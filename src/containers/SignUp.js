@@ -1,11 +1,12 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import MuiPhoneNumber from 'material-ui-phone-number';
 import IntlMessages from 'util/IntlMessages';
 import {
   hideMessage,
@@ -21,9 +22,11 @@ class SignUp extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: '',
+      first_name: '',
+      last_name: '',
       email: '',
-      password: ''
+      password: '',
+      phone_number: ''
     }
   }
 
@@ -37,21 +40,27 @@ class SignUp extends React.Component {
       this.props.history.push('/');
     }
   }
-
+  handleOnChange = (value) => {
+    this.setState({
+      phone_number: value
+    });
+  }
   render() {
     const {
-      name,
+      first_name,
+      last_name,
       email,
-      password
+      password,
+      phone_number
     } = this.state;
-    const {showMessage, loader, alertMessage} = this.props;
+    const { showMessage, loader, alertMessage } = this.props;
     return (
       <div
         className="app-login-container d-flex justify-content-center align-items-center animated slideInUpTiny animation-duration-3">
         <div className="app-login-main-content">
           <div className="app-logo-content d-flex align-items-center justify-content-center">
-            <Link className="logo-lg" to="/" title="Jambo">
-              <img src={require("assets/images/logo.png")} alt="jambo" title="jambo"/>
+            <Link className="logo-lg" to="/" title="GEMINI START">
+              <img src={require("assets/images/logo.png")} alt="GEMINI START" title="GEMINI START" />
             </Link>
           </div>
 
@@ -61,95 +70,114 @@ class SignUp extends React.Component {
             </div>
 
             <div className="mb-4">
-              <h2><IntlMessages id="appModule.createAccount"/></h2>
+              <h2><IntlMessages id="appModule.createAccount" /></h2>
             </div>
 
             <div className="app-login-form">
               <form method="post" action="/">
                 <TextField
                   type="text"
-                  label="Name"
-                  onChange={(event) => this.setState({name: event.target.value})}
+                  label="First Name"
+                  onChange={(event) => this.setState({ first_name: event.target.value })}
                   fullWidth
-                  defaultValue={name}
+                  defaultValue={first_name}
+                  margin="normal"
+                  className="mt-0 mb-2"
+                />
+                <TextField
+                  type="text"
+                  label="Last Name"
+                  onChange={(event) => this.setState({ last_name: event.target.value })}
+                  fullWidth
+                  defaultValue={last_name}
                   margin="normal"
                   className="mt-0 mb-2"
                 />
 
                 <TextField
                   type="email"
-                  onChange={(event) => this.setState({email: event.target.value})}
-                  label={<IntlMessages id="appModule.userID"/>}
+                  onChange={(event) => this.setState({ email: event.target.value })}
+                  label={<IntlMessages id="appModule.email" />}
                   fullWidth
                   defaultValue={email}
                   margin="normal"
                   className="mt-0 mb-2"
                 />
-
+                <MuiPhoneNumber
+                  defaultCountry={'it'}
+                  onChange={this.handleOnChange}
+                  label={'Phone Number'}
+                  fullWidth
+                  inputClass="mt-0 mb-2"
+                />
                 <TextField
                   type="password"
-                  onChange={(event) => this.setState({password: event.target.value})}
-                  label={<IntlMessages id="appModule.password"/>}
+                  onChange={(event) => this.setState({ password: event.target.value })}
+                  label={<IntlMessages id="appModule.password" />}
                   fullWidth
                   defaultValue={password}
                   margin="normal"
                   className="mt-0 mb-4"
                 />
-
+                <div className="mb-3 d-flex align-items-center">
+                  <span>
+                    By clicking “Create an account” below, you agree to our <Link to="/signup">Privacy Statement</Link>. We’ll occasionally send you account-related emails.
+                  </span>
+                </div>
                 <div className="mb-3 d-flex align-items-center justify-content-between">
                   <Button variant="contained" onClick={() => {
                     this.props.showAuthLoader();
-                    this.props.userSignUp({email, password});
+                    this.props.userSignUp({ email, password });
                   }} color="primary">
                     <IntlMessages
-                      id="appModule.regsiter"/>
+                      id="appModule.regsiter" />
                   </Button>
                   <Link to="/signin">
-                    <IntlMessages id="signUp.alreadyMember"/>
+                    <IntlMessages id="signUp.alreadyMember" />
                   </Link>
                 </div>
                 <div className="app-social-block my-1 my-sm-3">
                   <IntlMessages
-                    id="signIn.connectWith"/>
+                    id="signIn.connectWith" />
                   <ul className="social-link">
                     <li>
                       <IconButton className="icon"
-                                  onClick={() => {
-                                    this.props.showAuthLoader();
-                                    this.props.userFacebookSignIn();
-                                  }}>
-                        <i className="zmdi zmdi-facebook"/>
+                        onClick={() => {
+                          this.props.showAuthLoader();
+                          this.props.userFacebookSignIn();
+                        }}>
+                        <i className="zmdi zmdi-facebook" />
                       </IconButton>
                     </li>
 
                     <li>
                       <IconButton className="icon"
-                                  onClick={() => {
-                                    this.props.showAuthLoader();
-                                    this.props.userTwitterSignIn();
-                                  }}>
-                        <i className="zmdi zmdi-twitter"/>
+                        onClick={() => {
+                          this.props.showAuthLoader();
+                          this.props.userTwitterSignIn();
+                        }}>
+                        <i className="zmdi zmdi-twitter" />
                       </IconButton>
                     </li>
 
                     <li>
                       <IconButton className="icon"
-                                  onClick={() => {
-                                    this.props.showAuthLoader();
-                                    this.props.userGoogleSignIn();
+                        onClick={() => {
+                          this.props.showAuthLoader();
+                          this.props.userGoogleSignIn();
 
-                                  }}>
-                        <i className="zmdi zmdi-google-plus"/>
+                        }}>
+                        <i className="zmdi zmdi-google-plus" />
                       </IconButton>
                     </li>
 
                     <li>
                       <IconButton className="icon"
-                                  onClick={() => {
-                                    this.props.showAuthLoader();
-                                    this.props.userGithubSignIn();
-                                  }}>
-                        <i className="zmdi zmdi-github"/>
+                        onClick={() => {
+                          this.props.showAuthLoader();
+                          this.props.userGithubSignIn();
+                        }}>
+                        <i className="zmdi zmdi-github" />
                       </IconButton>
                     </li>
                   </ul>
@@ -164,19 +192,19 @@ class SignUp extends React.Component {
         {
           loader &&
           <div className="loader-view">
-            <CircularProgress/>
+            <CircularProgress />
           </div>
         }
         {showMessage && NotificationManager.error(alertMessage)}
-        <NotificationContainer/>
+        <NotificationContainer />
       </div>
     )
   }
 }
 
-const mapStateToProps = ({auth}) => {
-  const {loader, alertMessage, showMessage, authUser} = auth;
-  return {loader, alertMessage, showMessage, authUser}
+const mapStateToProps = ({ auth }) => {
+  const { loader, alertMessage, showMessage, authUser } = auth;
+  return { loader, alertMessage, showMessage, authUser }
 };
 
 export default connect(mapStateToProps, {

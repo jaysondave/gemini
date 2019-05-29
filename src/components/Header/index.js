@@ -88,54 +88,6 @@ class Header extends React.Component {
       searchText: evt.target.value,
     });
   }
-
-  Apps = () => {
-    return (
-      <ul className="jr-list jr-list-half">
-        <li className="jr-list-item">
-            <Link className="jr-list-link" to="/app/calendar/basic">
-                <i className="zmdi zmdi-calendar zmdi-hc-fw"/>
-                <span className="jr-list-text"><IntlMessages id="sidebar.calendar.basic"/></span>
-            </Link>
-        </li>
-
-        <li className="jr-list-item">
-          <Link className="jr-list-link" to="/app/to-do">
-            <i className="zmdi zmdi-check-square zmdi-hc-fw"/>
-            <span className="jr-list-text"><IntlMessages id="sidebar.appModule.toDo"/></span>
-          </Link>
-        </li>
-
-        <li className="jr-list-item">
-          <Link className="jr-list-link" to="/app/mail">
-            <i className="zmdi zmdi-email zmdi-hc-fw"/>
-            <span className="jr-list-text"><IntlMessages id="sidebar.appModule.mail"/></span>
-          </Link>
-        </li>
-
-        <li className="jr-list-item">
-            <Link className="jr-list-link" to="/app/chat">
-                <i className="zmdi zmdi-comment zmdi-hc-fw"/>
-                <span className="jr-list-text"><IntlMessages id="sidebar.appModule.chat"/></span>
-            </Link>
-        </li>
-
-        <li className="jr-list-item">
-            <Link className="jr-list-link" to="/app/contact">
-                <i className="zmdi zmdi-account-box zmdi-hc-fw"/>
-                <span className="jr-list-text"><IntlMessages id="sidebar.appModule.contact"/></span>
-            </Link>
-        </li>
-
-        <li className="jr-list-item">
-            <Link className="jr-list-link" to="/">
-                <i className="zmdi zmdi-plus-circle-o zmdi-hc-fw"/>
-                <span className="jr-list-text">Add New</span>
-            </Link>
-        </li>
-      </ul>)
-  };
-
   render() {
     const {drawerType, locale, navigationStyle, horizontalNavPosition} = this.props;
     const drawerStyle = drawerType.includes(FIXED_DRAWER) ? 'd-block d-xl-none' : drawerType.includes(COLLAPSED_DRAWER) ? 'd-block' : 'd-none';
@@ -158,7 +110,7 @@ class Header extends React.Component {
           }
 
           <Link className="app-logo mr-2 d-none d-sm-block" to="/">
-            <img src={require("assets/images/logo.png")} alt="Jambo" title="Jambo"/>
+            <img src={require("assets/images/logo.png")} alt="GEMINI START" title="GEMINI START"/>
           </Link>
 
 
@@ -169,27 +121,6 @@ class Header extends React.Component {
           <Menu/>}
 
           <ul className="header-notifications list-inline ml-auto">
-            <li className="list-inline-item">
-              <Dropdown
-                className="quick-menu app-notification"
-                isOpen={this.state.apps}
-                toggle={this.onAppsSelect.bind(this)}>
-
-                <DropdownToggle
-                  className="d-inline-block"
-                  tag="span"
-                  data-toggle="dropdown">
-                  <span className="app-notification-menu">
-                    <i className="zmdi zmdi-apps zmdi-hc-fw zmdi-hc-lg"/>
-                    <span>Apps</span>
-                  </span>
-                </DropdownToggle>
-
-                <DropdownMenu>
-                  {this.Apps()}
-                </DropdownMenu>
-              </Dropdown>
-            </li>
             <li className="d-inline-block d-lg-none list-inline-item">
               <Dropdown
                 className="quick-menu nav-searchbox"

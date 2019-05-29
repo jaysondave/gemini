@@ -1,5 +1,5 @@
 {
-  "name": "GEMINI START",
+  "name": "gemini-start",
   "version": "3.0.1",
   "main": "index.js",
   "license": "MIT",
@@ -28,6 +28,7 @@
     "install": "^0.10.1",
     "isomorphic-fetch": "^2.2.1",
     "jss-rtl": "^0.2.3",
+    "material-ui-phone-number": "^1.6.1",
     "material-ui-pickers": "^2.0.1",
     "moment": "^2.22.2",
     "node-sass": "^4.10.0",

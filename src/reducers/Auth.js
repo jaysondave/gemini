@@ -48,7 +48,7 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 authUser: null,
-                initURL: '/app/dashboard/default',
+                initURL: '/app/home-page',
                 loader: false
             }
         }
