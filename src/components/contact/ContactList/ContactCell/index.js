@@ -37,7 +37,6 @@ class ContactCell extends React.Component {
     const {contact, addFavourite, onContactSelect, onSaveContact} = this.props;
     const {menuState, anchorEl, addContactState} = this.state;
     const {name, thumb, email, phone, designation, starred} = contact;
-    console.log("thumb-->",thumb)
 
     const options = [
       'Edit',

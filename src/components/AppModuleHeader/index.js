@@ -1,7 +1,7 @@
-import React from 'react';
-import IconButton from '@material-ui/core/IconButton'
-import {Dropdown, DropdownMenu, DropdownToggle, Popover} from 'reactstrap';
-import SearchBox from 'components/SearchBox';
+import React from "react";
+import IconButton from "@material-ui/core/IconButton";
+import { Dropdown, DropdownMenu, DropdownToggle, Popover } from "reactstrap";
+import SearchBox from "components/SearchBox";
 
 
 class AppModuleHeader extends React.Component {
@@ -9,7 +9,7 @@ class AppModuleHeader extends React.Component {
   onSearchBoxSelect = () => {
     this.setState({
       searchBox: !this.state.searchBox
-    })
+    });
   };
 
   constructor() {
@@ -30,7 +30,7 @@ class AppModuleHeader extends React.Component {
   }
 
   render() {
-    const {placeholder, onChange, value, user, notification, apps} = this.props;
+    const { placeholder, onChange, value, user, notification, apps } = this.props;
 
     return (
       <div className="module-box-header-inner">
@@ -42,12 +42,13 @@ class AppModuleHeader extends React.Component {
             <button className="search-icon"><i className="zmdi zmdi-search zmdi-hc-lg"/></button>
           </div>
         </div>
-
+        {user &&
         <Popover className="p-3" placement="bottom" isOpen={this.state.popoverOpen} target="Popover1"
                  toggle={this.toggle}>
           <h3>{user.name}</h3>
           <h4>{user.email}</h4>
         </Popover>
+        }
 
         <div className="d-inline-block d-sm-none">
           <Dropdown
@@ -79,23 +80,24 @@ class AppModuleHeader extends React.Component {
           {notification && <IconButton className="size-40" aria-label="Menu">
             <i className="zmdi zmdi-notifications-none"/>
           </IconButton>}
-
+          {user &&
           <img className="ml-2 rounded-circle size-40 pointer" id="Popover1" alt={user.name}
                onMouseEnter={this.toggle}
                onMouseLeave={this.toggle}
                onClick={this.toggle}
                src={user.avatar}/>
+          }
         </div>
       </div>
-    )
+    );
   }
 }
 
 export default AppModuleHeader;
 
 AppModuleHeader.defaultProps = {
-  styleName: '',
-  value: '',
+  styleName: "",
+  value: "",
   notification: true,
   apps: true
 };
