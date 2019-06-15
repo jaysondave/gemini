@@ -1,6 +1,6 @@
 import React from 'react';
 import ContainerHeader from 'components/ContainerHeader';
-import ChartCard from "./ChartCard";
+import CardOverView from "../../../components/Cards/CardOverView";
 import { Area, AreaChart, ResponsiveContainer } from "recharts";
 import IntlMessages from 'util/IntlMessages';
 
@@ -19,9 +19,9 @@ class HomePage extends React.Component {
             <div className="row">
               <h3 className="col-md-12 entry-heading">MAINTENANCES</h3>
               <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                <ChartCard chartProperties={{
+                <CardOverView chartProperties={{
                   title: 'MAINTENANCES',
-                  prize: '30',
+                  number: '30',
                   icon: 'stats',
                   bgColor: 'indigo',
                   styleName: 'up',
@@ -39,10 +39,10 @@ class HomePage extends React.Component {
 
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                <ChartCard
+                <CardOverView
                   chartProperties={{
                     title: 'REQUESTS',
-                    prize: '5',
+                    number: '5',
                     icon: 'stats',
                     bgColor: 'indigo',
                     styleName: 'up',
@@ -59,10 +59,10 @@ class HomePage extends React.Component {
                 />
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                <ChartCard
+                <CardOverView
                   chartProperties={{
                     title: 'MAINTENANCES CLOSED',
-                    prize: '10',
+                    number: '10',
                     icon: 'stats',
                     bgColor: 'indigo',
                     styleName: 'down',
@@ -79,10 +79,10 @@ class HomePage extends React.Component {
                 />
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                <ChartCard
+                <CardOverView
                   chartProperties={{
                     title: 'MAINTENANCES CLOSED',
-                    prize: '12',
+                    number: '12',
                     icon: 'stats',
                     bgColor: 'indigo',
                     styleName: 'down',
@@ -100,9 +100,9 @@ class HomePage extends React.Component {
               </div>
               <h3 className="col-md-12 entry-heading">MAINTAINERS</h3>
               <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                <ChartCard chartProperties={{
+                <CardOverView chartProperties={{
                   title: 'USER 1',
-                  prize: '30',
+                  number: '30',
                   icon: 'stats',
                   bgColor: 'pink accent-2',
                   styleName: 'up',
@@ -120,10 +120,10 @@ class HomePage extends React.Component {
 
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                <ChartCard
+                <CardOverView
                   chartProperties={{
                     title: 'USER 2',
-                    prize: '5',
+                    number: '5',
                     icon: 'stats',
                     bgColor: 'pink accent-2',
                     styleName: 'up',
@@ -140,10 +140,10 @@ class HomePage extends React.Component {
                 />
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                <ChartCard
+                <CardOverView
                   chartProperties={{
                     title: 'USER 3',
-                    prize: '10',
+                    number: '10',
                     icon: 'stats',
                     bgColor: 'pink accent-2',
                     styleName: 'down',
@@ -160,10 +160,10 @@ class HomePage extends React.Component {
                 />
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                <ChartCard
+                <CardOverView
                   chartProperties={{
                     title: 'USER 4',
-                    prize: '12',
+                    number: '12',
                     icon: 'stats',
                     bgColor: 'pink accent-2',
                     styleName: 'down',
@@ -181,9 +181,9 @@ class HomePage extends React.Component {
               </div>
               <h3 className="col-md-12 entry-heading">PROFESSIONALS</h3>
               <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                <ChartCard chartProperties={{
+                <CardOverView chartProperties={{
                   title: 'USER 1',
-                  prize: '30',
+                  number: '30',
                   icon: 'stats',
                   bgColor: 'info',
                   styleName: 'up',
@@ -201,10 +201,10 @@ class HomePage extends React.Component {
 
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                <ChartCard
+                <CardOverView
                   chartProperties={{
                     title: 'USER 2',
-                    prize: '5',
+                    number: '5',
                     icon: 'stats',
                     bgColor: 'info',
                     styleName: 'up',
@@ -221,10 +221,10 @@ class HomePage extends React.Component {
                 />
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                <ChartCard
+                <CardOverView
                   chartProperties={{
                     title: 'USER 3',
-                    prize: '10',
+                    number: '10',
                     icon: 'stats',
                     bgColor: 'info',
                     styleName: 'down',
@@ -241,10 +241,10 @@ class HomePage extends React.Component {
                 />
               </div>
               <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
-                <ChartCard
+                <CardOverView
                   chartProperties={{
                     title: 'USER 4',
-                    prize: '12',
+                    number: '12',
                     icon: 'stats',
                     bgColor: 'info',
                     styleName: 'down',

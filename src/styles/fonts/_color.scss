@@ -1,0 +1,10 @@
+@import "../global/color";
+.text-primary-color {
+  color: map-get($primary, base);
+}
+.text-primary-accent-4-color {
+  color: map-get($primary, accent-4);
+}
+.text-primary-darken-4-color {
+  color: map_get($primary, darken-4);
+}

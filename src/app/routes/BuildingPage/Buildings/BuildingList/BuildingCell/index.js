@@ -7,6 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import {withRouter} from 'react-router-dom'
 import AddBuilding from "../../AddBuilding/index";
 import AddBody from "../../../BuildingDetail/Bodies/AddBody";
+import AddMaintenance from "../../../BuildingDetail/Maintenance/AddMaintenance";
 
 class BuildingCell extends React.Component {
 
@@ -19,9 +20,6 @@ class BuildingCell extends React.Component {
   onBuildingClose = () => {
     this.setState({ addBuildingState: false });
   };
-  onBodyClose = () => {
-    this.setState({ addBody: false });
-  };
   onDeleteBuilding = (building) => {
     this.setState({ addBuildingState: false });
     this.props.onDeleteBuilding(building);
@@ -29,8 +27,17 @@ class BuildingCell extends React.Component {
   onEditBuilding = () => {
     this.setState({ menuState: false, addBuildingState: true });
   };
-  onEditBody = () => {
-    this.setState({ menuState: false, addBody: true });
+  onBodyClose = () => {
+    this.setState({ addBuildingState: false });
+  };
+  onBodies = () => {
+    this.props.history.push('/app/buildingDashboard/detail')
+  };
+  onMaintenance = () => {
+    this.setState({ menuState: false, addMaintenance: true });
+  };
+  onMaintenanceClose = () => {
+    this.setState({ addMaintenance: false });
   };
   constructor() {
     super();
@@ -38,18 +45,21 @@ class BuildingCell extends React.Component {
       anchorEl: undefined,
       menuState: false,
       addBuildingState: false,
-      addBody: false
+      addMaintenance: false,
     };
   }
 
   render() {
-    const { building, onBuildingSelect, onSaveBuilding, onSaveBody, onBuildingItemSelect } = this.props;
-    const { menuState, anchorEl, addBuildingState, addBody } = this.state;
+    const { building, onBuildingSelect, onSaveBuilding, onSaveBody } = this.props;
+    const { menuState, anchorEl, addBuildingState, addBody, addMaintenance } = this.state;
     const { id, building_name, thumb, user_name, user_address, building_report, subBuildingList } = building;
 
     const options = [
       "Edit",
-      "Add Body",
+      "Bodies",
+      "Outdoor Spaces",
+      "Notice Board",
+      "Maintenance",
       "Delete"
     ];
     return (
@@ -65,14 +75,11 @@ class BuildingCell extends React.Component {
         />
         <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }}>
 
-          <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }} onClick={() => {
-            // onBuildingItemSelect(building);
-            this.props.history.push('/app/buildingDashboard/detail')
-          }}>
+          <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }}>
 
             <div className="mx-1 mx-md-3"
                  style={{ fontSize: 16, flex: 1, position: "relative" }}>
-              <div style={{ position: "relative", top: "50%", transform: "translateY(-50%)" }}>{id}</div>
+              <div className="align-center">{id}</div>
             </div>
             <div className="col con-inf-mw-100" style={{ flex: 3 }}>
               <p className="mb-0">
@@ -130,7 +137,7 @@ class BuildingCell extends React.Component {
 
                   MenuListProps={{
                     style: {
-                      width: 100
+                      width: 150
                     }
                   }}>
               {options.map(option =>
@@ -140,8 +147,10 @@ class BuildingCell extends React.Component {
                   } else if (option === "Delete") {
                     this.handleRequestClose();
                     this.onDeleteBuilding(building);
-                  } else {
-                    this.onEditBody();
+                  } else if (option === "Bodies") {
+                    this.onBodies();
+                  } else if (option === "Maintenance") {
+                    this.onMaintenance();
                   }
                 }
                 }>
@@ -159,6 +168,13 @@ class BuildingCell extends React.Component {
               body={{}}
               onSaveBody={onSaveBody}
               onBodyClose={this.onBodyClose}/>
+            }
+            {addMaintenance &&
+            <AddMaintenance
+              maintenance={{}}
+              open={addMaintenance}
+              onSaveBody={onSaveBody}
+              onMaintenanceClose={this.onMaintenanceClose}/>
             }
           </div>
         </div>

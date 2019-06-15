@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {NavLink, withRouter} from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 import IntlMessages from 'util/IntlMessages';
 import CustomScrollbars from 'util/CustomScrollbars';
@@ -104,6 +105,36 @@ class SidenavContent extends Component {
               <span className="nav-text"><IntlMessages id="pages.buildingsPage"/></span>
             </NavLink>
           </li>
+          <li className="menu collapse-box">
+            <Button>
+              <i className="zmdi zmdi-view-web zmdi-hc-fw"/>
+              <span className="nav-text">Maintenance</span>
+            </Button>
+
+            <ul className="sub-menu">
+              <li>
+                <NavLink className="prepend-icon" to="/app/maintenanceDashboard/dashboard">
+                  <span className="nav-text">Dashboard</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/maintenanceDashboard/not-view">
+                  <span className="nav-text">Not View</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/maintenanceDashboard/viewed">
+                  <span className="nav-text">Viewed</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/maintenanceDashboard/assigned">
+                  <span className="nav-text">Assigned</span>
+                </NavLink>
+              </li>
+            </ul>
+          </li>
+
         </ul>
       </CustomScrollbars>
     );

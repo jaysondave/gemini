@@ -16,11 +16,11 @@ const CardBox = ({heading, children, styleName, cardStyle, childrenStyle, header
         ( heading &&
           <div className={`jr-card-header ${headingStyle}`}>
             <h3 className="card-heading">{heading}</h3>
-            {children.length > 1 && <div className="sub-heading">{children[0]}</div>}
+            { children && children.length > 1 && <div className="sub-heading">{children[0]}</div>}
           </div>
         )}
         <div className={`jr-card-body ${childrenStyle}`}>
-          {children.length > 1 ? children[1] : children}
+          {children && children.length > 1 ? children[1] : children}
         </div>
       </div>
     </div>

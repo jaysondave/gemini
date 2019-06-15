@@ -82,7 +82,11 @@
 .module-side-nav {
   padding: 20px 0;
 }
-
+.align-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
 @media screen and (max-width: 767px) {
   .modal-w {
     .modal-box-mail & {

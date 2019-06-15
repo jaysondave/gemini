@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import TestComponent from 'app/routes/calendar/routes/basic';
+import TestComponent from 'app/routes/MaintenancePage/routes/basic';
 import 'react-big-calendar/lib/less/styles.less';
 import 'styles/app.scss';
 

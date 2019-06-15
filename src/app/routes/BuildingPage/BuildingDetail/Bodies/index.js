@@ -3,6 +3,7 @@ import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import Checkbox from "@material-ui/core/Checkbox";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom"
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import { Business } from "@material-ui/icons";
@@ -20,8 +21,7 @@ class BodyList extends Component {
     return <div className="module-side">
       <div className="module-side-header">
         <div className="module-logo">
-          <Business/>
-          <span> Bodies</span>
+          <span>BODY</span>
         </div>
       </div>
 
@@ -238,6 +238,10 @@ componentDidMount() {
             </div>
             <div className="module-box-content">
               <div className="module-box-topbar">
+                <IconButton className="icon-btn"
+                            onClick={() => {this.props.history.goBack();}}>
+                  <i className="zmdi zmdi-arrow-back"/>
+                </IconButton>
                 <Checkbox color="primary"
                           indeterminate={selectedSubBuildings > 0 && selectedSubBuildings < subBuildingList.length}
                           checked={selectedSubBuildings > 0}
@@ -290,5 +294,5 @@ const mapStateToProps = ({ settings }) => {
   const { width } = settings;
   return { width };
 };
-export default connect(mapStateToProps)(BodyList);
+export default withRouter(connect(mapStateToProps)(BodyList));
 

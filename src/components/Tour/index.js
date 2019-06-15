@@ -28,7 +28,7 @@ class Tour extends React.PureComponent {
           title: 'Notifications',
           text: 'Keep yourself notified with the upcoming alerts and announcements',
           textAlign: 'center',
-          selector: '.app-container .app-main-container .app-main-header .app-tour',
+          selector: '.app-container .app-MainPage-container .app-MainPage-header .app-tour',
           position: 'top',
           isFixed: true,
         },
@@ -36,7 +36,7 @@ class Tour extends React.PureComponent {
           title: 'Messages',
           text: 'Check your recent messages from your connections.',
           textAlign: 'center',
-          selector: '.app-container .app-main-container .app-main-header .mail-tour',
+          selector: '.app-container .app-MainPage-container .app-MainPage-header .mail-tour',
           position: 'top',
           isFixed: false,
         }

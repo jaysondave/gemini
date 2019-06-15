@@ -26,7 +26,8 @@ class SignUp extends React.Component {
       last_name: '',
       email: '',
       password: '',
-      phone_number: ''
+      phone_number: '',
+      buildingNum: ''
     }
   }
 
@@ -44,14 +45,15 @@ class SignUp extends React.Component {
     this.setState({
       phone_number: value
     });
-  }
+  };
   render() {
     const {
       first_name,
       last_name,
       email,
       password,
-      phone_number
+      phone_number,
+      buildingNum
     } = this.state;
     const { showMessage, loader, alertMessage } = this.props;
     return (
@@ -118,6 +120,15 @@ class SignUp extends React.Component {
                   defaultValue={password}
                   margin="normal"
                   className="mt-0 mb-4"
+                />
+                <TextField
+                  type="number"
+                  label="Building Number"
+                  onChange={(event) => this.setState({ buildingNum: event.target.value })}
+                  fullWidth
+                  defaultValue={buildingNum}
+                  margin="normal"
+                  className="mt-0 mb-2"
                 />
                 <div className="mb-3 d-flex align-items-center">
                   <span>

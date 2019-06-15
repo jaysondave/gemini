@@ -1,19 +1,19 @@
 import React from "react";
 
-class ChartCard extends React.Component {
+class CardOverView extends React.Component {
 
   state = {
     isHide: false,
     children: '',
     chartProperties: {
-      prize: '',
+      number: '',
       title: '',
       bgColor: '',
       styleName: '',
       desc: '',
       percent: '',
     }
-  }
+  };
 
 
   componentDidMount() {
@@ -31,7 +31,7 @@ class ChartCard extends React.Component {
 
   render() {
     const {chartProperties, isHide, children} = this.state;
-    const {prize, title, styleName, desc, bgColor, percent} = chartProperties;
+    const {number, title, styleName, desc, bgColor, percent} = chartProperties;
     return (
       <div className="jr-card jr-card-full">
         <div
@@ -40,7 +40,7 @@ class ChartCard extends React.Component {
           {children}
           <div className="jr-fillchart-content">
             <div className="card-title mb-4">{title}</div>
-            <h2 className="mb-2 jr-fs-xl jr-font-weight-medium">{prize}</h2>
+            <h2 className="mb-2 jr-fs-xl jr-font-weight-medium">{number}</h2>
             {percent > 0}
             <p className="mb-0 jr-fs-sm"><span
               className={`jr-font-weight-medium jr-fs-md jr-chart-${styleName}`}>{percent}
@@ -52,4 +52,4 @@ class ChartCard extends React.Component {
   }
 };
 
-export default ChartCard;
+export default CardOverView;
