@@ -11,6 +11,9 @@ import Select from "@material-ui/core/Select";
 import Input from "@material-ui/core/Input";
 import {DropzoneArea} from 'material-ui-dropzone'
 import IntlMessages from "util/IntlMessages";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { InputDate } from "../../../../../../components/CustomInput/InputDate";
 
 class AddMaintenance extends React.Component {
 
@@ -38,13 +41,28 @@ class AddMaintenance extends React.Component {
       maintainer: '',
       priority: '',
       notes: '',
-      files: null
+      files: null,
+      reminder: '',
+      dueDate: ''
     };
   }
-
+  updateDate = name => (date) => {
+    if (date) {
+      this.setState({ [name]: this.formatDate(date.toLocaleDateString()) });
+    }
+  };
+  formatDate = (d) => {
+    let date = new Date(d);
+    let reformattedDate = [
+      date.getFullYear(),
+      ("0" + (date.getMonth() + 1)).slice(-2),
+      ("0" + date.getDate()).slice(-2)
+    ].join('-');
+    return reformattedDate;
+  };
   render() {
     const { onSaveBody, onMaintenanceClose, open, maintenance } = this.props;
-    const { id, buildingName, floorName, bodyName, roomName, tipology, maintainer, priority, notes } = this.state;
+    const { id, buildingName, floorName, bodyName, roomName, tipology, maintainer, priority, notes, reminder, dueDate } = this.state;
 
     return (
       <Modal className="modal-box" toggle={onMaintenanceClose} isOpen={open}>
@@ -114,6 +132,41 @@ class AddMaintenance extends React.Component {
                   <MenuItem value={"priority1"}>Priority 1</MenuItem>
                   <MenuItem value={"priority2"}>Priority 2</MenuItem>
                   <MenuItem value={"priority3"}>Priority 3</MenuItem>
+                </Select>
+              </FormControl>
+              <div className="row w-100 mb-2 mt-2">
+                <div className="col-md-2 p-relative">
+                  <label className="align-center font-size-18">Due Date</label>
+                </div>
+                <div className="col-md-10 p-0">
+                  <div className="d-flex">
+                    <DatePicker
+                      customInput={
+                        <InputDate
+                        />
+                      }
+                      peekNextMonth
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                      selected={dueDate ? new Date(dueDate) : null}
+                      onChange={this.updateDate('dueDate')}
+                    />
+                  </div>
+                </div>
+
+              </div>
+              <FormControl className="w-100 mb-2">
+                <InputLabel htmlFor="age-simple">Reminder</InputLabel>
+                <Select
+                  value={reminder}
+                  onChange={this.handleChange("reminder")}
+                  input={<Input/>}
+                >
+                  <MenuItem value={"notRemember"}>NOT REMEMBER</MenuItem>
+                  <MenuItem value={"oneTime"}>ONE TIME</MenuItem>
+                  <MenuItem value={"everyDay"}>EVERY DAY OF DELAY</MenuItem>
+                  <MenuItem value={"threeDay"}>AFTER THREE DAYS OF DELAY</MenuItem>
                 </Select>
               </FormControl>
               <textarea style={{

@@ -17,6 +17,8 @@ import asyncComponent from '../util/asyncComponent';
 import TopNav from 'components/TopNav';
 import BuildingDashboard from "./routes/BuildingPage";
 import MaintenanceDashboard from "./routes/MaintenancePage";
+import TimeTableDashboard from "./routes/TimeTablePage";
+import RegisterDashboard from "./routes/RegisterPage";
 
 class App extends React.Component {
 
@@ -56,6 +58,10 @@ class App extends React.Component {
                        component={BuildingDashboard}/>
                 <Route path={`${match.url}/maintenanceDashboard`}
                        component={MaintenanceDashboard}/>
+                <Route path={`${match.url}/timetable`}
+                       component={TimeTableDashboard}/>
+                <Route path={`${match.url}/registers`}
+                       component={RegisterDashboard}/>
                 <Route component={asyncComponent(() => import('components/Error404'))}/>
               </Switch>
             </div>

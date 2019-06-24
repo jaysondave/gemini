@@ -460,7 +460,9 @@ a.badge-gray {
 .font-size-20 {
   font-size: 20px !important;
 }
-
+.hover-pointer {
+  cursor: pointer!important;
+}
 //Rounded
 .rounded-sm {
   @include border-radius($border-radius-sm !important);
@@ -753,4 +755,17 @@ a.btn-outline-geekblue {
     flex: 0 0 50%;
     max-width: 50%;
   }
+}
+
+.f-1 {
+  flex: 1;
+}
+.f-2 {
+  flex: 2;
+}
+.f-3 {
+  flex: 3;
+}
+.p-relative {
+  position: relative;
 }

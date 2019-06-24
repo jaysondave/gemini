@@ -132,9 +132,88 @@ class SidenavContent extends Component {
                   <span className="nav-text">Assigned</span>
                 </NavLink>
               </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/maintenanceDashboard/in-progress">
+                  <span className="nav-text">InProgress</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/maintenanceDashboard/done">
+                  <span className="nav-text">Done</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/maintenanceDashboard/end">
+                  <span className="nav-text">End</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/maintenanceDashboard/out-standing">
+                  <span className="nav-text">OutStanding</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/maintenanceDashboard/rejected">
+                  <span className="nav-text">Rejected</span>
+                </NavLink>
+              </li>
             </ul>
           </li>
+          <li className="menu no-arrow">
+            <NavLink to="/app/timetable">
+              <i className="zmdi zmdi-calendar zmdi-hc-fw"/>
+              <span className="nav-text">TimeTable</span>
+            </NavLink>
+          </li>
+          <li className="menu collapse-box">
+            <Button>
+              <i className="zmdi zmdi-account zmdi-hc-fw"/>
+              <span className="nav-text">Registers</span>
+            </Button>
 
+            <ul className="sub-menu">
+              <li>
+                <NavLink className="prepend-icon" to="/app/registers/dashboard">
+                  <span className="nav-text">Dashboard</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/registers/collaborator">
+                  <span className="nav-text">Collaborator</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/registers/maintainer">
+                  <span className="nav-text">Maintainer</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/registers/professional">
+                  <span className="nav-text">Professional</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/registers/stockist">
+                  <span className="nav-text">Stockist</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/registers/signaling">
+                  <span className="nav-text">Signaling</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/registers/tenant">
+                  <span className="nav-text">Tenant</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/registers/landord">
+                  <span className="nav-text">Landord</span>
+                </NavLink>
+              </li>
+            </ul>
+          </li>
         </ul>
       </CustomScrollbars>
     );
