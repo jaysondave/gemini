@@ -173,11 +173,6 @@ class SidenavContent extends Component {
 
             <ul className="sub-menu">
               <li>
-                <NavLink className="prepend-icon" to="/app/registers/dashboard">
-                  <span className="nav-text">Dashboard</span>
-                </NavLink>
-              </li>
-              <li>
                 <NavLink className="prepend-icon" to="/app/registers/collaborator">
                   <span className="nav-text">Collaborator</span>
                 </NavLink>
@@ -208,7 +203,7 @@ class SidenavContent extends Component {
                 </NavLink>
               </li>
               <li>
-                <NavLink className="prepend-icon" to="/app/registers/landord">
+                <NavLink className="prepend-icon" to="/app/registers/landlord">
                   <span className="nav-text">Landord</span>
                 </NavLink>
               </li>

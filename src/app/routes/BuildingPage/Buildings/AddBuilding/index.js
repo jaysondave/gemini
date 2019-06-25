@@ -28,7 +28,7 @@ class AddBuilding extends React.Component {
     const { id, name, email, phone, designation, selected, starred, frequently } = this.state;
 
     return (
-      <Modal className="modal-box" toggle={onBuildingClose} isOpen={open}>
+      <Modal className="modal-box" isOpen={open}>
         <ModalHeader className="modal-box-header bg-primary text-white">
           {building.name === "" ? "Add Building" :
             "Save Building"}

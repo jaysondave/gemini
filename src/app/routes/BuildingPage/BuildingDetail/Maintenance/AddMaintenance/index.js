@@ -65,7 +65,7 @@ class AddMaintenance extends React.Component {
     const { id, buildingName, floorName, bodyName, roomName, tipology, maintainer, priority, notes, reminder, dueDate } = this.state;
 
     return (
-      <Modal className="modal-box" toggle={onMaintenanceClose} isOpen={open}>
+      <Modal className="modal-box" isOpen={open}>
         <ModalHeader className="modal-box-header bg-primary text-white">
           {maintenance.name === "" ? "Edit Maintenance" :
             "Set Maintenance"}

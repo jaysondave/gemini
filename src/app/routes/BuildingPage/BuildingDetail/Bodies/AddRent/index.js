@@ -86,7 +86,7 @@ class AddRent extends React.Component {
       endDate
     } = this.state;
     return (
-      <Modal className="modal-box" toggle={onRentClose} isOpen={open}>
+      <Modal className="modal-box" isOpen={open}>
         <ModalHeader className="modal-box-header bg-primary text-white">
           {id === "" ? "Insert Rent" :
             "Edit Rent"}

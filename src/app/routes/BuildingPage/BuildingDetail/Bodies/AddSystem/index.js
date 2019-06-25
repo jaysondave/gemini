@@ -47,7 +47,7 @@ class AddSystem extends React.Component {
       uploadFile
     } = this.state;
     return (
-      <Modal className="modal-box" toggle={onSystemClose} isOpen={open}>
+      <Modal className="modal-box" isOpen={open}>
         <ModalHeader className="modal-box-header bg-primary text-white">
           {id === "" ? "Insert System" :
             "Edit System"}

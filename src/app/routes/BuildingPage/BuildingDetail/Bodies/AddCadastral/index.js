@@ -85,7 +85,7 @@ class AddCadastral extends React.Component {
       note
     } = this.state;
     return (
-      <Modal className="modal-box" toggle={onCadastralClose} isOpen={open}>
+      <Modal className="modal-box" isOpen={open}>
         <ModalHeader className="modal-box-header bg-primary text-white">
           {id === "" ? "Insert Cadastral" :
             "Edit Cadastral"}

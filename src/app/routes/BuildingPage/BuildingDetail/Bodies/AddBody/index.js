@@ -30,7 +30,7 @@ class AddBody extends React.Component {
     const { id, type, name, address, house_num, cap, city, province, code_fisc, body_picture } = this.state;
 
     return (
-      <Modal className="modal-box" toggle={onBodyClose} isOpen={open}>
+      <Modal className="modal-box" isOpen={open}>
         <ModalHeader className="modal-box-header bg-primary text-white">
           {body.name === "" ? "Add Body" :
             "Save Body"}

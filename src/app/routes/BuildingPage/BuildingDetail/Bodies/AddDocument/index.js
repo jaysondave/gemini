@@ -51,7 +51,7 @@ class AddDocument extends React.Component {
       uploadFile
     } = this.state;
     return (
-      <Modal className="modal-box" toggle={onDocumentClose} isOpen={open}>
+      <Modal className="modal-box" isOpen={open}>
         <ModalHeader className="modal-box-header bg-primary text-white">
           {id === "" ? "Insert Document" :
             "Edit Document"}
