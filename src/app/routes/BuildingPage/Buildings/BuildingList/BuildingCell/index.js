@@ -6,7 +6,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import {withRouter} from 'react-router-dom'
 import AddBuilding from "../../AddBuilding/index";
-import AddBody from "../../../BuildingDetail/Bodies/AddBody";
+import AddBody from "../../../BuildingDetail/Body/AddBody";
 import AddMaintenance from "../../../BuildingDetail/Maintenance/AddMaintenance";
 
 class BuildingCell extends React.Component {
@@ -56,7 +56,7 @@ class BuildingCell extends React.Component {
 
     const options = [
       "Edit",
-      "Bodies",
+      "Body",
       "Outdoor Spaces",
       "Notice Board",
       "Maintenance",
@@ -147,7 +147,7 @@ class BuildingCell extends React.Component {
                   } else if (option === "Delete") {
                     this.handleRequestClose();
                     this.onDeleteBuilding(building);
-                  } else if (option === "Bodies") {
+                  } else if (option === "Body") {
                     this.onBodies();
                   } else if (option === "Maintenance") {
                     this.onMaintenance();

@@ -1,30 +1,22 @@
 import React from "react";
-import SubBuildingCell from "./SubBuildingCell/index";
+import RentCell from "./RentCell/index";
 
-const SubBuildingList = ({
+const RentList = ({
                            subBuildingList,
                            onSubBuildingItemSelect,
                            onSubBuildingSelect,
                            onSaveSubBuilding,
                            onDeleteSubBuilding,
-                           onSaveCadastral,
-                           onSaveRent,
-                           onSaveSystem,
-                           onSaveCertificate
                          }) => {
   return (
     subBuildingList != null?
       <div className="contact-main-content">
         {subBuildingList.map((subBuilding, index) =>
-          <SubBuildingCell key={index} subBuilding={subBuilding}
+          <RentCell key={index} subBuilding={subBuilding}
                            onSubBuildingItemSelect={onSubBuildingItemSelect}
                            onDeleteSubBuilding={onDeleteSubBuilding}
                            onSaveSubBuilding={onSaveSubBuilding}
                            onSubBuildingSelect={onSubBuildingSelect}
-                           onSaveCadastral={onSaveCadastral}
-                           onSaveRent={onSaveRent}
-                           onSaveSystem={onSaveSystem}
-                           onSaveCertificate={onSaveCertificate}
           />
         )}
 
@@ -34,4 +26,4 @@ const SubBuildingList = ({
   );
 };
 
-export default SubBuildingList;
+export default RentList;

@@ -6,22 +6,21 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
-import { Business } from "@material-ui/icons";
-import buildingList from "../../data/buildingList";
+import buildingList from "../../../data/buildingList";
 import AppModuleHeader from "components/AppModuleHeader/index";
 import IntlMessages from "util/IntlMessages";
 import CustomScrollbars from "util/CustomScrollbars";
-import SubBuildingList from "./SubBuildingList";
-import AddBody from "./AddBody";
+import CadstralsList from "./CadstralList";
+import AddCadastral from "../AddCadastral";
 
 
-class BodyList extends Component {
+class CadstralList extends Component {
 
-  BuildingSideBar = (user) => {
+  BuildingSideBar = () => {
     return <div className="module-side">
       <div className="module-side-header">
         <div className="module-logo">
-          <span>BODY</span>
+          <span>Cadstral</span>
         </div>
       </div>
 
@@ -30,8 +29,8 @@ class BodyList extends Component {
                           style={{ height: this.props.width >= 1200 ? "calc(100vh - 200px)" : "calc(100vh - 80px)" }}>
           <div className="module-add-task">
             <Button className="jr-btn btn-block" variant="contained" color="primary" aria-label="add"
-                    onClick={this.onAddBody}>
-              <span>{"Add New Body"}</span>
+                    onClick={this.onAddCadastral}>
+              <span>{"New Cadstral"}</span>
             </Button>
           </div>
         </CustomScrollbars>
@@ -62,11 +61,14 @@ class BodyList extends Component {
       this.setState({ loader: false });
     }, 1500);
   }
-  onAddBody = () => {
-    this.setState({ addBodyState: true });
+  onAddCadastral = () => {
+    this.setState({ addCadstral: true });
   };
-  onBodyClose = () => {
-    this.setState({ addBodyState: false });
+  onCadastralClose = () => {
+    this.setState({ addCadstral: false });
+  };
+  onSaveCadastral = () => {
+    this.setState({ addCadstral: false });
   };
   handleRequestClose = () => {
     this.setState({
@@ -95,12 +97,12 @@ class BodyList extends Component {
       selectedBuilding: null,
       selectedSubBuildings: 0,
       addBuildingState: false,
-      addBodyState: false
+      addCadstral: false
     };
   }
-componentDidMount() {
-  this.onBuildingItemSelect();
-}
+  componentDidMount() {
+    this.onBuildingItemSelect();
+  }
 
   getBuilding(id) {
     return buildingList.find((building) => building.id === id);
@@ -121,21 +123,6 @@ componentDidMount() {
       drawerState: !this.state.drawerState
     });
   }
-  onSaveCadastral = () => {
-
-  };
-  onSaveRent = () => {
-
-  };
-  onSaveSystem = () => {
-
-  };
-  onSaveDocument = () => {
-
-  };
-  onSaveCertificate = () => {
-
-  };
   onSubBuildingSelect = (data) => {
     data.selected = !data.selected;
     let selectedSubBuildings = 0;
@@ -197,20 +184,15 @@ componentDidMount() {
     });
   };
   showBuildings = ({ subBuildingList, buildingList }) => {
-    return <SubBuildingList
-        subBuildingList={subBuildingList}
-        onSubBuildingItemSelect={this.onSubBuildingItemSelect.bind(this)}
-        onSubBuildingSelect={this.onSubBuildingSelect.bind(this)}
-        onSaveCadastral={this.onSaveCadastral}
-        onSaveRent={this.onSaveRent}
-        onSaveSystem={this.onSaveSystem}
-        onSaveDocument={this.onSaveDocument}
-        onSaveCertificate={this.onSaveCertificate}
-      />;
+    return <CadstralsList
+      subBuildingList={subBuildingList}
+      onSubBuildingItemSelect={this.onSubBuildingItemSelect.bind(this)}
+      onSubBuildingSelect={this.onSubBuildingSelect.bind(this)}
+    />;
   };
 
   render() {
-    const { user, subBuildingList, addBuildingState, addBodyState, selectedSubBuildings, alertMessage, showMessage, noContentFoundMessage, currentBuilding } = this.state;
+    const { subBuildingList, addBuildingState, addCadstral, selectedSubBuildings, alertMessage, showMessage, noContentFoundMessage, currentBuilding } = this.state;
     return (
       <div className="app-wrapper">
         <div className="app-module animated slideInUpTiny animation-duration-3">
@@ -219,11 +201,11 @@ componentDidMount() {
             <Drawer
               open={this.state.drawerState}
               onClose={this.onToggleDrawer.bind(this)}>
-              {this.BuildingSideBar(user)}
+              {this.BuildingSideBar()}
             </Drawer>
           </div>
           <div className="app-module-sidenav d-none d-xl-flex">
-            {this.BuildingSideBar(user)}
+            {this.BuildingSideBar()}
           </div>
 
           <div className="module-box">
@@ -271,11 +253,11 @@ componentDidMount() {
             </div>
           </div>
         </div>
-        <AddBody
-          open={addBodyState}
-          body={{}}
-          onSaveBody={this.onSaveBody}
-          onBodyClose={this.onBodyClose}/>
+        <AddCadastral
+          open={addCadstral}
+          onSaveCadastral={this.onSaveCadastral}
+          onCadastralClose={this.onCadastralClose}
+        />
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
           open={showMessage}
@@ -294,5 +276,5 @@ const mapStateToProps = ({ settings }) => {
   const { width } = settings;
   return { width };
 };
-export default withRouter(connect(mapStateToProps)(BodyList));
+export default withRouter(connect(mapStateToProps)(CadstralList));
 
