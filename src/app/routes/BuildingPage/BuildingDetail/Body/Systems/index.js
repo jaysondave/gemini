@@ -23,7 +23,7 @@ class SystemsList extends Component {
           <span>System</span>
         </div>
       </div>
-
+ 
       <div className="module-side-content">
         <CustomScrollbars className="module-side-scroll scrollbar"
                           style={{ height: this.props.width >= 1200 ? "calc(100vh - 200px)" : "calc(100vh - 80px)" }}>

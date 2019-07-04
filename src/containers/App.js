@@ -15,6 +15,7 @@ import SignUp from './SignUp';
 import { setInitUrl } from '../actions/Auth';
 import RTL from 'util/RTL';
 import asyncComponent from 'util/asyncComponent';
+import NoticeBoard from './NoticeBoard';
 
 const RestrictedRoute = ({ component: Component, authUser, ...rest }) =>
   <Route
@@ -74,6 +75,7 @@ class App extends Component {
                     component={MainApp} />
                   <Route path='/signin' component={SignIn} />
                   <Route path='/signup' component={SignUp} />
+                  <Route path='/notice-board' component={NoticeBoard} />
                   <Route
                     component={asyncComponent(() => import('components/Error404'))} />
                 </Switch>

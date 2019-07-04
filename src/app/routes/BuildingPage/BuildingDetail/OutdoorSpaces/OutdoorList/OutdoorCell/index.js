@@ -2,10 +2,9 @@ import React from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import { withRouter } from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
-class SystemCell extends React.Component {
+class OutdoorCell extends React.Component {
 
   onSubBuildingOptionSelect = event => {
     this.setState({ menuState: true, anchorEl: event.currentTarget });
@@ -25,13 +24,8 @@ class SystemCell extends React.Component {
       addCertificate: false
     };
   }
-  onEditRent = () => {
-    this.props.history.push('systems/sub-components');
-  }
+
   render() {
-    const options = [
-      "SUB-COMPONENTS"
-    ];
     const {
       subBuilding,
       onSubBuildingSelect,
@@ -44,11 +38,11 @@ class SystemCell extends React.Component {
       <div className="contact-item module-list-item">
 
         <Checkbox color="primary"
-          checked={subBuilding.selected}
-          value="checkedF"
-          onClick={() => {
-            onSubBuildingSelect(subBuilding);
-          }}
+                  checked={subBuilding.selected}
+                  value="checkedF"
+                  onClick={() => {
+                    onSubBuildingSelect(subBuilding);
+                  }}
         />
         <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }}>
 
@@ -57,7 +51,7 @@ class SystemCell extends React.Component {
           }}>
 
             <div className="mx-1 mx-md-3"
-              style={{ fontSize: 16, flex: 1, position: "relative" }}>
+                 style={{ fontSize: 16, flex: 1, position: "relative" }}>
               <div style={{ position: "relative", top: "50%", transform: "translateY(-50%)" }}>{id}</div>
             </div>
             <div className="col con-inf-mw-100" style={{ flex: 3 }}>
@@ -93,32 +87,8 @@ class SystemCell extends React.Component {
           </div>
           <div className="col-auto px-1 actions d-none d-sm-flex">
             <IconButton className="icon-btn p-2" onClick={this.onSubBuildingOptionSelect}>
-              <i className="zmdi zmdi-more-vert" />
+              <i className="zmdi zmdi-more-vert"/>
             </IconButton>
-            <Menu id="long-menu"
-              anchorEl={anchorEl}
-              open={menuState}
-              onClose={this.handleRequestClose}
-
-              MenuListProps={{
-                style: {
-                  width: 200
-                }
-              }}>
-              {options.map(option =>
-                <MenuItem key={option} onClick={() => {
-                  switch (option) {
-                    case "SUB-COMPONENTS":
-                      this.onEditRent();
-                    default:
-                      return;
-                  }
-                }
-                }>
-                  {option}
-                </MenuItem>
-              )}
-            </Menu>
           </div>
         </div>
       </div>
@@ -126,4 +96,4 @@ class SystemCell extends React.Component {
   }
 }
 
-export default withRouter(SystemCell);
+export default withRouter(OutdoorCell);

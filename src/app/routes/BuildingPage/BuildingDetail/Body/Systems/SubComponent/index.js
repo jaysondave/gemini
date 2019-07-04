@@ -6,31 +6,31 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
-import buildingList from "../../data/buildingList";
+import buildingList from "../../../../data/buildingList";
 import AppModuleHeader from "components/AppModuleHeader/index";
 import IntlMessages from "util/IntlMessages";
 import CustomScrollbars from "util/CustomScrollbars";
-import OutdoorList from "./OutdoorList";
-import AddOutdoor from "./AddOutdoor";
+import AddComponent from "./AddComponent";
+import ComponentList from "./ComponentList";
 
 
-class OutdoorSpaces extends Component {
+class SubComponent extends Component {
 
   BuildingSideBar = () => {
     return <div className="module-side">
       <div className="module-side-header">
         <div className="module-logo">
-          <span>Outdoors</span>
+          <span>Sub Components</span>
         </div>
       </div>
 
       <div className="module-side-content">
         <CustomScrollbars className="module-side-scroll scrollbar"
-                          style={{ height: this.props.width >= 1200 ? "calc(100vh - 200px)" : "calc(100vh - 80px)" }}>
+          style={{ height: this.props.width >= 1200 ? "calc(100vh - 200px)" : "calc(100vh - 80px)" }}>
           <div className="module-add-task">
             <Button className="jr-btn btn-block" variant="contained" color="primary" aria-label="add"
-                    onClick={this.onAddOutdoor}>
-              <span>{"New Outdoor"}</span>
+              onClick={this.onAddComponent}>
+              <span>{"New Component"}</span>
             </Button>
           </div>
         </CustomScrollbars>
@@ -41,7 +41,7 @@ class OutdoorSpaces extends Component {
 
   onBuildingItemSelect(building) {
     let currentBuilding = this.getBuilding(1457690400);
-    console.log({currentBuilding});
+    console.log({ currentBuilding });
     this.setState({
       subBuildingList: currentBuilding.subBuildingList,
       loader: true
@@ -61,11 +61,14 @@ class OutdoorSpaces extends Component {
       this.setState({ loader: false });
     }, 1500);
   }
-  onAddOutdoor = () => {
-    this.setState({ addOutdoor: true });
+  onAddComponent = () => {
+    this.setState({ addComponent: true });
   };
-  onOutdoorClose = () => {
-    this.setState({ addOutdoor: false });
+  onClose = () => {
+    this.setState({ addComponent: false });
+  };
+  onSave = () => {
+    this.setState({ addComponent: false });
   };
   handleRequestClose = () => {
     this.setState({
@@ -94,7 +97,7 @@ class OutdoorSpaces extends Component {
       selectedBuilding: null,
       selectedSubBuildings: 0,
       addBuildingState: false,
-      addOutdoor: false
+      addComponent: false
     };
   }
   componentDidMount() {
@@ -120,25 +123,25 @@ class OutdoorSpaces extends Component {
       drawerState: !this.state.drawerState
     });
   }
-  onSaveOutdoor = () => {
+  onSaveSystem = () => {
 
   };
   onSubBuildingSelect = (data) => {
     data.selected = !data.selected;
     let selectedSubBuildings = 0;
     const subBuildingList = this.state.subBuildingList.map(building => {
+      if (building.selected) {
+        selectedSubBuildings++;
+      }
+      if (building.id === data.id) {
         if (building.selected) {
           selectedSubBuildings++;
         }
-        if (building.id === data.id) {
-          if (building.selected) {
-            selectedSubBuildings++;
-          }
-          return data;
-        } else {
-          return building;
-        }
+        return data;
+      } else {
+        return building;
       }
+    }
     );
     this.setState({
       selectedSubBuildings: selectedSubBuildings,
@@ -184,7 +187,7 @@ class OutdoorSpaces extends Component {
     });
   };
   showBuildings = ({ subBuildingList, buildingList }) => {
-    return <OutdoorList
+    return <ComponentList
       subBuildingList={subBuildingList}
       onSubBuildingItemSelect={this.onSubBuildingItemSelect.bind(this)}
       onSubBuildingSelect={this.onSubBuildingSelect.bind(this)}
@@ -192,7 +195,7 @@ class OutdoorSpaces extends Component {
   };
 
   render() {
-    const { subBuildingList, addOutdoor, selectedSubBuildings, alertMessage, showMessage, noContentFoundMessage, currentBuilding } = this.state;
+    const { subBuildingList, addBuildingState, addComponent, selectedSubBuildings, alertMessage, showMessage, noContentFoundMessage, currentBuilding } = this.state;
     return (
       <div className="app-wrapper">
         <div className="app-module animated slideInUpTiny animation-duration-3">
@@ -211,35 +214,35 @@ class OutdoorSpaces extends Component {
           <div className="module-box">
             <div className="module-box-header">
               <IconButton className="drawer-btn d-block d-xl-none" aria-label="Menu"
-                          onClick={this.onToggleDrawer.bind(this)}>
-                <i className="zmdi zmdi-menu"/>
+                onClick={this.onToggleDrawer.bind(this)}>
+                <i className="zmdi zmdi-menu" />
               </IconButton>
               <AppModuleHeader placeholder="Search building" notification={false} apps={false}
-                               onChange={this.updateBuilding.bind(this)}
-                               value={this.state.searchUser}/>
+                onChange={this.updateBuilding.bind(this)}
+                value={this.state.searchUser} />
             </div>
             <div className="module-box-content">
               <div className="module-box-topbar">
                 <IconButton className="icon-btn"
-                            onClick={() => {this.props.history.goBack();}}>
-                  <i className="zmdi zmdi-arrow-back"/>
+                  onClick={() => { this.props.history.goBack(); }}>
+                  <i className="zmdi zmdi-arrow-back" />
                 </IconButton>
                 <Checkbox color="primary"
-                          indeterminate={selectedSubBuildings > 0 && selectedSubBuildings < subBuildingList.length}
-                          checked={selectedSubBuildings > 0}
-                          onChange={this.onAllSubBuildingSelect.bind(this)}
-                          value="SelectMail"/>
+                  indeterminate={selectedSubBuildings > 0 && selectedSubBuildings < subBuildingList.length}
+                  checked={selectedSubBuildings > 0}
+                  onChange={this.onAllSubBuildingSelect.bind(this)}
+                  value="SelectMail" />
 
 
                 {selectedSubBuildings > 0 &&
-                <IconButton className="icon-btn"
-                            onClick={this.onDeleteSelectedBuilding.bind(this)}>
-                  <i className="zmdi zmdi-delete"/>
-                </IconButton>}
+                  <IconButton className="icon-btn"
+                    onClick={this.onDeleteSelectedBuilding.bind(this)}>
+                    <i className="zmdi zmdi-delete" />
+                  </IconButton>}
 
               </div>
               <CustomScrollbars className="module-list-scroll scrollbar"
-                                style={{ height: this.props.width >= 1200 ? "calc(100vh - 265px)" : "calc(100vh - 245px)" }}>
+                style={{ height: this.props.width >= 1200 ? "calc(100vh - 265px)" : "calc(100vh - 245px)" }}>
                 {subBuildingList == null ?
                   <div className="h-100 d-flex align-items-center justify-content-center">
                     {noContentFoundMessage}
@@ -253,10 +256,10 @@ class OutdoorSpaces extends Component {
             </div>
           </div>
         </div>
-        <AddOutdoor
-          open={addOutdoor}
-          onSave={this.onSaveOutdoor}
-          onClose={this.onOutdoorClose}
+        <AddComponent
+          open={addComponent}
+          onSave={this.onSave}
+          onClose={this.onClose}
         />
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
@@ -276,5 +279,5 @@ const mapStateToProps = ({ settings }) => {
   const { width } = settings;
   return { width };
 };
-export default withRouter(connect(mapStateToProps)(OutdoorSpaces));
+export default withRouter(connect(mapStateToProps)(SubComponent));
 

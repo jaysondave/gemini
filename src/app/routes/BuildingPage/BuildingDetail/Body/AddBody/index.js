@@ -24,6 +24,9 @@ class AddBody extends React.Component {
       body_picture
     };
   }
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
+  };
 
   render() {
     const { onSaveBody, onBodyClose, onDeleteBody, open, body } = this.props;
@@ -47,26 +50,26 @@ class AddBody extends React.Component {
                 required
                 id="required"
                 label={"Type of Body"}
-                onChange={(event) => this.setState({ name: event.target.value })}
-                defaultValue={type}
+                onChange={this.handleChange("type")}
+                value={type}
                 margin="none"/>
               <TextField
                 id="required"
                 label={"Name of Body"}
-                onChange={(event) => this.setState({ email: event.target.value })}
+                onChange={this.handleChange("name")}
                 value={name}
                 margin="normal"/>
               <TextField
                 id="required"
                 label={"N.part of house"}
-                onChange={(event) => this.setState({ phone: event.target.value })}
+                onChange={this.handleChange("house_num")}
                 value={house_num}
                 margin="normal"
               />
               <TextField
                 id="required"
                 label={"Address"}
-                onChange={(event) => this.setState({ designation: event.target.value })}
+                onChange={this.handleChange("address")}
                 value={address}
                 multiline
                 rowsMax="4"
@@ -74,7 +77,7 @@ class AddBody extends React.Component {
               <TextField
                 id="required"
                 label={"CAP"}
-                onChange={(event) => this.setState({ designation: event.target.value })}
+                onChange={this.handleChange("cap")}
                 value={cap}
                 multiline
                 rowsMax="4"
@@ -82,7 +85,7 @@ class AddBody extends React.Component {
               <TextField
                 id="required"
                 label={"City"}
-                onChange={(event) => this.setState({ designation: event.target.value })}
+                onChange={this.handleChange("city")}
                 value={city}
                 multiline
                 rowsMax="4"
@@ -90,7 +93,7 @@ class AddBody extends React.Component {
               <TextField
                 id="required"
                 label={"Province"}
-                onChange={(event) => this.setState({ designation: event.target.value })}
+                onChange={this.handleChange("province")}
                 value={province}
                 multiline
                 rowsMax="4"
@@ -98,7 +101,7 @@ class AddBody extends React.Component {
               <TextField
                 id="required"
                 label={"Fiscal Code"}
-                onChange={(event) => this.setState({ designation: event.target.value })}
+                onChange={this.handleChange("code_fisc")}
                 value={code_fisc}
                 multiline
                 rowsMax="4"
@@ -110,13 +113,6 @@ class AddBody extends React.Component {
         <div className="modal-box-footer d-flex flex-row">
           <Button disabled={name === ""} variant="contained" color="primary" onClick={() => {
             onBodyClose();
-            onSaveBody(
-              {
-              });
-            this.setState({
-
-            });
-
           }}>Save Body</Button>
         </div>
       </Modal>

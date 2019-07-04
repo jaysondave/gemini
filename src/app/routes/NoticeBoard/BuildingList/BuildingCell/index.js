@@ -6,8 +6,6 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withRouter } from 'react-router-dom'
 import AddBuilding from "../../AddBuilding/index";
-import AddBody from "../../../BuildingDetail/Body/AddBody";
-import AddMaintenance from "../../../BuildingDetail/Maintenance/AddMaintenance";
 
 class BuildingCell extends React.Component {
 
@@ -17,27 +15,13 @@ class BuildingCell extends React.Component {
   handleRequestClose = () => {
     this.setState({ menuState: false });
   };
-  onBuildingClose = () => {
-    this.setState({ addBuildingState: false });
+  onEditImages = (building) => {
+    this.setState({ menuState: false, addBuildingState: false });
+    this.props.history.push('notice-board/images')
   };
-  onDeleteBuilding = (building) => {
-    this.setState({ addBuildingState: false });
-    this.props.onDeleteBuilding(building);
-  };
-  onEditBuilding = () => {
+  onEditMessages = () => {
     this.setState({ menuState: false, addBuildingState: true });
-  };
-  onBodyClose = () => {
-    this.setState({ addBuildingState: false });
-  };
-  onBodies = () => {
-    this.props.history.push('detail')
-  };
-  onMaintenance = () => {
-    this.setState({ menuState: false, addMaintenance: true });
-  };
-  onMaintenanceClose = () => {
-    this.setState({ addMaintenance: false });
+    this.props.history.push('notice-board/messages')
   };
   constructor() {
     super();
@@ -50,38 +34,25 @@ class BuildingCell extends React.Component {
   }
 
   render() {
-    const { building, onBuildingSelect, onSaveBuilding, onSaveBody } = this.props;
-    const { menuState, anchorEl, addBuildingState, addBody, addMaintenance } = this.state;
+    const { building } = this.props;
+    const { menuState, anchorEl } = this.state;
     const { id, building_name, thumb, user_name, user_address, building_report, subBuildingList } = building;
 
     const options = [
-      "Edit",
-      "Body",
-      "Outdoor Spaces",
-      "Notice Board",
-      "Maintenance",
-      "Delete"
+      "Messages",
+      "Images"
     ];
     return (
 
       <div className="contact-item module-list-item">
+        <div className="d-flex f-1 flex-wrap">
 
-        <Checkbox color="primary"
-          checked={building.selected}
-          value="checkedF"
-          onClick={() => {
-            onBuildingSelect(building);
-          }}
-        />
-        <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }}>
+          <div className="d-flex f-1 flex-wrap" onClick={() => this.props.history.push('/notice-board')}>
 
-          <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }}>
-
-            <div className="mx-1 mx-md-3"
-              style={{ fontSize: 16, flex: 1, position: "relative" }}>
+            <div className="mx-1 mx-md-3 f-1 p-relative font-size-16">
               <div className="align-center">{id}</div>
             </div>
-            <div className="col con-inf-mw-100" style={{ flex: 3 }}>
+            <div className="col con-inf-mw-100 f-3">
               <p className="mb-0">
                 <span className="text-truncate contact-name text-dark">
                   {building_name}
@@ -98,7 +69,7 @@ class BuildingCell extends React.Component {
                 </span>
               </div>
             </div>
-            <div className="col con-inf-mw-100" style={{ flex: 1, textAlign: "center" }}>
+            <div className="col con-inf-mw-100 f-1 text-center">
               <p className="mb-0">
                 <span className="text-truncate contact-name text-dark">
                   {"No.Part of Building"}
@@ -111,7 +82,7 @@ class BuildingCell extends React.Component {
                 </span>
               </div>
             </div>
-            <div className="col con-inf-mw-100" style={{ flex: 1, textAlign: "center" }}>
+            <div className="col con-inf-mw-100 f-1 text-center">
               <p className="mb-0">
                 <span className="text-truncate contact-name text-dark">
                   {"No.Reporter"}
@@ -142,24 +113,12 @@ class BuildingCell extends React.Component {
               }}>
               {options.map(option =>
                 <MenuItem key={option} onClick={() => {
-                  if (option === "Edit") {
+                  if (option === "Messages") {
                     this.handleRequestClose();
-                    this.onEditBuilding();
-                  } else if (option === "Delete") {
+                    this.onEditMessages();
+                  } else if (option === "Images") {
                     this.handleRequestClose();
-                    this.onDeleteBuilding(building);
-                  } else if (option === "Body") {
-                    this.handleRequestClose();
-                    this.onBodies();
-                  } else if (option === "Maintenance") {
-                    this.handleRequestClose();
-                    this.onMaintenance();
-                  } else if (option === "Outdoor Spaces") {
-                    this.handleRequestClose();
-                    this.props.history.push('detail/outdoorspaces');
-                  } else if (option === "Notice Board") {
-                    this.handleRequestClose();
-                    alert("Notice Board")
+                    this.onEditImages();
                   }
                 }
                 }>
@@ -167,24 +126,6 @@ class BuildingCell extends React.Component {
                 </MenuItem>
               )}
             </Menu>
-            {addBuildingState &&
-              <AddBuilding open={addBuildingState} building={building} onSaveBuilding={onSaveBuilding}
-                onBuildingClose={this.onBuildingClose} onDeleteBuilding={this.onDeleteBuilding} />
-            }
-            {addBody &&
-              <AddBody
-                open={addBody}
-                body={{}}
-                onSaveBody={onSaveBody}
-                onBodyClose={this.onBodyClose} />
-            }
-            {addMaintenance &&
-              <AddMaintenance
-                maintenance={{}}
-                open={addMaintenance}
-                onSaveBody={onSaveBody}
-                onMaintenanceClose={this.onMaintenanceClose} />
-            }
           </div>
         </div>
       </div>

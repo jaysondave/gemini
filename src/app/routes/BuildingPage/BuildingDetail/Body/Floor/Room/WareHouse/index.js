@@ -6,21 +6,21 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
-import buildingList from "../../data/buildingList";
+import buildingList from "../../../../../data/buildingList";
 import AppModuleHeader from "components/AppModuleHeader/index";
 import IntlMessages from "util/IntlMessages";
 import CustomScrollbars from "util/CustomScrollbars";
-import OutdoorList from "./OutdoorList";
-import AddOutdoor from "./AddOutdoor";
+import WareHoustList from "./WareHoustList";
+import AddWareHouse from "./AddWareHouse";
 
 
-class OutdoorSpaces extends Component {
+class WareHouse extends Component {
 
-  BuildingSideBar = () => {
+  SideBar = () => {
     return <div className="module-side">
       <div className="module-side-header">
         <div className="module-logo">
-          <span>Outdoors</span>
+          <span>WareHouses</span>
         </div>
       </div>
 
@@ -29,8 +29,8 @@ class OutdoorSpaces extends Component {
                           style={{ height: this.props.width >= 1200 ? "calc(100vh - 200px)" : "calc(100vh - 80px)" }}>
           <div className="module-add-task">
             <Button className="jr-btn btn-block" variant="contained" color="primary" aria-label="add"
-                    onClick={this.onAddOutdoor}>
-              <span>{"New Outdoor"}</span>
+                    onClick={this.onAddWareHouse}>
+              <span>{"New WareHouse"}</span>
             </Button>
           </div>
         </CustomScrollbars>
@@ -61,11 +61,11 @@ class OutdoorSpaces extends Component {
       this.setState({ loader: false });
     }, 1500);
   }
-  onAddOutdoor = () => {
-    this.setState({ addOutdoor: true });
+  onAddWareHouse = () => {
+    this.setState({ addWareHouse: true });
   };
-  onOutdoorClose = () => {
-    this.setState({ addOutdoor: false });
+  onClose = () => {
+    this.setState({ addWareHouse: false });
   };
   handleRequestClose = () => {
     this.setState({
@@ -81,11 +81,6 @@ class OutdoorSpaces extends Component {
       showMessage: false,
       selectedSectionId: 1,
       drawerState: false,
-      user: {
-        name: "Robert Johnson",
-        email: "robert.johnson@example.com",
-        avatar: "https://via.placeholder.com/150x150"
-      },
       searchUser: "",
       filterOption: "All buildings",
       buildingList: buildingList,
@@ -94,7 +89,7 @@ class OutdoorSpaces extends Component {
       selectedBuilding: null,
       selectedSubBuildings: 0,
       addBuildingState: false,
-      addOutdoor: false
+      addWareHouse: false
     };
   }
   componentDidMount() {
@@ -120,7 +115,7 @@ class OutdoorSpaces extends Component {
       drawerState: !this.state.drawerState
     });
   }
-  onSaveOutdoor = () => {
+  onSave = () => {
 
   };
   onSubBuildingSelect = (data) => {
@@ -183,8 +178,8 @@ class OutdoorSpaces extends Component {
       selectedSubBuildings: 0
     });
   };
-  showBuildings = ({ subBuildingList, buildingList }) => {
-    return <OutdoorList
+  showWareHouses = ({ subBuildingList, buildingList }) => {
+    return <WareHoustList
       subBuildingList={subBuildingList}
       onSubBuildingItemSelect={this.onSubBuildingItemSelect.bind(this)}
       onSubBuildingSelect={this.onSubBuildingSelect.bind(this)}
@@ -192,7 +187,7 @@ class OutdoorSpaces extends Component {
   };
 
   render() {
-    const { subBuildingList, addOutdoor, selectedSubBuildings, alertMessage, showMessage, noContentFoundMessage, currentBuilding } = this.state;
+    const { subBuildingList, addWareHouse, selectedSubBuildings, alertMessage, showMessage, noContentFoundMessage, currentBuilding } = this.state;
     return (
       <div className="app-wrapper">
         <div className="app-module animated slideInUpTiny animation-duration-3">
@@ -201,11 +196,11 @@ class OutdoorSpaces extends Component {
             <Drawer
               open={this.state.drawerState}
               onClose={this.onToggleDrawer.bind(this)}>
-              {this.BuildingSideBar()}
+              {this.SideBar()}
             </Drawer>
           </div>
           <div className="app-module-sidenav d-none d-xl-flex">
-            {this.BuildingSideBar()}
+            {this.SideBar()}
           </div>
 
           <div className="module-box">
@@ -244,7 +239,7 @@ class OutdoorSpaces extends Component {
                   <div className="h-100 d-flex align-items-center justify-content-center">
                     {noContentFoundMessage}
                   </div>
-                  : this.showBuildings(this.state)
+                  : this.showWareHouses(this.state)
                 }
 
 
@@ -253,10 +248,10 @@ class OutdoorSpaces extends Component {
             </div>
           </div>
         </div>
-        <AddOutdoor
-          open={addOutdoor}
-          onSave={this.onSaveOutdoor}
-          onClose={this.onOutdoorClose}
+        <AddWareHouse
+          open={addWareHouse}
+          onSave={this.onSave}
+          onClose={this.onClose}
         />
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
@@ -276,5 +271,5 @@ const mapStateToProps = ({ settings }) => {
   const { width } = settings;
   return { width };
 };
-export default withRouter(connect(mapStateToProps)(OutdoorSpaces));
+export default withRouter(connect(mapStateToProps)(WareHouse));
 
