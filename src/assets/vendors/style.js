@@ -12,3 +12,4 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import 'styles/bootstrap.scss'
 import 'styles/app.scss';
 import 'styles/app-rtl.scss';
+import "react-datepicker/dist/react-datepicker.css";

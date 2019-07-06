@@ -37,6 +37,10 @@ class SubBuildingCell extends React.Component {
     this.setState({ menuState: false });
     this.props.history.push('certified')
   };
+  onEditInsurance = () => {
+    this.setState({ menuState: false });
+    this.props.history.push('insurance')
+  };
   onEditFloor = () => {
     this.setState({ menuState: false });
     this.props.history.push('floors')
@@ -69,7 +73,8 @@ class SubBuildingCell extends React.Component {
       "SYSTEMS",
       "DOCUMENTATIONS",
       "CADASTRAL",
-      "CERTIFIED"
+      "CERTIFIED",
+      "INSURANCE"
     ];
     return (
 
@@ -158,6 +163,9 @@ class SubBuildingCell extends React.Component {
                         return;
                       case "CERTIFIED":
                         this.onEditCertificate();
+                        return;
+                      case "INSURANCE":
+                        this.onEditInsurance();
                         return;
                       default:
                         return;

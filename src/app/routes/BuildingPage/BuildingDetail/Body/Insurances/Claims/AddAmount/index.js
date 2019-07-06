@@ -4,23 +4,25 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import DatePicker from "react-datepicker";
+import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Input from "@material-ui/core/Input";
 import IntlMessages from "util/IntlMessages";
-import { InputDate } from "../../../../../components/CustomInput/InputDate";
+import { DropzoneArea } from "material-ui-dropzone";
+import { InputDate } from "../../../../../../../../components/CustomInput/InputDate";
+import DatePicker from "react-datepicker";
 
-class AddMessage extends React.Component {
+class AddAmount extends React.Component {
   constructor(props) {
     super(props);
-    console.log({ AddSystem: props });
+    console.log({ AddRent: props });
     // const { id, type, province, city, part, areaMq, sectionRegister, name, fg, partFg, sub, partSub, category, kind, className, deduction, consistency, income, dominicalIncome, agriculturalIncome, conformity, registerationDate, dataFrom, address, heading, note } = props.cadastral;
     this.state = {
       id: "",
-      component: "",
-      brand: "",
-      publishDate: "",
-      expiryDate: "",
-      uploadFile: ""
+      levelFloor: "",
+      intend: "",
+      files: null
     };
   }
 
@@ -30,7 +32,7 @@ class AddMessage extends React.Component {
   handleChangeFile = (files) => {
     console.log(files);
     this.setState({
-      uploadFile: files
+      files: files
     });
   };
   updateDate = name => (date) => {
@@ -48,46 +50,66 @@ class AddMessage extends React.Component {
     return reformattedDate;
   };
   render() {
-    const { onSave, onClose, open, system } = this.props;
+    const { onSave, onClose, open, rent } = this.props;
     const {
       id,
-      component,
-      brand,
-      publishDate,
-      expiryDate,
-      uploadFile
+      levelFloor,
+      intend,
+      files
     } = this.state;
     return (
       <Modal className="modal-box" isOpen={open}>
         <ModalHeader className="modal-box-header bg-primary text-white">
-          {id === "" ? "New Message" :
-            "Edit Message"}
+          {'CLEARANCE AMOUNT'}
           <IconButton className="text-white"
-            onClick={onClose}>
-            <CloseIcon />
+                      onClick={() => onClose('addAmount')}>
+            <CloseIcon/>
           </IconButton>
         </ModalHeader>
 
         <div className="modal-box-content">
           <div className="row no-gutters">
+
             <div className="row col-md-12 col-12 p-0 mb-2">
               <div className="col-md-4 text-right p-relative">
-                <label className="align-center font-size-18">Title</label>
+                <label className="align-center font-size-18">DATE</label>
+              </div>
+              <div className="col-md-8 p-0">
+                <div className="d-flex">
+                  <DatePicker
+                    customInput={
+                      <InputDate
+                      />
+                    }
+                    peekNextMonth
+                    showMonthDropdown
+                    showYearDropdown
+                    dropdownMode="select"
+                    selected={new Date()}
+                    onChange={this.updateDate('publishDate')}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="row col-md-12 col-12 p-0 mb-2">
+              <div className="col-md-4 text-right p-relative">
+                <label className="align-center font-size-18">CLEARANCE AMOUNT</label>
               </div>
               <div className="col-md-8 p-0">
                 <FormControl className="w-100 mb-2">
                   <TextField
-                    value={component}
-                    onChange={this.handleChange("component")}
+                    value={''}
+                    onChange={this.handleChange("levelFloor")}
                     fullWidth
-                    margin="none" />
+                    margin="none"/>
                 </FormControl>
               </div>
             </div>
 
             <div className="row col-md-12 col-12 p-0 mb-2">
-              <div className="col-md-4 text-right">
-                <label className="font-size-18">Message</label>
+              <div className="col-md-4 text-right p-relative">
+                <label className="align-center font-size-18">DESCRIPTION</label>
               </div>
               <div className="col-md-8 p-0">
                 <FormControl className="w-100 mb-2">
@@ -98,9 +120,9 @@ class AddMessage extends React.Component {
                     paddingHorizontal: 10,
                     paddingVertical: 5
                   }}
-                    value={''}
-                    placeholder="Description"
-                    onChange={this.handleChange("description")}
+                            value={''}
+                            placeholder="Description"
+                            onChange={this.handleChange("description")}
                   />
                 </FormControl>
               </div>
@@ -108,61 +130,30 @@ class AddMessage extends React.Component {
 
             <div className="row col-md-12 col-12 p-0 mb-2">
               <div className="col-md-4 text-right p-relative">
-                <label className="align-center font-size-18">Publish Date</label>
+                <label className="font-size-18">ADD IMAGE</label>
               </div>
               <div className="col-md-8 p-0">
-                <div className="d-flex">
-                  <DatePicker
-                    disabled
-                    readOnly
-                    customInput={
-                      <InputDate
-                      />
-                    }
-                    peekNextMonth
-                    showMonthDropdown
-                    showYearDropdown
-                    dropdownMode="select"
-                    selected={publishDate ? new Date(publishDate) : new Date()}
-                    onChange={this.updateDate('publishDate')}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="row col-md-12 col-12 p-0 mb-2">
-            <div className="col-md-4 text-right p-relative">
-              <label className="align-center font-size-18">Expiry Date</label>
-            </div>
-            <div className="col-md-8 p-0">
-              <div className="d-flex">
-                <DatePicker
-                  customInput={
-                    <InputDate
-                    />
-                  }
-                  peekNextMonth
-                  showMonthDropdown
-                  showYearDropdown
-                  dropdownMode="select"
-                  selected={expiryDate ? new Date(expiryDate) : null}
-                  onChange={this.updateDate('expiryDate')}
+                <DropzoneArea
+                  filesLimit={1}
+                  showFileNamesInPreview={true}
+                  dropzoneText={"Drag and drop a file here or click"}
+                  onChange={this.handleChangeFile}
                 />
               </div>
             </div>
+
           </div>
         </div>
 
         <div className="modal-box-footer d-flex flex-row">
-          <Button variant="contained" color="primary" onClick={() => {
-            onClose();
+          <Button disabled={id === ""} variant="contained" color="primary" onClick={() => {
+            onClose('addAmount');
 
-          }}>Save Message</Button>
+          }}>Save AMOUNT</Button>
         </div>
       </Modal>
     );
   }
 }
 
-export default AddMessage;
+export default AddAmount;

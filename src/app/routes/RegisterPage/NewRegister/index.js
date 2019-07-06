@@ -151,6 +151,7 @@ class NewRegister extends React.Component {
                   <MenuItem value={"category5"}>MANAGER</MenuItem>
                   <MenuItem value={"category6"}>AGRONOMIST LABOR</MenuItem>
                   <MenuItem value={"category7"}>CONSULTANT</MenuItem>
+                  <MenuItem value={"category8"}>EXPERT</MenuItem>
                 </Select>
               </FormControl>
             </div>
