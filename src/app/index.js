@@ -3,8 +3,9 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from 'components/Header/index';
 import Sidebar from 'containers/SideNav/index';
+import SideNavMaintainer from 'containers/SideNavMaintainer/index';
+
 import Footer from 'components/Footer';
-import Tour from '../components/Tour/index';
 import {
   ABOVE_THE_HEADER,
   BELOW_THE_HEADER,
@@ -19,6 +20,8 @@ import BuildingDashboard from "./routes/BuildingPage";
 import MaintenanceDashboard from "./routes/MaintenancePage";
 import TimeTableDashboard from "./routes/TimeTablePage";
 import RegisterDashboard from "./routes/RegisterPage";
+
+import MaintainerMaintenanceDashboard from "./m_routes/MaintenancePage";
 
 class App extends React.Component {
 
@@ -38,7 +41,8 @@ class App extends React.Component {
       <div className={`app-container ${drawerStyle}`}>
         {/* <Tour /> */}
 
-        <Sidebar />
+        {/*<Sidebar />*/}
+        <SideNavMaintainer/>
         <div className="app-main-container">
           <div
             className={`app-header ${navigationStyle === HORIZONTAL_NAVIGATION ? 'app-header-horizontal' : ''}`}>
@@ -74,6 +78,13 @@ class App extends React.Component {
                 />
                 <Route path={`${match.url}/warehouse`}
                 component={asyncComponent(() => import('./routes/WareHouse'))}/>
+
+                <Route path={`${match.url}/buildingDashboard`}
+                       component={BuildingDashboard} />
+
+                <Route path={`${match.url}/m-maintenance`}
+                       component={MaintainerMaintenanceDashboard} />
+
                 <Route component={asyncComponent(() => import('components/Error404'))} />
               </Switch>
             </div>

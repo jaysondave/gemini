@@ -48,7 +48,7 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 authUser: null,
-                initURL: '/app/home-page',
+                initURL: '/app/',
                 loader: false
             }
         }
