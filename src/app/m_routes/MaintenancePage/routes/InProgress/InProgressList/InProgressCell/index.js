@@ -4,6 +4,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withRouter } from "react-router-dom";
+import RejectJob from "../../RejectJob";
+import SuspendWork from "../../SuspendWork";
 
 class InProgressCell extends React.Component {
 
@@ -16,11 +18,12 @@ class InProgressCell extends React.Component {
   onOptionSelect = event => {
     this.setState({ menuState: true, anchorEl: event.currentTarget });
   };
-  onTapPerform = () => {
-    this.setState({ menuState: false, performDialogVisible: true });
+  onTapReject = () => {
+    this.setState({ menuState: false, rejectDialogVisible: true });
   };
   onTapSubAssign = () => {
-    this.setState({ menuState: false, subAssignDialogVisible: true });
+    this.setState({ menuState: false});
+    this.props.history.push('in-progress/sub-assign');
   };
   onTapChat = () => {
     this.setState({ menuState: false });
@@ -28,8 +31,9 @@ class InProgressCell extends React.Component {
   onTapSuspend = () => {
     this.setState({ menuState: false, suspendDialogVisible: true });
   };
-  onTapClose = () => {
+  onTapRevoke = () => {
     this.setState({ menuState: false });
+    this.props.history.push('in-progress/revoke');
   };
   onClose = name => {
     this.setState({[name]: false});
@@ -39,7 +43,7 @@ class InProgressCell extends React.Component {
     this.state = {
       anchorEl: undefined,
       menuState: false,
-      performDialogVisible: false,
+      rejectDialogVisible: false,
       subAssignDialogVisible: false,
       suspendDialogVisible: false,
     };
@@ -47,15 +51,15 @@ class InProgressCell extends React.Component {
 
   render() {
     const { maintenance, onMaintenanceSelect } = this.props;
-    const { menuState, anchorEl, performDialogVisible, subAssignDialogVisible, suspendDialogVisible } = this.state;
+    const { menuState, anchorEl, rejectDialogVisible, subAssignDialogVisible, suspendDialogVisible } = this.state;
     const { id, building, reporter, reportContent, assign, viewDate } = maintenance;
 
     const options = [
-      "Perform",
-      "Sub Assign",
+      "Reject",
+      "Assign",
       "Suspend",
-      "Chat",
-      "Close",
+      "Revoke",
+      "Chat"
     ];
     return (
 
@@ -63,7 +67,7 @@ class InProgressCell extends React.Component {
 
         <div className="d-flex f-1 flex-wrap">
 
-          <div className="d-flex f-1 flex-wrap" onClick={() => this.props.history.push("detail")}>
+          <div className="d-flex f-1 flex-wrap">
 
             <div className="mx-1 mx-md-3 font-size-16 f-1 position-relative">
               <div className="position-absolute align-center">{id}</div>
@@ -106,11 +110,6 @@ class InProgressCell extends React.Component {
                       Accept Date: {reporter.date}
                   </span>
               </p>
-              <p className="mb-0">
-                  <span className="text-primary-darken-4-color">
-                      End Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reporter.date}
-                  </span>
-              </p>
             </div>
           </div>
           <div className="col-auto px-1 actions d-none d-sm-flex">
@@ -130,16 +129,16 @@ class InProgressCell extends React.Component {
                   }}>
               {options.map(option =>
                 <MenuItem key={option} onClick={() => {
-                  if (option === "Perform") {
-                    this.onTapPerform();
-                  } else if (option === "Sub Assign") {
+                  if (option === "Reject") {
+                    this.onTapReject();
+                  } else if (option === "Assign") {
                     this.onTapSubAssign();
                   } else if (option === "Chat") {
                     this.onTapChat();
                   } else if (option === "Suspend") {
                     this.onTapSuspend();
-                  } else if (option === "Close") {
-                    this.onTapClose();
+                  } else if (option === "Revoke") {
+                    this.onTapRevoke();
                   }
                 }
                 }>
@@ -150,7 +149,18 @@ class InProgressCell extends React.Component {
           </div>
 
         </div>
-
+        {rejectDialogVisible &&
+          <RejectJob
+            open={rejectDialogVisible}
+            onClose={this.onClose}
+          />
+        }
+        {suspendDialogVisible &&
+        <SuspendWork
+          open={suspendDialogVisible}
+          onClose={this.onClose}
+        />
+        }
       </div>
     );
   }

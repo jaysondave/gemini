@@ -31,14 +31,10 @@ class MainPage extends React.Component {
     switch (type) {
       case "workInProgress":
         return "#EF5350";
-      case "document":
+      case "expiringJob":
         return "#ec407a";
-      case "certificate":
+      case "appointment":
         return "#5c6bc0";
-      case "rent":
-        return "#29b6f6";
-      case "maintenance":
-        return "#f57f17";
       default:
         return "#fff";
     }
@@ -104,28 +100,14 @@ class MainPage extends React.Component {
             <div className="d-flex mb-2">
               <div className="" style={{ backgroundColor: "#ec407a", height: 25, flex: 1 }}/>
               <div className="p-relative" style={{ height: 25, flex: 2 }}>
-                <div className="align-center ml-2">Document</div>
+                <div className="align-center ml-2">Expiring Job</div>
               </div>
             </div>
 
             <div className="d-flex mb-2">
               <div className="" style={{ backgroundColor: "#5c6bc0", height: 25, flex: 1 }}/>
               <div className="p-relative" style={{ height: 25, flex: 2 }}>
-                <div className="align-center ml-2">Certificate</div>
-              </div>
-            </div>
-
-            <div className="d-flex mb-2">
-              <div className="" style={{ backgroundColor: "#29b6f6", height: 25, flex: 1 }}/>
-              <div className="p-relative" style={{ height: 25, flex: 2 }}>
-                <div className="align-center ml-2">Rent</div>
-              </div>
-            </div>
-
-            <div className="d-flex mb-2">
-              <div className="" style={{ backgroundColor: "#f57f17", height: 25, flex: 1 }}/>
-              <div className="p-relative" style={{ height: 25, flex: 2 }}>
-                <div className="align-center ml-2">Maintenance</div>
+                <div className="align-center ml-2">Appointment</div>
               </div>
             </div>
 

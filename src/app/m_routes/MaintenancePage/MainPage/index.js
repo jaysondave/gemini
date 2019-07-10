@@ -23,7 +23,7 @@ class MainPage extends React.Component {
         <div className="row">
           <div className="col-lg-9 col-md-9 col-sm-12">
             <div className="row">
-              <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 hover-pointer" onClick={() => this.onTapBlock('new-job')}>
+              <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 hover-pointer" onClick={() => this.onTapBlock('new-job')}>
                 <CardOverView
                   chartProperties={{
                     title: "NEW JOB",
@@ -45,8 +45,29 @@ class MainPage extends React.Component {
 
               </div>
 
+              <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 hover-pointer" onClick={() => this.onTapBlock('accepted')}>
+                <CardOverView
+                  chartProperties={{
+                    title: "ACCEPTED",
+                    number: "5",
+                    icon: "stats",
+                    bgColor: "indigo",
+                    styleName: "up",
+                    desc: "ON THIS WEEK",
+                    percent: "+3"
+                  }}
+                  children={<ResponsiveContainer width="100%" height={75}>
+                    <AreaChart data={increamentData}
+                               margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+                      <Area dataKey='pv' strokeWidth={0} stackId="2" stroke='#273894' fill="#273894"
+                            fillOpacity={1}/>
+                    </AreaChart>
+                  </ResponsiveContainer>}
+                />
+              </div>
 
-              <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 hover-pointer" onClick={() => this.onTapBlock('in-progress')}>
+
+              <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 hover-pointer" onClick={() => this.onTapBlock('in-progress')}>
                 <CardOverView
                   chartProperties={{
                     title: "IN PROGRESS",
@@ -67,14 +88,14 @@ class MainPage extends React.Component {
                 />
               </div>
 
-              <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 hover-pointer" onClick={() => this.onTapBlock('end-job')}>
+              <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 hover-pointer" onClick={() => this.onTapBlock('to-check')}>
                 <CardOverView
                   chartProperties={{
-                    title: "END JOB",
-                    number: "5",
+                    title: "TO CHECK",
+                    number: "12",
                     icon: "stats",
                     bgColor: "indigo",
-                    styleName: "up",
+                    styleName: "down",
                     desc: "ON THIS WEEK",
                     percent: "+3"
                   }}
@@ -88,7 +109,9 @@ class MainPage extends React.Component {
                 />
               </div>
 
-              <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 hover-pointer" onClick={() => this.onTapBlock('out-standing')}>
+
+
+              <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 hover-pointer" onClick={() => this.onTapBlock('out-standing')}>
                 <CardOverView
                   chartProperties={{
                     title: "OUTSTANDING",
@@ -109,7 +132,7 @@ class MainPage extends React.Component {
                 />
               </div>
 
-              <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 hover-pointer" onClick={() => this.onTapBlock('closed')}>
+              <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 hover-pointer" onClick={() => this.onTapBlock('closed')}>
                 <CardOverView
                   chartProperties={{
                     title: "CLOSED",
@@ -130,7 +153,7 @@ class MainPage extends React.Component {
                 />
               </div>
 
-              <div className="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12 hover-pointer" onClick={() => this.onTapBlock('rejected')}>
+              <div className="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 hover-pointer" onClick={() => this.onTapBlock('rejected')}>
                 <CardOverView
                   chartProperties={{
                     title: "REJECTED",

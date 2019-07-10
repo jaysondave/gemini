@@ -28,7 +28,7 @@ class Maintainer extends Component {
   }
 
   componentWillMount() {
-    console.log('Maintainer componentWillMount')
+    console.log('SubWorkers componentWillMount')
   }
 
   onMaintainerSelect = (data) => {

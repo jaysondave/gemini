@@ -113,22 +113,31 @@ class SidenavContent extends Component {
               </li>
 
               <li>
+                <NavLink className="prepend-icon" to="/app/m-maintenance/accepted">
+                  <span className="nav-text">Accepted</span>
+                </NavLink>
+              </li>
+
+              <li>
                 <NavLink className="prepend-icon" to="/app/m-maintenance/in-progress">
                   <span className="nav-text">In Progress</span>
                 </NavLink>
               </li>
 
-              <li>
-                <NavLink className="prepend-icon" to="/app/m-maintenance/end-job">
-                  <span className="nav-text">End Job</span>
-                </NavLink>
-              </li>
+
 
               <li>
                 <NavLink className="prepend-icon" to="/app/m-maintenance/out-standing">
                   <span className="nav-text">OutStanding</span>
                 </NavLink>
               </li>
+
+              <li>
+                <NavLink className="prepend-icon" to="/app/m-maintenance/to-check">
+                  <span className="nav-text">To Check</span>
+                </NavLink>
+              </li>
+
               <li>
                 <NavLink className="prepend-icon" to="/app/m-maintenance/closed">
                   <span className="nav-text">Closed</span>
@@ -163,7 +172,7 @@ class SidenavContent extends Component {
           </li>
 
           <li className="menu no-arrow">
-            <NavLink to="/app/m-profile">
+            <NavLink to="/app/sub-worker">
               <i className="zmdi zmdi-accounts zmdi-hc-fw"/>
               <span className="nav-text">SUB WORKERS</span>
             </NavLink>

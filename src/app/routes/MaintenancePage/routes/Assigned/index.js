@@ -143,7 +143,7 @@ class Assigned extends Component {
       <div className="app-wrapper">
           <div className="module-box content-margin-auto">
             <div className="module-box-header">
-              <AppModuleHeader placeholder="Search building" notification={false} apps={false} value={this.state.searchKey} onChange={this.onSearch}/>
+              <AppModuleHeader placeholder="Search here..." notification={false} apps={false} value={this.state.searchKey} onChange={this.onSearch}/>
             </div>
             <div className="module-box-content">
               <div className="module-box-topbar">

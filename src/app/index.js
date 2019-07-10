@@ -22,6 +22,7 @@ import TimeTableDashboard from "./routes/TimeTablePage";
 import RegisterDashboard from "./routes/RegisterPage";
 
 import MaintainerMaintenanceDashboard from "./m_routes/MaintenancePage";
+import MTimeTableDashboard from "./m_routes/TimeTablePage";
 
 class App extends React.Component {
 
@@ -84,6 +85,10 @@ class App extends React.Component {
 
                 <Route path={`${match.url}/m-maintenance`}
                        component={MaintainerMaintenanceDashboard} />
+                <Route path={`${match.url}/m-timetable`}
+                       component={MTimeTableDashboard} />
+                <Route path={`${match.url}/sub-worker`}
+                       component={asyncComponent(() => import('./m_routes/RegisterPage'))} />
 
                 <Route component={asyncComponent(() => import('components/Error404'))} />
               </Switch>

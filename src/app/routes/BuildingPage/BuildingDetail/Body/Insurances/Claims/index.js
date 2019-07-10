@@ -215,7 +215,7 @@ class Claims extends Component {
                           onClick={this.onToggleDrawer.bind(this)}>
                 <i className="zmdi zmdi-menu"/>
               </IconButton>
-              <AppModuleHeader placeholder="Search building" notification={false} apps={false}
+              <AppModuleHeader placeholder="Search here..." notification={false} apps={false}
                                onChange={this.updateBuilding.bind(this)}
                                value={this.state.searchUser}/>
             </div>

@@ -8,14 +8,17 @@ const MaintainerMaintenanceDashboard = ({match}) => (
       <Redirect exact from={`${match.url}/`} to={`${match.url}/dashboard`}/>
       <Route path={`${match.url}/dashboard`} component={asyncComponent(() => import('./MainPage'))}/>
       <Route path={`${match.url}/new-job`} component={asyncComponent(() => import('./routes/NewJob'))}/>
-      <Route path={`${match.url}/end-job`} component={asyncComponent(() => import('./routes/EndJob'))}/>
-      <Route path={`${match.url}/in-progress`} component={asyncComponent(() => import('./routes/InProgress'))}/>
-      <Route path={`${match.url}/out-standing`} component={asyncComponent(() => import('./routes/OutStanding'))}/>
+      <Route path={`${match.url}/accepted`} component={asyncComponent(() => import('./routes/AcceptedJob'))}/>
+      <Route exact path={`${match.url}/in-progress`} component={asyncComponent(() => import('./routes/InProgress'))}/>
+      <Route exact path={`${match.url}/in-progress/sub-assign`} component={asyncComponent(() => import('./SubWorkers'))}/>
+      <Route exact path={`${match.url}/in-progress/revoke`} component={asyncComponent(() => import('./routes/InProgress/RevokeJob'))}/>
+      <Route exact path={`${match.url}/out-standing`} component={asyncComponent(() => import('./routes/OutStanding'))}/>
+      <Route exact path={`${match.url}/out-standing/sub-assign`} component={asyncComponent(() => import('./SubWorkers'))}/>
+      <Route exact path={`${match.url}/to-check`} component={asyncComponent(() => import('./routes/ToCheck'))}/>
+      <Route exact path={`${match.url}/to-check/sub-assign`} component={asyncComponent(() => import('./SubWorkers'))}/>
       <Route path={`${match.url}/closed`} component={asyncComponent(() => import('./routes/Closed'))}/>
       <Route path={`${match.url}/rejected`} component={asyncComponent(() => import('./routes/Rejected'))}/>
 
-      <Route path={`${match.url}/detail`} component={asyncComponent(() => import('./routes/NewJob/MaintenanceDetail'))}/>
-      <Route path={`${match.url}/maintainer`} component={asyncComponent(() => import('./routes/Maintainer'))}/>
     </Switch>
   </div>
 );
