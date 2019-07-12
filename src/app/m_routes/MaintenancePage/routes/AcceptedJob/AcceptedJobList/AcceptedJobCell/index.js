@@ -29,6 +29,7 @@ class AcceptedJobCell extends React.Component {
   };
   onTapChat = () => {
     this.setState({ menuState: false });
+    this.props.history.push('/app/m-chat');
   };
   onClose = name => {
     this.setState({[name]: false});
@@ -61,7 +62,7 @@ class AcceptedJobCell extends React.Component {
 
         <div className="d-flex f-1 flex-wrap">
 
-          <div className="d-flex f-1 flex-wrap" onClick={() => this.props.history.push("detail")}>
+          <div className="d-flex f-1 flex-wrap">
 
             <div className="mx-1 mx-md-3 font-size-16 f-1 position-relative">
               <div className="position-absolute align-center">{id}</div>
@@ -93,7 +94,7 @@ class AcceptedJobCell extends React.Component {
                   </span>
               </div>
             </div>
-            <div className="col con-inf-mw-100 f-1">
+            <div className="col con-inf-mw-100 f-2">
               <p className="mb-0">
                   <span className="text-primary-darken-4-color">
                       Due Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reporter.date}

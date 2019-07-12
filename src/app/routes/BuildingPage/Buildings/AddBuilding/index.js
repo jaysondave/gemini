@@ -41,66 +41,96 @@ class AddBuilding extends React.Component {
         <div className="modal-box-content">
           <div className="row no-gutters">
             <div className="col-lg-12 d-flex flex-column order-lg-1">
-              <TextField
-                required
-                id="required"
-                label={"Type of Building"}
-                onChange={(event) => this.setState({ name: event.target.value })}
-                defaultValue={name}
-                margin="none"/>
-              <TextField
-                id="required"
-                label={"Name of Building"}
-                onChange={(event) => this.setState({ email: event.target.value })}
-                value={email}
-                margin="normal"/>
-              <TextField
-                id="required"
-                label={"N.part of Building"}
-                onChange={(event) => this.setState({ phone: event.target.value })}
-                value={phone}
-                margin="normal"
-              />
-              <TextField
-                id="required"
-                label={"Address"}
-                onChange={(event) => this.setState({ designation: event.target.value })}
-                value={designation}
-                multiline
-                rowsMax="4"
-                margin="normal"/>
-              <TextField
-                id="required"
-                label={"CAP"}
-                onChange={(event) => this.setState({ designation: event.target.value })}
-                value={designation}
-                multiline
-                rowsMax="4"
-                margin="normal"/>
-              <TextField
-                id="required"
-                label={"Common"}
-                onChange={(event) => this.setState({ designation: event.target.value })}
-                value={designation}
-                multiline
-                rowsMax="4"
-                margin="normal"/>
-              <TextField
-                id="required"
-                label={"Province"}
-                onChange={(event) => this.setState({ designation: event.target.value })}
-                value={designation}
-                multiline
-                rowsMax="4"
-                margin="normal"/>
-              <TextField
-                id="required"
-                label={"Fiscal Code"}
-                onChange={(event) => this.setState({ designation: event.target.value })}
-                value={designation}
-                multiline
-                rowsMax="4"
-                margin="normal"/>
+              <form className="row" noValidate autoComplete="off">
+                <div className="row col-md-12 col-12 p-0 mb-2">
+                  <div className="col-md-4 text-right p-relative">
+                    <label className="align-center font-size-18">Type of Building</label>
+                  </div>
+                  <div className="col-md-8 p-0">
+                    <input
+                      className='form-control form-control-lg'
+                    />
+                  </div>
+                </div>
+
+                <div className="row col-md-12 col-12 p-0 mb-2">
+                  <div className="col-md-4 text-right p-relative">
+                    <label className="align-center font-size-18">Name of Building</label>
+                  </div>
+                  <div className="col-md-8 p-0">
+                    <input
+                      className='form-control form-control-lg'
+                    />
+                  </div>
+                </div>
+
+                <div className="row col-md-12 col-12 p-0 mb-2">
+                  <div className="col-md-4 text-right p-relative">
+                    <label className="align-center font-size-18">N.part of Building</label>
+                  </div>
+                  <div className="col-md-8 p-0">
+                    <input
+                      className='form-control form-control-lg'
+                    />
+                  </div>
+                </div>
+
+                <div className="row col-md-12 col-12 p-0 mb-2">
+                  <div className="col-md-4 text-right p-relative">
+                    <label className="align-center font-size-18">Address</label>
+                  </div>
+                  <div className="col-md-8 p-0">
+                    <input
+                      className='form-control form-control-lg'
+                    />
+                  </div>
+                </div>
+
+                <div className="row col-md-12 col-12 p-0 mb-2">
+                  <div className="col-md-4 text-right p-relative">
+                    <label className="align-center font-size-18">CAP</label>
+                  </div>
+                  <div className="col-md-8 p-0">
+                    <input
+                      className='form-control form-control-lg'
+                    />
+                  </div>
+                </div>
+
+                <div className="row col-md-12 col-12 p-0 mb-2">
+                  <div className="col-md-4 text-right p-relative">
+                    <label className="align-center font-size-18">Common</label>
+                  </div>
+                  <div className="col-md-8 p-0">
+                    <input
+                      className='form-control form-control-lg'
+                    />
+                  </div>
+                </div>
+
+                <div className="row col-md-12 col-12 p-0 mb-2">
+                  <div className="col-md-4 text-right p-relative">
+                    <label className="align-center font-size-18">Province</label>
+                  </div>
+                  <div className="col-md-8 p-0">
+                    <input
+                      className='form-control form-control-lg'
+                    />
+                  </div>
+                </div>
+
+                <div className="row col-md-12 col-12 p-0 mb-2">
+                  <div className="col-md-4 text-right p-relative">
+                    <label className="align-center font-size-18">Fiscal Code</label>
+                  </div>
+                  <div className="col-md-8 p-0">
+                    <input
+                      className='form-control form-control-lg'
+                    />
+                  </div>
+                </div>
+
+              </form>
             </div>
           </div>
         </div>
@@ -108,24 +138,6 @@ class AddBuilding extends React.Component {
         <div className="modal-box-footer d-flex flex-row">
           <Button disabled={name === ""} variant="contained" color="primary" onClick={() => {
             onBuildingClose();
-            onSaveBuilding(
-              {
-                "id": id,
-                "name": name,
-                "email": email,
-                "phone": phone,
-                "designation": designation,
-                "selected": selected,
-                "starred": starred,
-                "frequently": frequently
-              });
-            this.setState({
-              "id": id + 1,
-              "name": "",
-              "email": "",
-              "phone": "",
-              "designation": ""
-            });
 
           }}>Save Building</Button>
         </div>

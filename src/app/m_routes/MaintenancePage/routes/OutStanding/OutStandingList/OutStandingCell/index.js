@@ -31,6 +31,7 @@ class OutStandingCell extends React.Component {
   };
   onTapChat = () => {
     this.setState({ menuState: false });
+    this.props.history.push('/app/m-chat');
   };
   onClose = name => {
     this.setState({[name]: false});

@@ -5,7 +5,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withRouter } from 'react-router-dom'
-import AddBuilding from "../../AddBuilding/index";
 
 class BuildingCell extends React.Component {
 

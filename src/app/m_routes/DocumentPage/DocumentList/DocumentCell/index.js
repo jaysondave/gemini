@@ -1,14 +1,12 @@
 import React from "react";
 
-import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withRouter } from "react-router-dom";
-import AcceptJob from "../../AcceptJob";
-import RejectJob from "../../RejectJob";
+import NewDocument from "../../NewDocument";
 
-class NewJobCell extends React.Component {
+class DocumentCell extends React.Component {
 
   handleRequestClose = () => {
     this.setState({ menuState: false });
@@ -19,38 +17,30 @@ class NewJobCell extends React.Component {
   onOptionSelect = event => {
     this.setState({ menuState: true, anchorEl: event.currentTarget });
   };
-  onTapAccept = () => {
-    this.setState({ menuState: false, acceptDialogVisible: true });
+  onTapEdit = () => {
+    this.setState({ menuState: false, edit: true});
   };
-  onTapReject = () => {
-    this.setState({ menuState: false, rejectDialogVisible: true });
-  };
-  onTapChat = () => {
+  onTapDelete = () => {
     this.setState({ menuState: false });
-    this.props.history.push('/app/m-chat');
   };
   onClose = name => {
-    this.setState({[name]: false});
+    this.setState({edit: false});
   };
   constructor() {
     super();
     this.state = {
       anchorEl: undefined,
       menuState: false,
-      acceptDialogVisible: false,
-      rejectDialogVisible: false,
+      edit: false,
     };
   }
 
   render() {
-    const { maintenance, onMaintenanceSelect } = this.props;
-    const { menuState, anchorEl, acceptDialogVisible, rejectDialogVisible } = this.state;
-    const { id, building, reporter, reportContent, assign, viewDate } = maintenance;
+    const { menuState, anchorEl, edit } = this.state;
 
     const options = [
-      "Accept",
-      "Reject",
-      "Chat"
+      "Edit",
+      "Delete",
     ];
     return (
 
@@ -61,39 +51,32 @@ class NewJobCell extends React.Component {
           <div className="d-flex f-1 flex-wrap">
 
             <div className="mx-1 mx-md-3 font-size-16 f-1 position-relative">
-              <div className="position-absolute align-center">{id}</div>
+              <div className="position-absolute align-center">{"id1223123"}</div>
             </div>
             <div className="col con-inf-mw-100 f-2">
               <p className="mb-0">
                   <span className="text-truncate contact-name text-primary-color text-bold">
-                    {"Administrator"}
+                    {"Type of Document"}
                   </span>
               </p>
 
               <div className="text-muted">
                 <span className="email d-inline-block mr-2">
-                    {"Building Name"}
-                </span>
-              </div>
-
-              <div className="text-muted">
-                <span className="email d-inline-block mr-2">
-                    {building.address}
+                    {"Name of Document"}
                 </span>
               </div>
 
             </div>
-            <div className="col con-inf-mw-100 f-2">
-              <div className="text-muted">
-                  <span className="text-primary-color text-bold">
-                      {"Description of report"}
-                  </span>
-              </div>
-            </div>
+
             <div className="col con-inf-mw-100 f-1">
               <p className="mb-0">
                   <span className="text-primary-darken-4-color">
-                      Due Date: {reporter.date}
+                      End Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"2019/07/11"}
+                  </span>
+              </p>
+              <p className="mb-0">
+                  <span className="text-primary-darken-4-color">
+                      Warning Date: {"2019/07/11"}
                   </span>
               </p>
             </div>
@@ -115,12 +98,10 @@ class NewJobCell extends React.Component {
                   }}>
               {options.map(option =>
                 <MenuItem key={option} onClick={() => {
-                  if (option === "Accept") {
-                    this.onTapAccept();
-                  } else if (option === "Reject") {
-                    this.onTapReject();
-                  } else if (option === "Chat") {
-                    this.onTapChat();
+                  if (option === "Edit") {
+                    this.onTapEdit();
+                  } else if (option === "Delete") {
+                    this.onTapDelete();
                   }
                 }
                 }>
@@ -131,16 +112,13 @@ class NewJobCell extends React.Component {
           </div>
 
         </div>
-        {acceptDialogVisible &&
-          <AcceptJob
-            open={acceptDialogVisible}
+
+        {edit &&
+          <NewDocument
+            document={null}
             onClose={this.onClose}
-          />
-        }
-        {rejectDialogVisible &&
-          <RejectJob
-            open={rejectDialogVisible}
-            onClose={this.onClose}
+            open={edit}
+
           />
         }
       </div>
@@ -148,4 +126,4 @@ class NewJobCell extends React.Component {
   }
 }
 
-export default withRouter(NewJobCell);
+export default withRouter(DocumentCell);

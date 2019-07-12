@@ -138,7 +138,7 @@ class AddEvent extends Component {
     const { startTime, endTime, onClose, selectedEvent, open, classes } = this.props;
     const { eventTitle, startDate, endDate, eventType, notification, busyType, notes } = this.state;
     return (
-      <Modal className="modal-box w-25" toggle={onClose} isOpen={open}>
+      <Modal className="modal-box w-25" isOpen={open}>
         <ModalHeader className="modal-box-header bg-primary text-white">
           {selectedEvent ? "Event Detail" : "Add Event"}
           <IconButton className="text-white"

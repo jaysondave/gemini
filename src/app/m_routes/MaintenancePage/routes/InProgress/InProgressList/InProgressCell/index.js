@@ -27,6 +27,7 @@ class InProgressCell extends React.Component {
   };
   onTapChat = () => {
     this.setState({ menuState: false });
+    this.props.history.push('/app/m-chat');
   };
   onTapSuspend = () => {
     this.setState({ menuState: false, suspendDialogVisible: true });
@@ -99,7 +100,7 @@ class InProgressCell extends React.Component {
                   </span>
               </div>
             </div>
-            <div className="col con-inf-mw-100 f-1">
+            <div className="col con-inf-mw-100 f-2">
               <p className="mb-0">
                   <span className="text-primary-darken-4-color">
                       Due Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{reporter.date}

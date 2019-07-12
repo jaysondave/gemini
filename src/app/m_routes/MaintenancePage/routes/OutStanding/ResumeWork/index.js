@@ -119,19 +119,12 @@ class ResumeWork extends React.Component {
                 <label className="font-size-18">NOTE</label>
               </div>
               <div className="col-md-8 p-0">
-                <FormControl className="w-100 mb-2">
-                  <textarea style={{
-                    width: "100%",
-                    height: 70,
-                    marginTop: 10,
-                    paddingHorizontal: 10,
-                    paddingVertical: 5
-                  }}
-                            value={''}
-                            placeholder="Description"
-                            onChange={this.handleChange("description")}
-                  />
-                </FormControl>
+                <textarea
+                  className="form-control form-control-lg" rows="6"
+                  style={{ width: "100%", height: 70, marginTop: 5, paddingHorizontal: 10, paddingVertical: 5 }}
+                  placeholder="Description"
+                  onChange={this.handleChange("notes")}
+                />
               </div>
             </div>
 

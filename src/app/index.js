@@ -89,7 +89,12 @@ class App extends React.Component {
                        component={MTimeTableDashboard} />
                 <Route path={`${match.url}/sub-worker`}
                        component={asyncComponent(() => import('./m_routes/RegisterPage'))} />
-
+                <Route path={`${match.url}/m-document`}
+                       component={asyncComponent(() => import('./m_routes/DocumentPage'))} />
+                <Route path={`${match.url}/m-profile`}
+                       component={asyncComponent(() => import('./m_routes/ProfilePage'))} />
+                <Route path={`${match.url}/m-chat`}
+                       component={asyncComponent(() => import('./m_routes/ChatPage'))} />
                 <Route component={asyncComponent(() => import('components/Error404'))} />
               </Switch>
             </div>

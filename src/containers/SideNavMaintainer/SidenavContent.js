@@ -177,6 +177,14 @@ class SidenavContent extends Component {
               <span className="nav-text">SUB WORKERS</span>
             </NavLink>
           </li>
+
+          <li className="menu no-arrow">
+            <NavLink to="/app/m-chat">
+              <i className="zmdi zmdi-comment zmdi-hc-fw"/>
+              <span className="nav-text"><IntlMessages id="sidebar.appModule.chat"/></span>
+            </NavLink>
+          </li>
+
         </ul>
       </CustomScrollbars>
     );
