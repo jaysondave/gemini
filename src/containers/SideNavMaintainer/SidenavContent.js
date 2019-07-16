@@ -102,24 +102,24 @@ class SidenavContent extends Component {
 
             <ul className="sub-menu">
               <li>
-                <NavLink className="prepend-icon" to="/app/m-maintenance/dashboard">
+                <NavLink className="prepend-icon" to="/app/maintainer/dashboard">
                   <span className="nav-text">Dashboard</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink className="prepend-icon" to="/app/m-maintenance/new-job">
+                <NavLink className="prepend-icon" to="/app/maintainer/new-job">
                   <span className="nav-text">New Job</span>
                 </NavLink>
               </li>
 
               <li>
-                <NavLink className="prepend-icon" to="/app/m-maintenance/accepted">
+                <NavLink className="prepend-icon" to="/app/maintainer/accepted">
                   <span className="nav-text">Accepted</span>
                 </NavLink>
               </li>
 
               <li>
-                <NavLink className="prepend-icon" to="/app/m-maintenance/in-progress">
+                <NavLink className="prepend-icon" to="/app/maintainer/in-progress">
                   <span className="nav-text">In Progress</span>
                 </NavLink>
               </li>
@@ -127,24 +127,24 @@ class SidenavContent extends Component {
 
 
               <li>
-                <NavLink className="prepend-icon" to="/app/m-maintenance/out-standing">
+                <NavLink className="prepend-icon" to="/app/maintainer/out-standing">
                   <span className="nav-text">OutStanding</span>
                 </NavLink>
               </li>
 
               <li>
-                <NavLink className="prepend-icon" to="/app/m-maintenance/to-check">
+                <NavLink className="prepend-icon" to="/app/maintainer/to-check">
                   <span className="nav-text">To Check</span>
                 </NavLink>
               </li>
 
               <li>
-                <NavLink className="prepend-icon" to="/app/m-maintenance/closed">
+                <NavLink className="prepend-icon" to="/app/maintainer/closed">
                   <span className="nav-text">Closed</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink className="prepend-icon" to="/app/m-maintenance/rejected">
+                <NavLink className="prepend-icon" to="/app/maintainer/rejected">
                   <span className="nav-text">Rejected</span>
                 </NavLink>
               </li>

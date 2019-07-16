@@ -2,7 +2,7 @@ import React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import asyncComponent from '../../../util/asyncComponent';
 
-const MaintainerMaintenanceDashboard = ({match}) => (
+const SubWorkerMaintenanceDashboard = ({match}) => (
   <div className="app-wrapper">
     <Switch>
       <Redirect exact from={`${match.url}/`} to={`${match.url}/dashboard`}/>
@@ -23,4 +23,4 @@ const MaintainerMaintenanceDashboard = ({match}) => (
   </div>
 );
 
-export default MaintainerMaintenanceDashboard;
+export default SubWorkerMaintenanceDashboard;

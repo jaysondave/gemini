@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Header from 'components/Header/index';
 import Sidebar from 'containers/SideNav/index';
 import SideNavMaintainer from 'containers/SideNavMaintainer/index';
+import SideNavSubWorker from "../containers/SideNavSubWorker/index";
+import SideNavUser from "../containers/SideNavUser/index";
 
 import Footer from 'components/Footer';
 import {
@@ -24,6 +26,9 @@ import RegisterDashboard from "./routes/RegisterPage";
 import MaintainerMaintenanceDashboard from "./m_routes/MaintenancePage";
 import MTimeTableDashboard from "./m_routes/TimeTablePage";
 
+import SubWorkerMaintenanceDashboard from "./sub_routes/MaintenancePage"
+import STimeTableDashboard from "./sub_routes/TimeTablePage";
+import UserReportDashboard from "./u_routes/HomePage";
 class App extends React.Component {
 
   render() {
@@ -43,7 +48,9 @@ class App extends React.Component {
         {/* <Tour /> */}
 
         {/*<Sidebar />*/}
-        <SideNavMaintainer/>
+        {/*<SideNavMaintainer/>*/}
+        {/*<SideNavSubWorker/>*/}
+        <SideNavUser/>
         <div className="app-main-container">
           <div
             className={`app-header ${navigationStyle === HORIZONTAL_NAVIGATION ? 'app-header-horizontal' : ''}`}>
@@ -83,7 +90,7 @@ class App extends React.Component {
                 <Route path={`${match.url}/buildingDashboard`}
                        component={BuildingDashboard} />
 
-                <Route path={`${match.url}/m-maintenance`}
+                <Route path={`${match.url}/maintainer`}
                        component={MaintainerMaintenanceDashboard} />
                 <Route path={`${match.url}/m-timetable`}
                        component={MTimeTableDashboard} />
@@ -95,6 +102,33 @@ class App extends React.Component {
                        component={asyncComponent(() => import('./m_routes/ProfilePage'))} />
                 <Route path={`${match.url}/m-chat`}
                        component={asyncComponent(() => import('./m_routes/ChatPage'))} />
+
+
+
+                <Route path={`${match.url}/s-worker`}
+                       component={SubWorkerMaintenanceDashboard} />
+                <Route path={`${match.url}/s-timetable`}
+                       component={STimeTableDashboard} />
+                <Route path={`${match.url}/s-document`}
+                       component={asyncComponent(() => import('./sub_routes/DocumentPage'))} />
+                <Route path={`${match.url}/s-profile`}
+                       component={asyncComponent(() => import('./sub_routes/ProfilePage'))} />
+                <Route path={`${match.url}/s-chat`}
+                       component={asyncComponent(() => import('./sub_routes/ChatPage'))} />
+
+                <Route path={`${match.url}/user`}
+                       component={UserReportDashboard} />
+                <Route path={`${match.url}/u-profile`}
+                       component={asyncComponent(() => import('./u_routes/ProfilePage'))} />
+                <Route path={`${match.url}/u-chat`}
+                       component={asyncComponent(() => import('./u_routes/ChatPage'))} />
+                <Route path={`${match.url}/u-forward-signaling`}
+                       component={asyncComponent(() => import('./u_routes/ForwardSignaling'))} />
+
+
+
+
+
                 <Route component={asyncComponent(() => import('components/Error404'))} />
               </Switch>
             </div>

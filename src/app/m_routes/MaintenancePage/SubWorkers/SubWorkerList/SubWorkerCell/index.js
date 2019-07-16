@@ -6,9 +6,6 @@ import { withRouter } from "react-router-dom";
 
 class SubWorkerCell extends React.Component {
 
-  onBuildingOptionSelect = event => {
-    this.setState({ menuState: true, anchorEl: event.currentTarget });
-  };
   handleRequestClose = () => {
     this.setState({ menuState: false });
   };
@@ -18,12 +15,6 @@ class SubWorkerCell extends React.Component {
   onDeleteBuilding = (maintenance) => {
     this.setState({ addBuildingState: false });
     this.props.onDeleteMaintenance(maintenance);
-  };
-  onEditBuilding = () => {
-    this.setState({ menuState: false, addBuildingState: true });
-  };
-  onBodies = () => {
-    this.props.history.push("/app/buildingDashboard/detail");
   };
 
   constructor() {
@@ -57,15 +48,13 @@ class SubWorkerCell extends React.Component {
                     onMaintainerSelect(maintainer);
                   }}
         />
-        <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }}>
+        <div className="d-flex f-1 flex-wrap">
 
-          <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }}>
-            <div className="row con-inf-mw-100" style={{ flex: 2 }}>
-              <div className="mx-1 mx-md-3"
-                   style={{ fontSize: 16, position: "relative"}}>
+          <div className="d-flex f-1 flex-wrap">
+            <div className="row con-inf-mw-100 f-3">
+              <div className="mx-1 mx-md-3 font-size-16 position-relative">
                 {(avatar === null || avatar === '') ?
-                  <div className="rounded-circle size-40 bg-blue text-center text-white mx-1 mx-md-3 align-center"
-                       style={{fontSize: 20}}>
+                  <div className="rounded-circle size-40 bg-blue text-center text-white mx-1 mx-md-3 align-center font-size-20">
                     {name.charAt(0).toUpperCase()}
                   </div> :
                   <img className="rounded-circle size-40 mx-1 mx-md-3 align-center" alt={name} src={avatar}/>}
@@ -90,7 +79,7 @@ class SubWorkerCell extends React.Component {
               </div>
 
             </div>
-            <div className="col con-inf-mw-100" style={{ flex: 0.5, position: 'relative' }}>
+            <div className="col con-inf-mw-100 f-1 position-relative">
               <div className="text-muted align-center">
                 <div className="email d-inline-block mr-2">
                     {'Ability'}
@@ -100,7 +89,7 @@ class SubWorkerCell extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="col con-inf-mw-100" style={{ flex: 1 }}>
+            <div className="col con-inf-mw-100 f-1">
               <div className="text-muted align-center">
                 <div className="email d-inline-block mr-2">
                   {'DURC'}
@@ -110,9 +99,9 @@ class SubWorkerCell extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="col con-inf-mw-100" style={{ flex: 1 }}>
+            <div className="col con-inf-mw-100 f-1">
               <div className="text-muted align-center">
-                <div className="d-inline-block mr-2">
+                {/*<div className="d-inline-block mr-2">
                   <StarRatings
                     rating={3}
                     starRatedColor="#f4db1d"
@@ -122,9 +111,27 @@ class SubWorkerCell extends React.Component {
                     starDimension="25px"
                     starSpacing="1px"
                   />
+                </div>*/}
+                <div className="email d-inline-block mr-2">
+                  {'Accepted'}
+                </div>
+                <div className="d-inline-block rounded-circle size-30 border-1-dark text-center">
+                  {"20"}
                 </div>
               </div>
             </div>
+
+            <div className="col con-inf-mw-100 f-1">
+              <div className="text-muted align-center">
+                <div className="email d-inline-block mr-2">
+                  {'In progress'}
+                </div>
+                <div className="d-inline-block rounded-circle size-30 border-1-dark text-center">
+                  {"2"}
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
