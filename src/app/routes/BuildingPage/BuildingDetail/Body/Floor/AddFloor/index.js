@@ -1,13 +1,12 @@
 import React from "react";
 import { Modal, ModalHeader } from "reactstrap";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import Input from "@material-ui/core/Input";
+import BootstrapInput from 'components/BootstrapInput';
 import IntlMessages from "util/IntlMessages";
 import { DropzoneArea } from "material-ui-dropzone";
 
@@ -60,13 +59,11 @@ class AddFloor extends React.Component {
                   <label className="align-center font-size-18">Level of Floor</label>
                 </div>
                 <div className="col-md-8 p-0">
-                  <FormControl className="w-100 mb-2">
-                    <TextField
-                      value={levelFloor}
-                      onChange={this.handleChange("levelFloor")}
-                      fullWidth
-                      margin="none"/>
-                  </FormControl>
+                  <input
+                    className='form-control form-control-lg'
+                    value={levelFloor}
+                    onChange={this.handleChange("levelFloor")}
+                  />
                 </div>
               </div>
 
@@ -79,7 +76,7 @@ class AddFloor extends React.Component {
                     <Select
                       value={intend}
                       onChange={this.handleChange("intend")}
-                      input={<Input/>}
+                      input={<BootstrapInput/>}
                     >
                       <MenuItem value={"intend1"}>OFFICIES</MenuItem>
                       <MenuItem value={"intend2"}>RESIDENTIAL</MenuItem>

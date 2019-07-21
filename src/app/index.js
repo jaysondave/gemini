@@ -48,9 +48,9 @@ class App extends React.Component {
         {/* <Tour /> */}
 
         {/*<Sidebar />*/}
-        {/*<SideNavMaintainer/>*/}
+        <SideNavMaintainer/>
         {/*<SideNavSubWorker/>*/}
-        <SideNavUser/>
+        {/*<SideNavUser/>*/}
         <div className="app-main-container">
           <div
             className={`app-header ${navigationStyle === HORIZONTAL_NAVIGATION ? 'app-header-horizontal' : ''}`}>
@@ -118,8 +118,10 @@ class App extends React.Component {
 
                 <Route path={`${match.url}/user`}
                        component={UserReportDashboard} />
-                <Route path={`${match.url}/u-profile`}
+                <Route exact path={`${match.url}/u-profile`}
                        component={asyncComponent(() => import('./u_routes/ProfilePage'))} />
+                <Route exact path={`${match.url}/u-profile/buildings`}
+                       component={asyncComponent(() => import('./u_routes/ProfilePage/BuildingPage'))} />
                 <Route path={`${match.url}/u-chat`}
                        component={asyncComponent(() => import('./u_routes/ChatPage'))} />
                 <Route path={`${match.url}/u-forward-signaling`}

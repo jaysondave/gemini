@@ -11,6 +11,7 @@ import Input from "@material-ui/core/Input";
 import IntlMessages from "util/IntlMessages";
 import { DropzoneArea } from "material-ui-dropzone";
 import { InputDate } from "../../../../../../../components/CustomInput/InputDate";
+import BootstrapInput from 'components/BootstrapInput';
 import DatePicker from "react-datepicker";
 
 class AddInsurance extends React.Component {
@@ -75,13 +76,11 @@ class AddInsurance extends React.Component {
                 <label className="align-center font-size-18">INSURANCE AGENCY</label>
               </div>
               <div className="col-md-8 p-0">
-                <FormControl className="w-100 mb-2">
-                  <TextField
-                    value={levelFloor}
-                    onChange={this.handleChange("levelFloor")}
-                    fullWidth
-                    margin="none"/>
-                </FormControl>
+                <input
+                  value={levelFloor}
+                  className='form-control form-control-lg'
+                  onChange={this.handleChange("levelFloor")}
+                />
               </div>
             </div>
 
@@ -90,13 +89,11 @@ class AddInsurance extends React.Component {
                 <label className="align-center font-size-18">INSURANCE COMPANY</label>
               </div>
               <div className="col-md-8 p-0">
-                <FormControl className="w-100 mb-2">
-                  <TextField
-                    value={levelFloor}
-                    onChange={this.handleChange("levelFloor")}
-                    fullWidth
-                    margin="none"/>
-                </FormControl>
+                <input
+                  value={levelFloor}
+                  className='form-control form-control-lg'
+                  onChange={this.handleChange("levelFloor")}
+                />
               </div>
             </div>
 
@@ -105,13 +102,11 @@ class AddInsurance extends React.Component {
                 <label className="align-center font-size-18">POLICY BRANCH</label>
               </div>
               <div className="col-md-8 p-0">
-                <FormControl className="w-100 mb-2">
-                  <TextField
-                    value={levelFloor}
-                    onChange={this.handleChange("levelFloor")}
-                    fullWidth
-                    margin="none"/>
-                </FormControl>
+                <input
+                  value={levelFloor}
+                  className='form-control form-control-lg'
+                  onChange={this.handleChange("levelFloor")}
+                />
               </div>
             </div>
 
@@ -120,13 +115,11 @@ class AddInsurance extends React.Component {
                 <label className="align-center font-size-18">POLICY NUMBER</label>
               </div>
               <div className="col-md-8 p-0">
-                <FormControl className="w-100 mb-2">
-                  <TextField
-                    value={levelFloor}
-                    onChange={this.handleChange("levelFloor")}
-                    fullWidth
-                    margin="none"/>
-                </FormControl>
+                <input
+                  value={levelFloor}
+                  className='form-control form-control-lg'
+                  onChange={this.handleChange("levelFloor")}
+                />
               </div>
             </div>
 
@@ -135,13 +128,11 @@ class AddInsurance extends React.Component {
                 <label className="align-center font-size-18">CONTACTOR</label>
               </div>
               <div className="col-md-8 p-0">
-                <FormControl className="w-100 mb-2">
-                  <TextField
-                    value={levelFloor}
-                    onChange={this.handleChange("levelFloor")}
-                    fullWidth
-                    margin="none"/>
-                </FormControl>
+                <input
+                  value={levelFloor}
+                  className='form-control form-control-lg'
+                  onChange={this.handleChange("levelFloor")}
+                />
               </div>
             </div>
 
@@ -198,7 +189,7 @@ class AddInsurance extends React.Component {
                   <Select
                     value={intend}
                     onChange={this.handleChange("intend")}
-                    input={<Input/>}
+                    input={<BootstrapInput/>}
                   >
                     <MenuItem value={"intend1"}>MONTHLY</MenuItem>
                     <MenuItem value={"intend2"}>QUARTERLY</MenuItem>
@@ -239,7 +230,9 @@ class AddInsurance extends React.Component {
               </div>
               <div className="col-md-8 p-0">
                 <FormControl className="w-100 mb-2">
-                  <textarea style={{
+                  <textarea
+                    className="form-control form-control-lg" rows="6"
+                    style={{
                     width: "100%",
                     height: 70,
                     marginTop: 10,

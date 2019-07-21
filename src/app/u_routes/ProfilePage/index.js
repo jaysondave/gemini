@@ -11,7 +11,7 @@ class ProfilePage extends Component {
     this.setState({editable: !editable});
   };
   onClickAddBuilding = () => {
-    this.setState({addBuilding: true});
+    this.props.history.push("u-profile/buildings");
   };
   onClickAddEmail = () => {
     this.setState({addEmail: true});
@@ -29,14 +29,13 @@ class ProfilePage extends Component {
     super(props);
     this.state = {
       editable: false,
-      addBuilding: false,
       addEmail: false,
       changePassword: false,
       changePhone: false
     }
   }
   render() {
-    const { editable, addBuilding, addEmail, changePassword, changePhone } = this.state;
+    const { editable, addEmail, changePassword, changePhone } = this.state;
     return (
       <div className="app-wrapper">
         <Auxiliary>
@@ -130,7 +129,7 @@ class ProfilePage extends Component {
                       <li>
                         <div className="contact-body">
                           <h4 className="text-uppercase">Change Credential</h4>
-                          <div onClick={this.onClickAddEmail}>
+                          <div onClick={this.onClickAddBuilding}>
                             <span className="text-primary jr-link">Add Building</span>
                           </div>
                           <div onClick={this.onClickAddEmail}>

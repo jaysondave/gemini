@@ -157,12 +157,12 @@ class AddEvent extends Component {
                     </div>
                   </div>
                   <div className="row f-1 ml-3">
-                    <TextField
-                      label={"Title"}
+                    <input
+                      label="Title"
+                      className='form-control form-control-lg'
                       value={eventTitle}
                       onChange={this.handleChange("eventTitle")}
-                      fullWidth
-                      margin="none"/>
+                    />
                   </div>
                 </div>
               </div>

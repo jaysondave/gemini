@@ -9,12 +9,42 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Checkbox from "@material-ui/core/Checkbox";
 import Select from "@material-ui/core/Select";
-import Input from "@material-ui/core/Input";
+import BootstrapInput from 'components/BootstrapInput';
 import {DropzoneArea} from 'material-ui-dropzone'
 import IntlMessages from "util/IntlMessages";
-import FormControlLabel from "../AddRent";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import DatePicker from "react-datepicker";
+import { InputDate } from "../../../../../../components/CustomInput/InputDate";
 
 class AddCertificate extends React.Component {
+
+
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
+  };
+  handleChangeFile = (files) => {
+    console.log(files);
+    this.setState({
+      uploadFile: files
+    });
+  };
+  handleChangeChecked = name => (event, checked) => {
+    this.setState({ [name]: checked });
+  };
+  updateDate = name => (date) => {
+    if (date) {
+      this.setState({ [name]: this.formatDate(date.toLocaleDateString()) });
+    }
+  };
+  formatDate = (d) => {
+    let date = new Date(d);
+    let reformattedDate = [
+      date.getFullYear(),
+      ("0" + (date.getMonth() + 1)).slice(-2),
+      ("0" + date.getDate()).slice(-2)
+    ].join('-');
+    return reformattedDate;
+  };
   constructor(props) {
     super(props);
     console.log({ AddCertificate: props });
@@ -33,19 +63,6 @@ class AddCertificate extends React.Component {
       uploadFile: ""
     };
   }
-
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
-  };
-  handleChangeFile = (files) => {
-    console.log(files);
-    this.setState({
-      uploadFile: files
-    });
-  };
-  handleChangeChecked = name => (event, checked) => {
-    this.setState({ [name]: checked });
-  };
   render() {
     const { onSaveCertificate, onCertificateClose, open, certificate } = this.props;
     const {
@@ -78,11 +95,10 @@ class AddCertificate extends React.Component {
               <div className="row">
                 <div className="col-lg-12 col-sm-12 col-12">
                   <FormControl className="w-100 mb-2">
-                    <InputLabel htmlFor="age-simple">Type of Certificate</InputLabel>
                     <Select
                       value={certificateType}
                       onChange={this.handleChange("certificateType")}
-                      input={<Input id="ageSimple1"/>}
+                      input={<BootstrapInput/>}
                     >
                       <MenuItem value={"certificateType1"}>certificateType1</MenuItem>
                       <MenuItem value={"certificateType2"}>certificateType2</MenuItem>
@@ -93,36 +109,44 @@ class AddCertificate extends React.Component {
               </div>
 
 
-              <div className="row">
+              <div className="row mt-2">
+
                 <div className="col-lg-6 col-sm-6 col-12">
-                  <TextField
-                    id="date"
-                    label="Record Date"
-                    type="date"
-                    value={recordDate}
-                    fullWidth
-                    onChange={this.handleChange("recordDate")}
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                  />
-                </div>
-                <div className="col-lg-6 col-sm-6 col-12">
-                  <TextField
-                    label="Record Number"
+                  <input
+                    placeholder="Record Number"
                     type="number"
                     value={recordNumber}
-                    fullWidth
+                    className='form-control form-control-lg'
                     onChange={this.handleChange("recordNumber")}
                   />
                 </div>
-              </div>
-              <div className="row">
+
                 <div className="col-lg-6 col-sm-6 col-12">
-                  <TextField
-                    label="Storage Code"
+                  <div className="d-flex">
+                    <DatePicker
+                      customInput={
+                        <InputDate/>
+                      }
+                      placeholderText={"Select Record Date"}
+                      peekNextMonth
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                      selected={new Date()}
+                      value={recordDate}
+                      onChange={this.updateDate('recordDate')}
+                    />
+                  </div>
+                </div>
+
+              </div>
+              <div className="row mt-4">
+                <div className="col-lg-6 col-sm-6 col-12">
+                  <input
+                    placeholder="Storage Code"
+                    type="number"
                     value={storageCode}
-                    fullWidth
+                    className='form-control form-control-lg'
                     onChange={this.handleChange("storageCode")}
                   />
                 </div>
@@ -139,14 +163,13 @@ class AddCertificate extends React.Component {
                   />
                 </div>
               </div>
-              <div className="row">
+              <div className="row mt-4">
                 <div className="col-lg-12 col-sm-12 col-12">
                   <FormControl className="w-100 mb-2">
-                    <InputLabel htmlFor="age-simple">Compliance</InputLabel>
                     <Select
                       value={compliance}
                       onChange={this.handleChange("compliance")}
-                      input={<Input id="ageSimple1"/>}
+                      input={<BootstrapInput/>}
                     >
                       <MenuItem value={"compliant"}>Compliant</MenuItem>
                       <MenuItem value={"toBeTested"}>Te be tested</MenuItem>
@@ -156,47 +179,51 @@ class AddCertificate extends React.Component {
                   </FormControl>
                 </div>
               </div>
-              <div className="row">
+              <div className="row mt-4">
                 <div className="col-lg-12 col-sm-12 col-12">
-                  <textarea style={{
-                    width: "100%",
-                    height: 70,
-                    marginTop: 10,
-                    paddingHorizontal: 10,
-                    paddingVertical: 5
-                  }}
-                            value={note}
-                            placeholder="Note"
-                            onChange={this.handleChange("note")}
+                  <textarea
+                    className="form-control form-control-lg" rows="6"
+                    style={{ width: "100%", height: 70, marginTop: 5, paddingHorizontal: 10, paddingVertical: 5 }}
+                    value={note}
+                    placeholder="Note"
+                    onChange={this.handleChange("note")}
                   />
                 </div>
               </div>
-              <div className="row">
+              <div className="row mt-4">
                 <div className="col-lg-6 col-sm-6 col-12">
-                  <TextField
-                    id="date"
-                    label="Expiry Date"
-                    type="date"
-                    value={expiryDate}
-                    fullWidth
-                    onChange={this.handleChange("expiryDate")}
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                  />
+                  <div className="d-flex">
+                    <DatePicker
+                      customInput={
+                        <InputDate/>
+                      }
+                      placeholderText={"Select Expiry Date"}
+                      peekNextMonth
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                      selected={new Date()}
+                      value={expiryDate}
+                      onChange={this.updateDate('expiryDate')}
+                    />
+                  </div>
                 </div>
                 <div className="col-lg-6 col-sm-6 col-12">
-                  <TextField
-                    id="date"
-                    label="Expiry Note Date"
-                    type="date"
-                    value={expiryNoteDate}
-                    fullWidth
-                    onChange={this.handleChange("expiryNoteDate")}
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                  />
+                  <div className="d-flex">
+                    <DatePicker
+                      customInput={
+                        <InputDate/>
+                      }
+                      placeholderText={"Select ExpiryNote Date"}
+                      peekNextMonth
+                      showMonthDropdown
+                      showYearDropdown
+                      dropdownMode="select"
+                      selected={new Date()}
+                      value={expiryNoteDate}
+                      onChange={this.updateDate('expiryNoteDate')}
+                    />
+                  </div>
                 </div>
               </div>
               <div className="row" style={{paddingTop: 20}}>

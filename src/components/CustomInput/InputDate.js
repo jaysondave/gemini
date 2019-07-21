@@ -6,7 +6,7 @@ export const InputDate = (props) => {
       className='form-control form-control-lg'
       value={props.value}
       readOnly={true}
-      placeholder={'Click to select date'}
-      onClick={props.onClick} />
-  )
+      placeholder={props.placeholder ? props.placeholder : "Click to select date"}
+      onClick={props.onClick}/>
+  );
 };
