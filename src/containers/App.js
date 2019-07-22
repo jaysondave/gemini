@@ -45,10 +45,14 @@ class App extends Component {
     if (location.pathname === '/') {
       if (authUser === null) {
         return ( <Redirect to={'/signin'}/> );
-      } else if (initURL === '' || initURL === '/' || initURL === '/signin') {
-        // return (<Redirect to={'/app/user'} />);
-        // return (<Redirect to={'/app/home-page'} />);
-        return (<Redirect to={'/app/s-worker'}/>)
+      } else if (authUser.user_type === 'admin') {
+        return (<Redirect to={'/app/home-page'} />);
+      } else if (authUser.user_type === 'maintainer') {
+        return (<Redirect to={'/app/maintainer'} />);
+      } else if (authUser.user_type === 'sub_worker') {
+        return (<Redirect to={'/app/s-worker'}/>);
+      } else if (authUser.user_type === 'sub_worker') {
+        return (<Redirect to={'/app/user'}/>);
       } else {
         return (<Redirect to={initURL} />);
       }

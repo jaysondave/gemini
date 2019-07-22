@@ -22,6 +22,7 @@ import {
     userGoogleSignInSuccess,
     userTwitterSignInSuccess
 } from "../actions/Auth";
+import { signIn } from "../apis/auth";
 
 const createUserWithEmailPasswordRequest = async (email, password) =>
     await  auth.createUserWithEmailAndPassword(email, password)
@@ -29,7 +30,7 @@ const createUserWithEmailPasswordRequest = async (email, password) =>
         .catch(error => error);
 
 const signInUserWithEmailPasswordRequest = async (email, password) =>
-    await  auth.signInWithEmailAndPassword(email, password)
+    await  signIn({email, password})
         .then(authUser => authUser)
         .catch(error => error);
 
@@ -63,7 +64,7 @@ function* createUserWithEmailPassword({payload}) {
     const {email, password} = payload;
     try {
         const signUpUser = yield call(createUserWithEmailPasswordRequest, email, password);
-        if (signUpUser.message) {
+        if (signUpUser.status !== 200) {
             yield put(showAuthMessage(signUpUser.message));
         } else {
             localStorage.setItem('user_id', signUpUser.user.uid);
@@ -141,11 +142,14 @@ function* signInUserWithEmailPassword({payload}) {
     const {email, password} = payload;
     try {
         const signInUser = yield call(signInUserWithEmailPasswordRequest, email, password);
-        if (signInUser.message) {
+        if (signInUser.status !== 200) {
             yield put(showAuthMessage(signInUser.message));
         } else {
-            localStorage.setItem('user_id', signInUser.user.uid);
-            yield put(userSignInSuccess(signInUser.user.uid));
+            const headers = signInUser.headers;
+            const user = signInUser.data.user;
+            localStorage.setItem('headers', JSON.stringify(headers));
+            localStorage.setItem('user', JSON.stringify(user));
+            yield put(userSignInSuccess({user, headers}));
         }
     } catch (error) {
         yield put(showAuthMessage(error));
@@ -154,13 +158,9 @@ function* signInUserWithEmailPassword({payload}) {
 
 function* signOut() {
     try {
-        const signOutUser = yield call(signOutRequest);
-        if (signOutUser === undefined) {
-            localStorage.removeItem('user_id');
-            yield put(userSignOutSuccess(signOutUser));
-        } else {
-            yield put(showAuthMessage(signOutUser.message));
-        }
+        localStorage.removeItem('user');
+        localStorage.removeItem('headers');
+        yield put(userSignOutSuccess());
     } catch (error) {
         yield put(showAuthMessage(error));
     }
@@ -195,7 +195,8 @@ export function* signOutUser() {
 }
 
 export default function* rootSaga() {
-    yield all([fork(signInUser),
+    yield all([
+        fork(signInUser),
         fork(createUserAccount),
         fork(signInWithGoogle),
         fork(signInWithFacebook),

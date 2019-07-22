@@ -31,6 +31,23 @@ import STimeTableDashboard from "./sub_routes/TimeTablePage";
 import UserReportDashboard from "./u_routes/HomePage";
 class App extends React.Component {
 
+  renderSideBar = () => {
+    const { authUser } = this.props;
+    const { user_type } = authUser;
+    switch (user_type) {
+      case 'admin':
+        return (<Sidebar />);
+      case 'maintainer':
+        return (<SideNavMaintainer />);
+      case 'sub_worker':
+        return (<SideNavSubWorker />);
+      case 'user':
+        return (<SideNavUser />);
+      default:
+        return null;
+    }
+
+  };
   render() {
     const { match, drawerType, navigationStyle, horizontalNavPosition } = this.props;
     const drawerStyle = drawerType.includes(FIXED_DRAWER) ? 'fixed-drawer' : drawerType.includes(COLLAPSED_DRAWER) ? 'collapsible-drawer' : 'mini-drawer';
@@ -47,10 +64,7 @@ class App extends React.Component {
       <div className={`app-container ${drawerStyle}`}>
         {/* <Tour /> */}
 
-        {/*<Sidebar />*/}
-        <SideNavMaintainer/>
-        {/*<SideNavSubWorker/>*/}
-        {/*<SideNavUser/>*/}
+        {this.renderSideBar()}
         <div className="app-main-container">
           <div
             className={`app-header ${navigationStyle === HORIZONTAL_NAVIGATION ? 'app-header-horizontal' : ''}`}>
@@ -143,8 +157,9 @@ class App extends React.Component {
 }
 
 
-const mapStateToProps = ({ settings }) => {
+const mapStateToProps = ({ settings, auth }) => {
   const { drawerType, navigationStyle, horizontalNavPosition } = settings;
-  return { drawerType, navigationStyle, horizontalNavPosition }
+  const { authUser } = auth;
+  return { drawerType, navigationStyle, horizontalNavPosition, authUser }
 };
 export default withRouter(connect(mapStateToProps)(App));

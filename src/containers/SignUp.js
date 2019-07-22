@@ -147,52 +147,6 @@ class SignUp extends React.Component {
                     <IntlMessages id="signUp.alreadyMember" />
                   </Link>
                 </div>
-                <div className="app-social-block my-1 my-sm-3">
-                  <IntlMessages
-                    id="signIn.connectWith" />
-                  <ul className="social-link">
-                    <li>
-                      <IconButton className="icon"
-                        onClick={() => {
-                          this.props.showAuthLoader();
-                          this.props.userFacebookSignIn();
-                        }}>
-                        <i className="zmdi zmdi-facebook" />
-                      </IconButton>
-                    </li>
-
-                    <li>
-                      <IconButton className="icon"
-                        onClick={() => {
-                          this.props.showAuthLoader();
-                          this.props.userTwitterSignIn();
-                        }}>
-                        <i className="zmdi zmdi-twitter" />
-                      </IconButton>
-                    </li>
-
-                    <li>
-                      <IconButton className="icon"
-                        onClick={() => {
-                          this.props.showAuthLoader();
-                          this.props.userGoogleSignIn();
-
-                        }}>
-                        <i className="zmdi zmdi-google-plus" />
-                      </IconButton>
-                    </li>
-
-                    <li>
-                      <IconButton className="icon"
-                        onClick={() => {
-                          this.props.showAuthLoader();
-                          this.props.userGithubSignIn();
-                        }}>
-                        <i className="zmdi zmdi-github" />
-                      </IconButton>
-                    </li>
-                  </ul>
-                </div>
 
               </form>
             </div>

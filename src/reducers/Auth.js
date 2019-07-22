@@ -18,7 +18,8 @@ const INIT_STATE = {
     alertMessage: '',
     showMessage: false,
     initURL: '',
-    authUser: localStorage.getItem('user_id'),
+    authUser: JSON.parse(localStorage.getItem('user')),
+    headers: JSON.parse(localStorage.getItem('headers')),
 };
 
 
@@ -35,7 +36,8 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 loader: false,
-                authUser: action.payload
+                authUser: action.payload.user,
+                headers: action.payload.headers
             }
         }
         case INIT_URL: {
@@ -48,6 +50,7 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 authUser: null,
+                headers: null,
                 initURL: '/app/',
                 loader: false
             }
