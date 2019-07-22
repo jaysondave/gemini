@@ -13,3 +13,17 @@ export const signIn = (user) => {
       })
   })
 };
+
+export const signUp = (user) => {
+    return new Promise((resolve, reject) => {
+        return axios.post(`${API_URL}/users`, ({user: user}), {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            resolve(response);
+        }).catch((error) => {
+            reject(error);
+        })
+    })
+};

@@ -29,7 +29,8 @@ export default (state = INIT_STATE, action) => {
             return {
                 ...state,
                 loader: false,
-                authUser: action.payload
+                authUser: action.payload.user,
+                headers: action.payload.headers
             }
         }
         case SIGNIN_USER_SUCCESS: {

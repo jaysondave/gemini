@@ -22,10 +22,10 @@ import {
     userGoogleSignInSuccess,
     userTwitterSignInSuccess
 } from "../actions/Auth";
-import { signIn } from "../apis/auth";
+import { signIn, signUp } from "apis/auth";
 
-const createUserWithEmailPasswordRequest = async (email, password) =>
-    await  auth.createUserWithEmailAndPassword(email, password)
+const createUserWithEmailPasswordRequest = async (user) =>
+    await  signUp(user)
         .then(authUser => authUser)
         .catch(error => error);
 
@@ -61,15 +61,30 @@ const signInUserWithTwitterRequest = async () =>
         .catch(error => error);
 
 function* createUserWithEmailPassword({payload}) {
-    const {email, password} = payload;
+    const {user} = payload;
     try {
-        const signUpUser = yield call(createUserWithEmailPasswordRequest, email, password);
+        const signUpUser = yield call(createUserWithEmailPasswordRequest, user);
+        console.log({signUpUser});
         if (signUpUser.status !== 200) {
-            yield put(showAuthMessage(signUpUser.message));
+            switch (signUpUser.response.status) {
+                case 401:
+                    yield put(showAuthMessage(signUpUser['response']['data']['errors'][0]));
+                    return;
+                case 500:
+                    yield put(showAuthMessage('There is the problem in server. Please try later'));
+                    return;
+                default:
+                    yield put(showAuthMessage(signUpUser.message));
+                    return
+            }
         } else {
-            localStorage.setItem('user_id', signUpUser.user.uid);
-            yield put(userSignUpSuccess(signUpUser.user.uid));
+            const headers = signUpUser.headers;
+            const user = signUpUser.data.user;
+            localStorage.setItem('headers', JSON.stringify(headers));
+            localStorage.setItem('user', JSON.stringify(user));
+            yield put(userSignUpSuccess({user, headers}));
         }
+
     } catch (error) {
         yield put(showAuthMessage(error));
     }

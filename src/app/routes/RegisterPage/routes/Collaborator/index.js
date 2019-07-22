@@ -15,23 +15,7 @@ import NewRegister from "../../NewRegister";
 
 class Collaborator extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      noContentFoundMessage: "No Collaborator found",
-      alertMessage: "",
-      showMessage: false,
-      drawerState: false,
-      searchKey: "",
-      allUsers: registerList,
-      registerList: registerList,
-      currentRegister: null,
-      selectedRegister: null,
-      selectedRegisters: 0,
-      addBuildingState: false,
-      isOpen: false,
-    };
-  }
+
 
   onRegisterSelect = (data) => {
     data.selected = !data.selected;
@@ -158,6 +142,24 @@ class Collaborator extends Component {
   onTapNewRegister = () => {
     this.setState({ isOpen: true });
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      noContentFoundMessage: "No Collaborator found",
+      alertMessage: "",
+      showMessage: false,
+      drawerState: false,
+      searchKey: "",
+      allUsers: registerList,
+      registerList: registerList,
+      currentRegister: null,
+      selectedRegister: null,
+      selectedRegisters: 0,
+      addBuildingState: false,
+      isOpen: false,
+    };
+  }
+
   render() {
     const { registerList, addBuildingState, selectedRegisters, alertMessage, showMessage, noContentFoundMessage, isOpen, selectedRegister } = this.state;
     return (

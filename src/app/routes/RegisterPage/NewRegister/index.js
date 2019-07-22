@@ -11,6 +11,7 @@ import IntlMessages from "util/IntlMessages";
 import FormControl from "@material-ui/core/FormControl";
 import Chip from "@material-ui/core/Chip";
 import InputMask from "react-input-mask";
+import BootstrapInput from 'components/BootstrapInput';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -36,34 +37,7 @@ const OTHER_CATEGORY = [
 ];
 
 class NewRegister extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log({ NewRegister: props });
-    // const { id, category, name, surName, address, homeNumber, cap, city, province, codFisc, mobile, email, phone, otherCategory} = props.register;
-    this.state = {
-      userType: props.userType,
-      id: "",
-      category: "",
-      name: "",
-      surName: "",
-      address: "",
-      homeNumber: "",
-      cap: "",
-      city: "",
-      province: "",
-      codFisc: "",
-      mobile: "",
-      email: "",
-      phone: "",
-      pec: "",
-      cuu: "",
-      Plva: "",
-      userID: "",
-      password: "",
-      otherCategory: [],
-      building: ""
-    };
-  }
+
 
   handleChange = name => event => {
     this.setState({
@@ -114,7 +88,7 @@ class NewRegister extends React.Component {
                 <Select
                   value={category}
                   onChange={this.handleChange("category")}
-                  input={<Input/>}
+                  input={<BootstrapInput/>}
                 >
                   <MenuItem value={"category1"}>ELECTRICIAN</MenuItem>
                   <MenuItem value={"category2"}>BRICKLAYER</MenuItem>
@@ -188,18 +162,42 @@ class NewRegister extends React.Component {
     }
 
   };
-
+  constructor(props) {
+    super(props);
+    console.log({ NewRegister: props });
+    this.state = {
+      userType: props.userType,
+      id: "",
+      category: "",
+      firstName: "",
+      lastName: "",
+      address: "",
+      homeNumber: "",
+      zip_code: "",
+      city: "",
+      province: "",
+      codFisc: "",
+      mobile: "",
+      email: "",
+      phone: "",
+      pec: "",
+      cuu: "",
+      plva: "",
+      otherCategory: [],
+      building: ""
+    };
+  }
   render() {
     const { onRegisterClose, open, register } = this.props;
     const {
       userType,
       id,
       category,
-      name,
-      surName,
+      firstName,
+      lastName,
       address,
       homeNumber,
-      cap,
+      zip_code,
       city,
       province,
       codFisc,
@@ -209,9 +207,7 @@ class NewRegister extends React.Component {
       otherCategory,
       pec,
       cuu,
-      Plva,
-      userID,
-      password,
+      plva,
       building
     } = this.state;
 
@@ -234,32 +230,26 @@ class NewRegister extends React.Component {
                 {this.renderCategory(userType)}
                 <div className="row col-md-12 col-12 p-0 mb-2">
                   <div className="col-md-4 text-right p-relative">
-                    <label className="align-center font-size-18">Name</label>
+                    <label className="align-center font-size-18">First Name</label>
                   </div>
                   <div className="col-md-8 p-0">
-                    <FormControl className="w-100 mb-2">
-                      <TextField
-                        required
-                        id="required"
-                        onChange={this.handleChange("name")}
-                        value={name}
-                        margin="none"/>
-                    </FormControl>
+                    <input
+                        className='form-control form-control-lg'
+                        onChange={this.handleChange("firstName")}
+                        value={firstName}
+                    />
                   </div>
                 </div>
                 <div className="row col-md-12 col-12 p-0 mb-2">
                   <div className="col-md-4 text-right p-relative">
-                    <label className="align-center font-size-18">Surname</label>
+                    <label className="align-center font-size-18">Last Name</label>
                   </div>
                   <div className="col-md-8 p-0">
-                    <FormControl className="w-100 mb-2">
-                      <TextField
-                        required
-                        id="required"
-                        onChange={this.handleChange("surName")}
-                        value={surName}
-                        margin="none"/>
-                    </FormControl>
+                    <input
+                        className='form-control form-control-lg'
+                        onChange={this.handleChange("lastName")}
+                        value={lastName}
+                    />
                   </div>
                 </div>
                 <div className="row col-md-12 col-12 p-0 mb-2">
@@ -267,14 +257,11 @@ class NewRegister extends React.Component {
                     <label className="align-center font-size-18">Address</label>
                   </div>
                   <div className="col-md-8 p-0">
-                    <FormControl className="w-100 mb-2">
-                      <TextField
-                        required
-                        id="required"
+                    <input
+                        className='form-control form-control-lg'
                         onChange={this.handleChange("address")}
                         value={address}
-                        margin="none"/>
-                    </FormControl>
+                    />
                   </div>
                 </div>
                 <div className="row col-md-12 col-12 p-0 mb-2">
@@ -282,30 +269,24 @@ class NewRegister extends React.Component {
                     <label className="align-center font-size-18">Home Number</label>
                   </div>
                   <div className="col-md-8 p-0">
-                    <FormControl className="w-100 mb-2">
-                      <TextField
-                        required
-                        id="required"
+                    <input
+                        className='form-control form-control-lg'
                         onChange={this.handleChange("homeNumber")}
                         value={homeNumber}
-                        margin="none"/>
-                    </FormControl>
+                    />
                   </div>
                 </div>
                 <div className="row col-md-12 col-12 p-0 mb-2">
                   <div className="col-md-4 text-right p-relative">
-                    <label className="align-center font-size-18">CAP</label>
+                    <label className="align-center font-size-18">ZIP CODE</label>
                   </div>
                   <div className="col-md-8 p-0">
-                    <FormControl className="w-100 mb-2">
-                      <TextField
-                        required
-                        id="required"
+                    <input
+                        className='form-control form-control-lg'
                         type={"number"}
-                        onChange={this.handleChange("cap")}
-                        value={cap}
-                        margin="none"/>
-                    </FormControl>
+                        onChange={this.handleChange("zip_code")}
+                        value={zip_code}
+                    />
                   </div>
                 </div>
 
@@ -314,14 +295,11 @@ class NewRegister extends React.Component {
                     <label className="align-center font-size-18">City</label>
                   </div>
                   <div className="col-md-8 p-0">
-                    <FormControl className="w-100 mb-2">
-                      <TextField
-                        required
-                        id="required"
+                    <input
+                        className='form-control form-control-lg'
                         onChange={this.handleChange("city")}
                         value={city}
-                        margin="none"/>
-                    </FormControl>
+                    />
                   </div>
                 </div>
 
@@ -330,14 +308,11 @@ class NewRegister extends React.Component {
                     <label className="align-center font-size-18">Province</label>
                   </div>
                   <div className="col-md-8 p-0">
-                    <FormControl className="w-100 mb-2">
-                      <TextField
-                        required
-                        id="required"
+                    <input
+                        className='form-control form-control-lg'
                         onChange={this.handleChange("province")}
                         value={province}
-                        margin="none"/>
-                    </FormControl>
+                    />
                   </div>
                 </div>
 
@@ -346,15 +321,11 @@ class NewRegister extends React.Component {
                     <label className="align-center font-size-18">Cod.Fisc.</label>
                   </div>
                   <div className="col-md-8 p-0">
-                    <FormControl className="w-100 mb-2">
-                      <TextField
-                        required
-                        id="required"
-                        type={"number"}
+                    <input
+                        className='form-control form-control-lg'
                         onChange={this.handleChange("codFisc")}
                         value={codFisc}
-                        margin="none"/>
-                    </FormControl>
+                    />
                   </div>
                 </div>
 
@@ -364,15 +335,11 @@ class NewRegister extends React.Component {
                       <label className="align-center font-size-18">P.lva</label>
                     </div>
                     <div className="col-md-8 p-0">
-                      <FormControl className="w-100 mb-2">
-                        <TextField
-                          required
-                          id="required"
-                          type={"number"}
-                          onChange={this.handleChange("Plva")}
-                          value={Plva}
-                          margin="none"/>
-                      </FormControl>
+                      <input
+                          className='form-control form-control-lg'
+                          onChange={this.handleChange("plva")}
+                          value={plva}
+                      />
                     </div>
                   </div>
                   : null
@@ -392,7 +359,10 @@ class NewRegister extends React.Component {
                         onChange={this.handleChange("mobile")}
                         beforeMaskedValueChange={this.beforeMaskedValueChangeMobile("mobile")}
                       >
-                        {(inputProps) => <TextField {...inputProps} type="tel" margin="none"/>}
+                        {(inputProps) => <input
+                            {...inputProps}
+                            className='form-control form-control-lg'
+                        />}
                       </InputMask>
                     </FormControl>
                   </div>
@@ -411,7 +381,11 @@ class NewRegister extends React.Component {
                         onChange={this.handleChange("phone")}
                         beforeMaskedValueChange={this.beforeMaskedValueChangeMobile("phone")}
                       >
-                        {(inputProps) => <TextField {...inputProps} type="tel" margin="none"/>}
+                        {(inputProps) =>
+                            <input
+                                {...inputProps}
+                                className='form-control form-control-lg'
+                          />}
                       </InputMask>
                     </FormControl>
                   </div>
@@ -422,14 +396,11 @@ class NewRegister extends React.Component {
                     <label className="align-center font-size-18">Email</label>
                   </div>
                   <div className="col-md-8 p-0">
-                    <FormControl className="w-100 mb-2">
-                      <TextField
-                        required
-                        id="required"
+                    <input
+                        className='form-control form-control-lg'
                         onChange={this.handleChange("email")}
                         value={email}
-                        margin="none"/>
-                    </FormControl>
+                    />
                   </div>
                 </div>
 
@@ -443,7 +414,7 @@ class NewRegister extends React.Component {
                         <Select
                           value={building}
                           onChange={this.handleChange("building")}
-                          input={<Input/>}
+                          input={<BootstrapInput/>}
                         >
                           <MenuItem value={"building1"}>Building 1</MenuItem>
                           <MenuItem value={"building2"}>Building 2</MenuItem>
@@ -460,14 +431,11 @@ class NewRegister extends React.Component {
                       <label className="align-center font-size-18">PEC</label>
                     </div>
                     <div className="col-md-8 p-0">
-                      <FormControl className="w-100 mb-2">
-                        <TextField
-                          required
-                          id="required"
-                          onChange={this.handleChange("email")}
+                      <input
+                          className='form-control form-control-lg'
+                          onChange={this.handleChange("pec")}
                           value={pec}
-                          margin="none"/>
-                      </FormControl>
+                      />
                     </div>
                   </div>
                   : null
@@ -478,58 +446,17 @@ class NewRegister extends React.Component {
                       <label className="align-center font-size-18">CUU</label>
                     </div>
                     <div className="col-md-8 p-0">
-                      <FormControl className="w-100 mb-2">
-                        <TextField
-                          required
-                          id="required"
+                      <input
+                          className='form-control form-control-lg'
                           type={"number"}
                           onChange={this.handleChange("cuu")}
                           value={cuu}
-                          margin="none"/>
-                      </FormControl>
+                      />
                     </div>
                   </div>
                   : null
                 }
 
-                {userType === "signaling" ?
-                  <div className="row col-md-12 col-12 p-0 mb-2">
-                    <div className="col-md-4 text-right p-relative">
-                      <label className="align-center font-size-18">User ID</label>
-                    </div>
-                    <div className="col-md-8 p-0">
-                      <FormControl className="w-100 mb-2">
-                        <TextField
-                          required
-                          id="required"
-                          type={"text"}
-                          onChange={this.handleChange("userID")}
-                          value={userID}
-                          margin="none"/>
-                      </FormControl>
-                    </div>
-                  </div>
-                  : null
-                }
-                {userType === "signaling" ?
-                  <div className="row col-md-12 col-12 p-0 mb-2">
-                    <div className="col-md-4 text-right p-relative">
-                      <label className="align-center font-size-18">Password</label>
-                    </div>
-                    <div className="col-md-8 p-0">
-                      <FormControl className="w-100 mb-2">
-                        <TextField
-                          required
-                          id="required"
-                          type={"password"}
-                          onChange={this.handleChange("password")}
-                          value={password}
-                          margin="none"/>
-                      </FormControl>
-                    </div>
-                  </div>
-                  : null
-                }
                 {userType === "collaborator" || userType === "maintainer" || userType === "professional" || userType === "stockist" ?
                   <div className="row col-md-12 col-12 p-0 mb-2">
                     <div className="col-md-4 text-right p-relative">
@@ -541,7 +468,7 @@ class NewRegister extends React.Component {
                           multiple
                           value={otherCategory}
                           onChange={this.handleChange("otherCategory")}
-                          input={<Input/>}
+                          input={<BootstrapInput/>}
                           renderValue={selected => (
                             <div className="d-flex flex-wrap">
                               {selected.map(value => (
@@ -570,7 +497,7 @@ class NewRegister extends React.Component {
         </div>
 
         <div className="modal-box-footer d-flex flex-row">
-          <Button disabled={name === ""} variant="contained" color="primary" onClick={() => {
+          <Button variant="contained" color="primary" onClick={() => {
             onRegisterClose();
           }}>Save Register</Button>
         </div>
