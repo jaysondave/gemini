@@ -142,8 +142,19 @@ function* signInUserWithEmailPassword({payload}) {
     const {email, password} = payload;
     try {
         const signInUser = yield call(signInUserWithEmailPasswordRequest, email, password);
+        console.log({signInUser});
         if (signInUser.status !== 200) {
-            yield put(showAuthMessage(signInUser.message));
+            switch (signInUser.response.status) {
+                case 401:
+                    yield put(showAuthMessage(signInUser['response']['data']['errors'][0]));
+                    return;
+                case 500:
+                    yield put(showAuthMessage('There is the problem in server. Please try later'));
+                    return;
+                default:
+                    yield put(showAuthMessage(signInUser.message));
+                    return
+            }
         } else {
             const headers = signInUser.headers;
             const user = signInUser.data.user;
