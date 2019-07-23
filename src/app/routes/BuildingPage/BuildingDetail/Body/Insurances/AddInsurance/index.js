@@ -7,8 +7,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import Input from "@material-ui/core/Input";
-import IntlMessages from "util/IntlMessages";
 import { DropzoneArea } from "material-ui-dropzone";
 import { InputDate } from "../../../../../../../components/CustomInput/InputDate";
 import BootstrapInput from 'components/BootstrapInput';

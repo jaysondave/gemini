@@ -6,7 +6,6 @@ import Button from "@material-ui/core/Button";
 import dummyDoc from "./data/dummyDoc";
 import DocumentList from "./DocumentList";
 import AppModuleHeader from "components/AppModuleHeader/index";
-import IntlMessages from "util/IntlMessages";
 import CustomScrollbars from "util/CustomScrollbars";
 import Drawer from "@material-ui/core/Drawer";
 import NewDocument from "./NewDocument";

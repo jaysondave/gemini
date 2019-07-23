@@ -1,7 +1,6 @@
 import React from "react";
 import ContainerHeader from "components/ContainerHeader";
 import Widget from "components/Widget/index";
-import IntlMessages from "util/IntlMessages";
 import NewReport from "./NewReport";
 
 const report_list = [

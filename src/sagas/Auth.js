@@ -15,7 +15,8 @@ import {
     SIGNOUT_USER,
     SIGNUP_USER
 } from "constants/ActionTypes";
-import {showAuthMessage, userSignInSuccess, userSignOutSuccess, userSignUpSuccess} from "actions/Auth";
+import {userSignInSuccess, userSignOutSuccess, userSignUpSuccess} from "actions/Auth";
+import {showMessage} from "actions/Alert";
 import {
     userFacebookSignInSuccess,
     userGithubSignInSuccess,
@@ -68,13 +69,13 @@ function* createUserWithEmailPassword({payload}) {
         if (signUpUser.status !== 200) {
             switch (signUpUser.response.status) {
                 case 401:
-                    yield put(showAuthMessage(signUpUser['response']['data']['errors'][0]));
+                    yield put(showMessage(signUpUser['response']['data']['errors'][0]));
                     return;
                 case 500:
-                    yield put(showAuthMessage('There is the problem in server. Please try later'));
+                    yield put(showMessage('There is the problem in server. Please try later'));
                     return;
                 default:
-                    yield put(showAuthMessage(signUpUser.message));
+                    yield put(showMessage(signUpUser.message));
                     return
             }
         } else {
@@ -86,7 +87,7 @@ function* createUserWithEmailPassword({payload}) {
         }
 
     } catch (error) {
-        yield put(showAuthMessage(error));
+        yield put(showMessage(error));
     }
 }
 
@@ -94,13 +95,13 @@ function* signInUserWithGoogle() {
     try {
         const signUpUser = yield call(signInUserWithGoogleRequest);
         if (signUpUser.message) {
-            yield put(showAuthMessage(signUpUser.message));
+            yield put(showMessage(signUpUser.message));
         } else {
             localStorage.setItem('user_id', signUpUser.user.uid);
             yield put(userGoogleSignInSuccess(signUpUser.user.uid));
         }
     } catch (error) {
-        yield put(showAuthMessage(error));
+        yield put(showMessage(error));
     }
 }
 
@@ -109,13 +110,13 @@ function* signInUserWithFacebook() {
     try {
         const signUpUser = yield call(signInUserWithFacebookRequest);
         if (signUpUser.message) {
-            yield put(showAuthMessage(signUpUser.message));
+            yield put(showMessage(signUpUser.message));
         } else {
             localStorage.setItem('user_id', signUpUser.user.uid);
             yield put(userFacebookSignInSuccess(signUpUser.user.uid));
         }
     } catch (error) {
-        yield put(showAuthMessage(error));
+        yield put(showMessage(error));
     }
 }
 
@@ -124,13 +125,13 @@ function* signInUserWithGithub() {
     try {
         const signUpUser = yield call(signInUserWithGithubRequest);
         if (signUpUser.message) {
-            yield put(showAuthMessage(signUpUser.message));
+            yield put(showMessage(signUpUser.message));
         } else {
             localStorage.setItem('user_id', signUpUser.user.uid);
             yield put(userGithubSignInSuccess(signUpUser.user.uid));
         }
     } catch (error) {
-        yield put(showAuthMessage(error));
+        yield put(showMessage(error));
     }
 }
 
@@ -140,16 +141,16 @@ function* signInUserWithTwitter() {
         const signUpUser = yield call(signInUserWithTwitterRequest);
         if (signUpUser.message) {
             if (signUpUser.message.length > 100) {
-                yield put(showAuthMessage('Your request has been canceled.'));
+                yield put(showMessage('Your request has been canceled.'));
             } else {
-                yield put(showAuthMessage(signUpUser.message));
+                yield put(showMessage(signUpUser.message));
             }
         } else {
             localStorage.setItem('user_id', signUpUser.user.uid);
             yield put(userTwitterSignInSuccess(signUpUser.user.uid));
         }
     } catch (error) {
-        yield put(showAuthMessage(error));
+        yield put(showMessage(error));
     }
 }
 
@@ -161,13 +162,13 @@ function* signInUserWithEmailPassword({payload}) {
         if (signInUser.status !== 200) {
             switch (signInUser.response.status) {
                 case 401:
-                    yield put(showAuthMessage(signInUser['response']['data']['errors'][0]));
+                    yield put(showMessage(signInUser['response']['data']['errors'][0]));
                     return;
                 case 500:
-                    yield put(showAuthMessage('There is the problem in server. Please try later'));
+                    yield put(showMessage('There is the problem in server. Please try later'));
                     return;
                 default:
-                    yield put(showAuthMessage(signInUser.message));
+                    yield put(showMessage(signInUser.message));
                     return
             }
         } else {
@@ -178,7 +179,7 @@ function* signInUserWithEmailPassword({payload}) {
             yield put(userSignInSuccess({user, headers}));
         }
     } catch (error) {
-        yield put(showAuthMessage(error));
+        yield put(showMessage(error));
     }
 }
 
@@ -188,7 +189,7 @@ function* signOut() {
         localStorage.removeItem('headers');
         yield put(userSignOutSuccess());
     } catch (error) {
-        yield put(showAuthMessage(error));
+        yield put(showMessage(error));
     }
 }
 

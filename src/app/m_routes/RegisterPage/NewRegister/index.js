@@ -2,11 +2,9 @@ import React from "react";
 import { Modal, ModalHeader } from "reactstrap";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import IntlMessages from "util/IntlMessages";
 import FormControl from "@material-ui/core/FormControl";
 import InputMask from "react-input-mask";
 

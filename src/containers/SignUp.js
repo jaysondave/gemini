@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -9,14 +8,14 @@ import { Link } from 'react-router-dom';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import IntlMessages from 'util/IntlMessages';
 import {
-  hideMessage,
-  showAuthLoader,
   userFacebookSignIn,
   userGithubSignIn,
   userGoogleSignIn,
   userSignUp,
   userTwitterSignIn
 } from 'actions/Auth';
+import { showLoader } from "actions/Alert";
+
 
 class SignUp extends React.Component {
   constructor() {
@@ -32,11 +31,6 @@ class SignUp extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.showMessage) {
-      setTimeout(() => {
-        this.props.hideMessage();
-      }, 3000);
-    }
     if (this.props.authUser !== null) {
       this.props.history.push('/');
     }
@@ -55,7 +49,6 @@ class SignUp extends React.Component {
       phone_number,
       buildingNum
     } = this.state;
-    const { showMessage, loader, alertMessage } = this.props;
     return (
       <div
         className="app-login-container d-flex justify-content-center align-items-center animated slideInUpTiny animation-duration-3">
@@ -137,7 +130,7 @@ class SignUp extends React.Component {
                 </div>
                 <div className="mb-3 d-flex align-items-center justify-content-between">
                   <Button variant="contained" onClick={() => {
-                    this.props.showAuthLoader();
+                    this.props.showLoader();
                     this.props.userSignUp({ email, password });
                   }} color="primary">
                     <IntlMessages
@@ -153,29 +146,19 @@ class SignUp extends React.Component {
           </div>
 
         </div>
-
-        {
-          loader &&
-          <div className="loader-view">
-            <CircularProgress />
-          </div>
-        }
-        {showMessage && NotificationManager.error(alertMessage)}
-        <NotificationContainer />
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ auth }) => {
-  const { loader, alertMessage, showMessage, authUser } = auth;
-  return { loader, alertMessage, showMessage, authUser }
+const mapStateToProps = ({ auth, alert }) => {
+  const { authUser } = auth;
+  return { authUser }
 };
 
 export default connect(mapStateToProps, {
   userSignUp,
-  hideMessage,
-  showAuthLoader,
+  showLoader,
   userFacebookSignIn,
   userGoogleSignIn,
   userGithubSignIn,

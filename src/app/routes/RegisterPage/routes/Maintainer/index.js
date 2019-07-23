@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import registerList from "../../data/registerList";
 import RegisterList from "../../RegisterList";
 import AppModuleHeader from "components/AppModuleHeader/index";
-import IntlMessages from "util/IntlMessages";
 import CustomScrollbars from "util/CustomScrollbars";
 import Drawer from "@material-ui/core/Drawer";
 import NewRegister from "../../NewRegister";

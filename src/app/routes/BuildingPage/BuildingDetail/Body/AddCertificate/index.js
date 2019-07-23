@@ -1,17 +1,14 @@
 import React from "react";
 import { Modal, ModalHeader } from "reactstrap";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Checkbox from "@material-ui/core/Checkbox";
 import Select from "@material-ui/core/Select";
 import BootstrapInput from 'components/BootstrapInput';
 import {DropzoneArea} from 'material-ui-dropzone'
-import IntlMessages from "util/IntlMessages";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import DatePicker from "react-datepicker";
 import { InputDate } from "../../../../../../components/CustomInput/InputDate";

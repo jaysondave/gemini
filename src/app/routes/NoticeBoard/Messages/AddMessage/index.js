@@ -6,7 +6,6 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import DatePicker from "react-datepicker";
 import FormControl from "@material-ui/core/FormControl";
-import IntlMessages from "util/IntlMessages";
 import { InputDate } from "../../../../../components/CustomInput/InputDate";
 
 class AddMessage extends React.Component {

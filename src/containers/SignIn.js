@@ -1,23 +1,20 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
-import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
 import IntlMessages from 'util/IntlMessages';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import {
-    hideMessage,
-    showAuthLoader,
     userFacebookSignIn,
     userGithubSignIn,
     userGoogleSignIn,
     userSignIn,
     userTwitterSignIn
 } from 'actions/Auth';
+import {
+    showLoader,
+} from 'actions/Alert';
 
 class SignIn extends React.Component {
     constructor() {
@@ -30,11 +27,7 @@ class SignIn extends React.Component {
     }
 
     componentDidUpdate() {
-        if (this.props.showMessage) {
-            setTimeout(() => {
-                this.props.hideMessage();
-            }, 100);
-        }
+
         if (this.props.authUser !== null) {
             this.props.history.push('/');
         }
@@ -45,7 +38,7 @@ class SignIn extends React.Component {
     };
     onSubmitSignIn = () => {
         const {email, password} = this.state;
-        this.props.showAuthLoader();
+        this.props.showLoader();
         this.props.userSignIn({email, password});
     };
 
@@ -55,7 +48,6 @@ class SignIn extends React.Component {
             password,
             checkedAdmin
         } = this.state;
-        const {showMessage, loader, alertMessage} = this.props;
         return (
             <div className="app-wrapper h-100">
                 <div
@@ -108,20 +100,10 @@ class SignIn extends React.Component {
                                             color="primary">
                                         <IntlMessages id="appModule.signIn"/>
                                     </Button>
-                                    {
-                                        loader &&
-                                        <div className="loader-view">
-                                            <CircularProgress/>
-                                        </div>
-                                    }
                                 </fieldset>
                             </form>
                         </div>
                     </div>
-
-
-                    {showMessage && NotificationManager.error(alertMessage)}
-                    <NotificationContainer/>
                 </div>
             </div>
         );
@@ -129,14 +111,13 @@ class SignIn extends React.Component {
 }
 
 const mapStateToProps = ({auth}) => {
-    const {loader, alertMessage, showMessage, authUser} = auth;
-    return {loader, alertMessage, showMessage, authUser}
+    const {authUser} = auth;
+    return {authUser}
 };
 
 export default connect(mapStateToProps, {
     userSignIn,
-    hideMessage,
-    showAuthLoader,
+    showLoader,
     userFacebookSignIn,
     userGoogleSignIn,
     userGithubSignIn,

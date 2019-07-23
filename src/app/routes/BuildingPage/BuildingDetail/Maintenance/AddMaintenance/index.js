@@ -10,9 +10,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Input from "@material-ui/core/Input";
 import {DropzoneArea} from 'material-ui-dropzone'
-import IntlMessages from "util/IntlMessages";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { InputDate } from "../../../../../../components/CustomInput/InputDate";
 
 class AddMaintenance extends React.Component {

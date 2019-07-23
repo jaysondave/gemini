@@ -11,7 +11,6 @@ import Select from "@material-ui/core/Select";
 import Input from "@material-ui/core/Input";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import IntlMessages from "util/IntlMessages";
 
 class AddRent extends React.Component {
   constructor(props) {

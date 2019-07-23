@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import IconButton from "@material-ui/core/IconButton";
-import Checkbox from "@material-ui/core/Checkbox";
 import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import MaintainerList from "./SubWorkerList";
 import AppModuleHeader from "components/AppModuleHeader/index";
-import IntlMessages from "util/IntlMessages";
 import CustomScrollbars from "util/CustomScrollbars";
-import { ArrowBack } from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
 
 const subWorkers = [

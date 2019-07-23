@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import AppModuleHeader from "components/AppModuleHeader/index";
-import IntlMessages from "util/IntlMessages";
 import CustomScrollbars from "util/CustomScrollbars";
 import AddImage from "./AddImage";
 import ImageItem from "./Components/ImageItem";

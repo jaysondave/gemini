@@ -87,6 +87,8 @@ class App extends React.Component {
                   component={MaintenanceDashboard} />
                 <Route path={`${match.url}/timetable`}
                   component={TimeTableDashboard} />
+                  <Route path={`${match.url}/categories`}
+                         component={asyncComponent(() => import('./routes/CategoryPage'))} />
                 <Route path={`${match.url}/registers`}
                   component={RegisterDashboard} />
                 <Route exact path={`${match.url}/notice-board`}

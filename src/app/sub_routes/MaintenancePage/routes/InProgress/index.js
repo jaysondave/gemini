@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import maintenanceNotViewedList from "../../data/maintenanceNotViewedList";
 import AppModuleHeader from "components/AppModuleHeader/index";
-import IntlMessages from "util/IntlMessages";
 import CustomScrollbars from "util/CustomScrollbars";
 import InProgressList from "./InProgressList";
 

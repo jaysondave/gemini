@@ -8,7 +8,6 @@ import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import buildingList from "../BuildingPage/data/buildingList";
 import AppModuleHeader from "components/AppModuleHeader/index";
-import IntlMessages from "util/IntlMessages";
 import CustomScrollbars from "util/CustomScrollbars";
 import WareHoustList from "./WareHoustList";
 import AddWareHouse from "./AddWareHouse";

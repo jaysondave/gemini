@@ -7,7 +7,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import BootstrapInput from 'components/BootstrapInput';
-import IntlMessages from "util/IntlMessages";
 import { DropzoneArea } from "material-ui-dropzone";
 
 class AddFloor extends React.Component {

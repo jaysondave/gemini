@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
-import Checkbox from "@material-ui/core/Checkbox";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import BuildingList from "./BuildingList";
 import AppModuleHeader from "components/AppModuleHeader/index";
 import AddBuilding from "./AddBuilding";
-import IntlMessages from "util/IntlMessages";
 import CustomScrollbars from "util/CustomScrollbars";
 
 const buildingList = [1,2,3,4,5];

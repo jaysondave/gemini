@@ -5,6 +5,7 @@ import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-intl'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import "assets/vendors/style"
 import defaultTheme from './themes/defaultTheme';
 import AppLocale from '../lngProvider';
@@ -16,6 +17,7 @@ import { setInitUrl } from '../actions/Auth';
 import RTL from 'util/RTL';
 import asyncComponent from 'util/asyncComponent';
 import NoticeBoard from './NoticeBoard';
+import { hideMessage } from "actions/Alert";
 
 const RestrictedRoute = ({ component: Component, authUser, ...rest }) =>
   <Route
@@ -40,8 +42,16 @@ class App extends Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.props.showMessage) {
+      setTimeout(() => {
+        this.props.hideMessage();
+      }, 100);
+    }
+  }
+
   render() {
-    const { match, location, locale, authUser, initURL, isDirectionRTL } = this.props;
+    const { match, location, locale, authUser, initURL, isDirectionRTL, showMessage, alertMessage } = this.props;
     if (location.pathname === '/') {
       if (authUser === null) {
         return ( <Redirect to={'/signin'}/> );
@@ -85,6 +95,8 @@ class App extends Component {
                   <Route
                     component={asyncComponent(() => import('components/Error404'))} />
                 </Switch>
+                {showMessage && NotificationManager.error(alertMessage)}
+                <NotificationContainer/>
               </div>
             </RTL>
           </IntlProvider>
@@ -94,11 +106,12 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ settings, auth }) => {
+const mapStateToProps = ({ settings, auth, alert }) => {
   const { sideNavColor, locale, isDirectionRTL } = settings;
   const { authUser, initURL } = auth;
-  return { sideNavColor, locale, isDirectionRTL, authUser, initURL }
+  const {alertMessage, showMessage} = alert;
+  return { sideNavColor, locale, isDirectionRTL, authUser, initURL, alertMessage, showMessage }
 };
 
-export default connect(mapStateToProps, { setInitUrl })(App);
+export default connect(mapStateToProps, { setInitUrl, hideMessage })(App);
 

@@ -165,6 +165,12 @@ class SidenavContent extends Component {
               <span className="nav-text">TimeTable</span>
             </NavLink>
           </li>
+          <li className="menu no-arrow">
+            <NavLink to="/app/categories">
+              <i className="zmdi zmdi-sort zmdi-hc-fw"/>
+              <span className="nav-text">Category</span>
+            </NavLink>
+          </li>
           <li className="menu collapse-box">
             <Button>
               <i className="zmdi zmdi-account zmdi-hc-fw"/>

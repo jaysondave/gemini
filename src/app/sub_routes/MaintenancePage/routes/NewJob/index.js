@@ -4,7 +4,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import maintenanceNotViewedList from "../../data/maintenanceNotViewedList";
 import NewJobList from "./NewJobList";
 import AppModuleHeader from "components/AppModuleHeader/index";
-import IntlMessages from "util/IntlMessages";
 import CustomScrollbars from "util/CustomScrollbars";
 
 

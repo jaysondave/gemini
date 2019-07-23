@@ -9,7 +9,6 @@ import buildingList from "../data/buildingList";
 import BuildingList from "./BuildingList";
 import AppModuleHeader from "components/AppModuleHeader/index";
 import AddBuilding from "../Buildings/AddBuilding";
-import IntlMessages from "util/IntlMessages";
 import CustomScrollbars from "util/CustomScrollbars";
 
 
@@ -232,7 +231,6 @@ class BuildingPage extends Component {
             </div>
             <div className="module-box-content">
               <div className="module-box-topbar">
-
                 <Checkbox color="primary"
                           indeterminate={selectedbuildings > 0 && selectedbuildings < buildingList.length}
                           checked={selectedbuildings > 0}

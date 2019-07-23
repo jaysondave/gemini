@@ -1,11 +1,8 @@
 import React from "react";
 import ContainerHeader from "components/ContainerHeader";
 import { Area, AreaChart, ResponsiveContainer } from "recharts";
-import IntlMessages from "util/IntlMessages";
 
 import { increamentData, recentActivity } from "./mdata";
-import Widget from "../../../../components/Widget";
-import RecentActivity from "./RecentActivity";
 import CardOverView from "../../../../components/Cards/CardOverView";
 
 class MainPage extends React.Component {
