@@ -13,7 +13,8 @@ import AppLocale from '../lngProvider';
 import MainApp from 'app/index';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
-import { setInitUrl } from '../actions/Auth';
+import LoadComponent from "components/LoadComponent";
+import { setInitUrl } from 'actions/Auth';
 import RTL from 'util/RTL';
 import asyncComponent from 'util/asyncComponent';
 import NoticeBoard from './NoticeBoard';
@@ -51,7 +52,7 @@ class App extends Component {
   }
 
   render() {
-    const { match, location, locale, authUser, initURL, isDirectionRTL, showMessage, alertMessage } = this.props;
+    const { match, location, locale, authUser, initURL, isDirectionRTL, showMessage, alertMessage, loader } = this.props;
     if (location.pathname === '/') {
       if (authUser === null) {
         return ( <Redirect to={'/signin'}/> );
@@ -97,6 +98,7 @@ class App extends Component {
                 </Switch>
                 {showMessage && NotificationManager.error(alertMessage)}
                 <NotificationContainer/>
+                {loader && <LoadComponent />}
               </div>
             </RTL>
           </IntlProvider>
@@ -109,8 +111,8 @@ class App extends Component {
 const mapStateToProps = ({ settings, auth, alert }) => {
   const { sideNavColor, locale, isDirectionRTL } = settings;
   const { authUser, initURL } = auth;
-  const {alertMessage, showMessage} = alert;
-  return { sideNavColor, locale, isDirectionRTL, authUser, initURL, alertMessage, showMessage }
+  const {alertMessage, showMessage, loader} = alert;
+  return { sideNavColor, locale, isDirectionRTL, authUser, initURL, alertMessage, showMessage, loader }
 };
 
 export default connect(mapStateToProps, { setInitUrl, hideMessage })(App);

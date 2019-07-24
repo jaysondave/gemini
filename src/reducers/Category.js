@@ -1,30 +1,22 @@
 import {
-    GET_CATEGORIES_START,
     GET_CATEGORIES_SUCCESS,
+    CREATE_NEW_CATEGORY
 
 } from "constants/ActionTypes";
 
 const INIT_STATE = {
-    category: null
+    allCategory: []
 };
 
 
 export default (state = INIT_STATE, action) => {
     switch (action.type) {
-        case GET_CATEGORIES_START: {
-            return {
-                ...state,
-                loader: true,
-            }
-        }
 
-        case GET_CATEGORIES_SUCCESS: {
+        case GET_CATEGORIES_SUCCESS:
             return {
                 ...state,
-                loader: false,
-                category: action.payload.category,
-            }
-        }
+                allCategory: action.payload.category,
+            };
         default:
             return state;
     }

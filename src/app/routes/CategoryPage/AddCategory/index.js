@@ -12,9 +12,18 @@ class AddCategory extends Component {
       name
     };
   }
-
+  tapSaveBtn = () => {
+    const { name } = this.state;
+    const { onSave, onUpdate, category } = this.props;
+    if (category.name) {
+      onUpdate(name)
+    } else {
+      onSave(name)
+    }
+    this.setState({name: null});
+  };
   render() {
-    const { onClose, onSave, open, category } = this.props;
+    const { onClose, open, category } = this.props;
     const { name } = this.state;
 
     return (
@@ -56,9 +65,7 @@ class AddCategory extends Component {
 
         <div className="modal-box-footer d-flex flex-row">
           <Button disabled={name === "" || name == null || name === this.props.category.name} variant="contained" color="primary" onClick={() => {
-            this.setState({name: ""});
-            onSave(name);
-
+            this.tapSaveBtn();
           }}>Save Building</Button>
         </div>
       </Modal>

@@ -1,6 +1,5 @@
 import React from "react";
 import {withRouter} from 'react-router-dom'
-import AddBuilding from "../../AddCategory/index";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 
@@ -19,21 +18,6 @@ class CategoryCell extends React.Component {
         this.setState({addBuildingState: false});
         this.props.onDeleteBuilding(building);
     };
-    onEditBuilding = () => {
-        this.setState({menuState: false, addBuildingState: true});
-    };
-    onBodyClose = () => {
-        this.setState({addBuildingState: false});
-    };
-    onBodies = () => {
-        this.props.history.push('detail')
-    };
-    onMaintenance = () => {
-        this.setState({menuState: false, addMaintenance: true});
-    };
-    onMaintenanceClose = () => {
-        this.setState({addMaintenance: false});
-    };
 
     constructor() {
         super();
@@ -48,7 +32,8 @@ class CategoryCell extends React.Component {
     this.setState({[name]: checked});
   };
     render() {
-        const {category, index, onSaveBuilding, onSaveBody} = this.props;
+        const {category, index, onEditCategory, onDelete, onUpdateActive} = this.props;
+        const { name, active } = category;
         const {menuState, anchorEl, addBuildingState, addBody, addMaintenance} = this.state;
         return (
 
@@ -59,21 +44,21 @@ class CategoryCell extends React.Component {
                     </div>
                     <div className="col con-inf-mw-100 f-3 position-relative">
                         <div className="text-dark align-center">
-                            {"Category Name"}
+                            {name}
                         </div>
                     </div>
                     <div className="col con-inf-mw-100 f-1 position-relative">
                         <div className="text-muted align-center">
                           <Checkbox color="primary"
-                                    checked={true}
-                                    onChange={this.handleChange('checkedAdmin')}
+                                    checked={active}
+                                    onChange={() => onUpdateActive(category.id, !active)}
                           />
                         </div>
                     </div>
                     <div className="col con-inf-mw-100 f-1 position-relative">
                         <div className="text-muted align-center">
                           <IconButton className="d-block" aria-label="Menu"
-                                      onClick={() => alert('adf')}>
+                                      onClick={() => onDelete(category.id)}>
                             <i className="zmdi zmdi-delete"/>
                           </IconButton>
                         </div>
@@ -81,7 +66,7 @@ class CategoryCell extends React.Component {
                     <div className="col con-inf-mw-100 f-1 position-relative">
                       <div className="text-muted align-center">
                         <IconButton className="d-block" aria-label="Menu"
-                                    onClick={() => alert('adf')}>
+                                    onClick={() => onEditCategory(category)}>
                           <i className="zmdi zmdi-edit"/>
                         </IconButton>
                       </div>

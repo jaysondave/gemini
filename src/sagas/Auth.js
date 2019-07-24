@@ -16,7 +16,7 @@ import {
     SIGNUP_USER
 } from "constants/ActionTypes";
 import {userSignInSuccess, userSignOutSuccess, userSignUpSuccess} from "actions/Auth";
-import {showMessage} from "actions/Alert";
+import {showMessage, hideLoader} from "actions/Alert";
 import {
     userFacebookSignInSuccess,
     userGithubSignInSuccess,
@@ -83,6 +83,7 @@ function* createUserWithEmailPassword({payload}) {
             const user = signUpUser.data.user;
             localStorage.setItem('headers', JSON.stringify(headers));
             localStorage.setItem('user', JSON.stringify(user));
+            yield put(hideLoader());
             yield put(userSignUpSuccess({user, headers}));
         }
 
@@ -158,6 +159,7 @@ function* signInUserWithEmailPassword({payload}) {
     const {email, password} = payload;
     try {
         const signInUser = yield call(signInUserWithEmailPasswordRequest, email, password);
+        yield put(hideLoader());
         console.log({signInUser});
         if (signInUser.status !== 200) {
             switch (signInUser.response.status) {
