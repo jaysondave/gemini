@@ -5,27 +5,27 @@ import {
     CREATE_NEW_CATEGORY,
     UPDATE_CATEGORY,
     DELETE_CATEGORY
-} from "constants/ActionTypes";
-import { fetchCategories, fetchCategoriesSuccess } from "actions/Category";
-import {showMessage, hideLoader, showLoader} from "actions/Alert";
-import {userSignOut} from "actions/Auth";
+} from "../constants/ActionTypes";
+import { fetchCategories, fetchCategoriesSuccess } from "../actions/Category";
+import {showMessage, hideLoader, showLoader} from "../actions/Alert";
+import {userSignOut} from "../actions/Auth";
+import CategoryAPI from "../apis/category";
 
-import { fetchAllCategories, createCategory, updateCategory, deleteCategory } from "apis/category";
-
+const categoryApi = new CategoryAPI();
 const fetchAllCategoriesRequest = async () =>
-    await  fetchAllCategories()
+    await  categoryApi.fetchAllCategories()
         .then(resp => resp)
         .catch(error => error);
 const createNewCategoryRequest = async (body) =>
-    await  createCategory(body)
+    await  categoryApi.createCategory(body)
         .then(resp => resp)
         .catch(error => error);
 const updateCategoryRequest = async (payload) =>
-    await  updateCategory(payload.id, payload.body)
+    await  categoryApi.updateCategory(payload.id, payload.body)
         .then(resp => resp)
         .catch(error => error);
 const deleteCategoryRequest = async (payload) =>
-    await  deleteCategory(payload)
+    await  categoryApi.deleteCategory(payload)
         .then(resp => resp)
         .catch(error => error);
 

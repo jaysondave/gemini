@@ -22,6 +22,7 @@ class UserInfo extends React.Component {
   };
 
   render() {
+      const { user } = this.props;
     return (
       <div className="user-profile d-flex flex-row align-items-center">
         <Avatar
@@ -30,7 +31,7 @@ class UserInfo extends React.Component {
           className="user-avatar "
         />
         <div className="user-detail">
-          <h4 className="user-name" onClick={this.handleClick}>Massimo Ghirga <i
+          <h4 className="user-name" onClick={this.handleClick}>{user.first_name + " " + user.last_name}<i
             className="zmdi zmdi-caret-down zmdi-hc-fw align-middle"/>
           </h4>
         </div>
@@ -51,10 +52,6 @@ class UserInfo extends React.Component {
             <i className="zmdi zmdi-account zmdi-hc-fw mr-2"/>
             <IntlMessages id="popup.profile"/>
           </MenuItem>
-          <MenuItem onClick={this.handleRequestClose}>
-            <i className="zmdi zmdi-settings zmdi-hc-fw mr-2"/>
-            <IntlMessages id="popup.setting"/>
-          </MenuItem>
           <MenuItem onClick={() => {
             this.handleRequestClose();
             this.props.userSignOut()
@@ -69,9 +66,10 @@ class UserInfo extends React.Component {
   }
 }
 
-const mapStateToProps = ({settings}) => {
+const mapStateToProps = ({settings, auth}) => {
   const {locale} = settings;
-  return {locale}
+  const { user } = auth.authUser;
+  return {locale, user}
 };
 export default connect(mapStateToProps, {userSignOut})(UserInfo);
 

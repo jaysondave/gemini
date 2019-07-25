@@ -54,15 +54,15 @@ class App extends Component {
   render() {
     const { match, location, locale, authUser, initURL, isDirectionRTL, showMessage, alertMessage, loader } = this.props;
     if (location.pathname === '/') {
-      if (authUser === null) {
+      if (!authUser) {
         return ( <Redirect to={'/signin'}/> );
-      } else if (authUser.user_type === 'admin') {
+      } else if (authUser.user.user_type === 'admin') {
         return (<Redirect to={'/app/home-page'} />);
-      } else if (authUser.user_type === 'maintainer') {
+      } else if (authUser.user.user_type === 'maintainer') {
         return (<Redirect to={'/app/maintainer'} />);
-      } else if (authUser.user_type === 'sub_worker') {
+      } else if (authUser.user.user_type === 'sub_worker') {
         return (<Redirect to={'/app/s-worker'}/>);
-      } else if (authUser.user_type === 'sub_worker') {
+      } else if (authUser.user.user_type === 'sub_worker') {
         return (<Redirect to={'/app/user'}/>);
       } else {
         return (<Redirect to={initURL} />);

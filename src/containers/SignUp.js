@@ -2,17 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { NotificationContainer, NotificationManager } from 'react-notifications';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { Link } from 'react-router-dom';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import IntlMessages from 'util/IntlMessages';
 import {
-  userFacebookSignIn,
-  userGithubSignIn,
-  userGoogleSignIn,
   userSignUp,
-  userTwitterSignIn
 } from 'actions/Auth';
 import { showLoader } from "actions/Alert";
 
@@ -159,8 +153,4 @@ const mapStateToProps = ({ auth, alert }) => {
 export default connect(mapStateToProps, {
   userSignUp,
   showLoader,
-  userFacebookSignIn,
-  userGoogleSignIn,
-  userGithubSignIn,
-  userTwitterSignIn
 })(SignUp);

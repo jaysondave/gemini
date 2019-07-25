@@ -6,11 +6,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import IntlMessages from 'util/IntlMessages';
 import {
-    userFacebookSignIn,
-    userGithubSignIn,
-    userGoogleSignIn,
     userSignIn,
-    userTwitterSignIn
 } from 'actions/Auth';
 import {
     showLoader,
@@ -22,7 +18,7 @@ class SignIn extends React.Component {
         this.state = {
             email: '',
             password: '',
-            checkedAdmin: false,
+            isRemember: false,
         }
     }
 
@@ -37,16 +33,16 @@ class SignIn extends React.Component {
         this.setState({[name]: checked});
     };
     onSubmitSignIn = () => {
-        const {email, password} = this.state;
+        const {email, password, isRemember} = this.state;
         this.props.showLoader();
-        this.props.userSignIn({email, password});
+        this.props.userSignIn({email, password, isRemember});
     };
 
     render() {
         const {
             email,
             password,
-            checkedAdmin
+            isRemember
         } = this.state;
         return (
             <div className="app-wrapper h-100">
@@ -80,9 +76,8 @@ class SignIn extends React.Component {
                                         <FormControlLabel
                                             control={
                                                 <Checkbox color="primary"
-                                                          checked={checkedAdmin}
-                                                          onChange={this.handleChange('checkedAdmin')}
-                                                          value="checkedAdmin"
+                                                          checked={isRemember}
+                                                          onChange={this.handleChange('isRemember')}
                                                 />
                                             }
                                             label={'Remember me'}
@@ -118,8 +113,4 @@ const mapStateToProps = ({auth}) => {
 export default connect(mapStateToProps, {
     userSignIn,
     showLoader,
-    userFacebookSignIn,
-    userGoogleSignIn,
-    userGithubSignIn,
-    userTwitterSignIn
 })(SignIn);

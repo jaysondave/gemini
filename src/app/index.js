@@ -33,8 +33,8 @@ class App extends React.Component {
 
   renderSideBar = () => {
     const { authUser } = this.props;
-    const { user_type } = authUser;
-    switch (user_type) {
+    const { user } = authUser;
+    switch (user.user_type) {
       case 'admin':
         return (<Sidebar />);
       case 'maintainer':
