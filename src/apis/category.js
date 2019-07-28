@@ -5,7 +5,7 @@ class CategoryAPI extends ConfigurationAPI {
     fetchAllCategories = () => {
         return new Promise((resolve, reject) => {
             return axios.get(`${API_URL}/categories`, {
-                headers: this.headers
+                headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);
             }).catch((error) => {
@@ -17,7 +17,7 @@ class CategoryAPI extends ConfigurationAPI {
     createCategory = (body) => {
         return new Promise((resolve, reject) => {
             return axios.post(`${API_URL}/categories`, body, {
-                headers: this.headers
+                headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);
             }).catch((error) => {
@@ -29,7 +29,7 @@ class CategoryAPI extends ConfigurationAPI {
     updateCategory = (id, body) => {
         return new Promise((resolve, reject) => {
             return axios.put(`${API_URL}/categories/${id}`, body, {
-                headers: this.headers
+                headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);
             }).catch((error) => {
@@ -41,7 +41,7 @@ class CategoryAPI extends ConfigurationAPI {
     deleteCategory = (id) => {
         return new Promise((resolve, reject) => {
             return axios.delete(`${API_URL}/categories/${id}`, {
-                headers: this.headers
+                headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);
             }).catch((error) => {

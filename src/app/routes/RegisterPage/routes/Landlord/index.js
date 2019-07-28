@@ -216,7 +216,7 @@ class Landlord extends Component {
         </div>
         {isOpen &&
         <NewRegister
-          userType={'landlord'}
+          user_type={'landlord'}
           onRegisterClose={this.onRegisterClose}
           open={isOpen}
           register={selectedRegister}

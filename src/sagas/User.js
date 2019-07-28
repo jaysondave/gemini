@@ -7,7 +7,7 @@ import {
 import {showMessage, hideLoader, showLoader} from "../actions/Alert";
 import {userSignOut} from "../actions/Auth";
 import UserAPI from "../apis/user";
-import {fetchUsersSuccess} from "../actions";
+import {fetchUsers, fetchUsersSuccess} from "../actions";
 
 const userAPI = new UserAPI();
 const fetchAllUserRequest = async () =>
@@ -27,18 +27,18 @@ function* fetchAllUser() {
         if (users.status !== 200) {
             switch (users.response.status) {
                 case 401:
-                    yield put(showMessage(category['response']['data']['errors'][0]));
+                    yield put(showMessage(users['response']['data']['errors'][0]));
                     yield put(userSignOut());
                     return;
                 case 500:
                     yield put(showMessage('There is the problem in server. Please try later'));
                     return;
                 default:
-                    yield put(showMessage(category.message));
+                    yield put(showMessage(users.message));
                     return
             }
         } else {
-            yield put(fetchUsersSuccess(users));
+            yield put(fetchUsersSuccess(users.data));
         }
     } catch (error) {
         yield put(showMessage(error));
@@ -52,18 +52,18 @@ function* registerNewUser({payload}) {
         if (register.status !== 200) {
             switch (register.response.status) {
                 case 401:
-                    yield put(showMessage(category['response']['data']['errors'][0]));
+                    yield put(showMessage(register['response']['data']['errors'][0]));
                     yield put(userSignOut());
                     return;
                 case 500:
                     yield put(showMessage('There is the problem in server. Please try later'));
                     return;
                 default:
-                    yield put(showMessage(category.message));
-                    return
+                    yield put(showMessage(register.message));
+                    return;
             }
         } else {
-            yield put(fetchAllUser());
+            yield put(fetchUsers());
         }
     } catch (error) {
         yield put(showMessage(error));

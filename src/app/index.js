@@ -29,7 +29,12 @@ import MTimeTableDashboard from "./m_routes/TimeTablePage";
 import SubWorkerMaintenanceDashboard from "./sub_routes/MaintenancePage"
 import STimeTableDashboard from "./sub_routes/TimeTablePage";
 import UserReportDashboard from "./u_routes/HomePage";
+import {fetchUsers} from "../actions";
 class App extends React.Component {
+  componentDidMount() {
+    console.log("Root App componentDidMount");
+    this.props.dispatch(fetchUsers());
+  }
 
   renderSideBar = () => {
     const { authUser } = this.props;

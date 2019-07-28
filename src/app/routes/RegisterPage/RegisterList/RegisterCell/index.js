@@ -40,42 +40,51 @@ class RegisterCell extends React.Component {
   render() {
     const { register, onRegisterSelect } = this.props;
     const { menuState, anchorEl } = this.state;
-    const { id, name, surName, avatar, address, homeNumber, cap, city, province, codFisc, mobile, phone, email } = register;
+    const {
+      id,
+      email,
+      user_type,
+      first_name,
+      last_name,
+      picture,
+      business_name,
+      address,
+      home_number,
+      zip_code,
+      city,
+      province,
+      cod_fisc,
+      p_lva,
+      mobile,
+      phone,
+      pec,
+      cuu,
+      specialization,
+      building
+    } = register;
 
-    const options = [
-      "Edit",
-      "Delete"
-    ];
     return (
 
       <div className="contact-item module-list-item">
-
-        <Checkbox color="primary"
-                  checked={register.selected}
-                  value="checkedF"
-                  onClick={() => {
-                    onRegisterSelect(register);
-                  }}
-        />
         <div className="d-flex f-1 flex-wrap">
 
-          <div className="d-flex f-1 flex-wrap" onClick={() => alert(name)}>
+          <div className="d-flex f-1 flex-wrap" onClick={() => alert(first_name)}>
 
             <div className="mx-1 mx-md-3 p-relative"
                  style={{ fontSize: 16}}>
-              {(avatar === null || avatar === '') ?
+              {(picture === null || picture === '') ?
                   <div className="align-center rounded-circle size-40 bg-blue text-center text-white mx-1 mx-md-3"
                        style={{fontSize: 20}}>
-                    {name.charAt(0).toUpperCase()}
+                    {first_name.charAt(0).toUpperCase()}
                   </div>
                  :
-                  <img className="rounded-circle size-40 mx-1 mx-md-3" alt={name} src={avatar}/>
+                  <img className="rounded-circle size-40 mx-1 mx-md-3" alt={first_name + " " + last_name} src={picture}/>
                 }
             </div>
             <div className="col con-inf-mw-100">
               <p className="mb-0">
                   <span className="text-truncate contact-name text-primary-color text-bold">
-                      {name}
+                      {first_name + " " + last_name}
                   </span>
               </p>
 

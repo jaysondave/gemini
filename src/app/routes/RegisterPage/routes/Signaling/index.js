@@ -216,7 +216,7 @@ class Signaling extends Component {
         </div>
         {isOpen &&
         <NewRegister
-          userType={'signaling'}
+          user_type={'signaling'}
           onRegisterClose={this.onRegisterClose}
           open={isOpen}
           register={selectedRegister}

@@ -16,7 +16,7 @@ class NewRegister extends React.Component {
     console.log({ NewRegister: props });
     // const { id, category, name, surName, address, homeNumber, cap, city, province, codFisc, mobile, email, phone, otherCategory} = props.register;
     this.state = {
-      userType: props.userType,
+      user_type: props.user_type,
       id: "",
       category: "",
       name: "",

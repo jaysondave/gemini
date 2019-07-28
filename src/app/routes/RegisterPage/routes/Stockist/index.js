@@ -216,7 +216,7 @@ class Stockist extends Component {
         </div>
         {isOpen &&
         <NewRegister
-          userType={'stockist'}
+          user_type={'stockist'}
           onRegisterClose={this.onRegisterClose}
           open={isOpen}
           register={selectedRegister}

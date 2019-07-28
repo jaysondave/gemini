@@ -216,7 +216,7 @@ class RegisterPage extends Component {
         </div>
         {isOpen &&
         <NewRegister
-          userType={'collaborator'}
+          user_type={'collaborator'}
           onRegisterClose={this.onRegisterClose}
           open={isOpen}
           register={selectedRegister}

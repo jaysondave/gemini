@@ -216,7 +216,7 @@ class Tenant extends Component {
         </div>
         {isOpen &&
         <NewRegister
-          userType={'tenant'}
+          user_type={'tenant'}
           onRegisterClose={this.onRegisterClose}
           open={isOpen}
           register={selectedRegister}

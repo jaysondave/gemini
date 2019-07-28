@@ -9,11 +9,11 @@ const storageId = 'authUser';
 export const setStorage = (authUser) => {
   const { isRemember } = authUser;
   setItem(storageId, authUser, isRemember);
-  removeItem(storageId, !isRemember);
+  // removeItem(storageId, !isRemember);
 };
 
-export const getStorage = (key) => (
-  findItem(key)
+export const getStorage = () => (
+  findItem(storageId)
 );
 
 export const emptyStorage = () => (

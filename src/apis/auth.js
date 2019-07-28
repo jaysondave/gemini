@@ -34,7 +34,7 @@ class AuthAPI extends ConfigurationAPI {
     signOut = () => {
         return new Promise((resolve, reject) => {
             return axios.delete(`${API_URL}/users/sign_out`, {
-                headers: this.headers
+                headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);
             }).catch((error) => {

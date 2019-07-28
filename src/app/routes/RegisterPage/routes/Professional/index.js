@@ -216,7 +216,7 @@ class Professional extends Component {
         </div>
         {isOpen &&
         <NewRegister
-          userType={'professional'}
+          user_type={'professional'}
           onRegisterClose={this.onRegisterClose}
           open={isOpen}
           register={selectedRegister}

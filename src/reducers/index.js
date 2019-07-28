@@ -4,6 +4,7 @@ import Settings from './Settings';
 import Auth from './Auth';
 import Category from "./Category";
 import Alert from "./Alert";
+import User from "./User";
 
 
 export default (history) => combineReducers({
@@ -11,5 +12,6 @@ export default (history) => combineReducers({
   settings: Settings,
   auth: Auth,
   category: Category,
-  alert: Alert
+  alert: Alert,
+  users: User
 });

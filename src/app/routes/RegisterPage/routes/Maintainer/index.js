@@ -216,7 +216,7 @@ class Maintainer extends Component {
         </div>
         {isOpen &&
         <NewRegister
-          userType={'maintainer'}
+          user_type={'maintainer'}
           onRegisterClose={this.onRegisterClose}
           open={isOpen}
           register={selectedRegister}
