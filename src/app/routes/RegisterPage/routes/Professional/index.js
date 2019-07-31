@@ -17,13 +17,11 @@ class Professional extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      noContentFoundMessage: "No Collaborator found",
+      noContentFoundMessage: "No Professional found",
       alertMessage: "",
       showMessage: false,
       drawerState: false,
       searchKey: "",
-      allUsers: registerList,
-      registerList: registerList,
       currentRegister: null,
       selectedRegister: null,
       selectedRegisters: 0,
@@ -32,89 +30,17 @@ class Professional extends Component {
     };
   }
 
-  onRegisterSelect = (data) => {
-    data.selected = !data.selected;
-    let selectedRegisters = 0;
-    const registerList = this.state.registerList.map(register => {
-        if (register.selected) {
-          selectedRegisters++;
-        }
-        if (register.id === data.id) {
-          if (register.selected) {
-            selectedRegisters++;
-          }
-          return data;
-        } else {
-          return register;
-        }
-      }
-    );
-    this.setState({
-      selectedRegisters: selectedRegisters,
-      registerList: registerList
-    });
 
-  };
-  onDeleteRegister = (data) => {
-    this.setState({
-      alertMessage: "User is deleted successfully",
-      showMessage: true,
-      allUsers: this.state.allUsers.filter((register) => register.id !== data.id),
-      registerList: this.state.allUsers.filter((register) => register.id !== data.id)
-    });
-  };
-  onDeleteSelectedRegister = () => {
-    const allUsers = this.state.allUsers.filter((register) => !register.selected);
-    this.setState({
-      alertMessage: "Users is deleted successfully",
-      showMessage: true,
-      allUsers: allUsers,
-      registerList: allUsers,
-      selectedRegisters: 0
-    });
-  };
   handleRequestClose = () => {
     this.setState({
       showMessage: false
     });
   };
-  getAllUser = () => {
-    let registerList = this.state.allUsers.map((register) => register ? {
-      ...register,
-      selected: true
-    } : register);
-    this.setState({
-      selectedRegisters: registerList.length,
-      allUsers: registerList,
-      registerList: registerList
-    });
-  };
-  getUnselectedAllUser = () => {
-    let registerList = this.state.allUsers.map((register) => register ? {
-      ...register,
-      selected: false
-    } : register);
-    this.setState({
-      selectedRegisters: 0,
-      allUsers: registerList,
-      registerList: registerList
-    });
-  };
 
-  onAllUserSelect() {
-    const selectAll = this.state.selectedRegisters < this.state.registerList.length;
-    if (selectAll) {
-      this.getAllUser();
-    } else {
-      this.getUnselectedAllUser();
-    }
-  }
-
-  showRegisters = ({ registerList }) => {
+  showRegisters = (registerList) => {
     return (
-      <RegisterList registerList={registerList}
-                    onRegisterSelect={this.onRegisterSelect.bind(this)}
-                    onDeleteRegister={this.onDeleteRegister.bind(this)}
+      <RegisterList
+          registerList={registerList}
       />
     );
   };
@@ -158,7 +84,8 @@ class Professional extends Component {
     this.setState({ isOpen: true });
   };
   render() {
-    const { registerList, addBuildingState, selectedRegisters, alertMessage, showMessage, noContentFoundMessage, isOpen, selectedRegister } = this.state;
+    const { registerList, alertMessage, showMessage, noContentFoundMessage, isOpen, selectedRegister } = this.state;
+    const { professionals } = this.props;
     return (
       <div className="app-wrapper">
         <div className="app-module animated slideInUpTiny animation-duration-3">
@@ -183,29 +110,15 @@ class Professional extends Component {
             </div>
             <div className="module-box-content">
               <div className="module-box-topbar">
-
-                <Checkbox color="primary"
-                          indeterminate={selectedRegisters > 0 && selectedRegisters < registerList.length}
-                          checked={selectedRegisters > 0}
-                          onChange={this.onAllUserSelect.bind(this)}
-                          value="SelectMail"/>
-
-
-                {selectedRegisters > 0 &&
-                <IconButton className="icon-btn"
-                            onClick={this.onDeleteSelectedRegister.bind(this)}>
-                  <i className="zmdi zmdi-delete"/>
-                </IconButton>}
-
               </div>
 
               <CustomScrollbars className="module-list-scroll scrollbar"
                                 style={{ height: this.props.width >= 1200 ? "calc(100vh - 265px)" : "calc(100vh - 245px)" }}>
-                {registerList.length === 0 ?
+                {professionals.length === 0 ?
                   <div className="h-100 d-flex align-items-center justify-content-center">
                     {noContentFoundMessage}
                   </div>
-                  : this.showRegisters(this.state)
+                  : this.showRegisters(professionals)
                 }
 
 
@@ -237,8 +150,9 @@ class Professional extends Component {
   }
 }
 
-const mapStateToProps = ({ settings }) => {
+const mapStateToProps = ({ settings, users }) => {
   const { width } = settings;
-  return { width };
+  const { professionals } = users.users
+  return { width, professionals };
 };
 export default connect(mapStateToProps)(Professional);

@@ -26,8 +26,8 @@ class UserInfo extends React.Component {
     return (
       <div className="user-profile d-flex flex-row align-items-center">
         <Avatar
-          alt='...'
-          src={'http://pbs.twimg.com/profile_images/1146982927433007110/KweOe9o3_200x200.jpg'}
+          alt=''
+          src={'https://asia-mag.com/wp-content/uploads/2019/06/zhangitanai7.png'}
           className="user-avatar "
         />
         <div className="user-detail">

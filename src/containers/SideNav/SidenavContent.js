@@ -179,6 +179,16 @@ class SidenavContent extends Component {
 
             <ul className="sub-menu">
               <li>
+                <NavLink className="prepend-icon" to="/app/registers/agency">
+                  <span className="nav-text">Agency</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/registers/manager">
+                  <span className="nav-text">Manager</span>
+                </NavLink>
+              </li>
+              <li>
                 <NavLink className="prepend-icon" to="/app/registers/collaborator">
                   <span className="nav-text">Collaborator</span>
                 </NavLink>
@@ -201,16 +211,6 @@ class SidenavContent extends Component {
               <li>
                 <NavLink className="prepend-icon" to="/app/registers/signaling">
                   <span className="nav-text">Signaling</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="prepend-icon" to="/app/registers/tenant">
-                  <span className="nav-text">Tenant</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="prepend-icon" to="/app/registers/landlord">
-                  <span className="nav-text">Landord</span>
                 </NavLink>
               </li>
             </ul>

@@ -11,6 +11,7 @@ import CustomScrollbars from "util/CustomScrollbars";
 import {fetchCategories} from 'actions/Category'
 import {showLoader} from 'actions/Alert'
 import {createNewCategory, updateSelectedCategory, deleteSelectedCategory} from "actions/Category";
+import Checkbox from "@material-ui/core/Checkbox";
 
 class CategoryPage extends Component {
     SideBar = () => {
@@ -45,10 +46,10 @@ class CategoryPage extends Component {
     onClose = () => {
         this.setState({addCategoryState: false, selectedCategory: {}});
     };
-    onSave = (name) => {
+    onSave = (name, category_type) => {
         this.setState({addCategoryState: false});
         const body = {
-          category: { name }
+          category: { name, category_type }
         };
         this.props.dispatch(showLoader());
         this.props.dispatch(createNewCategory(body))
@@ -106,13 +107,6 @@ class CategoryPage extends Component {
         console.log('search key', e.target.value)
         this.setState({searchKey: e.target.value})
     };
-    fetchCategories = () => {
-        this.props.dispatch(fetchCategories());
-    };
-
-    componentDidMount() {
-        this.fetchCategories()
-    }
 
     constructor(props) {
         super(props);
@@ -163,6 +157,38 @@ class CategoryPage extends Component {
                         <div className="module-box-content">
                             <CustomScrollbars className="module-list-scroll scrollbar"
                                               style={{height: this.props.width >= 1200 ? "calc(100vh - 265px)" : "calc(100vh - 245px)"}}>
+                                <div className="contact-item module-list-item">
+                                    <div className="d-flex f-1 flex-wrap">
+                                        <div className="mx-1 mx-md-3 font-size-16 f-1 position-relative">
+                                            <div className="align-center">{""}</div>
+                                        </div>
+                                        <div className="col con-inf-mw-100 f-3 position-relative">
+                                            <div className="text-dark align-center text-bold">
+                                                {"Name"}
+                                            </div>
+                                        </div>
+                                        <div className="col con-inf-mw-100 f-3 position-relative">
+                                            <div className="text-dark align-center text-bold">
+                                                {"Type"}
+                                            </div>
+                                        </div>
+                                        <div className="col con-inf-mw-100 f-1 position-relative">
+                                            <div className="text-dark align-center text-bold">
+                                                {"Active"}
+                                            </div>
+                                        </div>
+                                        <div className="col con-inf-mw-100 f-1 position-relative">
+                                            <div className="text-dark align-center text-bold">
+                                                {"Delete"}
+                                            </div>
+                                        </div>
+                                        <div className="col con-inf-mw-100 f-1 position-relative">
+                                            <div className="text-dark align-center text-bold">
+                                                {"Edit"}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 {allCategory.length === 0 ?
                                     <div className="h-100 d-flex align-items-center justify-content-center">
                                         {noContentFoundMessage}

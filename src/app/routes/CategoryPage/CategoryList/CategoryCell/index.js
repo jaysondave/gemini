@@ -33,7 +33,7 @@ class CategoryCell extends React.Component {
   };
     render() {
         const {category, index, onEditCategory, onDelete, onUpdateActive} = this.props;
-        const { name, active } = category;
+        const { name, category_type, active } = category;
         const {menuState, anchorEl, addBuildingState, addBody, addMaintenance} = this.state;
         return (
 
@@ -45,6 +45,11 @@ class CategoryCell extends React.Component {
                     <div className="col con-inf-mw-100 f-3 position-relative">
                         <div className="text-dark align-center">
                             {name}
+                        </div>
+                    </div>
+                    <div className="col con-inf-mw-100 f-3 position-relative">
+                        <div className="text-dark align-center">
+                            {category_type.toUpperCase()}
                         </div>
                     </div>
                     <div className="col con-inf-mw-100 f-1 position-relative">

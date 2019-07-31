@@ -19,6 +19,10 @@ const createNewUserRequest = async (user) =>
         .then(resp => resp)
         .catch(error => error);
 
+
+function* showErrorMessage(message) {
+    yield put(showMessage(message));
+}
 function* fetchAllUser() {
     try {
         const users = yield call(fetchAllUserRequest);
@@ -31,6 +35,9 @@ function* fetchAllUser() {
                     yield put(userSignOut());
                     return;
                 case 500:
+                    yield put(showMessage('There is the problem in server. Please try later'));
+                    return;
+                case 400:
                     yield put(showMessage('There is the problem in server. Please try later'));
                     return;
                 default:
@@ -50,6 +57,7 @@ function* registerNewUser({payload}) {
         yield put(hideLoader());
         console.log({register});
         if (register.status !== 200) {
+            const errorResp = register.response.data.errors;
             switch (register.response.status) {
                 case 401:
                     yield put(showMessage(register['response']['data']['errors'][0]));
@@ -57,6 +65,13 @@ function* registerNewUser({payload}) {
                     return;
                 case 500:
                     yield put(showMessage('There is the problem in server. Please try later'));
+                    return;
+                case 400:
+                    let errors = [];
+                    Object.entries(errorResp).map(([key,value]) => {
+                        errors.push(key + " " + value);
+                    });
+                    yield put(showMessage(errors[0]));
                     return;
                 default:
                     yield put(showMessage(register.message));

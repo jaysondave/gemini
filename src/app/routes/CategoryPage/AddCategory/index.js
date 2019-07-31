@@ -3,28 +3,38 @@ import { Modal, ModalHeader } from "reactstrap";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import BootstrapInput from "../../../../components/BootstrapInput";
 
 class AddCategory extends Component {
   constructor(props) {
     super(props);
-    const { id, thumb, name, email, phone, designation, selected, starred, frequently } = props.category;
+    const { id, name, category_type } = props.category;
     this.state = {
-      name
+      name,
+      category_type
     };
   }
   tapSaveBtn = () => {
-    const { name } = this.state;
+    const { name, category_type } = this.state;
     const { onSave, onUpdate, category } = this.props;
     if (category.name) {
       onUpdate(name)
     } else {
-      onSave(name)
+      onSave(name, category_type)
     }
     this.setState({name: null});
   };
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
   render() {
     const { onClose, open, category } = this.props;
-    const { name } = this.state;
+    const { name, category_type } = this.state;
 
     return (
       <Modal className="modal-box" isOpen={open}>
@@ -45,6 +55,27 @@ class AddCategory extends Component {
           <div className="row no-gutters">
             <div className="col-lg-12 d-flex flex-column order-lg-1">
               <form className="row" noValidate autoComplete="off">
+                {!category.id &&
+                  <div className="row col-md-12 col-12 p-0 mb-2">
+                    <div className="col-md-4 text-right ">
+                      <label className="font-size-18">User Type</label>
+                    </div>
+                    <div className="col-md-8 p-0">
+                      <FormControl className="w-100 mb-2">
+                        <Select
+                            value={category_type}
+                            onChange={this.handleChange("category_type")}
+                            input={<BootstrapInput/>}
+                        >
+                          <MenuItem value={"maintainer"}>Maintainer</MenuItem>
+                          <MenuItem value={"professional"}>Professional</MenuItem>
+                          <MenuItem value={"stockist"}>Stockist</MenuItem>
+                        </Select>
+                      </FormControl>
+                      <div className={`invalid-text ${this.state.category_id_error? '': 'invalid-text-invisible'}`}>{"* Specialization is required"}</div>
+                    </div>
+                  </div>
+                }
                 <div className="row col-md-12 col-12 p-0 mb-2">
                   <div className="col-md-4 text-right p-relative">
                     <label className="align-center font-size-18">Category Name</label>
@@ -64,9 +95,9 @@ class AddCategory extends Component {
         </div>
 
         <div className="modal-box-footer d-flex flex-row">
-          <Button disabled={name === "" || name == null || name === this.props.category.name} variant="contained" color="primary" onClick={() => {
+          <Button disabled={category_type === undefined || category_type === null || category_type === "" || name === "" || name == null || name === this.props.category.name} variant="contained" color="primary" onClick={() => {
             this.tapSaveBtn();
-          }}>Save Building</Button>
+          }}>Save Category</Button>
         </div>
       </Modal>
     );

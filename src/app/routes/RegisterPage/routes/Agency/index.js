@@ -10,7 +10,7 @@ import Drawer from "@material-ui/core/Drawer";
 import NewRegister from "../../NewRegister";
 
 
-class Collaborator extends Component {
+class Agency extends Component {
     handleRequestClose = () => {
         this.setState({
             showMessage: false
@@ -39,7 +39,7 @@ class Collaborator extends Component {
         return <div className="module-side">
             <div className="module-side-header">
                 <div className="module-logo">
-                    <span>Collaborators</span>
+                    <span>Agencies</span>
                 </div>
             </div>
 
@@ -49,7 +49,7 @@ class Collaborator extends Component {
                     <div className="module-add-task">
                         <Button className="jr-btn btn-block" variant="contained" color="primary" aria-label="add"
                                 onClick={this.onTapNewRegister}>
-                            <span>{"New Collaborator"}</span>
+                            <span>{"New Agency"}</span>
                         </Button>
                     </div>
                 </CustomScrollbars>
@@ -66,7 +66,7 @@ class Collaborator extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            noContentFoundMessage: "No Collaborator found",
+            noContentFoundMessage: "No Agency found",
             alertMessage: "",
             showMessage: false,
             drawerState: false,
@@ -81,7 +81,7 @@ class Collaborator extends Component {
 
     render() {
         const { alertMessage, showMessage, noContentFoundMessage, isOpen, selectedRegister} = this.state;
-        const { collaborators } = this.props;
+        const { agencies } = this.props;
         return (
             <div className="app-wrapper">
                 <div className="app-module animated slideInUpTiny animation-duration-3">
@@ -107,11 +107,11 @@ class Collaborator extends Component {
                         <div className="module-box-content">
                             <CustomScrollbars className="module-list-scroll scrollbar"
                                               style={{height: this.props.width >= 1200 ? "calc(100vh - 265px)" : "calc(100vh - 245px)"}}>
-                                {collaborators.length === 0 ?
+                                {agencies.length === 0 ?
                                     <div className="h-100 d-flex align-items-center justify-content-center">
                                         {noContentFoundMessage}
                                     </div>
-                                    : this.showRegisters(collaborators)
+                                    : this.showRegisters(agencies)
                                 }
 
 
@@ -122,7 +122,7 @@ class Collaborator extends Component {
                 </div>
                 {isOpen &&
                 <NewRegister
-                    user_type={'collaborator'}
+                    user_type={'agency'}
                     onRegisterClose={this.onRegisterClose}
                     open={isOpen}
                     register={selectedRegister}
@@ -145,7 +145,7 @@ class Collaborator extends Component {
 
 const mapStateToProps = ({settings, users}) => {
     const {width} = settings;
-    const { collaborators} = users.users;
-    return {width, collaborators};
+    const { agencies } = users.users;
+    return {width, agencies};
 };
-export default connect(mapStateToProps)(Collaborator);
+export default connect(mapStateToProps)(Agency);

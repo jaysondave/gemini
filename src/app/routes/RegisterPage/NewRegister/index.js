@@ -1,18 +1,16 @@
 import React from "react";
-import { Modal, ModalHeader } from "reactstrap";
+import {Modal, ModalHeader} from "reactstrap";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import FormControl from "@material-ui/core/FormControl";
-import Chip from "@material-ui/core/Chip";
 import InputMask from "react-input-mask";
 import BootstrapInput from 'components/BootstrapInput';
 import {connect} from "react-redux";
-import {showLoader} from "actions/Alert";
-import {registerUser} from "actions/User";
+import {showLoader} from "../../../../actions/Alert";
+import {registerUser} from "../../../../actions/User";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -25,24 +23,15 @@ const MenuProps = {
   }
 };
 
-const OTHER_CATEGORY = [
-  "ELECTRICIAN",
-  "BRICKLAYER",
-  "PAINTER",
-  "BLACKSMITH",
-  "CHIMMEY SWEEP",
-  "PLUMBER",
-  "PURGE SEWERAGE",
-  "CLEANING",
-  "RODENT CONTROL"
-];
-
 class NewRegister extends React.Component {
 
 
   handleChange = name => event => {
+    const state_error_name = name + "_error";
+    const error = event.target.value === "";
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
+      [state_error_name]: error
     });
   };
   beforeMaskedValueChangeMobile = name => (newState, oldState, userInput) => {
@@ -77,12 +66,15 @@ class NewRegister extends React.Component {
   };
   renderCategory = (user_type) => {
     const { category_id } = this.state;
+    const { allCategory } = this.props;
+    let categories = allCategory.filter(c => c.active === true);
     switch (user_type) {
       case "maintainer":
+        categories = categories.filter(c => c.category_type === "maintainer");
         return (
           <div className="row col-md-12 col-12 p-0 mb-2">
-            <div className="col-md-4 text-right p-relative">
-              <label className="align-center font-size-18">Category</label>
+            <div className="col-md-4 text-right ">
+              <label className="font-size-18">Category</label>
             </div>
             <div className="col-md-8 p-0">
               <FormControl className="w-100 mb-2">
@@ -91,68 +83,60 @@ class NewRegister extends React.Component {
                   onChange={this.handleChange("category_id")}
                   input={<BootstrapInput/>}
                 >
-                  <MenuItem value={"category1"}>ELECTRICIAN</MenuItem>
-                  <MenuItem value={"category2"}>BRICKLAYER</MenuItem>
-                  <MenuItem value={"category3"}>PAINTER</MenuItem>
-                  <MenuItem value={"category4"}>BLACKSMITH</MenuItem>
-                  <MenuItem value={"category5"}>CHIMNEY SWEEP</MenuItem>
-                  <MenuItem value={"category6"}>PLUMBER</MenuItem>
-                  <MenuItem value={"category7"}>PURGE SEWERAGE</MenuItem>
-                  <MenuItem value={"category8"}>CLEANING</MenuItem>
-                  <MenuItem value={"category9"}>RODENT CONTROL</MenuItem>
+                  {categories.map(c =>
+                      <MenuItem key={c.id} value={c.id}>{c.name}</MenuItem>
+                  )}
                 </Select>
               </FormControl>
+              <div className={`invalid-text ${this.state.category_id_error? '': 'invalid-text-invisible'}`}>{"* Specialization is required"}</div>
             </div>
           </div>
 
         );
       case "professional":
+        categories = categories.filter(c => c.category_type === "professional");
         return (
           <div className="row col-md-12 col-12 p-0 mb-2">
-            <div className="col-md-4 text-right p-relative">
-              <label className="align-center font-size-18">Category</label>
+            <div className="col-md-4 text-right ">
+              <label className="font-size-18">Category</label>
             </div>
             <div className="col-md-8 p-0">
               <FormControl className="w-100 mb-2">
                 <Select
                   value={category_id}
-                  onChange={this.handleChange("category")}
-                  input={<Input/>}
+                  onChange={this.handleChange("category_id")}
+                  input={<BootstrapInput/>}
                 >
-                  <MenuItem value={"category1"}>ARCHITECT</MenuItem>
-                  <MenuItem value={"category2"}>SURVEYOR ENGINEER</MenuItem>
-                  <MenuItem value={"category3"}>LAWYER BUSINESS</MenuItem>
-                  <MenuItem value={"category4"}>CONSULTANT ENERGY</MenuItem>
-                  <MenuItem value={"category5"}>MANAGER</MenuItem>
-                  <MenuItem value={"category6"}>AGRONOMIST LABOR</MenuItem>
-                  <MenuItem value={"category7"}>CONSULTANT</MenuItem>
-                  <MenuItem value={"category8"}>EXPERT</MenuItem>
+                  {categories.map(c =>
+                      <MenuItem key={c.id} value={c.id}>{c.name}</MenuItem>
+                  )}
                 </Select>
               </FormControl>
+              <div className={`invalid-text ${this.state.category_id_error? '': 'invalid-text-invisible'}`}>{"* Specialization is required"}</div>
             </div>
           </div>
 
         );
       case "stockist":
+        categories = categories.filter(c => c.category_type === "stockist");
         return (
           <div className="row col-md-12 col-12 p-0 mb-2">
-            <div className="col-md-4 text-right p-relative">
-              <label className="align-center font-size-18">Category</label>
+            <div className="col-md-4 text-right ">
+              <label className="font-size-18">Category</label>
             </div>
             <div className="col-md-8 p-0">
               <FormControl className="w-100 mb-2">
                 <Select
                   value={category_id}
-                  onChange={this.handleChange("category")}
-                  input={<Input/>}
+                  onChange={this.handleChange("category_id")}
+                  input={<BootstrapInput/>}
                 >
-                  <MenuItem value={"category1"}>BUILDING PRODUCT</MenuItem>
-                  <MenuItem value={"category2"}>HARDWARE</MenuItem>
-                  <MenuItem value={"category3"}>ELECTRICAL SYSTEM</MenuItem>
-                  <MenuItem value={"category4"}>HYDRAULIC SYSTEMS AND HEATING</MenuItem>
-                  <MenuItem value={"category5"}>GARDENING</MenuItem>
+                  {categories.map(c =>
+                      <MenuItem key={c.id} value={c.id}>{c.name}</MenuItem>
+                  )}
                 </Select>
               </FormControl>
+              <div className={`invalid-text ${this.state.category_id_error? '': 'invalid-text-invisible'}`}>{"* Category is required"}</div>
             </div>
           </div>
 
@@ -163,12 +147,98 @@ class NewRegister extends React.Component {
     }
 
   };
+  validation = () => {
+    const {
+      user_type,
+      category_id,
+      first_name,
+      last_name,
+      address,
+      home_number,
+      zip_code,
+      city,
+      province,
+      cod_fisc,
+      mobile,
+      email,
+      password,
+      phone,
+      pec,
+      cuu,
+      p_lva,
+      specialization,
+      building,
+    } = this.state;
+    return email === "" ||
+        first_name === "" ||
+        last_name === "" ||
+        address === "" ||
+        home_number === "" ||
+        zip_code === "" ||
+        city === "" ||
+        province === "" ||
+        cod_fisc === "" ||
+        mobile === "" ||
+        phone === "" ||
+        (user_type === "agency"?
+            (pec === "" || cuu === "")
+            : false) ||
+        (user_type === "collaborator" || user_type === "manager" ?
+            (specialization === "")
+            : false) ||
+        (user_type === "maintainer" || user_type === "professional" || user_type === "stockist" ?
+            (category_id === "" || p_lva === "" || pec === "" || cuu === "" || specialization === "")
+            : false) ||
+        (user_type === "user" ?
+            (building === "")
+            : false);
+  };
   onRegisterUser = () => {
-    console.log('=======================');
     console.log({userToRegister: this.state});
-    // this.props.onRegisterClose();
+    const {
+      user_type,
+      category_id,
+      first_name,
+      last_name,
+      address,
+      home_number,
+      zip_code,
+      city,
+      province,
+      cod_fisc,
+      mobile,
+      email,
+      password,
+      phone,
+      pec,
+      cuu,
+      p_lva,
+      specialization,
+      building,
+    } = this.state;
+
     this.props.dispatch(showLoader());
-    this.props.dispatch(registerUser(this.state));
+    this.props.dispatch(registerUser({
+      user_type,
+      category_id,
+      first_name,
+      last_name,
+      address,
+      home_number,
+      zip_code,
+      city,
+      province,
+      cod_fisc,
+      mobile,
+      email,
+      password,
+      phone,
+      pec,
+      cuu,
+      p_lva,
+      specialization,
+      building
+    }));
   };
   generatePassword = () => {
     let result             = '';
@@ -202,8 +272,25 @@ class NewRegister extends React.Component {
       p_lva: "",
       specialization: "",
       building: "",
+      password: this.generatePassword(),
 
-      password: this.generatePassword()
+      category_id_error: false,
+      first_name_error: false,
+      last_name_error: false,
+      address_error: false,
+      zip_code_error: false,
+      home_number_error: false,
+      city_error: false,
+      province_error: false,
+      cod_fisc_error: false,
+      mobile_error: false,
+      email_error: false,
+      phone_error: false,
+      pec_error: false,
+      cuu_error: false,
+      p_lva_error: false,
+      specialization_error: false,
+      building_error: false
     };
   }
   render() {
@@ -227,7 +314,25 @@ class NewRegister extends React.Component {
       pec,
       cuu,
       p_lva,
-      building
+      building,
+
+      category_id_error,
+      first_name_error,
+      last_name_error,
+      address_error,
+      home_number_error,
+      zip_code_error,
+      city_error,
+      province_error,
+      cod_fisc_error,
+      mobile_error,
+      email_error,
+      phone_error,
+      pec_error,
+      cuu_error,
+      p_lva_error,
+      specialization_error,
+      building_error
     } = this.state;
 
     return (
@@ -248,117 +353,126 @@ class NewRegister extends React.Component {
 
                 {this.renderCategory(user_type)}
                 <div className="row col-md-12 col-12 p-0 mb-2">
-                  <div className="col-md-4 text-right p-relative">
-                    <label className="align-center font-size-18">First Name</label>
+                  <div className="col-md-4 text-right">
+                    <label className="font-size-18">First Name</label>
                   </div>
                   <div className="col-md-8 p-0">
                     <input
-                        className='form-control form-control-lg'
+                        className="form-control form-control-lg"
                         onChange={this.handleChange("first_name")}
                         value={first_name}
                     />
+                    <div className={`invalid-text ${first_name_error? '': 'invalid-text-invisible'}`}>{"* First name is required"}</div>
                   </div>
                 </div>
                 <div className="row col-md-12 col-12 p-0 mb-2">
-                  <div className="col-md-4 text-right p-relative">
-                    <label className="align-center font-size-18">Last Name</label>
+                  <div className="col-md-4 text-right">
+                    <label className="font-size-18">Last Name</label>
                   </div>
                   <div className="col-md-8 p-0">
                     <input
-                        className='form-control form-control-lg'
+                        className="form-control form-control-lg"
                         onChange={this.handleChange("last_name")}
                         value={last_name}
                     />
+                    <div className={`invalid-text ${last_name_error? '': 'invalid-text-invisible'}`}>{"* Last name is required"}</div>
                   </div>
                 </div>
                 <div className="row col-md-12 col-12 p-0 mb-2">
-                  <div className="col-md-4 text-right p-relative">
-                    <label className="align-center font-size-18">Address</label>
+                  <div className="col-md-4 text-right">
+                    <label className="font-size-18">Address</label>
                   </div>
                   <div className="col-md-8 p-0">
                     <input
-                        className='form-control form-control-lg'
+                        className="form-control form-control-lg"
                         onChange={this.handleChange("address")}
                         value={address}
                     />
+                    <div className={`invalid-text ${address_error? '': 'invalid-text-invisible'}`}>{"* Address is required"}</div>
                   </div>
                 </div>
                 <div className="row col-md-12 col-12 p-0 mb-2">
-                  <div className="col-md-4 text-right p-relative">
-                    <label className="align-center font-size-18">Home Number</label>
+                  <div className="col-md-4 text-right ">
+                    <label className="font-size-18">Home Number</label>
                   </div>
                   <div className="col-md-8 p-0">
                     <input
-                        className='form-control form-control-lg'
+                        className="form-control form-control-lg"
                         onChange={this.handleChange("home_number")}
                         value={home_number}
                     />
+                    <div className={`invalid-text ${home_number_error? '': 'invalid-text-invisible'}`}>{"* Home Number is required"}</div>
                   </div>
                 </div>
                 <div className="row col-md-12 col-12 p-0 mb-2">
-                  <div className="col-md-4 text-right p-relative">
-                    <label className="align-center font-size-18">ZIP CODE</label>
+                  <div className="col-md-4 text-right ">
+                    <label className="font-size-18">Zip Code</label>
                   </div>
                   <div className="col-md-8 p-0">
                     <input
-                        className='form-control form-control-lg'
+                        className="form-control form-control-lg"
                         type={"number"}
                         onChange={this.handleChange("zip_code")}
                         value={zip_code}
                     />
+                    <div className={`invalid-text ${zip_code_error? '': 'invalid-text-invisible'}`}>{"* Zip Code is required"}</div>
                   </div>
                 </div>
 
                 <div className="row col-md-12 col-12 p-0 mb-2">
-                  <div className="col-md-4 text-right p-relative">
-                    <label className="align-center font-size-18">City</label>
+                  <div className="col-md-4 text-right ">
+                    <label className="font-size-18">City</label>
                   </div>
                   <div className="col-md-8 p-0">
                     <input
-                        className='form-control form-control-lg'
+                        className="form-control form-control-lg"
                         onChange={this.handleChange("city")}
                         value={city}
                     />
+                    <div className={`invalid-text ${city_error? '': 'invalid-text-invisible'}`}>{"* City is required"}</div>
                   </div>
                 </div>
 
                 <div className="row col-md-12 col-12 p-0 mb-2">
-                  <div className="col-md-4 text-right p-relative">
-                    <label className="align-center font-size-18">Province</label>
+                  <div className="col-md-4 text-right ">
+                    <label className="font-size-18">Province</label>
                   </div>
                   <div className="col-md-8 p-0">
                     <input
-                        className='form-control form-control-lg'
+                        className="form-control form-control-lg"
                         onChange={this.handleChange("province")}
                         value={province}
                     />
+                    <div className={`invalid-text ${province_error? '': 'invalid-text-invisible'}`}>{"* Province is required"}</div>
                   </div>
                 </div>
 
                 <div className="row col-md-12 col-12 p-0 mb-2">
-                  <div className="col-md-4 text-right p-relative">
-                    <label className="align-center font-size-18">Cod.Fisc.</label>
+                  <div className="col-md-4 text-right ">
+                    <label className="font-size-18">Cod.Fisc.</label>
                   </div>
                   <div className="col-md-8 p-0">
                     <input
-                        className='form-control form-control-lg'
+                        className="form-control form-control-lg"
                         onChange={this.handleChange("cod_fisc")}
                         value={cod_fisc}
                     />
+                    <div className={`invalid-text ${cod_fisc_error? '': 'invalid-text-invisible'}`}>{"* Cod.Fisc is required"}</div>
                   </div>
                 </div>
 
-                {user_type === "maintainer" || user_type === "professional" || user_type === "stockist" || user_type === "tenant" || user_type === "landlord" ?
+                {user_type === "agency" || user_type === "maintainer" || user_type === "professional" || user_type === "stockist" ?
                   <div className="row col-md-12 col-12 p-0 mb-2">
-                    <div className="col-md-4 text-right p-relative">
-                      <label className="align-center font-size-18">P.lva</label>
+                    <div className="col-md-4 text-right ">
+                      <label className="font-size-18">P.lva</label>
                     </div>
                     <div className="col-md-8 p-0">
                       <input
-                          className='form-control form-control-lg'
+                          className="form-control form-control-lg"
                           onChange={this.handleChange("p_lva")}
                           value={p_lva}
                       />
+                      <div className={`invalid-text ${p_lva_error? '': 'invalid-text-invisible'}`}>{"* P.lva is required"}</div>
                     </div>
                   </div>
                   : null
@@ -366,8 +480,8 @@ class NewRegister extends React.Component {
 
 
                 <div className="row col-md-12 col-12 p-0 mb-2">
-                  <div className="col-md-4 text-right p-relative">
-                    <label className="align-center font-size-18">Mobile</label>
+                  <div className="col-md-4 text-right ">
+                    <label className="font-size-18">Mobile</label>
                   </div>
                   <div className="col-md-8 p-0">
                     <FormControl className="w-100 mb-2">
@@ -380,16 +494,17 @@ class NewRegister extends React.Component {
                       >
                         {(inputProps) => <input
                             {...inputProps}
-                            className='form-control form-control-lg'
+                            className="form-control form-control-lg"
                         />}
                       </InputMask>
+                      <div className={`invalid-text ${mobile_error? '': 'invalid-text-invisible'}`}>{"* Mobile is required"}</div>
                     </FormControl>
                   </div>
                 </div>
 
                 <div className="row col-md-12 col-12 p-0 mb-2">
-                  <div className="col-md-4 text-right p-relative">
-                    <label className="align-center font-size-18">Phone</label>
+                  <div className="col-md-4 text-right ">
+                    <label className="font-size-18">Phone</label>
                   </div>
                   <div className="col-md-8 p-0">
                     <FormControl className="w-100 mb-2">
@@ -403,30 +518,32 @@ class NewRegister extends React.Component {
                         {(inputProps) =>
                             <input
                                 {...inputProps}
-                                className='form-control form-control-lg'
+                                className="form-control form-control-lg"
                           />}
                       </InputMask>
+                      <div className={`invalid-text ${phone_error? '': 'invalid-text-invisible'}`}>{"* Phone is required"}</div>
                     </FormControl>
                   </div>
                 </div>
 
                 <div className="row col-md-12 col-12 p-0 mb-2">
-                  <div className="col-md-4 text-right p-relative">
-                    <label className="align-center font-size-18">Email</label>
+                  <div className="col-md-4 text-right ">
+                    <label className="font-size-18">Email</label>
                   </div>
                   <div className="col-md-8 p-0">
                     <input
-                        className='form-control form-control-lg'
+                        className="form-control form-control-lg"
                         onChange={this.handleChange("email")}
                         value={email}
                     />
+                    <div className={`invalid-text ${email_error? '': 'invalid-text-invisible'}`}>{"* Email is required"}</div>
                   </div>
                 </div>
 
-                {user_type === "signaling" ?
+                {user_type === "user" ?
                   <div className="row col-md-12 col-12 p-0 mb-2">
-                    <div className="col-md-4 text-right p-relative">
-                      <label className="align-center font-size-18">Building</label>
+                    <div className="col-md-4 text-right ">
+                      <label className="font-size-18">Building</label>
                     </div>
                     <div className="col-md-8 p-0">
                       <FormControl className="w-100 mb-2">
@@ -440,54 +557,58 @@ class NewRegister extends React.Component {
                           <MenuItem value={"building3"}>Building 3</MenuItem>
                         </Select>
                       </FormControl>
+                      <div className={`invalid-text ${building_error? '': 'invalid-text-invisible'}`}>{"* Building is required"}</div>
                     </div>
                   </div>
                   : null
                 }
-                {user_type === "maintainer" || user_type === "professional" || user_type === "stockist" || user_type === "tenant" || user_type === "landlord" ?
+                {user_type === "agency" || user_type === "maintainer" || user_type === "professional" || user_type === "stockist" ?
                   <div className="row col-md-12 col-12 p-0 mb-2">
-                    <div className="col-md-4 text-right p-relative">
-                      <label className="align-center font-size-18">PEC</label>
+                    <div className="col-md-4 text-right ">
+                      <label className="font-size-18">PEC</label>
                     </div>
                     <div className="col-md-8 p-0">
                       <input
-                          className='form-control form-control-lg'
+                          className="form-control form-control-lg"
                           onChange={this.handleChange("pec")}
                           value={pec}
                       />
+                      <div className={`invalid-text ${pec_error? '': 'invalid-text-invisible'}`}>{"* Pec field is required"}</div>
                     </div>
                   </div>
                   : null
                 }
-                {user_type === "maintainer" || user_type === "professional" || user_type === "stockist" || user_type === "tenant" || user_type === "landlord" ?
+                {user_type === "agency" || user_type === "maintainer" || user_type === "professional" || user_type === "stockist" ?
                   <div className="row col-md-12 col-12 p-0 mb-2">
-                    <div className="col-md-4 text-right p-relative">
-                      <label className="align-center font-size-18">CUU</label>
+                    <div className="col-md-4 text-right ">
+                      <label className="font-size-18">CUU</label>
                     </div>
                     <div className="col-md-8 p-0">
                       <input
-                          className='form-control form-control-lg'
+                          className="form-control form-control-lg"
                           type={"number"}
                           onChange={this.handleChange("cuu")}
                           value={cuu}
                       />
+                      <div className={`invalid-text ${cuu_error? '': 'invalid-text-invisible'}`}>{"* Cuu field is required"}</div>
                     </div>
                   </div>
                   : null
                 }
 
-                {user_type === "collaborator" || user_type === "maintainer" || user_type === "professional" || user_type === "stockist" ?
+                {user_type === "manager" || user_type === "collaborator" || user_type === "maintainer" || user_type === "professional" || user_type === "stockist" ?
                   <div className="row col-md-12 col-12 p-0 mb-2">
-                    <div className="col-md-4 text-right p-relative">
-                      <label className="align-center font-size-18">Specialization</label>
+                    <div className="col-md-4 text-right ">
+                      <label className="font-size-18">Specialization</label>
                     </div>
                     <div className="col-md-8 p-0">
                       <input
-                          className='form-control form-control-lg'
+                          className="form-control form-control-lg"
                           type={"text"}
                           onChange={this.handleChange("specialization")}
                           value={specialization}
                       />
+                      <div className={`invalid-text ${specialization_error? '': 'invalid-text-invisible'}`}>{"* Specialization is required"}</div>
                     </div>
                   </div>
                   : null
@@ -500,13 +621,14 @@ class NewRegister extends React.Component {
         </div>
 
         <div className="modal-box-footer d-flex flex-row">
-          <Button variant="contained" color="primary" onClick={() => this.onRegisterUser()}>Save Register</Button>
+          <Button variant="contained" disabled={this.validation()} color="primary" onClick={() => this.onRegisterUser()}>Register</Button>
         </div>
       </Modal>
     );
   }
 }
-const mapsToProps = ({}) => {
-
+const mapsToProps = ({ category }) => {
+  const { allCategory } = category;
+  return { allCategory }
 };
-export default connect()(NewRegister);
+export default connect(mapsToProps)(NewRegister);
