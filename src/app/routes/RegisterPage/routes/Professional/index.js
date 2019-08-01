@@ -10,6 +10,7 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import CustomScrollbars from "util/CustomScrollbars";
 import Drawer from "@material-ui/core/Drawer";
 import NewRegister from "../../NewRegister";
+import ReactPaginate from "react-paginate";
 
 
 class Professional extends Component {
@@ -27,6 +28,9 @@ class Professional extends Component {
       selectedRegisters: 0,
       addBuildingState: false,
       isOpen: false,
+
+      selectPageNum: 0,
+      numPerPage: 5
     };
   }
 
@@ -37,16 +41,16 @@ class Professional extends Component {
     });
   };
 
-  showRegisters = (registerList) => {
+  showRegisters = (registerList, selectedPageNum, numPerPage) => {
+    const users = registerList.slice(selectedPageNum*numPerPage, (selectedPageNum + 1)*numPerPage);
     return (
-      <RegisterList
-          registerList={registerList}
-      />
+        <RegisterList
+            registerList={users}
+        />
     );
   };
   onSearch = (e) => {
-    console.log("search key", e.target.value);
-    this.setState({ searchKey: e.target.value });
+    this.setState({ searchKey: e.target.value, selectPageNum: 0 });
   };
 
   onToggleDrawer() {
@@ -83,9 +87,19 @@ class Professional extends Component {
   onTapNewRegister = () => {
     this.setState({ isOpen: true });
   };
+  filterUsers = (users, userName) => {
+    return users.filter((user) =>
+        (user.first_name + " " + user.last_name).toLowerCase().indexOf(userName.toLowerCase()) > -1
+    );
+  };
+  handlePageClick = data => {
+    const selectPageNum = data.selected;
+    this.setState({selectPageNum});
+  };
   render() {
-    const { registerList, alertMessage, showMessage, noContentFoundMessage, isOpen, selectedRegister } = this.state;
+    const { alertMessage, showMessage, noContentFoundMessage, isOpen, selectedRegister, searchKey, selectPageNum, numPerPage } = this.state;
     const { professionals } = this.props;
+    const users = searchKey === ""?professionals: this.filterUsers(professionals, searchKey);
     return (
       <div className="app-wrapper">
         <div className="app-module animated slideInUpTiny animation-duration-3">
@@ -106,7 +120,7 @@ class Professional extends Component {
                 <i className="zmdi zmdi-menu"/>
               </IconButton>
               <AppModuleHeader placeholder="Search professional" notification={false} apps={false}
-                               value={this.state.searchKey} onChange={this.onSearch}/>
+                               value={searchKey} onChange={this.onSearch}/>
             </div>
             <div className="module-box-content">
               <div className="module-box-topbar">
@@ -114,16 +128,32 @@ class Professional extends Component {
 
               <CustomScrollbars className="module-list-scroll scrollbar"
                                 style={{ height: this.props.width >= 1200 ? "calc(100vh - 265px)" : "calc(100vh - 245px)" }}>
-                {professionals.length === 0 ?
+                {users.length === 0 ?
                   <div className="h-100 d-flex align-items-center justify-content-center">
                     {noContentFoundMessage}
                   </div>
-                  : this.showRegisters(professionals)
+                  : this.showRegisters(users, selectPageNum, numPerPage)
                 }
-
-
               </CustomScrollbars>
-
+              <ReactPaginate
+                  previousLabel={'previous'}
+                  nextLabel={'next'}
+                  breakLabel={<a className="page-link">...</a>}
+                  pageCount={users.length/numPerPage}
+                  marginPagesDisplayed={2}
+                  pageRangeDisplayed={5}
+                  onPageChange={this.handlePageClick}
+                  containerClassName="pagination justify-content-center"
+                  pageClassName="page-item"
+                  activeClassName="active"
+                  disabledClassName="disabled"
+                  pageLinkClassName="page-link"
+                  previousClassName="page-item"
+                  previousLinkClassName="page-link"
+                  nextClassName="page-item"
+                  nextLinkClassName="page-link"
+                  breakClassName="page-item disabled"
+              />
             </div>
           </div>
         </div>

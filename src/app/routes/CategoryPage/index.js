@@ -12,6 +12,7 @@ import {fetchCategories} from 'actions/Category'
 import {showLoader} from 'actions/Alert'
 import {createNewCategory, updateSelectedCategory, deleteSelectedCategory} from "actions/Category";
 import Checkbox from "@material-ui/core/Checkbox";
+import ReactPaginate from "react-paginate";
 
 class CategoryPage extends Component {
     SideBar = () => {
@@ -93,10 +94,11 @@ class CategoryPage extends Component {
         });
     }
 
-    showBuildings = (categories) => {
+    showBuildings = (categories, selectedPageNum, numPerPage) => {
+        const categoryList = categories.slice(selectedPageNum*numPerPage, (selectedPageNum + 1)*numPerPage);
         return (
             <CategoryList
-                categories={categories}
+                categories={categoryList}
                 onEditCategory={this.onEditCategory}
                 onDelete={this.onDelete}
                 onUpdateActive={this.onUpdateActive}
@@ -104,10 +106,13 @@ class CategoryPage extends Component {
         );
     };
     onSearch = (e) => {
-        console.log('search key', e.target.value)
-        this.setState({searchKey: e.target.value})
+        this.setState({searchKey: e.target.value, selectPageNum: 0})
     };
-
+    filterCategories = (categories, searchKey) => {
+        return categories.filter((c) =>
+            c.name.toLowerCase().indexOf(searchKey.toLowerCase()) > -1
+        );
+    };
     constructor(props) {
         super(props);
         this.state = {
@@ -117,7 +122,10 @@ class CategoryPage extends Component {
             drawerState: false,
             searchKey: "",
             addCategoryState: false,
-            selectedCategory: {}
+            selectedCategory: {},
+
+            selectPageNum: 0,
+            numPerPage: 10
         };
     }
 
@@ -127,9 +135,13 @@ class CategoryPage extends Component {
             selectedCategory,
             alertMessage,
             showMessage,
-            noContentFoundMessage
+            noContentFoundMessage,
+            searchKey,
+            selectPageNum,
+            numPerPage
         } = this.state;
         const {allCategory} = this.props;
+        const categoryList = searchKey === ""?allCategory: this.filterCategories(allCategory, searchKey);
         return (
             <div className="app-wrapper">
                 <div className="app-module animated slideInUpTiny animation-duration-3">
@@ -193,12 +205,30 @@ class CategoryPage extends Component {
                                     <div className="h-100 d-flex align-items-center justify-content-center">
                                         {noContentFoundMessage}
                                     </div>
-                                    : this.showBuildings(allCategory)
+                                    : this.showBuildings(categoryList, selectPageNum, numPerPage)
                                 }
 
 
                             </CustomScrollbars>
-
+                            <ReactPaginate
+                                previousLabel={'previous'}
+                                nextLabel={'next'}
+                                breakLabel={<a className="page-link">...</a>}
+                                pageCount={allCategory.length/numPerPage}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={this.handlePageClick}
+                                containerClassName="pagination justify-content-center"
+                                pageClassName="page-item"
+                                activeClassName="active"
+                                disabledClassName="disabled"
+                                pageLinkClassName="page-link"
+                                previousClassName="page-item"
+                                previousLinkClassName="page-link"
+                                nextClassName="page-item"
+                                nextLinkClassName="page-link"
+                                breakClassName="page-item disabled"
+                            />
                         </div>
                     </div>
                 </div>

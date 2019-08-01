@@ -59,6 +59,7 @@ class RegisterCell extends React.Component {
       phone,
       pec,
       cuu,
+      category,
       specialization,
       building
     } = register;
@@ -70,29 +71,67 @@ class RegisterCell extends React.Component {
 
           <div className="d-flex f-1 flex-wrap" onClick={() => alert(first_name)}>
 
-            <div className="mx-1 mx-md-3 p-relative"
-                 style={{ fontSize: 16}}>
+            <div className="mx-1 mx-md-3 font-size-16">
               {(picture === null || picture === '') ?
-                  <div className="align-center rounded-circle size-40 bg-blue text-center text-white mx-1 mx-md-3"
-                       style={{fontSize: 20}}>
+                  <div className="rounded-circle size-80 bg-blue text-center text-white mx-1 mx-md-3 font-size-20">
                     {first_name.charAt(0).toUpperCase()}
                   </div>
                  :
-                  <img className="rounded-circle size-40 mx-1 mx-md-3" alt={first_name + " " + last_name} src={picture}/>
+                  <img className="rounded-circle size-80 mx-1 mx-md-3 image-resize-cover" alt={first_name + " " + last_name} src={picture}/>
                 }
             </div>
             <div className="col con-inf-mw-100">
-              <p className="mb-0">
-                  <span className="text-truncate contact-name text-primary-color text-bold">
-                      {first_name + " " + last_name}
-                  </span>
-              </p>
-
-              <div className="text-muted">
-                <span className="email d-inline-block mr-2">
-                    {address}
+              <div className="row mb-2">
+                <span className="text-truncate contact-name text-primary-color text-bold font-size-18">
+                  {first_name + " " + last_name}
                 </span>
               </div>
+              <div className="row text-muted">
+                <div className="row col-6 col-md-6 col-xs-12">
+                  <span>
+                    <i className="zmdi zmdi-email zmdi-hc-fw font-size-18"/>
+                  </span>
+                  <span className="d-inline-block mr-2">
+                      {email}
+                  </span>
+                </div>
+                <div className="row col-6 col-md-6 col-xs-12">
+                  <span>
+                    <i className="zmdi zmdi-pin zmdi-hc-fw font-size-18"/>
+                  </span>
+                  <span className="d-inline-block mr-2">
+                      {address + ", " + zip_code + ", " + city + " " + province}
+                  </span>
+                </div>
+              </div>
+              <div className="row text-muted">
+                <span>
+                  <i className="zmdi zmdi-local-phone zmdi-hc-fw font-size-18"/>
+                </span>
+                <span className="d-inline-block mr-2">
+                    {mobile + ", " + phone}
+                </span>
+              </div>
+              {category  &&
+              <div className="row text-muted">
+                <span>
+                  <i className="zmdi zmdi-sort zmdi-hc-fw font-size-18"/>
+                </span>
+                <span className="d-inline-block mr-2">
+                    {category.name}
+                </span>
+              </div>
+              }
+              { specialization &&
+              <div className="row text-muted">
+                <span>
+                  <i className="zmdi zmdi-tag zmdi-hc-fw font-size-18"/>
+                </span>
+                <span className="d-inline-block mr-2">
+                    {specialization}
+                </span>
+              </div>
+              }
             </div>
           </div>
         </div>

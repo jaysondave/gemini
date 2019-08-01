@@ -47,7 +47,6 @@ class Landlord extends Component {
     );
   };
   onSearch = (e) => {
-    console.log("search key", e.target.value);
     this.setState({ searchKey: e.target.value });
   };
 

@@ -3,6 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import {connect} from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import Button from "@material-ui/core/Button";
+import ReactPaginate from "react-paginate";
 import RegisterList from "../../RegisterList";
 import AppModuleHeader from "components/AppModuleHeader/index";
 import CustomScrollbars from "util/CustomScrollbars";
@@ -17,16 +18,16 @@ class Collaborator extends Component {
         });
     };
 
-    showRegisters = (registerList) => {
+    showRegisters = (registerList, selectedPageNum, numPerPage) => {
+        const users = registerList.slice(selectedPageNum*numPerPage, (selectedPageNum + 1)*numPerPage);
         return (
             <RegisterList
-                registerList={registerList}
+                registerList={users}
             />
         );
     };
     onSearch = (e) => {
-        console.log("search key", e.target.value);
-        this.setState({searchKey: e.target.value});
+        this.setState({searchKey: e.target.value, selectPageNum: 0});
     };
 
     onToggleDrawer() {
@@ -63,6 +64,15 @@ class Collaborator extends Component {
     onTapNewRegister = () => {
         this.setState({isOpen: true});
     };
+    filterUsers = (users, userName) => {
+        return users.filter((user) =>
+            (user.first_name + " " + user.last_name).toLowerCase().indexOf(userName.toLowerCase()) > -1
+        );
+    };
+    handlePageClick = data => {
+        const selectPageNum = data.selected;
+        this.setState({selectPageNum});
+    };
     constructor(props) {
         super(props);
         this.state = {
@@ -76,12 +86,16 @@ class Collaborator extends Component {
             selectedRegisters: 0,
             addBuildingState: false,
             isOpen: false,
+
+            selectPageNum: 0,
+            numPerPage: 5
         };
     }
 
     render() {
-        const { alertMessage, showMessage, noContentFoundMessage, isOpen, selectedRegister} = this.state;
+        const { alertMessage, showMessage, noContentFoundMessage, isOpen, selectedRegister, searchKey, selectPageNum, numPerPage} = this.state;
         const { collaborators } = this.props;
+        const users = searchKey === ""?collaborators: this.filterUsers(collaborators, searchKey);
         return (
             <div className="app-wrapper">
                 <div className="app-module animated slideInUpTiny animation-duration-3">
@@ -102,21 +116,37 @@ class Collaborator extends Component {
                                 <i className="zmdi zmdi-menu"/>
                             </IconButton>
                             <AppModuleHeader placeholder="Search collaborator" notification={false} apps={false}
-                                             value={this.state.searchKey} onChange={this.onSearch}/>
+                                             value={searchKey} onChange={this.onSearch}/>
                         </div>
                         <div className="module-box-content">
                             <CustomScrollbars className="module-list-scroll scrollbar"
                                               style={{height: this.props.width >= 1200 ? "calc(100vh - 265px)" : "calc(100vh - 245px)"}}>
-                                {collaborators.length === 0 ?
+                                {users.length === 0 ?
                                     <div className="h-100 d-flex align-items-center justify-content-center">
                                         {noContentFoundMessage}
                                     </div>
-                                    : this.showRegisters(collaborators)
+                                    : this.showRegisters(users, selectPageNum, numPerPage)
                                 }
-
-
                             </CustomScrollbars>
-
+                            <ReactPaginate
+                                previousLabel={'previous'}
+                                nextLabel={'next'}
+                                breakLabel={<a className="page-link">...</a>}
+                                pageCount={users.length/numPerPage}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={this.handlePageClick}
+                                containerClassName="pagination justify-content-center"
+                                pageClassName="page-item"
+                                activeClassName="active"
+                                disabledClassName="disabled"
+                                pageLinkClassName="page-link"
+                                previousClassName="page-item"
+                                previousLinkClassName="page-link"
+                                nextClassName="page-item"
+                                nextLinkClassName="page-link"
+                                breakClassName="page-item disabled"
+                            />
                         </div>
                     </div>
                 </div>
