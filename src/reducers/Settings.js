@@ -8,7 +8,7 @@ import {
   TOGGLE_COLLAPSED_NAV,
   VERTICAL_NAVIGATION,
   WINDOW_WIDTH
-} from 'constants/ActionTypes';
+} from '../constants/ActionTypes';
 
 const rltLocale = ['ar'];
 const initialSettings = {

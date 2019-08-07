@@ -6,7 +6,7 @@ import {
     SIGNOUT_USER_SUCCESS,
     SIGNUP_USER,
     SIGNUP_USER_SUCCESS
-} from 'constants/ActionTypes';
+} from '../constants/ActionTypes';
 
 export const userSignUp = (user) => {
     return {

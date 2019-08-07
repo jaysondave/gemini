@@ -230,24 +230,9 @@ class BuildingPage extends Component {
               <AppModuleHeader placeholder="Search here..." notification={false} apps={false} value={this.state.searchKey} onChange={this.onSearch}/>
             </div>
             <div className="module-box-content">
-              <div className="module-box-topbar">
-                <Checkbox color="primary"
-                          indeterminate={selectedbuildings > 0 && selectedbuildings < buildingList.length}
-                          checked={selectedbuildings > 0}
-                          onChange={this.onAllBuildingSelect.bind(this)}
-                          value="SelectMail"/>
-
-
-                {selectedbuildings > 0 &&
-                <IconButton className="icon-btn"
-                            onClick={this.onDeleteSelectedBuilding.bind(this)}>
-                  <i className="zmdi zmdi-delete"/>
-                </IconButton>}
-
-              </div>
-
               <CustomScrollbars className="module-list-scroll scrollbar"
                                 style={{ height: this.props.width >= 1200 ? "calc(100vh - 265px)" : "calc(100vh - 245px)" }}>
+
                 {buildingList.length === 0 ?
                   <div className="h-100 d-flex align-items-center justify-content-center">
                     {noContentFoundMessage}

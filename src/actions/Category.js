@@ -5,7 +5,7 @@ import {
     CREATE_NEW_CATEGORY,
     UPDATE_CATEGORY,
     DELETE_CATEGORY
-} from 'constants/ActionTypes';
+} from '../constants/ActionTypes';
 
 export const fetchCategories = () => {
     return {

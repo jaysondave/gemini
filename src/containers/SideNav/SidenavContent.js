@@ -99,11 +99,38 @@ class SidenavContent extends Component {
               <span className="nav-text"><IntlMessages id="pages.homePage"/> </span>
             </NavLink>
           </li>
-          <li className="menu no-arrow">
-            <NavLink to="/app/buildingDashboard">
+          <li className="menu collapse-box">
+            <Button>
               <i className="zmdi zmdi-widgets zmdi-hc-fw"/>
-              <span className="nav-text"><IntlMessages id="pages.buildingsPage"/></span>
-            </NavLink>
+              <span className="nav-text">Building</span>
+            </Button>
+            <ul className="sub-menu">
+              <li>
+                <NavLink to="/app/buildingDashboard/building_type">
+                  <span className="nav-text">Building Type</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/app/buildingDashboard/body_type">
+                  <span className="nav-text">Body Type</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/app/buildingDashboard/component">
+                  <span className="nav-text">Component</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/app/buildingDashboard/sub_component">
+                  <span className="nav-text">Sub Component</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="prepend-icon" to="/app/buildingDashboard/buildings">
+                  <span className="nav-text">Buildings</span>
+                </NavLink>
+              </li>
+            </ul>
           </li>
           <li className="menu collapse-box">
             <Button>
@@ -165,19 +192,17 @@ class SidenavContent extends Component {
               <span className="nav-text">TimeTable</span>
             </NavLink>
           </li>
-          <li className="menu no-arrow">
-            <NavLink to="/app/categories">
-              <i className="zmdi zmdi-sort zmdi-hc-fw"/>
-              <span className="nav-text">Category</span>
-            </NavLink>
-          </li>
           <li className="menu collapse-box">
             <Button>
               <i className="zmdi zmdi-account zmdi-hc-fw"/>
               <span className="nav-text">Registers</span>
             </Button>
-
             <ul className="sub-menu">
+              <li>
+                <NavLink to="/app/categories">
+                  <span className="nav-text">Category</span>
+                </NavLink>
+              </li>
               <li>
                 <NavLink className="prepend-icon" to="/app/registers/agency">
                   <span className="nav-text">Agency</span>

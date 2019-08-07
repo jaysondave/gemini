@@ -3,7 +3,7 @@ import {
     SIGNIN_USER_SUCCESS,
     SIGNOUT_USER_SUCCESS,
     SIGNUP_USER_SUCCESS
-} from "constants/ActionTypes";
+} from "../constants/ActionTypes";
 import {userHelper} from "../helpers";
 
 const INIT_STATE = {

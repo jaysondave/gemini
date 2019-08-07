@@ -8,7 +8,7 @@ import {
     THEME_COLOR,
     TOGGLE_COLLAPSED_NAV,
     WINDOW_WIDTH
-} from 'constants/ActionTypes';
+} from '../constants/ActionTypes';
 
 export function toggleCollapsedNav(isNavCollapsed) {
     return {type: TOGGLE_COLLAPSED_NAV, isNavCollapsed};

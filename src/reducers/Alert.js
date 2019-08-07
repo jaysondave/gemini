@@ -3,7 +3,7 @@ import {
     HIDE_MESSAGE,
     ON_SHOW_LOADER,
     ON_HIDE_LOADER
-} from "constants/ActionTypes";
+} from "../constants/ActionTypes";
 
 const INIT_STATE = {
     loader: false,

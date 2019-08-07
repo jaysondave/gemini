@@ -2,7 +2,7 @@ import {
     GET_CATEGORIES_SUCCESS,
     CREATE_NEW_CATEGORY
 
-} from "constants/ActionTypes";
+} from "../constants/ActionTypes";
 
 const INIT_STATE = {
     allCategory: []

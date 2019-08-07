@@ -3,7 +3,7 @@ import {
     ON_HIDE_LOADER,
     ON_SHOW_LOADER,
     SHOW_MESSAGE,
-} from 'constants/ActionTypes';
+} from '../constants/ActionTypes';
 
 export const showMessage = (message) => {
     return {

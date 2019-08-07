@@ -29,12 +29,23 @@ import MTimeTableDashboard from "./m_routes/TimeTablePage";
 import SubWorkerMaintenanceDashboard from "./sub_routes/MaintenancePage"
 import STimeTableDashboard from "./sub_routes/TimeTablePage";
 import UserReportDashboard from "./u_routes/HomePage";
-import {fetchCategories, fetchUsers} from "../actions";
+import {
+  fetchBodyTypes,
+  fetchBuildingTypes,
+  fetchCategories,
+  fetchComponents,
+  fetchSubComponents,
+  fetchUsers
+} from "../actions";
 class App extends React.Component {
   componentDidMount() {
     console.log("Root App componentDidMount");
     this.props.dispatch(fetchUsers());
     this.props.dispatch(fetchCategories());
+    this.props.dispatch(fetchBuildingTypes());
+    this.props.dispatch(fetchBodyTypes());
+    this.props.dispatch(fetchComponents());
+    this.props.dispatch(fetchSubComponents());
   }
 
   renderSideBar = () => {

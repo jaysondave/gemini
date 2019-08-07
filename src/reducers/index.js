@@ -5,13 +5,21 @@ import Auth from './Auth';
 import Category from "./Category";
 import Alert from "./Alert";
 import User from "./User";
+import BuildingType from "./BuildingType";
+import BodyType from "./BodyType";
+import Component from "./Component";
+import SubComponent from "./SubComponent";
 
 
 export default (history) => combineReducers({
   router: connectRouter(history),
   settings: Settings,
   auth: Auth,
-  category: Category,
   alert: Alert,
-  users: User
+  users: User,
+  category: Category,
+  buildingType: BuildingType,
+  bodyType: BodyType,
+  component: Component,
+  subComponent: SubComponent
 });

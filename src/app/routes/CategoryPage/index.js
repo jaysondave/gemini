@@ -98,6 +98,7 @@ class CategoryPage extends Component {
         const categoryList = categories.slice(selectedPageNum*numPerPage, (selectedPageNum + 1)*numPerPage);
         return (
             <CategoryList
+                selectedPageNum={selectedPageNum}
                 categories={categoryList}
                 onEditCategory={this.onEditCategory}
                 onDelete={this.onDelete}
