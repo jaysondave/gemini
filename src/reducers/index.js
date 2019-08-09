@@ -9,6 +9,7 @@ import BuildingType from "./BuildingType";
 import BodyType from "./BodyType";
 import Component from "./Component";
 import SubComponent from "./SubComponent";
+import Building from "./Building";
 
 
 export default (history) => combineReducers({
@@ -21,5 +22,6 @@ export default (history) => combineReducers({
   buildingType: BuildingType,
   bodyType: BodyType,
   component: Component,
-  subComponent: SubComponent
+  subComponent: SubComponent,
+  building: Building
 });

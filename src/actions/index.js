@@ -7,3 +7,4 @@ export * from './BuildingType';
 export * from './BodyType';
 export * from './Component';
 export * from './SubComponent';
+export * from './Building';

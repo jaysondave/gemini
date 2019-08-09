@@ -3,6 +3,11 @@ import { Modal, ModalHeader } from "reactstrap";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import BootstrapInput from "../../../../../components/BootstrapInput";
+import {connect} from "react-redux";
 
 class AddBuilding extends React.Component {
   tapSaveBtn = () => {
@@ -39,7 +44,7 @@ class AddBuilding extends React.Component {
   render() {
     const { onSave, onClose, onDelete, open, building } = this.props;
     const { id, building_type_id, name, address, zip_code, city, province, cod_fisc } = this.state;
-
+    const { allBuildingType } = this.props;
     return (
       <Modal className="modal-box" isOpen={open}>
         <ModalHeader className="modal-box-header bg-primary text-white">
@@ -60,9 +65,17 @@ class AddBuilding extends React.Component {
                     <label className="align-center font-size-18">Type</label>
                   </div>
                   <div className="col-md-8 p-0">
-                    <input
-                      className='form-control form-control-lg'
-                    />
+                    <FormControl className="w-100 mb-2">
+                      <Select
+                          value={building_type_id}
+                          onChange={this.handleChange("category_id")}
+                          input={<BootstrapInput/>}
+                      >
+                        {allBuildingType.map(type =>
+                            <MenuItem key={type.id} value={type.id}>{type.name}</MenuItem>
+                        )}
+                      </Select>
+                    </FormControl>
                   </div>
                 </div>
 
@@ -147,5 +160,8 @@ class AddBuilding extends React.Component {
     );
   }
 }
-
-export default AddBuilding;
+const mapsToProps = ({buildingType}) => {
+  const { allBuildingType } = buildingType;
+  return { allBuildingType };
+};
+export default connect(mapsToProps)(AddBuilding);
