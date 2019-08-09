@@ -35,7 +35,7 @@ class BuildingPage extends Component {
       selectedSubBuilding: null,
       selectedBuilding: null,
       selectedbuildings: 0,
-      addBuildingState: false
+      addState: false
     };
   }
 
@@ -88,10 +88,10 @@ class BuildingPage extends Component {
 
 
   onAddBuilding = () => {
-    this.setState({ addBuildingState: true });
+    this.setState({ addState: true });
   };
   onBuildingClose = () => {
-    this.setState({ addBuildingState: false });
+    this.setState({ addState: false });
   };
   onSaveBuilding = (data) => {
     let isNew = true;
@@ -175,22 +175,6 @@ class BuildingPage extends Component {
       drawerState: !this.state.drawerState
     });
   }
-
-  onSaveCadastral = () => {
-
-  };
-  onSaveRent = () => {
-
-  };
-  onSaveSystem = () => {
-
-  };
-  onSaveDocument = () => {
-
-  };
-  onSaveCertificate = () => {
-
-  };
   showBuildings = ({ currentBuilding, buildingList }) => {
     return (
       <BuildingList buildingList={buildingList}
@@ -205,7 +189,7 @@ class BuildingPage extends Component {
   };
 
   render() {
-    const { user, buildingList, addBuildingState, selectedbuildings, alertMessage, showMessage, noContentFoundMessage, currentBuilding } = this.state;
+    const { user, buildingList, addState, selectedbuildings, alertMessage, showMessage, noContentFoundMessage, currentBuilding } = this.state;
     return (
       <div className="app-wrapper">
         <div className="app-module animated slideInUpTiny animation-duration-3">
@@ -248,11 +232,11 @@ class BuildingPage extends Component {
         </div>
 
         <AddBuilding
-          open={addBuildingState}
+          open={addState}
           building={{}}
-          onSaveBuilding={this.onSaveBuilding}
-          onBuildingClose={this.onBuildingClose}
-          onDeleteBuilding={this.onDeleteBuilding}/>
+          onSave={this.onSaveBuilding}
+          onClose={this.onBuildingClose}
+          onDelete={this.onDeleteBuilding}/>
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
           open={showMessage}
