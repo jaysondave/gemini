@@ -24,5 +24,28 @@ class BuildingAPI extends ConfigurationAPI {
             })
         })
     };
+    updateItem = (id, body) => {
+        return new Promise((resolve, reject) => {
+            return axios.put(`${API_URL}/buildings/${id}`, body, {
+                headers: this.initHeaders()
+            }).then((response) => {
+                resolve(response);
+            }).catch((error) => {
+                reject(error);
+            })
+        })
+    };
+
+    deleteItem = (id) => {
+        return new Promise((resolve, reject) => {
+            return axios.delete(`${API_URL}/buildings/${id}`, {
+                headers: this.initHeaders()
+            }).then((response) => {
+                resolve(response);
+            }).catch((error) => {
+                reject(error);
+            })
+        })
+    };
 }
 export default BuildingAPI;

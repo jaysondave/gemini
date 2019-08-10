@@ -2,7 +2,7 @@ import React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import asyncComponent from '../../../../../util/asyncComponent';
 
-const BuildingDetail = ({match}) => (
+const BodyDetail = ({match}) => (
   <div className="app-wrapper">
     <Switch>
       <Redirect exact from={`${match.url}/`} to={`${match.url}/bodies`}/>
@@ -22,4 +22,4 @@ const BuildingDetail = ({match}) => (
   </div>
 );
 
-export default BuildingDetail;
+export default BodyDetail;

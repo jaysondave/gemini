@@ -215,7 +215,7 @@ class CategoryPage extends Component {
                                 previousLabel={'previous'}
                                 nextLabel={'next'}
                                 breakLabel={<a className="page-link">...</a>}
-                                pageCount={allCategory.length/numPerPage}
+                                pageCount={categoryList.length/numPerPage}
                                 marginPagesDisplayed={2}
                                 pageRangeDisplayed={5}
                                 onPageChange={this.handlePageClick}

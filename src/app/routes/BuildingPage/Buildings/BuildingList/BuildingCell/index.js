@@ -1,13 +1,9 @@
 import React from "react";
 
-import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withRouter } from 'react-router-dom'
-import AddBuilding from "../../AddBuilding/index";
-import AddBody from "../../../BuildingDetail/Body/AddBody";
-import AddMaintenance from "../../../BuildingDetail/Maintenance/AddMaintenance";
 
 class BuildingCell extends React.Component {
 
@@ -34,9 +30,9 @@ class BuildingCell extends React.Component {
   }
 
   render() {
-    const { building } = this.props;
-    const { menuState, anchorEl, addBuildingState, addBody, addMaintenance } = this.state;
-    const { id, building_code, name, address, zip_code, city, province, cod_fisc } = building;
+    const { building, onEdit, onDelete } = this.props;
+    const { menuState, anchorEl } = this.state;
+    const { building_code, name, building_type, address, zip_code, city, province, cod_fisc, bodies } = building;
 
     const options = [
       "Edit",
@@ -55,16 +51,27 @@ class BuildingCell extends React.Component {
               <div className="align-center">{building_code}</div>
             </div>
             <div className="col con-inf-mw-100 f-3">
-              <p className="mb-0">
-                <span className="text-truncate contact-name text-dark">
+              <div className="mb-1 ml-2">
+                <span className="text-truncate contact-name text-primary-color text-bold font-size-18">
                   {name}
                 </span>
-              </p>
+              </div>
 
               <div className="text-muted">
-                <span className="phone d-inline-block">
-                  {address}
-                </span>
+               <span>
+                    <i className="zmdi zmdi-pin zmdi-hc-fw font-size-18"/>
+                  </span>
+                <span className="d-inline-block mr-2">
+                      {(address?(address + ", "):"") + (zip_code?(zip_code + ", "):"") + (city?(city + ", "):"") + (province?province:"")}
+                  </span>
+              </div>
+              <div className="text-muted">
+               <span>
+                    <i className="zmdi zmdi-sort zmdi-hc-fw font-size-18"/>
+                  </span>
+                <span className="d-inline-block mr-2">
+                      {building_type.name}
+                  </span>
               </div>
             </div>
             <div className="col con-inf-mw-100 f-1 text-center">
@@ -76,14 +83,14 @@ class BuildingCell extends React.Component {
 
               <div className="text-muted">
                 <span className="email d-inline-block mr-2">
-                  {0}
+                  {bodies.length}
                 </span>
               </div>
             </div>
             <div className="col con-inf-mw-100 f-1 text-center">
               <p className="mb-0">
                 <span className="text-truncate contact-name text-dark">
-                  {"No.Reporter"}
+                  {"No.Report"}
                 </span>
               </p>
 
@@ -113,10 +120,10 @@ class BuildingCell extends React.Component {
                 <MenuItem key={option} onClick={() => {
                   if (option === "Edit") {
                     this.handleRequestClose();
-                    this.onEditBuilding();
+                    onEdit(building)
                   } else if (option === "Delete") {
                     this.handleRequestClose();
-                    this.onDeleteBuilding(building);
+                    onDelete(building.id);
                   } else if (option === "Body") {
                     this.handleRequestClose();
                     this.onBodies();

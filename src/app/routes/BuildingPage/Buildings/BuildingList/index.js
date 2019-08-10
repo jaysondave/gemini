@@ -1,13 +1,15 @@
 import React from 'react';
 import BuildingCell from "./BuildingCell/index";
 
-const BuildingList = ({ buildingList }) => {
+const BuildingList = ({ data, onEdit, onDelete }) => {
   return (
     <div className="contact-main-content">
-      {buildingList.map((building, index) =>
+      {data.map((building, index) =>
         <BuildingCell
             key={index}
             building={building}
+            onEdit={onEdit}
+            onDelete={onDelete}
         />
       )}
 
