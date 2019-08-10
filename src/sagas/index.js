@@ -3,10 +3,11 @@ import authSagas from './Auth';
 import categorySagas from './Category';
 import userSagas from './User';
 import buildingTypeSagas from './BuildingType';
-import bodySagas from './BodyType';
+import bodyTypeSagas from './BodyType';
 import componentSagas from './Component';
 import subComponentSagas from './SubComponent';
 import buildingSagas from './Building';
+import bodySagas from './Body';
 
 export default function* rootSaga(getState) {
     yield all([
@@ -14,9 +15,10 @@ export default function* rootSaga(getState) {
         categorySagas(),
         userSagas(),
         buildingTypeSagas(),
-        bodySagas(),
+        bodyTypeSagas(),
         componentSagas(),
         subComponentSagas(),
-        buildingSagas()
+        buildingSagas(),
+        bodySagas()
     ]);
 }

@@ -110,3 +110,10 @@ export const FETCH_ALL_BUILDING = 'FETCH_ALL_BUILDING';
 export const DELETE_BUILDING = 'DELETE_BUILDING';
 export const UPDATE_BUILDING = 'UPDATE_BUILDING';
 
+//Body const
+export const NEW_BODY = 'NEW_BODY';
+export const GET_BODIES_SUCCESS = 'GET_BODIES_SUCCESS';
+export const FETCH_ALL_BODY = 'FETCH_ALL_BODY';
+export const DELETE_BODY = 'DELETE_BODY';
+export const UPDATE_BODY = 'UPDATE_BODY';
+

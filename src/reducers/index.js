@@ -10,7 +10,7 @@ import BodyType from "./BodyType";
 import Component from "./Component";
 import SubComponent from "./SubComponent";
 import Building from "./Building";
-
+import Bodies from './Body';
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -23,5 +23,6 @@ export default (history) => combineReducers({
   bodyType: BodyType,
   component: Component,
   subComponent: SubComponent,
-  building: Building
+  building: Building,
+  body: Bodies
 });

@@ -2,28 +2,25 @@ import React from "react";
 import SubBuildingCell from "./SubBuildingCell/index";
 
 const SubBuildingList = ({
-                           subBuildingList,
-                           onSubBuildingItemSelect,
-                           onSubBuildingSelect,
-                           onSaveSubBuilding,
-                           onDeleteSubBuilding,
+                             data,
+                             onEdit,
+                             onDelete,
                          }) => {
-  return (
-    subBuildingList != null?
-      <div className="contact-main-content">
-        {subBuildingList.map((subBuilding, index) =>
-          <SubBuildingCell key={index} subBuilding={subBuilding}
-                           onSubBuildingItemSelect={onSubBuildingItemSelect}
-                           onDeleteSubBuilding={onDeleteSubBuilding}
-                           onSaveSubBuilding={onSaveSubBuilding}
-                           onSubBuildingSelect={onSubBuildingSelect}
-          />
-        )}
+    return (
+        data != null ?
+            <div className="contact-main-content">
+                {data.map((subBuilding, index) =>
+                    <SubBuildingCell key={index}
+                                     item={subBuilding}
+                                     onEdit={onEdit}
+                                     onDelete={onDelete}
+                    />
+                )}
 
-      </div>
-      :
-      null
-  );
+            </div>
+            :
+            null
+    );
 };
 
 export default SubBuildingList;

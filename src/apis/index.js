@@ -5,3 +5,4 @@ export * from './bodyType';
 export * from './component';
 export * from './subComponent';
 export * from './building';
+export * from './body';
