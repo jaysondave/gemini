@@ -12,7 +12,7 @@ import {DELETE_OUTDOOR, FETCH_ALL_OUTDOOR, NEW_OUTDOOR, UPDATE_OUTDOOR} from "..
 
 const outdoorAPI = new OutdoorAPI();
 const fetchAllRequest = async (payload) =>
-    await  outdoorAPI.fetchAll(payload.id)
+    await  outdoorAPI.fetchAll(payload)
         .then(resp => resp)
         .catch(error => error);
 const createRequest = async (body) =>
