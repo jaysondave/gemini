@@ -10,7 +10,7 @@ import CustomScrollbars from "util/CustomScrollbars";
 import SubBuildingList from "../SubBuildingList";
 import AddBody from "../AddBody";
 import ReactPaginate from "react-paginate";
-import {fetchBodies} from "../../../../../../actions";
+import {createNewBody, fetchBodies, showLoader, updateBody} from "../../../../../../actions";
 
 class BodyList extends Component {
 
@@ -43,17 +43,21 @@ class BodyList extends Component {
     onEdit = (item) => {
         this.setState({selectedItem: item, addBodyState: true});
     };
-    onSave = () => {
+    onSave = (data) => {
         this.setState({addBodyState: false});
+        this.props.dispatch(showLoader());
+        this.props.dispatch(createNewBody(data));
     };
-    onUpdate = () => {
-        this.setState({addBodyState: false});
+    onUpdate = (body) => {
+        this.setState({addBodyState: false, selectedItem: {}});
+        this.props.dispatch(showLoader());
+        this.props.dispatch(updateBody(body.id, body));
     };
     onDelete = () => {
-        this.setState({addBodyState: false});
+        this.setState({addBodyState: false, selectedItem: {}});
     };
     onClose = () => {
-        this.setState({addBodyState: false});
+        this.setState({addBodyState: false, selectedItem: {}});
     };
     handleRequestClose = () => {
         this.setState({
@@ -74,7 +78,7 @@ class BodyList extends Component {
                 data={dataList}
                 onEdit={this.onEdit}
                 onDelete={this.onDelete}
-        />);
+            />);
     };
     onSearch = (e) => {
         this.setState({searchKey: e.target.value, selectPageNum: 0})
@@ -84,10 +88,19 @@ class BodyList extends Component {
             c.name.toLowerCase().indexOf(searchKey.toLowerCase()) > -1
         );
     };
-    componentDidMount() {
-        this.props.dispatch(fetchBodies())
-    }
+    handlePageClick = data => {
+        const selectPageNum = data.selected;
+        this.setState({selectPageNum});
+    };
 
+    componentDidMount() {
+        this.props.dispatch(fetchBodies(this.getBuildingId()))
+    }
+    getBuildingId = () => {
+        const url = this.props.match.url;
+        const url_array = url.split('/');
+        return url_array[url_array.length - 2];
+    };
     constructor(props) {
         super(props);
         this.state = {
@@ -98,12 +111,14 @@ class BodyList extends Component {
             searchKey: "",
             addBuildingState: false,
             addBodyState: false,
+            building_id: "",
             selectedItem: {},
 
             selectPageNum: 0,
             numPerPage: 10
         };
     }
+
     render() {
         const {searchKey, addBodyState, alertMessage, showMessage, noContentFoundMessage, selectedItem, selectPageNum, numPerPage} = this.state;
         const {bodies} = this.props;
@@ -173,11 +188,15 @@ class BodyList extends Component {
                         </div>
                     </div>
                 </div>
+                {addBodyState &&
                 <AddBody
                     open={addBodyState}
                     item={selectedItem}
-                    onSave={this.onSave()}
-                    onClose={this.onClose()}/>
+                    building_id={this.getBuildingId()}
+                    onSave={this.onSave}
+                    onUpdate={this.onUpdate}
+                    onClose={this.onClose}/>
+                }
                 <Snackbar
                     anchorOrigin={{vertical: "top", horizontal: "center"}}
                     open={showMessage}
@@ -193,9 +212,9 @@ class BodyList extends Component {
 }
 
 const mapStateToProps = ({settings, body}) => {
-    const { width } = settings;
-    const { bodies } = body;
-    return { width, bodies };
+    const {width} = settings;
+    const {bodies} = body;
+    return {width, bodies};
 };
 export default withRouter(connect(mapStateToProps)(BodyList));
 

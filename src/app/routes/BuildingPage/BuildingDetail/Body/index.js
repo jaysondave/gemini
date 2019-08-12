@@ -5,8 +5,7 @@ import asyncComponent from '../../../../../util/asyncComponent';
 const BodyDetail = ({match}) => (
   <div className="app-wrapper">
     <Switch>
-      <Redirect exact from={`${match.url}/`} to={`${match.url}/bodies`}/>
-      <Route path={`${match.url}/bodies`} component={asyncComponent(() => import('./Bodies'))}/>
+      <Redirect exact from={`${match.url}/`} to={`${match.url}/floors`}/>
       <Route exact path={`${match.url}/floors`} component={asyncComponent(() => import('./Floor'))}/>
       <Route exact path={`${match.url}/floors/rooms`} component={asyncComponent(() => import('./Floor/Room'))}/>
       <Route exact path={`${match.url}/floors/rooms/warehouses`} component={asyncComponent(() => import('./Floor/Room/WareHouse'))}/>

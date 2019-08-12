@@ -9,3 +9,4 @@ export * from './Component';
 export * from './SubComponent';
 export * from './Building';
 export * from './Body';
+export * from './Outdoor';

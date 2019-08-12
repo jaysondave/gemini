@@ -8,6 +8,7 @@ import componentSagas from './Component';
 import subComponentSagas from './SubComponent';
 import buildingSagas from './Building';
 import bodySagas from './Body';
+import outdoorSagas from './Outdoor';
 
 export default function* rootSaga(getState) {
     yield all([
@@ -19,6 +20,7 @@ export default function* rootSaga(getState) {
         componentSagas(),
         subComponentSagas(),
         buildingSagas(),
-        bodySagas()
+        bodySagas(),
+        outdoorSagas()
     ]);
 }

@@ -14,7 +14,7 @@ class BuildingCell extends React.Component {
     this.setState({ menuState: false });
   };
   onBodies = () => {
-    this.props.history.push('detail')
+    this.props.history.push(`building/${this.props.building.id}`)
   };
   onMaintenance = () => {
     this.setState({ menuState: false, addMaintenance: true });
@@ -132,7 +132,7 @@ class BuildingCell extends React.Component {
                     this.onMaintenance();
                   } else if (option === "Outdoor Spaces") {
                     this.handleRequestClose();
-                    this.props.history.push('detail/outdoorspaces');
+                    this.props.history.push(`building/1/outdoorspaces`);
                   } else if (option === "Notice Board") {
                     this.handleRequestClose();
                     alert("Notice Board")

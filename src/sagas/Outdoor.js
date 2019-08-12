@@ -1,35 +1,30 @@
 import {all, call, fork, put, takeEvery} from "redux-saga/effects";
 
 import {
-    NEW_BUILDING,
-    FETCH_ALL_BUILDING,
-    UPDATE_BUILDING,
-    DELETE_BUILDING, FETCH_ALL_BODY, NEW_BODY, UPDATE_BODY, DELETE_BODY
-} from '../constants/ActionTypes';
-import {
     showMessage,
     hideLoader,
     userSignOut,
     fetchBuildingsSuccess,
-    fetchBuildings, fetchBodiesSuccess, fetchBodies
+    fetchBuildings, fetchBodiesSuccess, fetchBodies, fetchOutdoorsSuccess, fetchOutdoors
 } from "../actions";
-import BodyAPI from "../apis/body";
+import OutdoorAPI from "../apis/outdoor";
+import {DELETE_OUTDOOR, FETCH_ALL_OUTDOOR, NEW_OUTDOOR, UPDATE_OUTDOOR} from "../constants/ActionTypes";
 
-const bodyAPI = new BodyAPI();
-const fetchAllRequest = async (id) =>
-    await  bodyAPI.fetchAll(id)
+const outdoorAPI = new OutdoorAPI();
+const fetchAllRequest = async (payload) =>
+    await  outdoorAPI.fetchAll(payload.id)
         .then(resp => resp)
         .catch(error => error);
 const createRequest = async (body) =>
-    await  bodyAPI.register(body)
+    await  outdoorAPI.register(body)
         .then(resp => resp)
         .catch(error => error);
 const updateRequest = async (payload) =>
-    await  bodyAPI.updateItem(payload.id, payload.body)
+    await  outdoorAPI.updateItem(payload.id, payload.body)
         .then(resp => resp)
         .catch(error => error);
 const deleteRequest = async (payload) =>
-    await  bodyAPI.deleteItem(payload)
+    await  outdoorAPI.deleteItem(payload)
         .then(resp => resp)
         .catch(error => error);
 function* fetchAll({payload}) {
@@ -51,7 +46,7 @@ function* fetchAll({payload}) {
                     return
             }
         } else {
-            yield put(fetchBodiesSuccess(res.data.bodies));
+            yield put(fetchOutdoorsSuccess(res.data.outdoors));
         }
     } catch (error) {
         yield put(showMessage(error));
@@ -76,7 +71,7 @@ function* create({payload}) {
                     return
             }
         } else {
-            yield put(fetchBodies(res.data.body.building_id));
+            yield put(fetchOutdoors(res.data.outdoor.id));
         }
     } catch (error) {
         yield put(showMessage(error));
@@ -101,7 +96,7 @@ function* update({payload}) {
                     return
             }
         } else {
-            yield put(fetchBodies(res.data.body.building_id));
+            yield put(fetchOutdoors(res.data.outdoor.id));
         }
     } catch (error) {
         yield put(showMessage(error));
@@ -126,23 +121,23 @@ function* deleteItem({payload}) {
                     return
             }
         } else {
-            yield put(fetchBodies(payload.building_id));
+            yield put(fetchOutdoors());
         }
     } catch (error) {
         yield put(showMessage(error));
     }
 }
 export function* fetchAllSaga() {
-    yield takeEvery(FETCH_ALL_BODY, fetchAll);
+    yield takeEvery(FETCH_ALL_OUTDOOR, fetchAll);
 }
 export function* createSaga() {
-    yield takeEvery(NEW_BODY, create)
+    yield takeEvery(NEW_OUTDOOR, create)
 }
 export function* updateSaga() {
-    yield takeEvery(UPDATE_BODY, update)
+    yield takeEvery(UPDATE_OUTDOOR, update)
 }
 export function* deleteSaga() {
-    yield takeEvery(DELETE_BODY, deleteItem)
+    yield takeEvery(DELETE_OUTDOOR, deleteItem)
 }
 export default function* rootSaga() {
     yield all([

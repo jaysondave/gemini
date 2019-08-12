@@ -7,15 +7,17 @@ import Select from "@material-ui/core/Select";
 import BootstrapInput from "../../../../../../components/BootstrapInput";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
+import {connect} from "react-redux";
 
 class AddBody extends React.Component {
   tapSaveBtn = () => {
     const {id, body_type_id, name, address, zip_code, province, city, cod_fisc} = this.state;
-    const {onSave, onUpdate, item} = this.props;
+    const {onSave, onUpdate, item, building_id} = this.props;
+      console.log({building_id});
     if (item.id) {
       onUpdate({id, body_type_id, name, address, province, zip_code, city, cod_fisc})
     } else {
-      onSave({body_type_id, name, address, province, zip_code, city, cod_fisc});
+      onSave({body_type_id, building_id, name, address, province, zip_code, city, cod_fisc});
     }
     this.initValue();
   };
@@ -73,12 +75,12 @@ class AddBody extends React.Component {
 
     render() {
         const {item, open, onClose} = this.props;
-        const {id, body_type_id, name, address, zip_code, city, province, code_fisc} = this.state;
+        const {id, body_type_id, name, address, zip_code, city, province, cod_fisc} = this.state;
         const {allBodyType} = this.props;
         return (
             <Modal className="modal-box" isOpen={open}>
                 <ModalHeader className="modal-box-header bg-primary text-white">
-                    {item.name === "" ? "Edit Body" :
+                    {item.id? "Edit Body" :
                         "Save Body"}
                     <IconButton className="text-white"
                                 onClick={() => {
@@ -141,6 +143,19 @@ class AddBody extends React.Component {
 
                                 <div className="row col-md-12 col-12 p-0 mb-2">
                                     <div className="col-md-4 text-right p-relative">
+                                        <label className="align-center font-size-18">Province</label>
+                                    </div>
+                                    <div className="col-md-8 p-0">
+                                        <input
+                                            value={province}
+                                            onChange={this.handleChange("province")}
+                                            className='form-control form-control-lg'
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="row col-md-12 col-12 p-0 mb-2">
+                                    <div className="col-md-4 text-right p-relative">
                                         <label className="align-center font-size-18">Zip Code</label>
                                     </div>
                                     <div className="col-md-8 p-0">
@@ -171,8 +186,8 @@ class AddBody extends React.Component {
                                     </div>
                                     <div className="col-md-8 p-0">
                                         <input
-                                            value={code_fisc}
-                                            onChange={this.handleChange("code_fisc")}
+                                            value={cod_fisc}
+                                            onChange={this.handleChange("cod_fisc")}
                                             className='form-control form-control-lg'
                                         />
                                     </div>
@@ -192,5 +207,8 @@ class AddBody extends React.Component {
         );
     }
 }
-
-export default AddBody;
+const mapStateToProps = ({ bodyType }) => {
+    const { allBodyType } = bodyType;
+    return { allBodyType };
+};
+export default connect(mapStateToProps)(AddBody);

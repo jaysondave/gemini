@@ -1,10 +1,10 @@
 import axios from 'axios';
 import {API_URL} from "../config";
 import ConfigurationAPI from './configurationApi';
-class BodyAPI extends ConfigurationAPI {
+class OutdoorAPI extends ConfigurationAPI {
     register = (body) => {
         return new Promise((resolve, reject) => {
-            return axios.post(`${API_URL}/bodies`, ({body: body}), {
+            return axios.post(`${API_URL}/outdoors`, ({outdoor: body}), {
                 headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);
@@ -15,7 +15,7 @@ class BodyAPI extends ConfigurationAPI {
     };
     fetchAll = (id) => {
         return new Promise((resolve, reject) => {
-            return axios.get(`${API_URL}/bodies?building_id=${id}`,  {
+            return axios.get(`${API_URL}/outdoors?building_id=${id}`,  {
                 headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);
@@ -26,7 +26,7 @@ class BodyAPI extends ConfigurationAPI {
     };
     updateItem = (id, body) => {
         return new Promise((resolve, reject) => {
-            return axios.put(`${API_URL}/bodies/${id}`, ({body: body}), {
+            return axios.put(`${API_URL}/outdoors/${id}`, ({outdoor: body}), {
                 headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);
@@ -38,7 +38,7 @@ class BodyAPI extends ConfigurationAPI {
 
     deleteItem = (id) => {
         return new Promise((resolve, reject) => {
-            return axios.delete(`${API_URL}/bodies/${id}`, {
+            return axios.delete(`${API_URL}/outdoors/${id}`, {
                 headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);
@@ -48,4 +48,4 @@ class BodyAPI extends ConfigurationAPI {
         })
     };
 }
-export default BodyAPI;
+export default OutdoorAPI;

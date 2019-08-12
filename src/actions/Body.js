@@ -6,9 +6,10 @@ export const createNewBody = (body) => {
     };
 };
 
-export const fetchBodies = () => {
+export const fetchBodies = (id) => {
     return {
-        type: FETCH_ALL_BODY
+        type: FETCH_ALL_BODY,
+        payload: id
     }
 };
 

@@ -12,7 +12,7 @@ const BuildingDashboard = ({match}) => (
             <Route path={`${match.url}/component`} component={asyncComponent(() => import('./ComponentTypePage'))}/>
             <Route path={`${match.url}/sub_component`} component={asyncComponent(() => import('./SubComponentTypePage'))}/>
             <Route path={`${match.url}/buildings`} component={asyncComponent(() => import('./Buildings'))}/>
-            <Route path={`${match.url}/detail`} component={BuildingDetail}/>
+            <Route path={`${match.url}/building/:id`} component={BuildingDetail}/>
         </Switch>
     </div>
 );

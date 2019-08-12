@@ -80,7 +80,7 @@ class SubBuildingCell extends React.Component {
         return (
 
             <div className="contact-item module-list-item">
-                <div className="d-flex f-1 flex-wrap">
+                <div className="d-flex f-1 flex-wrap" onClick={() => onEdit(item)}>
                     <div className="col con-inf-mw-100 f-3">
                         <p className="mb-1 ml-2">
                           <span className="text-truncate contact-name text-primary-color text-bold font-size-18">

@@ -117,3 +117,10 @@ export const FETCH_ALL_BODY = 'FETCH_ALL_BODY';
 export const DELETE_BODY = 'DELETE_BODY';
 export const UPDATE_BODY = 'UPDATE_BODY';
 
+//Outdoor const
+export const NEW_OUTDOOR = 'NEW_OUTDOOR';
+export const GET_OUTDOOR_SUCCESS = 'GET_OUTDOOR_SUCCESS';
+export const FETCH_ALL_OUTDOOR = 'FETCH_ALL_OUTDOOR';
+export const DELETE_OUTDOOR = 'DELETE_OUTDOOR';
+export const UPDATE_OUTDOOR = 'UPDATE_OUTDOOR';
+
