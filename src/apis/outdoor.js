@@ -4,8 +4,8 @@ import ConfigurationAPI from './configurationApi';
 class OutdoorAPI extends ConfigurationAPI {
     register = (body) => {
         return new Promise((resolve, reject) => {
-            return axios.post(`${API_URL}/outdoors`, ({outdoor: body}), {
-                headers: this.initHeaders()
+            return axios.post(`${API_URL}/outdoors`, body, {
+                headers: {...this.initHeaders(), 'Content-Type': 'multipart/form-data'}
             }).then((response) => {
                 resolve(response);
             }).catch((error) => {

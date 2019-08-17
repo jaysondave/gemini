@@ -93,7 +93,7 @@ class SystemsList extends Component {
       selectedBuilding: null,
       selectedSubBuildings: 0,
       addBuildingState: false,
-      addSytem: false
+      addSystem: false
     };
   }
   componentDidMount() {
@@ -191,7 +191,7 @@ class SystemsList extends Component {
   };
 
   render() {
-    const { subBuildingList, addBuildingState, addSytem, selectedSubBuildings, alertMessage, showMessage, noContentFoundMessage, currentBuilding } = this.state;
+    const { subBuildingList, addBuildingState, addSystem, selectedSubBuildings, alertMessage, showMessage, noContentFoundMessage, currentBuilding } = this.state;
     return (
       <div className="app-wrapper">
         <div className="app-module animated slideInUpTiny animation-duration-3">
@@ -253,9 +253,9 @@ class SystemsList extends Component {
           </div>
         </div>
         <AddSystem
-          open={addSytem}
+          open={addSystem}
           onSaveRent={this.onSaveSystem}
-          onRentClose={this.onSystemClose}
+          onClose={this.onSystemClose}
         />
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "center" }}

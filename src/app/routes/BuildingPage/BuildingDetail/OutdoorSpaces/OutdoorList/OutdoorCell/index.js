@@ -3,6 +3,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import {withRouter} from 'react-router-dom'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class OutdoorCell extends React.Component {
 
@@ -42,7 +43,7 @@ class OutdoorCell extends React.Component {
         } = this.props;
         const {menuState, anchorEl} = this.state;
         const {id, condition, note, attachment, component, sub_component, building_id, name} = item;
-        const condition_bg_color = condition === "Good"?"#ffc107": condition === "Bad"? "red": "green";
+        const condition_bg_color = condition === "Good"?"green": condition === "Bad"? "red": "#ffc107";
         return (
 
             <div className="contact-item module-list-item">
@@ -58,7 +59,7 @@ class OutdoorCell extends React.Component {
                         </div>
 
                     </div>
-                    <div className="col con-inf-mw-100 f-3">
+                    <div className="f-1">
                         <p className="mb-1 ml-2">
                           <span className="text-truncate contact-name text-primary-color text-bold font-size-18">
                             {name.charAt(0).toUpperCase() + name.slice(1)}
@@ -69,28 +70,35 @@ class OutdoorCell extends React.Component {
                                 {condition}
                             </span>
                         </div>
-                        <div className="text-muted">
+                        <div className="text-muted mt-1">
                           <span>
-                            <i className="zmdi zmdi-pin zmdi-hc-fw font-size-18"/>
+                            <FontAwesomeIcon icon="th-large" className="mr-2"/>
                           </span>
-                            <span className="d-inline-block mr-2">
+                            <span className="d-inline-block">
                               {component.name}
                           </span>
                         </div>
 
                         <div className="text-muted">
                           <span>
-                            <i className="zmdi zmdi-pin zmdi-hc-fw font-size-18"/>
+                            <FontAwesomeIcon icon="th-list" className="mr-2"/>
                           </span>
-                            <span className="d-inline-block mr-2">
+                            <span className="d-inline-block">
                               {sub_component.name}
                           </span>
                         </div>
                     </div>
-                    <div className="col con-inf-mw-100 f-1 text-center">
+
+                    <div className="f-1 text-center">
+                        <div className="text-dark break-all">
+                            {note}
+                        </div>
+                    </div>
+
+                    <div className="f-1 text-center">
                         <p className="mb-0">
                           <span className="text-truncate contact-name text-dark">
-                            {"No.Reporter"}
+                            {"Reports"}
                           </span>
                         </p>
 

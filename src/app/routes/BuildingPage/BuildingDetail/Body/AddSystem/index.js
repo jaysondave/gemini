@@ -36,7 +36,7 @@ class AddSystem extends React.Component {
     });
   };
   render() {
-    const { onSaveSystem, onSystemClose, open, system } = this.props;
+    const { onSaveSystem, onClose, open, system } = this.props;
     const {
       id,
       systemType,
@@ -51,7 +51,7 @@ class AddSystem extends React.Component {
           {id === "" ? "Insert System" :
             "Edit System"}
           <IconButton className="text-white"
-                      onClick={onSystemClose}>
+                      onClick={() => onClose()}>
             <CloseIcon/>
           </IconButton>
         </ModalHeader>
@@ -138,7 +138,7 @@ class AddSystem extends React.Component {
 
         <div className="modal-box-footer d-flex flex-row">
           <Button disabled={id === ""} variant="contained" color="primary" onClick={() => {
-            onSystemClose();
+            onClose();
             onSaveSystem(
               {});
             this.setState({});

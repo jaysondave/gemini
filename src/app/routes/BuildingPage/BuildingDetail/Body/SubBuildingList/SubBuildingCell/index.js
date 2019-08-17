@@ -19,31 +19,31 @@ class SubBuildingCell extends React.Component {
     };
     onEditCadstral = () => {
         this.setState({menuState: false});
-        this.props.history.push('cadstral')
+        this.props.history.push(`body/${this.props.item.id}/cadstral`)
     };
     onEditRent = () => {
         this.setState({menuState: false});
-        this.props.history.push('rents')
+        this.props.history.push(`body/${this.props.item.id}/rents`)
     };
     onEditSystem = () => {
         this.setState({menuState: false});
-        this.props.history.push('systems')
+        this.props.history.push(`body/${this.props.item.id}/systems`)
     };
     onEditDocument = () => {
         this.setState({menuState: false});
-        this.props.history.push('documents')
+        this.props.history.push(`body/${this.props.item.id}/documents`)
     };
     onEditCertificate = () => {
         this.setState({menuState: false});
-        this.props.history.push('certified')
+        this.props.history.push(`body/${this.props.item.id}/certified`)
     };
     onEditInsurance = () => {
         this.setState({menuState: false});
-        this.props.history.push('insurance')
+        this.props.history.push(`body/${this.props.item.id}/insurance`)
     };
     onEditFloor = () => {
         this.setState({menuState: false});
-        this.props.history.push('floors')
+        this.props.history.push(`body/${this.props.item.id}/floors`)
     };
 
     constructor() {
@@ -110,7 +110,7 @@ class SubBuildingCell extends React.Component {
                     <div className="col con-inf-mw-100 f-1 text-center">
                         <p className="mb-0">
                           <span className="text-truncate contact-name text-dark">
-                            {"No.Reporter"}
+                            {"Reports"}
                           </span>
                         </p>
 

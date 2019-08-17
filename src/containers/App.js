@@ -6,6 +6,9 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-intl'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons'
 import "assets/vendors/style"
 import defaultTheme from './themes/defaultTheme';
 import AppLocale from '../lngProvider';
@@ -19,6 +22,11 @@ import RTL from 'util/RTL';
 import asyncComponent from 'util/asyncComponent';
 import NoticeBoard from './NoticeBoard';
 import { hideMessage } from "actions/Alert";
+
+library.add(
+    fab,
+    fas
+);
 
 const RestrictedRoute = ({ component: Component, authUser, ...rest }) =>
   <Route

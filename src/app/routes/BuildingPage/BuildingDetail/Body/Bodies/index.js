@@ -159,7 +159,7 @@ class BodyList extends Component {
                             </div>
                             <CustomScrollbars className="module-list-scroll scrollbar"
                                               style={{height: this.props.width >= 1200 ? "calc(100vh - 265px)" : "calc(100vh - 245px)"}}>
-                                {bodies == null ?
+                                {bodies == null || bodies.length === 0 ?
                                     <div className="h-100 d-flex align-items-center justify-content-center">
                                         {noContentFoundMessage}
                                     </div>

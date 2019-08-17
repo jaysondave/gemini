@@ -9,7 +9,14 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import CustomScrollbars from "util/CustomScrollbars";
 import OutdoorList from "./OutdoorList";
 import AddOutdoor from "./AddOutdoor";
-import {createNewBody, fetchOutdoors, showLoader, updateBody} from "../../../../../actions";
+import {
+    createNewBody,
+    createNewOutdoor,
+    fetchOutdoors,
+    showLoader,
+    updateBody,
+    updateOutdoor
+} from "../../../../../actions";
 import ReactPaginate from "react-paginate";
 
 
@@ -46,12 +53,12 @@ class OutdoorSpaces extends Component {
     onSave = (data) => {
         this.setState({addOutdoor: false});
         this.props.dispatch(showLoader());
-        this.props.dispatch(createNewBody(data));
+        this.props.dispatch(createNewOutdoor(data));
     };
     onUpdate = (body) => {
         this.setState({addOutdoor: false, selectedItem: {}});
         this.props.dispatch(showLoader());
-        this.props.dispatch(updateBody(body.id, body));
+        this.props.dispatch(updateOutdoor(body.id, body));
     };
     onDelete = () => {
         this.setState({addOutdoor: false, selectedItem: {}});
@@ -105,7 +112,7 @@ class OutdoorSpaces extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            noContentFoundMessage: "No body found in this building",
+            noContentFoundMessage: "No Outdoor found in this building",
             alertMessage: "",
             showMessage: false,
             selectedSectionId: 1,
@@ -160,7 +167,7 @@ class OutdoorSpaces extends Component {
                             </div>
                             <CustomScrollbars className="module-list-scroll scrollbar"
                                               style={{height: this.props.width >= 1200 ? "calc(100vh - 265px)" : "calc(100vh - 245px)"}}>
-                                {outdoors == null ?
+                                {outdoors == null || outdoors.length === 0 ?
                                     <div className="h-100 d-flex align-items-center justify-content-center">
                                         {noContentFoundMessage}
                                     </div>

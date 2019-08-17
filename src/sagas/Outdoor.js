@@ -4,8 +4,8 @@ import {
     showMessage,
     hideLoader,
     userSignOut,
-    fetchBuildingsSuccess,
-    fetchBuildings, fetchBodiesSuccess, fetchBodies, fetchOutdoorsSuccess, fetchOutdoors
+    fetchOutdoorsSuccess,
+    fetchOutdoors
 } from "../actions";
 import OutdoorAPI from "../apis/outdoor";
 import {DELETE_OUTDOOR, FETCH_ALL_OUTDOOR, NEW_OUTDOOR, UPDATE_OUTDOOR} from "../constants/ActionTypes";
@@ -71,7 +71,7 @@ function* create({payload}) {
                     return
             }
         } else {
-            yield put(fetchOutdoors(res.data.outdoor.id));
+            yield put(fetchOutdoors(res.data.outdoor.building_id));
         }
     } catch (error) {
         yield put(showMessage(error));
@@ -96,7 +96,7 @@ function* update({payload}) {
                     return
             }
         } else {
-            yield put(fetchOutdoors(res.data.outdoor.id));
+            yield put(fetchOutdoors(res.data.outdoor.building_id));
         }
     } catch (error) {
         yield put(showMessage(error));
