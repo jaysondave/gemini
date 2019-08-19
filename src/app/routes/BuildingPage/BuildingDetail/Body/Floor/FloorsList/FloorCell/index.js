@@ -1,5 +1,4 @@
 import React from "react";
-import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import {withRouter} from 'react-router-dom'
@@ -30,61 +29,28 @@ class FloorCell extends React.Component {
     this.props.history.push('floors/rooms');
   };
   render() {
-    const {
-      subBuilding,
-      onSubBuildingSelect,
-      onSubBuildingItemSelect,
-    } = this.props;
+    const { item, onDelete, onEdit } = this.props;
     const { menuState, anchorEl } = this.state;
-    const { id, building_name, user_name, user_address, building_report } = subBuilding;
+    const { name, target } = item;
     return (
-
       <div className="contact-item module-list-item">
 
-        <Checkbox color="primary"
-                  checked={subBuilding.selected}
-                  value="checkedF"
-                  onClick={() => {
-                    onSubBuildingSelect(subBuilding);
-                  }}
-        />
-        <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }}>
-
-          <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }} onClick={() => {
-            onSubBuildingItemSelect(subBuilding);
-          }}>
-
-            <div className="mx-1 mx-md-3"
-                 style={{ fontSize: 16, flex: 1, position: "relative" }}>
-              <div style={{ position: "relative", top: "50%", transform: "translateY(-50%)" }}>{id}</div>
-            </div>
-            <div className="col con-inf-mw-100" style={{ flex: 3 }}>
-              <p className="mb-0">
+          <div className="d-flex f-1 flex-wrap">
+            <div className="col con-inf-mw-100 ml-4 f-1">
+              <div className="mb-0">
                 <span className="text-truncate contact-name text-dark">
-                  {building_name}
+                  {name}
                 </span>
-              </p>
+              </div>
 
               <div className="text-muted">
                 <span className="email d-inline-block mr-2">
-                  {user_name},
-                        </span>
-
-                <span className="phone d-inline-block">
-                  {user_address}
+                  {target.name}{"(Intended use)"}
                 </span>
               </div>
-              <div className="text-muted">
-                <span className="email d-inline-block mr-2">
-                  {user_name},
-                        </span>
 
-                <span className="phone d-inline-block">
-                  {user_address}
-                </span>
-              </div>
             </div>
-            <div className="col con-inf-mw-100" style={{ flex: 1, textAlign: "center" }}>
+            <div className="col con-inf-mw-100 f-1 text-center">
               <p className="mb-0">
                 <span className="text-truncate contact-name text-dark">
                   {"Number of rooms"}
@@ -93,7 +59,7 @@ class FloorCell extends React.Component {
 
               <div className="text-muted">
                 <span className="email d-inline-block mr-2">
-                  {building_report}
+                  {0}
                 </span>
               </div>
             </div>
@@ -121,7 +87,6 @@ class FloorCell extends React.Component {
             </Menu>
 
           </div>
-        </div>
       </div>
     );
   }

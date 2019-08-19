@@ -7,3 +7,5 @@ export * from './subComponent';
 export * from './building';
 export * from './body';
 export * from './outdoor';
+export * from './floor';
+export * from './target';

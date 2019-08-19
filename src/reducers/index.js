@@ -12,6 +12,8 @@ import SubComponent from "./SubComponent";
 import Building from "./Building";
 import Body from './Body';
 import Outdoor from './Outdoor';
+import Target from './Target';
+import Floor from './Floor';
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -26,5 +28,7 @@ export default (history) => combineReducers({
   subComponent: SubComponent,
   building: Building,
   body: Body,
-  outdoor: Outdoor
+  outdoor: Outdoor,
+  floor: Floor,
+  target: Target
 });

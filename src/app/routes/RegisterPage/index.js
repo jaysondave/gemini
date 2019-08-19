@@ -13,6 +13,8 @@ const RegisterDashboard = ({match}) => (
       <Route path={`${match.url}/professional`} component={asyncComponent(() => import('./routes/Professional'))}/>
       <Route path={`${match.url}/stockist`} component={asyncComponent(() => import('./routes/Stockist'))}/>
       <Route path={`${match.url}/signaling`} component={asyncComponent(() => import('./routes/Signaling'))}/>
+      <Route path={`${match.url}/landlord`} component={asyncComponent(() => import('./routes/Landlord'))}/>
+      <Route path={`${match.url}/tenant`} component={asyncComponent(() => import('./routes/Tenant'))}/>
     </Switch>
   </div>
 );

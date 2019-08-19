@@ -124,3 +124,18 @@ export const FETCH_ALL_OUTDOOR = 'FETCH_ALL_OUTDOOR';
 export const DELETE_OUTDOOR = 'DELETE_OUTDOOR';
 export const UPDATE_OUTDOOR = 'UPDATE_OUTDOOR';
 
+// Component Type Module const
+export const GET_TARGET_START = 'GET_TARGET_START';
+export const GET_TARGET_SUCCESS = 'GET_TARGET_SUCCESS';
+export const GET_TARGET_FAILURE = 'GET_TARGET_FAILURE';
+export const CREATE_TARGET = 'CREATE_TARGET';
+export const UPDATE_TARGET = 'UPDATE_TARGET';
+export const DELETE_TARGET = 'DELETE_TARGET';
+
+//Floor const
+export const NEW_FLOOR = 'NEW_FLOOR';
+export const GET_FLOORS_SUCCESS = 'GET_FLOORS_SUCCESS';
+export const FETCH_ALL_FLOOR = 'FETCH_ALL_FLOOR';
+export const DELETE_FLOOR = 'DELETE_FLOOR';
+export const UPDATE_FLOOR = 'UPDATE_FLOOR';
+

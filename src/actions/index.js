@@ -10,3 +10,5 @@ export * from './SubComponent';
 export * from './Building';
 export * from './Body';
 export * from './Outdoor';
+export * from './Floor';
+export * from './Target';

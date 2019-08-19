@@ -238,6 +238,18 @@ class SidenavContent extends Component {
                   <span className="nav-text">Signaling</span>
                 </NavLink>
               </li>
+
+              <li>
+                <NavLink className="prepend-icon" to="/app/registers/landlord">
+                  <span className="nav-text">Landlord</span>
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink className="prepend-icon" to="/app/registers/tenant">
+                  <span className="nav-text">Tenant</span>
+                </NavLink>
+              </li>
             </ul>
           </li>
           <li className="menu no-arrow">

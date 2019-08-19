@@ -1,25 +1,16 @@
 import React from "react";
 import FloorCell from "./FloorCell";
 
-const FloorsList = ({
-                           subBuildingList,
-                           onSubBuildingItemSelect,
-                           onSubBuildingSelect,
-                           onSaveSubBuilding,
-                           onDeleteSubBuilding,
-                         }) => {
+const FloorsList = ({ data, onEdit, onDelete }) => {
   return (
-    subBuildingList != null?
+      data != null?
       <div className="contact-main-content">
-        {subBuildingList.map((subBuilding, index) =>
-          <FloorCell key={index} subBuilding={subBuilding}
-                           onSubBuildingItemSelect={onSubBuildingItemSelect}
-                           onDeleteSubBuilding={onDeleteSubBuilding}
-                           onSaveSubBuilding={onSaveSubBuilding}
-                           onSubBuildingSelect={onSubBuildingSelect}
+        {data.map((item, index) =>
+          <FloorCell key={index} item={item}
+                     onEdit={onEdit}
+                     onDelete={onDelete}
           />
         )}
-
       </div>
       :
       null

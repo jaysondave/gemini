@@ -461,7 +461,7 @@ class NewRegister extends React.Component {
                   </div>
                 </div>
 
-                {user_type === "agency" || user_type === "maintainer" || user_type === "professional" || user_type === "stockist" ?
+                {user_type === "agency" || user_type === "maintainer" || user_type === "professional" || user_type === "stockist" || user_type === "tenant" || user_type === "landlord"?
                   <div className="row col-md-12 col-12 p-0 mb-2">
                     <div className="col-md-4 text-right ">
                       <label className="font-size-18">P.lva</label>
@@ -562,7 +562,7 @@ class NewRegister extends React.Component {
                   </div>
                   : null
                 }
-                {user_type === "agency" || user_type === "maintainer" || user_type === "professional" || user_type === "stockist" ?
+                {user_type === "agency" || user_type === "maintainer" || user_type === "professional" || user_type === "stockist" || user_type === "tenant" || user_type === "landlord"?
                   <div className="row col-md-12 col-12 p-0 mb-2">
                     <div className="col-md-4 text-right ">
                       <label className="font-size-18">PEC</label>
@@ -578,7 +578,7 @@ class NewRegister extends React.Component {
                   </div>
                   : null
                 }
-                {user_type === "agency" || user_type === "maintainer" || user_type === "professional" || user_type === "stockist" ?
+                {user_type === "agency" || user_type === "maintainer" || user_type === "professional" || user_type === "stockist" || user_type === "tenant" || user_type === "landlord"?
                   <div className="row col-md-12 col-12 p-0 mb-2">
                     <div className="col-md-4 text-right ">
                       <label className="font-size-18">CUU</label>
