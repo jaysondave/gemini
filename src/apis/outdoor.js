@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {API_URL} from "../config";
 import ConfigurationAPI from './configurationApi';
-class OutdoorAPI extends ConfigurationAPI {
+export class OutdoorAPI extends ConfigurationAPI {
     register = (body) => {
         return new Promise((resolve, reject) => {
             return axios.post(`${API_URL}/outdoors`, body, {
@@ -48,4 +48,3 @@ class OutdoorAPI extends ConfigurationAPI {
         })
     };
 }
-export default OutdoorAPI;

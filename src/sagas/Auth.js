@@ -6,8 +6,8 @@ import {
 } from "../constants/ActionTypes";
 import {userSignInSuccess, userSignOutSuccess, userSignUpSuccess} from "../actions/Auth";
 import {showMessage, hideLoader} from "../actions/Alert";
-import AuthAPI from "../apis/auth";
 import {userHelper} from "../helpers";
+import {AuthAPI} from "../apis";
 
 
 const authApi = new AuthAPI();

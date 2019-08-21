@@ -11,6 +11,9 @@ import bodySagas from './Body';
 import outdoorSagas from './Outdoor';
 import targetSagas from './Target';
 import floorSagas from './Floor';
+import contractTypeSagas from './ContractType';
+import registrationTaxTypeSagas from './RegistrationTaxType';
+import paymentFrequencySagas from './PaymenyFrequency';
 
 export default function* rootSaga(getState) {
     yield all([
@@ -25,6 +28,9 @@ export default function* rootSaga(getState) {
         bodySagas(),
         outdoorSagas(),
         targetSagas(),
-        floorSagas()
+        floorSagas(),
+        contractTypeSagas(),
+        registrationTaxTypeSagas(),
+        paymentFrequencySagas()
     ]);
 }

@@ -13,7 +13,7 @@ import {
     fetchComponentsSuccess,
     fetchComponents
 } from "../actions";
-import ComponentAPI from "../apis/component";
+import {ComponentAPI} from "../apis";
 
 const componentAPI = new ComponentAPI();
 const fetchAllRequest = async () =>

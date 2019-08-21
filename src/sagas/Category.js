@@ -6,10 +6,8 @@ import {
     UPDATE_CATEGORY,
     DELETE_CATEGORY
 } from "../constants/ActionTypes";
-import { fetchCategories, fetchCategoriesSuccess } from "../actions/Category";
-import {showMessage, hideLoader, showLoader} from "../actions/Alert";
-import {userSignOut} from "../actions/Auth";
-import CategoryAPI from "../apis/category";
+import { fetchCategories, fetchCategoriesSuccess, userSignOut, showMessage, hideLoader } from "../actions";
+import {CategoryAPI} from "../apis";
 
 const categoryApi = new CategoryAPI();
 const fetchAllCategoriesRequest = async () =>

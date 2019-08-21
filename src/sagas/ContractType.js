@@ -1,36 +1,41 @@
 import {all, call, fork, put, takeEvery} from "redux-saga/effects";
 
 import {
-    FETCH_ALL_BODY, NEW_BODY, UPDATE_BODY, DELETE_BODY
-} from '../constants/ActionTypes';
+    GET_CONTRACT_TYPE_START,
+    CREATE_CONTRACT_TYPE,
+    UPDATE_CONTRACT_TYPE,
+    DELETE_CONTRACT_TYPE
+} from "../constants/ActionTypes";
 import {
     showMessage,
     hideLoader,
     userSignOut,
-    fetchBodiesSuccess, fetchBodies
+    fetchContractTypesSuccess,
+    fetchContractTypes
 } from "../actions";
-import {BodyAPI} from "../apis";
+import {ContractTypeAPI} from "../apis";
 
-const bodyAPI = new BodyAPI();
-const fetchAllRequest = async (id) =>
-    await  bodyAPI.fetchAll(id)
+const contractTypeAPI = new ContractTypeAPI();
+const fetchAllRequest = async () =>
+    await  contractTypeAPI.fetchAll()
         .then(resp => resp)
         .catch(error => error);
 const createRequest = async (body) =>
-    await  bodyAPI.register(body)
+    await  contractTypeAPI.createItem(body)
         .then(resp => resp)
         .catch(error => error);
 const updateRequest = async (payload) =>
-    await  bodyAPI.updateItem(payload.id, payload.body)
+    await  contractTypeAPI.updateItem(payload.id, payload.body)
         .then(resp => resp)
         .catch(error => error);
 const deleteRequest = async (payload) =>
-    await  bodyAPI.deleteItem(payload)
+    await  contractTypeAPI.deleteItem(payload)
         .then(resp => resp)
         .catch(error => error);
-function* fetchAll({payload}) {
+
+function* fetchAll() {
     try {
-        const res = yield call(fetchAllRequest, payload);
+        const res = yield call(fetchAllRequest);
         yield put(hideLoader());
         console.log({res});
         if (res.status !== 200) {
@@ -47,7 +52,7 @@ function* fetchAll({payload}) {
                     return
             }
         } else {
-            yield put(fetchBodiesSuccess(res.data.bodies));
+            yield put(fetchContractTypesSuccess(res.data.contract_types));
         }
     } catch (error) {
         yield put(showMessage(error));
@@ -72,7 +77,7 @@ function* create({payload}) {
                     return
             }
         } else {
-            yield put(fetchBodies(res.data.body.building_id));
+            yield put(fetchContractTypes());
         }
     } catch (error) {
         yield put(showMessage(error));
@@ -97,7 +102,7 @@ function* update({payload}) {
                     return
             }
         } else {
-            yield put(fetchBodies(res.data.body.building_id));
+            yield put(fetchContractTypes());
         }
     } catch (error) {
         yield put(showMessage(error));
@@ -122,23 +127,24 @@ function* deleteItem({payload}) {
                     return
             }
         } else {
-            yield put(fetchBodies(payload.building_id));
+            yield put(fetchContractTypes());
         }
     } catch (error) {
         yield put(showMessage(error));
     }
 }
+
 export function* fetchAllSaga() {
-    yield takeEvery(FETCH_ALL_BODY, fetchAll);
+    yield takeEvery(GET_CONTRACT_TYPE_START, fetchAll);
 }
 export function* createSaga() {
-    yield takeEvery(NEW_BODY, create)
+    yield takeEvery(CREATE_CONTRACT_TYPE, create)
 }
 export function* updateSaga() {
-    yield takeEvery(UPDATE_BODY, update)
+    yield takeEvery(UPDATE_CONTRACT_TYPE, update)
 }
 export function* deleteSaga() {
-    yield takeEvery(DELETE_BODY, deleteItem)
+    yield takeEvery(DELETE_CONTRACT_TYPE, deleteItem)
 }
 export default function* rootSaga() {
     yield all([

@@ -6,10 +6,10 @@ import {
     UPDATE_BUILDING_TYPE,
     DELETE_BUILDING_TYPE
 } from "../constants/ActionTypes";
-import {showMessage, hideLoader, showLoader} from "../actions/Alert";
+import {showMessage, hideLoader } from "../actions/Alert";
 import {userSignOut} from "../actions/Auth";
-import BuildingTypeAPI from "../apis/buildingType";
 import {fetchBuildingTypes, fetchBuildingTypesSuccess} from "../actions";
+import {BuildingTypeAPI} from "../apis";
 
 const buildingTypeAPI = new BuildingTypeAPI();
 const fetchAllBuildingTypesRequest = async () =>

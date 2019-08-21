@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {API_URL} from "../config";
 import ConfigurationAPI from "./configurationApi";
-class ComponentAPI extends ConfigurationAPI {
+export class ComponentAPI extends ConfigurationAPI {
     fetchAll = () => {
         return new Promise((resolve, reject) => {
             return axios.get(`${API_URL}/components`, {
@@ -50,4 +50,3 @@ class ComponentAPI extends ConfigurationAPI {
         })
     };
 }
-export default ComponentAPI;

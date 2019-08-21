@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {API_URL} from "../config";
 import ConfigurationAPI from './configurationApi';
-class BodyAPI extends ConfigurationAPI {
+export class BodyAPI extends ConfigurationAPI {
     register = (body) => {
         return new Promise((resolve, reject) => {
             return axios.post(`${API_URL}/bodies`, ({body: body}), {
@@ -48,4 +48,3 @@ class BodyAPI extends ConfigurationAPI {
         })
     };
 }
-export default BodyAPI;

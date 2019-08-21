@@ -13,7 +13,7 @@ import {
     fetchBodyTypesSuccess,
     fetchBodyTypes
 } from "../actions";
-import BodyTypeAPI from "../apis/bodyType";
+import {BodyTypeAPI} from "../apis";
 
 const bodyTypeAPI = new BodyTypeAPI();
 const fetchAllBodyTypesRequest = async () =>

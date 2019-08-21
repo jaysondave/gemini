@@ -13,7 +13,7 @@ import {
     fetchBuildingsSuccess,
     fetchBuildings
 } from "../actions";
-import BuildingAPI from "../apis/building";
+import {BuildingAPI} from "../apis";
 
 const buildingAPI = new BuildingAPI();
 const fetchAllRequest = async () =>

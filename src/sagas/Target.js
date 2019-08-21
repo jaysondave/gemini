@@ -12,7 +12,7 @@ import {
     userSignOut,
     fetchTargetsSuccess, fetchTargets
 } from "../actions";
-import TargetAPI from "../apis/target";
+import {TargetAPI} from "../apis";
 
 const targetAPI = new TargetAPI();
 const fetchAllRequest = async () =>

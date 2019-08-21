@@ -13,7 +13,7 @@ import {
     fetchSubComponentsSuccess,
     fetchSubComponents
 } from "../actions";
-import SubComponentAPI from "../apis/subComponent";
+import {SubComponentAPI} from "../apis";
 
 const subComponentAPI = new SubComponentAPI();
 const fetchAllRequest = async () =>

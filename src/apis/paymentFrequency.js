@@ -1,10 +1,10 @@
 import axios from 'axios';
 import {API_URL} from "../config";
 import ConfigurationAPI from "./configurationApi";
-export class TargetAPI extends ConfigurationAPI {
+export class PaymentFrequencyAPI extends ConfigurationAPI {
     fetchAll = () => {
         return new Promise((resolve, reject) => {
-            return axios.get(`${API_URL}/targets`, {
+            return axios.get(`${API_URL}/payment_frequencies`, {
                 headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);
@@ -16,7 +16,7 @@ export class TargetAPI extends ConfigurationAPI {
 
     createItem = (body) => {
         return new Promise((resolve, reject) => {
-            return axios.post(`${API_URL}/targets`, body, {
+            return axios.post(`${API_URL}/payment_frequencies`, body, {
                 headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);
@@ -28,7 +28,7 @@ export class TargetAPI extends ConfigurationAPI {
 
     updateItem = (id, body) => {
         return new Promise((resolve, reject) => {
-            return axios.put(`${API_URL}/targets/${id}`, body, {
+            return axios.put(`${API_URL}/payment_frequencies/${id}`, body, {
                 headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);
@@ -40,7 +40,7 @@ export class TargetAPI extends ConfigurationAPI {
 
     deleteItem = (id) => {
         return new Promise((resolve, reject) => {
-            return axios.delete(`${API_URL}/targets/${id}`, {
+            return axios.delete(`${API_URL}/payment_frequencies/${id}`, {
                 headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);

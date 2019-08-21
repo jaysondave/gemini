@@ -7,8 +7,8 @@ import {
     fetchOutdoorsSuccess,
     fetchOutdoors
 } from "../actions";
-import OutdoorAPI from "../apis/outdoor";
 import {DELETE_OUTDOOR, FETCH_ALL_OUTDOOR, NEW_OUTDOOR, UPDATE_OUTDOOR} from "../constants/ActionTypes";
+import {OutdoorAPI} from "../apis";
 
 const outdoorAPI = new OutdoorAPI();
 const fetchAllRequest = async (payload) =>

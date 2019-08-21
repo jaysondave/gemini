@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {API_URL} from "../config";
 import ConfigurationAPI from './configurationApi';
-class AuthAPI extends ConfigurationAPI {
+export class AuthAPI extends ConfigurationAPI {
     signIn = (user) => {
         console.log({user})
         return new Promise((resolve, reject) => {
@@ -43,4 +43,3 @@ class AuthAPI extends ConfigurationAPI {
         })
     };
 }
-export default AuthAPI;

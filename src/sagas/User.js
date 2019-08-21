@@ -4,10 +4,8 @@ import {
     REGISTER_USER,
     FETCH_ALL_USER
 } from "../constants/ActionTypes";
-import {showMessage, hideLoader, showLoader} from "../actions/Alert";
-import {userSignOut} from "../actions/Auth";
-import UserAPI from "../apis/user";
-import {fetchUsers, fetchUsersSuccess} from "../actions";
+import {showMessage, hideLoader, userSignOut, fetchUsers, fetchUsersSuccess } from "../actions";
+import {UserAPI} from "../apis/user";
 
 const userAPI = new UserAPI();
 const fetchAllUserRequest = async () =>

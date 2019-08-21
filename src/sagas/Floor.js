@@ -4,18 +4,15 @@ import {
     showMessage,
     hideLoader,
     userSignOut,
-    fetchOutdoorsSuccess,
-    fetchOutdoors, fetchFloorsSuccess, fetchFloors
+    fetchFloorsSuccess, fetchFloors
 } from "../actions";
 import {
     DELETE_FLOOR,
-    DELETE_OUTDOOR,
     FETCH_ALL_FLOOR,
-    FETCH_ALL_OUTDOOR, NEW_FLOOR,
-    NEW_OUTDOOR, UPDATE_FLOOR,
-    UPDATE_OUTDOOR
+    NEW_FLOOR,
+    UPDATE_FLOOR,
 } from "../constants/ActionTypes";
-import FloorAPI from "../apis/floor";
+import {FloorAPI} from "../apis";
 
 const floorAPI = new FloorAPI();
 const fetchAllRequest = async (payload) =>

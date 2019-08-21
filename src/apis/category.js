@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {API_URL} from "../config";
 import ConfigurationAPI from "./configurationApi";
-class CategoryAPI extends ConfigurationAPI {
+export class CategoryAPI extends ConfigurationAPI {
     fetchAllCategories = () => {
         return new Promise((resolve, reject) => {
             return axios.get(`${API_URL}/categories`, {
@@ -50,4 +50,3 @@ class CategoryAPI extends ConfigurationAPI {
         })
     };
 }
-export default CategoryAPI;

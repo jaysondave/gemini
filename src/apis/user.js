@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {API_URL} from "../config";
 import ConfigurationAPI from './configurationApi';
-class UserAPI extends ConfigurationAPI {
+export class UserAPI extends ConfigurationAPI {
     register = (user) => {
         return new Promise((resolve, reject) => {
             return axios.post(`${API_URL}/user`, ({user: user}), {
@@ -25,4 +25,3 @@ class UserAPI extends ConfigurationAPI {
         })
     };
 }
-export default UserAPI;

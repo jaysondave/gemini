@@ -12,3 +12,6 @@ export * from './Body';
 export * from './Outdoor';
 export * from './Floor';
 export * from './Target';
+export * from './ContractType';
+export * from './RegistrationTaxType';
+export * from './PaymentFrequency';

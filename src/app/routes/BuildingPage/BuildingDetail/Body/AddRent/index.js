@@ -1,443 +1,455 @@
 import React from "react";
-import { Modal, ModalHeader } from "reactstrap";
-import TextField from "@material-ui/core/TextField";
+import {Modal, ModalHeader} from "reactstrap";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import Input from "@material-ui/core/Input";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import BootstrapInput from "../../../../../../components/BootstrapInput";
+import InputMask from "react-input-mask";
+import {connect} from "react-redux";
+import {fetchContractTypes, fetchPaymentFrequencies, fetchRegistrationTaxTypes} from "../../../../../../actions";
 
 class AddRent extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log({ AddRent: props });
-    // const { id, type, province, city, part, areaMq, sectionRegister, name, fg, partFg, sub, partSub, category, kind, className, deduction, consistency, income, dominicalIncome, agriculturalIncome, conformity, registerationDate, dataFrom, address, heading, note } = props.cadastral;
-    this.state = {
-      id: "",
-      landLord: "",
-      tenantName: "",
-      contractType: "",
-      fg: "",
-      sub: "",
-      fgPart: "",
-      category: "",
-      className: "",
-      contractDescription: "",
-      registrationDate: "",
-      registrationNumber: "",
-      model: "",
-      registrationTax: "",
-      registrationTaxType: "",
-      rentalFee: "",
-      paymentFrequency: "",
-      daeList: "",
-      numberList: "",
-      storageCode: "",
-      registered: false,
-      note: "",
-      expiryDate: "",
-      expiryNoticeDate: "",
-      updatingDate: "",
-      endDate: ""
+
+
+    componentDidMount() {
+        this.props.dispatch(fetchContractTypes());
+        this.props.dispatch(fetchRegistrationTaxTypes());
+        this.props.dispatch(fetchPaymentFrequencies());
+    }
+    isValid = () => {
+        const {
+            landlord_id,
+            tenant_id,
+            fg,
+            sub,
+            fg_part,
+            category,
+            rent_class,
+            contract_description,
+            reg_date,
+            reg_number,
+            rent_model,
+            registration_tax,
+            registration_tax_type_id,
+            payment_frequency_id,
+            contract_type_id,
+            rental_fee,
+            storage_code,
+            note,
+            expiry_date,
+            expiry_notice_date,
+            ISTAT_update_date,
+            end_date
+        } = this.state;
+        return landlord_id !== "" && tenant_id !== "" && fg !== "" && sub !== "" && fg_part !== "" &&
+            category !== "" && rent_class !== "" && contract_description !== "" && reg_date !== "" &&
+            reg_number !== "" && rent_model !== "" && registration_tax !== "" && registration_tax_type_id !== "" &&
+            payment_frequency_id !== "" && contract_type_id !== "" && rental_fee !== "" && storage_code !== "" &&
+            note !== "" && expiry_date !== "" && expiry_notice_date !== "" && ISTAT_update_date !== "" && end_date !== "";
+
     };
-  }
+    handleChange = name => event => {
+        this.setState({[name]: event.target.value});
+    };
+    constructor(props) {
+        super(props);
+        // const { id, type, province, city, part, areaMq, sectionRegister, name, fg, partFg, sub, partSub, category, kind, className, deduction, consistency, income, dominicalIncome, agriculturalIncome, conformity, registerationDate, dataFrom, address, heading, note } = props.cadastral;
+        this.state = {
+            id: "",
+            landlord_id: "",
+            tenant_id: "",
+            fg: "",
+            sub: "",
+            fg_part: "",
+            category: "",
+            rent_class: "",
+            contract_description: "",
+            reg_date: "",
+            reg_number: "",
+            rent_model: "",
+            registration_tax: "",
+            registration_tax_type_id: "",
+            payment_frequency_id: "",
+            contract_type_id: "",
+            rental_fee: "",
+            storage_code: "",
+            note: "",
+            expiry_date: "",
+            expiry_notice_date: "",
+            ISTAT_update_date: "",
+            end_date: ""
+        };
+    }
+    render() {
+        const {onSaveRent, onRentClose, open, rent} = this.props;
+        const {
+            id,
+            landlord_id,
+            tenant_id,
+            fg,
+            sub,
+            fg_part,
+            category,
+            rent_class,
+            contract_description,
+            reg_date,
+            reg_number,
+            rent_model,
+            registration_tax,
+            registration_tax_type_id,
+            payment_frequency_id,
+            contract_type_id,
+            rental_fee,
+            storage_code,
+            note,
+            expiry_date,
+            expiry_notice_date,
+            ISTAT_update_date,
+            end_date
+        } = this.state;
+        const {
+            landlords,
+            tenants,
+            contractTypes,
+            registrationTaxTypes,
+            paymentFrequencies
+        } = this.props;
+        return (
+            <Modal className="modal-box" isOpen={open}>
+                <ModalHeader className="modal-box-header bg-primary text-white">
+                    {id === "" ? "Insert Rent" :
+                        "Edit Rent"}
+                    <IconButton className="text-white"
+                                onClick={onRentClose}>
+                        <CloseIcon/>
+                    </IconButton>
+                </ModalHeader>
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
-  };
-  handleChangeChecked = name => (event, checked) => {
-    this.setState({ [name]: checked });
-  };
+                <div className="modal-box-content">
+                    <div className="row no-gutters">
+                        <div className="col-lg-12 d-flex flex-column order-lg-1">
 
-  render() {
-    const { onSaveRent, onRentClose, open, rent } = this.props;
-    const {
-      id,
-      landLord,
-      tenantName,
-      contractType,
-      fg,
-      sub,
-      fgPart,
-      category,
-      className,
-      contractDescription,
-      registrationDate,
-      registrationNumber,
-      model,
-      registrationTax,
-      registrationTaxType,
-      rentalFee,
-      paymentFrequency,
-      daeList,
-      numberList,
-      storageCode,
-      registered,
-      note,
-      expiryDate,
-      expiryNoticeDate,
-      updatingDate,
-      endDate
-    } = this.state;
-    return (
-      <Modal className="modal-box" isOpen={open}>
-        <ModalHeader className="modal-box-header bg-primary text-white">
-          {id === "" ? "Insert Rent" :
-            "Edit Rent"}
-          <IconButton className="text-white"
-                      onClick={onRentClose}>
-            <CloseIcon/>
-          </IconButton>
-        </ModalHeader>
+                            <div className="row mb-2">
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <FormControl className="w-100">
+                                        <Select
+                                            value={landlord_id}
+                                            displayEmpty
+                                            onChange={this.handleChange("landlord_id")}
+                                            input={<BootstrapInput/>}
+                                        >
+                                            <MenuItem value={""} disabled>Select Landlord</MenuItem>
+                                            {landlords.map(item =>
+                                                <MenuItem key={item.id}
+                                                          value={item.id}>{item.first_name + " " + item.last_name}</MenuItem>
+                                            )}
+                                        </Select>
+                                    </FormControl>
+                                </div>
 
-        <div className="modal-box-content">
-          <div className="row no-gutters">
-            <div className="col-lg-12 d-flex flex-column order-lg-1">
-              <div className="row">
-                <div className="col-lg-12 col-sm-12 col-12">
-                  <FormControl className="w-100 mb-2">
-                    <InputLabel htmlFor="age-simple">Landlord</InputLabel>
-                    <Select
-                      value={landLord}
-                      onChange={this.handleChange("landLord")}
-                      input={<Input id="ageSimple1"/>}
-                    >
-                      <MenuItem value={"landLord1"}>landLord1</MenuItem>
-                      <MenuItem value={"landLord2"}>landLord2</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div>
-              </div>
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <FormControl className="w-100">
+                                        <Select
+                                            value={tenant_id}
+                                            displayEmpty
+                                            onChange={this.handleChange("tenant_id")}
+                                            input={<BootstrapInput/>}
+                                        >
+                                            <MenuItem value={""} disabled>Select Tenant</MenuItem>
+                                            {tenants.map(item =>
+                                                <MenuItem key={item.id}
+                                                          value={item.id}>{item.first_name + " " + item.last_name}</MenuItem>
+                                            )}
+                                        </Select>
+                                    </FormControl>
+                                </div>
+                            </div>
 
+                            <div className="row mb-2">
+                                <div className="col-lg-12 col-sm-12 col-12">
+                                    <FormControl className="w-100">
+                                        <Select
+                                            value={contract_type_id}
+                                            displayEmpty
+                                            onChange={this.handleChange("contract_type_id")}
+                                            input={<BootstrapInput/>}
+                                        >
+                                            <MenuItem value={""} disabled>Select Type of Contract</MenuItem>
+                                            {contractTypes.map(item =>
+                                                <MenuItem value={item.id} key={item.id}>{item.name}</MenuItem>
+                                            )}
+                                        </Select>
+                                    </FormControl>
+                                </div>
+                            </div>
 
-              <div className="row">
-                <div className="col-lg-12 col-sm-12 col-12">
-                  <FormControl className="w-100 mb-2">
-                    <InputLabel htmlFor="age-simple">TENANT NAME</InputLabel>
-                    <Select
-                      value={tenantName}
-                      onChange={this.handleChange("tenantName")}
-                      input={<Input id="ageSimple1"/>}
-                    >
-                      <MenuItem value={"tenantName1"}>tenantName1</MenuItem>
-                      <MenuItem value={"tenantName2"}>tenantName2</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-lg-12 col-sm-12 col-12">
-                  <FormControl className="w-100 mb-2">
-                    <InputLabel htmlFor="age-simple">Type of Contract</InputLabel>
-                    <Select
-                      value={contractType}
-                      onChange={this.handleChange("contractType")}
-                      input={<Input id="ageSimple1"/>}
-                    >
-                      <MenuItem value={"loan"}>Loan of Use</MenuItem>
-                      <MenuItem value={"service"}>Service Contract</MenuItem>
-                      <MenuItem value={"contract"}>Contract</MenuItem>
-                      <MenuItem value={"rent"}>Rent</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6 col-12">
-                  <TextField
-                    label={"Fg."}
-                    onChange={this.handleChange("fg")}
-                    defaultValue={fg}
-                    fullWidth
-                    margin="none"/>
-                </div>
-                <div className="col-md-6 col-12">
-                  <TextField
-                    label={"Part of Fg"}
-                    onChange={this.handleChange("fgPart")}
-                    defaultValue={fgPart}
-                    fullWidth
-                    margin="none"/>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6 col-12">
-                  <TextField
-                    label={"Sub."}
-                    onChange={this.handleChange("sub")}
-                    defaultValue={sub}
-                    fullWidth
-                    margin="none"/>
-                </div>
-                <div className="col-md-6 col-12">
-                  <TextField
-                    label={"Category"}
-                    onChange={this.handleChange("category")}
-                    defaultValue={category}
-                    fullWidth
-                    margin="none"/>
-                </div>
-              </div>
+                            <div className="row mb-2">
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <input
+                                        className='form-control form-control-lg'
+                                        placeholder={"Fg"}
+                                        value={fg}
+                                        onChange={this.handleChange("fg")}
+                                    />
+                                </div>
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <input
+                                        className='form-control form-control-lg'
+                                        placeholder={"Part of Fg"}
+                                        value={fg_part}
+                                        onChange={this.handleChange("fg_part")}
+                                    />
+                                </div>
+                            </div>
 
-              <TextField
-                label={"Class"}
-                onChange={this.handleChange("className")}
-                defaultValue={className}
-                fullWidth
-                margin="none"/>
-              <div className="row">
-                <div className="col-md-12 col-12">
-                  <textarea style={{
-                    width: "100%",
-                    height: 70,
-                    marginTop: 10,
-                    paddingHorizontal: 10,
-                    paddingVertical: 5
-                  }}
-                            value={contractDescription}
-                            placeholder="Description of Contract"
-                            onChange={this.handleChange("contractDescription")}
-                  />
-                </div>
-              </div>
+                            <div className="row mb-2">
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <input
+                                        className='form-control form-control-lg'
+                                        placeholder={"Sub"}
+                                        value={sub}
+                                        onChange={this.handleChange("sub")}
+                                    />
+                                </div>
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <input
+                                        className='form-control form-control-lg'
+                                        placeholder={"Category"}
+                                        value={category}
+                                        onChange={this.handleChange("category")}
+                                    />
+                                </div>
+                            </div>
 
-              <div className="row">
-                <div className="col-md-6 col-12">
-                  <TextField
-                    id="date"
-                    label="Registration Date"
-                    type="date"
-                    defaultValue={registrationDate}
-                    fullWidth
-                    onChange={this.handleChange("registrationDate")}
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                  />
-                </div>
-                <div className="col-md-6 col-12">
-                  <TextField
-                    label={"Registration Number"}
-                    onChange={this.handleChange("registrationNumber")}
-                    defaultValue={registrationNumber}
-                    fullWidth
-                    margin="none"/>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6 col-12">
-                  <TextField
-                    label={"Model"}
-                    onChange={this.handleChange("model")}
-                    defaultValue={model}
-                    fullWidth
-                    margin="none"/>
-                </div>
-                <div className="col-md-6 col-12">
-                  <TextField
-                    label={"Registration Tax(€)"}
-                    onChange={this.handleChange("registrationTax")}
-                    defaultValue={registrationTax}
-                    fullWidth
-                    margin="none"/>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-12 col-12">
-                  <FormControl className="w-100 mb-2">
-                    <InputLabel htmlFor="age-simple">Type of Registration Tax</InputLabel>
-                    <Select
-                      value={registrationTaxType}
-                      onChange={this.handleChange("registrationTaxType")}
-                      input={<Input id="ageSimple1"/>}
-                    >
-                      <MenuItem value={"annual"}>Annual</MenuItem>
-                      <MenuItem value={"entirePeriod"}>Entire Period</MenuItem>
-                      <MenuItem value={"verbalContract"}>Verbal Contract</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6 col-12">
-                  <TextField
-                    label={"Rental Fee(€)"}
-                    onChange={this.handleChange("rentalFee")}
-                    defaultValue={rentalFee}
-                    fullWidth
-                    margin="none"/>
-                </div>
-                <div className="col-md-6 col-12">
-                  <FormControl className="w-100 mb-2">
-                    <InputLabel htmlFor="age-simple">Payment Frequency</InputLabel>
-                    <Select
-                      value={paymentFrequency}
-                      onChange={this.handleChange("paymentFrequency")}
-                      input={<Input id="ageSimple1"/>}
-                    >
-                      <MenuItem value={"free"}>Free</MenuItem>
-                      <MenuItem value={"monthly"}>Monthly</MenuItem>
-                      <MenuItem value={"quarterly"}>Quarterly</MenuItem>
-                      <MenuItem value={"semiannual"}>semiannual</MenuItem>
-                      <MenuItem value={"annual"}>Annual</MenuItem>
-                      <MenuItem value={"twoYears"}>Two years</MenuItem>
-                      <MenuItem value={"threeYears"}>Three years</MenuItem>
-                      <MenuItem value={"fourYears"}>Four years</MenuItem>
-                      <MenuItem value={"fiveYears"}>Five years</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6 col-12">
-                  <FormControl className="w-100 mb-2">
-                    <InputLabel htmlFor="age-simple">Dae List</InputLabel>
-                    <Select
-                      value={daeList}
-                      onChange={this.handleChange("daeList")}
-                      input={<Input id="ageSimple1"/>}
-                    >
-                      <MenuItem value={"daeList1"}>daeList1</MenuItem>
-                      <MenuItem value={"daeList2"}>daeList2</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div>
+                            <div className="row mb-2">
+                                <div className="col-lg-12 col-sm-12 col-12">
+                                    <input
+                                        className='form-control form-control-lg'
+                                        placeholder={"Class"}
+                                        value={rent_class}
+                                        onChange={this.handleChange("rent_class")}
+                                    />
+                                </div>
+                            </div>
+                            <textarea
+                                className="form-control form-control-lg" rows="6"
+                                style={{
+                                    width: "100%",
+                                    height: 70,
+                                    marginTop: 5,
+                                    paddingHorizontal: 10,
+                                    paddingVertical: 5
+                                }}
+                                placeholder="Description of Contract"
+                                value={contract_description}
+                                onChange={this.handleChange("contract_description")}
+                            />
 
-                <div className="col-md-6 col-12">
-                  <FormControl className="w-100 mb-2">
-                    <InputLabel htmlFor="age-simple">Number List</InputLabel>
-                    <Select
-                      value={numberList}
-                      onChange={this.handleChange("numberList")}
-                      input={<Input id="ageSimple1"/>}
-                    >
-                      <MenuItem value={"numberList1"}>numberList1</MenuItem>
-                      <MenuItem value={"numberList2"}>numberList2</MenuItem>
-                    </Select>
-                  </FormControl>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6 col-12">
-                  <TextField
-                    label={"Storage Code"}
-                    onChange={this.handleChange("storageCode")}
-                    defaultValue={storageCode}
-                    fullWidth
-                    margin="none"/>
-                </div>
+                            <div className="row mt-2 mb-2">
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <InputMask
+                                        mask="99/99/9999"
+                                        maskChar={null}
+                                        placeholder={"Registration Date"}
+                                        value={reg_date}
+                                        onChange={this.handleChange("reg_date")}
+                                    >
+                                        {(inputProps) => <input
+                                            {...inputProps}
+                                            className="form-control form-control-lg"
+                                        />}
+                                    </InputMask>
+                                </div>
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <input
+                                        className='form-control form-control-lg'
+                                        placeholder={"Registration Number"}
+                                        value={reg_number}
+                                        onChange={this.handleChange("reg_number")}
+                                    />
+                                </div>
+                            </div>
 
-                <div className="col-md-6 col-12">
-                  <FormControlLabel
-                    control={
-                      <Checkbox color="primary"
-                                checked={registered}
-                                onChange={this.handleChangeChecked("registered")}
-                                value="registered"
-                      />
-                    }
-                    label="Registered"
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-12 col-12">
-                  <textarea style={{
-                    width: "100%",
-                    height: 70,
-                    marginTop: 10,
-                    paddingHorizontal: 10,
-                    paddingVertical: 5
-                  }}
-                            value={note}
-                            placeholder="Note"
-                            onChange={this.handleChange("note")}
-                  />
-                </div>
-              </div>
+                            <div className="row mb-2">
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <input
+                                        className='form-control form-control-lg'
+                                        placeholder={"Model"}
+                                        value={rent_model}
+                                        onChange={this.handleChange("rent_model")}
+                                    />
+                                </div>
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <input
+                                        className='form-control form-control-lg'
+                                        placeholder={"Registration Tax(€)"}
+                                        value={registration_tax}
+                                        onChange={this.handleChange("registration_tax")}
+                                    />
+                                </div>
+                            </div>
 
-              <div className="row">
-                <div className="col-md-6 col-12">
-                  <TextField
-                    id="date"
-                    label="Expiry Date"
-                    type="date"
-                    defaultValue={expiryDate}
-                    fullWidth
-                    onChange={this.handleChange("expiryDate")}
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                  />
+                            <div className="row mb-2">
+                                <div className="col-lg-12 col-sm-12 col-12">
+                                    <FormControl className="w-100">
+                                        <Select
+                                            value={registration_tax_type_id}
+                                            displayEmpty
+                                            onChange={this.handleChange("registration_tax_type_id")}
+                                            input={<BootstrapInput/>}
+                                        >
+                                            <MenuItem value={""} disabled>Select Type of Registration Tax</MenuItem>
+                                            {registrationTaxTypes.map(item =>
+                                                <MenuItem value={item.id} key={item.id}>{item.name}</MenuItem>
+                                            )}
+                                        </Select>
+                                    </FormControl>
+                                </div>
+                            </div>
+
+                            <div className="row mb-2">
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <input
+                                        className='form-control form-control-lg'
+                                        placeholder={"Rental Fee(€)"}
+                                        value={rental_fee}
+                                        onChange={this.handleChange("rental_fee")}
+                                    />
+                                </div>
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <FormControl className="w-100">
+                                        <Select
+                                            value={payment_frequency_id}
+                                            displayEmpty
+                                            onChange={this.handleChange("payment_frequency_id")}
+                                            input={<BootstrapInput/>}
+                                        >
+                                            <MenuItem value={""} disabled>Select Payment Frequency</MenuItem>
+                                            {paymentFrequencies.map(item =>
+                                                <MenuItem value={item.id} key={item.id}>{item.name}</MenuItem>
+                                            )}
+                                        </Select>
+                                    </FormControl>
+                                </div>
+                            </div>
+
+                            <div className="row mb-2">
+                                <div className="col-lg-12 col-sm-12 col-12">
+                                    <input
+                                        className='form-control form-control-lg'
+                                        placeholder={"Storage Code"}
+                                        value={storage_code}
+                                        onChange={this.handleChange("storage_code")}
+                                    />
+                                </div>
+                            </div>
+                            <textarea
+                                className="form-control form-control-lg" rows="6"
+                                style={{
+                                    width: "100%",
+                                    height: 70,
+                                    marginTop: 5,
+                                    paddingHorizontal: 10,
+                                    paddingVertical: 5
+                                }}
+                                placeholder="Note"
+                                value={note}
+                                onChange={this.handleChange("note")}
+                            />
+
+                            <div className="row mt-2 mb-2">
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <InputMask
+                                        mask="99/99/9999"
+                                        maskChar={null}
+                                        placeholder={"Expiry Date"}
+                                        value={expiry_date}
+                                        onChange={this.handleChange("expiry_date")}
+                                    >
+                                        {(inputProps) => <input
+                                            {...inputProps}
+                                            className="form-control form-control-lg"
+                                        />}
+                                    </InputMask>
+                                </div>
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <InputMask
+                                        mask="99/99/9999"
+                                        maskChar={null}
+                                        placeholder={"Expiry Notice Date"}
+                                        value={expiry_notice_date}
+                                        onChange={this.handleChange("expiry_notice_date")}
+                                    >
+                                        {(inputProps) => <input
+                                            {...inputProps}
+                                            className="form-control form-control-lg"
+                                        />}
+                                    </InputMask>
+                                </div>
+                            </div>
+
+                            <div className="row mb-2">
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <InputMask
+                                        mask="99/99/9999"
+                                        maskChar={null}
+                                        placeholder={"ISTAT Updating Date"}
+                                        value={ISTAT_update_date}
+                                        onChange={this.handleChange("ISTAT_update_date")}
+                                    >
+                                        {(inputProps) => <input
+                                            {...inputProps}
+                                            className="form-control form-control-lg"
+                                        />}
+                                    </InputMask>
+                                </div>
+                                <div className="col-lg-6 col-sm-6 col-12">
+                                    <InputMask
+                                        mask="99/99/9999"
+                                        maskChar={null}
+                                        placeholder={"End Date"}
+                                        value={end_date}
+                                        onChange={this.handleChange("end_date")}
+                                    >
+                                        {(inputProps) => <input
+                                            {...inputProps}
+                                            className="form-control form-control-lg"
+                                        />}
+                                    </InputMask>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="col-md-6 col-12">
-                  <TextField
-                    id="date"
-                    label="Expiry Notice Date"
-                    type="date"
-                    defaultValue={expiryNoticeDate}
-                    fullWidth
-                    onChange={this.handleChange("expiryNoticeDate")}
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                  />
+                <div className="modal-box-footer d-flex flex-row">
+                    <Button disabled={this.isValid()} variant="contained" color="primary" onClick={() => {
+                        onRentClose();
+                        onSaveRent(
+                            {});
+                        this.setState({});
+
+                    }}>Save Rent</Button>
                 </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6 col-12">
-                  <TextField
-                    id="date"
-                    label="ISTAT Updating Date"
-                    type="date"
-                    defaultValue={updatingDate}
-                    fullWidth
-                    onChange={this.handleChange("updatingDate")}
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="col-md-6 col-12">
-                  <TextField
-                    id="date"
-                    label="End Date"
-                    type="date"
-                    defaultValue={endDate}
-                    fullWidth
-                    onChange={this.handleChange("endDate")}
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                  />
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <div className="modal-box-footer d-flex flex-row">
-          <Button disabled={id === ""} variant="contained" color="primary" onClick={() => {
-            onRentClose();
-            onSaveRent(
-              {});
-            this.setState({});
-
-          }}>Save Rent</Button>
-        </div>
-      </Modal>
-    );
-  }
+            </Modal>
+        );
+    }
 }
 
-export default AddRent;
+const mapStateToProps = ({users, contractType, registrationTaxType, paymentFrequency}) => {
+    const {landlords, tenants} = users.users;
+    const {contractTypes} = contractType;
+    const {registrationTaxTypes} = registrationTaxType;
+    const {paymentFrequencies} = paymentFrequency;
+    return {
+        landlords,
+        tenants,
+        contractTypes,
+        registrationTaxTypes,
+        paymentFrequencies,
+    }
+};
+export default connect(mapStateToProps)(AddRent);

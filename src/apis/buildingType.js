@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {API_URL} from "../config";
 import ConfigurationAPI from "./configurationApi";
-class BuildingTypeAPI extends ConfigurationAPI {
+export class BuildingTypeAPI extends ConfigurationAPI {
     fetchAllBuildingTypes = () => {
         return new Promise((resolve, reject) => {
             return axios.get(`${API_URL}/building_types`, {
@@ -50,4 +50,3 @@ class BuildingTypeAPI extends ConfigurationAPI {
         })
     };
 }
-export default BuildingTypeAPI;

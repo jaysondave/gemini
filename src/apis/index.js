@@ -9,3 +9,6 @@ export * from './body';
 export * from './outdoor';
 export * from './floor';
 export * from './target';
+export * from './contractType';
+export * from './registrationTaxType';
+export * from './paymentFrequency';

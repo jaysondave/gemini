@@ -1,36 +1,41 @@
 import {all, call, fork, put, takeEvery} from "redux-saga/effects";
 
 import {
-    FETCH_ALL_BODY, NEW_BODY, UPDATE_BODY, DELETE_BODY
-} from '../constants/ActionTypes';
+    GET_PAYMENT_FREQUENCY_START,
+    CREATE_PAYMENT_FREQUENCY,
+    UPDATE_PAYMENT_FREQUENCY,
+    DELETE_PAYMENT_FREQUENCY
+} from "../constants/ActionTypes";
 import {
     showMessage,
     hideLoader,
     userSignOut,
-    fetchBodiesSuccess, fetchBodies
+    fetchPaymentFrequenciesSuccess,
+    fetchPaymentFrequencies
 } from "../actions";
-import {BodyAPI} from "../apis";
+import {PaymentFrequencyAPI} from "../apis";
 
-const bodyAPI = new BodyAPI();
-const fetchAllRequest = async (id) =>
-    await  bodyAPI.fetchAll(id)
+const paymentFrequencyAPI = new PaymentFrequencyAPI();
+const fetchAllRequest = async () =>
+    await  paymentFrequencyAPI.fetchAll()
         .then(resp => resp)
         .catch(error => error);
 const createRequest = async (body) =>
-    await  bodyAPI.register(body)
+    await  paymentFrequencyAPI.createItem(body)
         .then(resp => resp)
         .catch(error => error);
 const updateRequest = async (payload) =>
-    await  bodyAPI.updateItem(payload.id, payload.body)
+    await  paymentFrequencyAPI.updateItem(payload.id, payload.body)
         .then(resp => resp)
         .catch(error => error);
 const deleteRequest = async (payload) =>
-    await  bodyAPI.deleteItem(payload)
+    await  paymentFrequencyAPI.deleteItem(payload)
         .then(resp => resp)
         .catch(error => error);
-function* fetchAll({payload}) {
+
+function* fetchAll() {
     try {
-        const res = yield call(fetchAllRequest, payload);
+        const res = yield call(fetchAllRequest);
         yield put(hideLoader());
         console.log({res});
         if (res.status !== 200) {
@@ -47,7 +52,7 @@ function* fetchAll({payload}) {
                     return
             }
         } else {
-            yield put(fetchBodiesSuccess(res.data.bodies));
+            yield put(fetchPaymentFrequenciesSuccess(res.data.payment_frequencies));
         }
     } catch (error) {
         yield put(showMessage(error));
@@ -72,7 +77,7 @@ function* create({payload}) {
                     return
             }
         } else {
-            yield put(fetchBodies(res.data.body.building_id));
+            yield put(fetchPaymentFrequencies());
         }
     } catch (error) {
         yield put(showMessage(error));
@@ -97,7 +102,7 @@ function* update({payload}) {
                     return
             }
         } else {
-            yield put(fetchBodies(res.data.body.building_id));
+            yield put(fetchPaymentFrequencies());
         }
     } catch (error) {
         yield put(showMessage(error));
@@ -122,23 +127,24 @@ function* deleteItem({payload}) {
                     return
             }
         } else {
-            yield put(fetchBodies(payload.building_id));
+            yield put(fetchPaymentFrequencies());
         }
     } catch (error) {
         yield put(showMessage(error));
     }
 }
+
 export function* fetchAllSaga() {
-    yield takeEvery(FETCH_ALL_BODY, fetchAll);
+    yield takeEvery(GET_PAYMENT_FREQUENCY_START, fetchAll);
 }
 export function* createSaga() {
-    yield takeEvery(NEW_BODY, create)
+    yield takeEvery(CREATE_PAYMENT_FREQUENCY, create)
 }
 export function* updateSaga() {
-    yield takeEvery(UPDATE_BODY, update)
+    yield takeEvery(UPDATE_PAYMENT_FREQUENCY, update)
 }
 export function* deleteSaga() {
-    yield takeEvery(DELETE_BODY, deleteItem)
+    yield takeEvery(DELETE_PAYMENT_FREQUENCY, deleteItem)
 }
 export default function* rootSaga() {
     yield all([

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {API_URL} from "../config";
 import ConfigurationAPI from './configurationApi';
-class FloorAPI extends ConfigurationAPI {
+export class FloorAPI extends ConfigurationAPI {
     register = (body) => {
         return new Promise((resolve, reject) => {
             return axios.post(`${API_URL}/floors`, body, {
@@ -48,4 +48,3 @@ class FloorAPI extends ConfigurationAPI {
         })
     };
 }
-export default FloorAPI;

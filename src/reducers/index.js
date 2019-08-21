@@ -14,6 +14,9 @@ import Body from './Body';
 import Outdoor from './Outdoor';
 import Target from './Target';
 import Floor from './Floor';
+import ContractType from './ContractType';
+import RegistrationTaxType from './RegistrationTaxType';
+import PaymentFrequency from './PaymentFrequency';
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -30,5 +33,8 @@ export default (history) => combineReducers({
   body: Body,
   outdoor: Outdoor,
   floor: Floor,
-  target: Target
+  target: Target,
+  contractType: ContractType,
+  registrationTaxType: RegistrationTaxType,
+  paymentFrequency: PaymentFrequency
 });

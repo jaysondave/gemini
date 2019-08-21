@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {API_URL} from "../config";
 import ConfigurationAPI from "./configurationApi";
-class BodyTypeAPI extends ConfigurationAPI {
+export class BodyTypeAPI extends ConfigurationAPI {
     fetchAllBodyTypes = () => {
         return new Promise((resolve, reject) => {
             return axios.get(`${API_URL}/body_types`, {
@@ -50,4 +50,3 @@ class BodyTypeAPI extends ConfigurationAPI {
         })
     };
 }
-export default BodyTypeAPI;

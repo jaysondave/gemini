@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {API_URL} from "../config";
 import ConfigurationAPI from './configurationApi';
-class BuildingAPI extends ConfigurationAPI {
+export class BuildingAPI extends ConfigurationAPI {
     register = (body) => {
         return new Promise((resolve, reject) => {
             return axios.post(`${API_URL}/buildings`, ({building: body}), {
@@ -48,4 +48,3 @@ class BuildingAPI extends ConfigurationAPI {
         })
     };
 }
-export default BuildingAPI;
