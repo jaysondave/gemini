@@ -3,6 +3,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import {withRouter} from 'react-router-dom'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class RentCell extends React.Component {
 
@@ -26,63 +27,45 @@ class RentCell extends React.Component {
   }
 
   render() {
-    const {
-      subBuilding,
-      onSubBuildingSelect,
-      onSubBuildingItemSelect,
-    } = this.props;
+    const { item, onDelete, onEdit } = this.props;
     const { menuState, anchorEl } = this.state;
-    const { id, building_name, user_name, user_address, building_report } = subBuilding;
+    const { landlord, tenant, expiry_date, end_date } = item;
     return (
 
       <div className="contact-item module-list-item">
-
-        <Checkbox color="primary"
-                  checked={subBuilding.selected}
-                  value="checkedF"
-                  onClick={() => {
-                    onSubBuildingSelect(subBuilding);
-                  }}
-        />
-        <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }}>
-
-          <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }} onClick={() => {
-            onSubBuildingItemSelect(subBuilding);
-          }}>
-
-            <div className="mx-1 mx-md-3"
-                 style={{ fontSize: 16, flex: 1, position: "relative" }}>
-              <div style={{ position: "relative", top: "50%", transform: "translateY(-50%)" }}>{id}</div>
-            </div>
-            <div className="col con-inf-mw-100" style={{ flex: 3 }}>
+        <div className="d-flex f-1 flex-wrap">
+            <div className="col con-inf-mw-100 f-2">
               <p className="mb-0">
-                <span className="text-truncate contact-name text-dark">
-                  {building_name}
+                <FontAwesomeIcon icon="user"/>
+                <span className="text-truncate contact-name text-dark ml-1">
+                  {landlord.first_name + " " + landlord.last_name}{"(Landlord)"}
+                </span>
+              </p>
+
+              <p className="mb-0">
+                <FontAwesomeIcon icon="user"/>
+                <span className="text-truncate contact-name text-dark ml-1">
+                  {tenant.first_name + " " + tenant.last_name}{"(Tenant)"}
                 </span>
               </p>
 
               <div className="text-muted">
-                <span className="email d-inline-block mr-2">
-                  {user_name},
-                        </span>
-
-                <span className="phone d-inline-block">
-                  {user_address}
-                </span>
               </div>
             </div>
-            <div className="col con-inf-mw-100" style={{ flex: 1, textAlign: "center" }}>
+            <div className="col con-inf-mw-100 f-1">
               <p className="mb-0">
-                <span className="text-truncate contact-name text-dark">
-                  {"No.Reporter"}
+                <FontAwesomeIcon icon="calendar-alt"/>
+                <span className="text-truncate contact-name text-dark ml-1">
+                  {expiry_date}{"(Expiry Date)"}
                 </span>
               </p>
 
-              <div className="text-muted">
-                <span className="email d-inline-block mr-2">
-                  {building_report}
+              <p className="mb-0">
+                <FontAwesomeIcon icon="clock"/>
+                <span className="text-truncate contact-name text-dark ml-1">
+                  {end_date}{"(End Date)"}
                 </span>
-              </div>
+              </p>
             </div>
           </div>
           <div className="col-auto px-1 actions d-none d-sm-flex">
@@ -90,7 +73,6 @@ class RentCell extends React.Component {
               <i className="zmdi zmdi-more-vert"/>
             </IconButton>
           </div>
-        </div>
       </div>
     );
   }

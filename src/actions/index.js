@@ -15,3 +15,10 @@ export * from './Target';
 export * from './ContractType';
 export * from './RegistrationTaxType';
 export * from './PaymentFrequency';
+export * from './Rent';
+export * from './Compliance';
+export * from './System';
+export * from './DocumentType';
+export * from './Document';
+export * from './CertificateType'
+export * from './Certificate';

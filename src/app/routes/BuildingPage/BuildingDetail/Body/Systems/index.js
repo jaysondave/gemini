@@ -11,11 +11,15 @@ import AppModuleHeader from "components/AppModuleHeader/index";
 import CustomScrollbars from "util/CustomScrollbars";
 import AddSystem from "../AddSystem";
 import SystemList from "./SystemList";
+import {createNewFloor, fetchFloors, fetchTargets, showLoader, updateFloor} from "../../../../../../actions";
+import FloorsList from "../Floor/FloorsList";
+import ReactPaginate from "react-paginate";
+import AddFloor from "../Floor/AddFloor";
 
 
 class SystemsList extends Component {
 
-  BuildingSideBar = () => {
+  SideBar = () => {
     return <div className="module-side">
       <div className="module-side-header">
         <div className="module-logo">
@@ -37,32 +41,6 @@ class SystemsList extends Component {
     </div>;
 
   };
-
-  onBuildingItemSelect(building) {
-    let currentBuilding = this.getBuilding(1457690400);
-    console.log({currentBuilding});
-    this.setState({
-      subBuildingList: currentBuilding.subBuildingList,
-      loader: true
-    });
-    setTimeout(() => {
-      this.setState({ loader: false });
-    }, 1500);
-  }
-
-  onSubBuildingItemSelect(subBuilding) {
-    let selectedSubBuilding = this.getSubBuilding(subBuilding.id);
-    this.setState({
-      selectedSubBuilding: selectedSubBuilding,
-      loader: true
-    });
-    setTimeout(() => {
-      this.setState({ loader: false });
-    }, 1500);
-  }
-  onAddSystem = () => {
-    this.setState({ addSystem: true });
-  };
   onSystemClose = () => {
     this.setState({ addSystem: false });
   };
@@ -70,6 +48,65 @@ class SystemsList extends Component {
     this.setState({
       showMessage: false
     });
+  };
+
+  onToggleDrawer() {
+    this.setState({
+      drawerState: !this.state.drawerState
+    });
+  }
+
+  onAddSystem = () => {
+    this.setState({ addSystem: true });
+  };
+  onEdit = (item) => {
+    this.setState({selectedItem: item, addSystem: true});
+  };
+  onSave = (data) => {
+    this.setState({addSystem: false});
+    this.props.dispatch(showLoader());
+    this.props.dispatch(createNewFloor(data));
+  };
+  onUpdate = (body) => {
+    this.setState({addSystem: false, selectedItem: {}});
+    this.props.dispatch(showLoader());
+    this.props.dispatch(updateFloor(body.id, body));
+  };
+  onDelete = () => {
+    this.setState({addSystem: false, selectedItem: {}});
+  };
+  onClose = () => {
+    this.setState({addSystem: false, selectedItem: {}});
+  };
+  showList = (data, selectedPageNum, numPerPage) => {
+    const dataList = data.slice(selectedPageNum * numPerPage, (selectedPageNum + 1) * numPerPage);
+    return <SystemList
+        data={dataList}
+        onEdit={this.onEdit}
+        onDelete={this.onDelete}
+    />;
+  };
+  onSearch = (e) => {
+    this.setState({searchKey: e.target.value, selectPageNum: 0})
+  };
+  filterData = (data, searchKey) => {
+    return data.filter((c) =>
+        c.name.toLowerCase().indexOf(searchKey.toLowerCase()) > -1
+    );
+  };
+  handlePageClick = data => {
+    const selectPageNum = data.selected;
+    this.setState({selectPageNum});
+  };
+
+  componentDidMount() {
+    this.props.dispatch(fetchTargets());
+    this.props.dispatch(fetchFloors(this.getBodyId()));
+  }
+  getBodyId = () => {
+    const url = this.props.match.url;
+    const url_array = url.split('/');
+    return url_array[url_array.length - 2];
   };
 
   constructor(props) {
@@ -80,118 +117,27 @@ class SystemsList extends Component {
       showMessage: false,
       selectedSectionId: 1,
       drawerState: false,
-      user: {
-        name: "Robert Johnson",
-        email: "robert.johnson@example.com",
-        avatar: "https://via.placeholder.com/150x150"
-      },
       searchUser: "",
-      filterOption: "All buildings",
-      buildingList: buildingList,
-      subBuildingList: null,
-      selectedSubBuilding: null,
-      selectedBuilding: null,
-      selectedSubBuildings: 0,
-      addBuildingState: false,
-      addSystem: false
+      addSystem: false,
+      selectedItem: {},
+
+      selectPageNum: 0,
+      numPerPage: 10
     };
   }
-  componentDidMount() {
-    this.onBuildingItemSelect();
-  }
-
-  getBuilding(id) {
-    return buildingList.find((building) => building.id === id);
-  }
-
-  getSubBuilding(id) {
-    return this.state.subBuildingList.find((subBuilding) => subBuilding.id === id);
-  }
-  updateBuilding(evt) {
-    this.setState({
-      searchUser: evt.target.value
-    });
-    this.filterBuilding(evt.target.value);
-  }
-
-  onToggleDrawer() {
-    this.setState({
-      drawerState: !this.state.drawerState
-    });
-  }
-  onSaveSystem = () => {
-
-  };
-  onSubBuildingSelect = (data) => {
-    data.selected = !data.selected;
-    let selectedSubBuildings = 0;
-    const subBuildingList = this.state.subBuildingList.map(building => {
-        if (building.selected) {
-          selectedSubBuildings++;
-        }
-        if (building.id === data.id) {
-          if (building.selected) {
-            selectedSubBuildings++;
-          }
-          return data;
-        } else {
-          return building;
-        }
-      }
-    );
-    this.setState({
-      selectedSubBuildings: selectedSubBuildings,
-      subBuildingList: subBuildingList
-    });
-
-  };
-  getAllSubBuilding = () => {
-    let subBuildingList = this.state.subBuildingList.map((building) => building ? {
-      ...building,
-      selected: true
-    } : building);
-    this.setState({
-      selectedSubBuildings: subBuildingList.length,
-      subBuildingList: subBuildingList
-    });
-  };
-  getUnselectedAllSubBuilding = () => {
-    let subBuildingList = this.state.subBuildingList.map((building) => building ? {
-      ...building,
-      selected: false
-    } : building);
-    this.setState({
-      selectedSubBuildings: 0,
-      subBuildingList: subBuildingList
-    });
-  };
-  onAllSubBuildingSelect() {
-    const selectAll = this.state.selectedSubBuildings < this.state.subBuildingList.length;
-    if (selectAll) {
-      this.getAllSubBuilding();
-    } else {
-      this.getUnselectedAllSubBuilding();
-    }
-  }
-  onDeleteSelectedBuilding = () => {
-    const subBuildingList = this.state.subBuildingList.filter((building) => !building.selected);
-    this.setState({
-      alertMessage: "BuildingDetail Deleted Successfully",
-      showMessage: true,
-      subBuildingList: subBuildingList,
-      selectedSubBuildings: 0
-    });
-  };
-  showBuildings = ({ subBuildingList, buildingList }) => {
-    return <SystemList
-      subBuildingList={subBuildingList}
-      onSubBuildingItemSelect={this.onSubBuildingItemSelect.bind(this)}
-      onSubBuildingSelect={this.onSubBuildingSelect.bind(this)}
-    />;
-  };
-
   render() {
-    const { subBuildingList, addBuildingState, addSystem, selectedSubBuildings, alertMessage, showMessage, noContentFoundMessage, currentBuilding } = this.state;
+    const {
+      searchKey,
+      addSystem,
+      alertMessage,
+      showMessage,
+      noContentFoundMessage,
+      selectedItem,
+      selectPageNum,
+      numPerPage
+    } = this.state;
+    const {systems} = this.props;
+    const dataList = searchKey === "" ? systems : this.filterData(systems, searchKey);
     return (
       <div className="app-wrapper">
         <div className="app-module animated slideInUpTiny animation-duration-3">
@@ -200,11 +146,11 @@ class SystemsList extends Component {
             <Drawer
               open={this.state.drawerState}
               onClose={this.onToggleDrawer.bind(this)}>
-              {this.BuildingSideBar()}
+              {this.SideBar()}
             </Drawer>
           </div>
           <div className="app-module-sidenav d-none d-xl-flex">
-            {this.BuildingSideBar()}
+            {this.SideBar()}
           </div>
 
           <div className="module-box">
@@ -214,8 +160,8 @@ class SystemsList extends Component {
                 <i className="zmdi zmdi-menu"/>
               </IconButton>
               <AppModuleHeader placeholder="Search here..." notification={false} apps={false}
-                               onChange={this.updateBuilding.bind(this)}
-                               value={this.state.searchUser}/>
+                               onChange={this.onSearch}
+                               value={searchKey}/>
             </div>
             <div className="module-box-content">
               <div className="module-box-topbar">
@@ -223,40 +169,51 @@ class SystemsList extends Component {
                             onClick={() => {this.props.history.goBack();}}>
                   <i className="zmdi zmdi-arrow-back"/>
                 </IconButton>
-                <Checkbox color="primary"
-                          indeterminate={selectedSubBuildings > 0 && selectedSubBuildings < subBuildingList.length}
-                          checked={selectedSubBuildings > 0}
-                          onChange={this.onAllSubBuildingSelect.bind(this)}
-                          value="SelectMail"/>
-
-
-                {selectedSubBuildings > 0 &&
-                <IconButton className="icon-btn"
-                            onClick={this.onDeleteSelectedBuilding.bind(this)}>
-                  <i className="zmdi zmdi-delete"/>
-                </IconButton>}
 
               </div>
               <CustomScrollbars className="module-list-scroll scrollbar"
                                 style={{ height: this.props.width >= 1200 ? "calc(100vh - 265px)" : "calc(100vh - 245px)" }}>
-                {subBuildingList == null ?
+                {dataList == null || dataList.length === 0 ?
                   <div className="h-100 d-flex align-items-center justify-content-center">
                     {noContentFoundMessage}
                   </div>
-                  : this.showBuildings(this.state)
+                  : this.showList(dataList, selectPageNum, numPerPage)
                 }
 
 
               </CustomScrollbars>
-
+              <ReactPaginate
+                  previousLabel={'previous'}
+                  nextLabel={'next'}
+                  breakLabel={<a className="page-link">...</a>}
+                  pageCount={dataList.length / numPerPage}
+                  marginPagesDisplayed={2}
+                  pageRangeDisplayed={5}
+                  onPageChange={this.handlePageClick}
+                  containerClassName="pagination justify-content-center"
+                  pageClassName="page-item"
+                  activeClassName="active"
+                  disabledClassName="disabled"
+                  pageLinkClassName="page-link"
+                  previousClassName="page-item"
+                  previousLinkClassName="page-link"
+                  nextClassName="page-item"
+                  nextLinkClassName="page-link"
+                  breakClassName="page-item disabled"
+              />
             </div>
           </div>
         </div>
+        {addSystem &&
         <AddSystem
-          open={addSystem}
-          onSaveRent={this.onSaveSystem}
-          onClose={this.onSystemClose}
+            open={addSystem}
+            item={selectedItem}
+            body_id={this.getBodyId()}
+            onSave={this.onSave}
+            onUpdate={this.onUpdate}
+            onClose={this.onClose}
         />
+        }
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
           open={showMessage}
@@ -271,9 +228,10 @@ class SystemsList extends Component {
   }
 }
 
-const mapStateToProps = ({ settings }) => {
+const mapStateToProps = ({ settings, system }) => {
   const { width } = settings;
-  return { width };
+  const { systems } = system;
+  return { width, systems };
 };
 export default withRouter(connect(mapStateToProps)(SystemsList));
 

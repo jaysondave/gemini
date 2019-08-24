@@ -55,26 +55,26 @@ class FloorList extends Component {
     }
 
     onAddRent = () => {
-        this.setState({addRent: true});
+        this.setState({addFloor: true});
     };
     onEdit = (item) => {
-        this.setState({selectedItem: item, addRent: true});
+        this.setState({selectedItem: item, addFloor: true});
     };
     onSave = (data) => {
-        this.setState({addRent: false});
+        this.setState({addFloor: false});
         this.props.dispatch(showLoader());
         this.props.dispatch(createNewFloor(data));
     };
     onUpdate = (body) => {
-        this.setState({addRent: false, selectedItem: {}});
+        this.setState({addFloor: false, selectedItem: {}});
         this.props.dispatch(showLoader());
         this.props.dispatch(updateFloor(body.id, body));
     };
     onDelete = () => {
-        this.setState({addRent: false, selectedItem: {}});
+        this.setState({addFloor: false, selectedItem: {}});
     };
     onClose = () => {
-        this.setState({addRent: false, selectedItem: {}});
+        this.setState({addFloor: false, selectedItem: {}});
     };
 
     showList = (data, selectedPageNum, numPerPage) => {
@@ -120,7 +120,7 @@ class FloorList extends Component {
             selectedSectionId: 1,
             drawerState: false,
             searchKey: "",
-            addRent: false,
+            addFloor: false,
             selectedItem: {},
 
             selectPageNum: 0,
@@ -131,7 +131,7 @@ class FloorList extends Component {
     render() {
         const {
             searchKey,
-            addRent,
+            addFloor,
             alertMessage,
             showMessage,
             noContentFoundMessage,
@@ -206,9 +206,9 @@ class FloorList extends Component {
                         </div>
                     </div>
                 </div>
-                {addRent &&
+                {addFloor &&
                   <AddFloor
-                      open={addRent}
+                      open={addFloor}
                       item={selectedItem}
                       body_id={this.getBodyId()}
                       onSave={this.onSave}

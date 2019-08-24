@@ -1,22 +1,14 @@
 import React from "react";
 import RentCell from "./RentCell/index";
 
-const RentList = ({
-                           subBuildingList,
-                           onSubBuildingItemSelect,
-                           onSubBuildingSelect,
-                           onSaveSubBuilding,
-                           onDeleteSubBuilding,
-                         }) => {
+const RentList = ({ data, onEdit, onDelete }) => {
   return (
-    subBuildingList != null?
+      data != null?
       <div className="contact-main-content">
-        {subBuildingList.map((subBuilding, index) =>
-          <RentCell key={index} subBuilding={subBuilding}
-                           onSubBuildingItemSelect={onSubBuildingItemSelect}
-                           onDeleteSubBuilding={onDeleteSubBuilding}
-                           onSaveSubBuilding={onSaveSubBuilding}
-                           onSubBuildingSelect={onSubBuildingSelect}
+        {data.map((item, index) =>
+          <RentCell key={index} item={item}
+                    onEdit={onEdit}
+                    onDelete={onDelete}
           />
         )}
 

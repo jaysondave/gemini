@@ -19,6 +19,59 @@ class AddRent extends React.Component {
         this.props.dispatch(fetchRegistrationTaxTypes());
         this.props.dispatch(fetchPaymentFrequencies());
     }
+    handleSubmit = () => {
+        const {
+            landlord_id,
+            tenant_id,
+            fg,
+            sub,
+            fg_part,
+            category,
+            rent_class,
+            contract_description,
+            reg_date,
+            reg_number,
+            rent_model,
+            registration_tax,
+            registration_tax_type_id,
+            payment_frequency_id,
+            contract_type_id,
+            rental_fee,
+            storage_code,
+            note,
+            expiry_date,
+            expiry_notice_date,
+            ISTAT_update_date,
+            end_date
+        } = this.state;
+        const { body_id, onSave } = this.props;
+        const body = {
+            body_id,
+            landlord_id,
+            tenant_id,
+            fg,
+            sub,
+            fg_part,
+            category,
+            rent_class,
+            contract_description,
+            reg_date,
+            reg_number,
+            rent_model,
+            registration_tax,
+            registration_tax_type_id,
+            payment_frequency_id,
+            contract_type_id,
+            rental_fee,
+            storage_code,
+            note,
+            expiry_date,
+            expiry_notice_date,
+            ISTAT_update_date,
+            end_date
+        };
+        onSave(body);
+    };
     isValid = () => {
         const {
             landlord_id,
@@ -84,7 +137,7 @@ class AddRent extends React.Component {
         };
     }
     render() {
-        const {onSaveRent, onRentClose, open, rent} = this.props;
+        const {onSave, onClose, open, rent} = this.props;
         const {
             id,
             landlord_id,
@@ -123,7 +176,7 @@ class AddRent extends React.Component {
                     {id === "" ? "Insert Rent" :
                         "Edit Rent"}
                     <IconButton className="text-white"
-                                onClick={onRentClose}>
+                                onClick={() => onClose()}>
                         <CloseIcon/>
                     </IconButton>
                 </ModalHeader>
@@ -426,12 +479,8 @@ class AddRent extends React.Component {
                 </div>
 
                 <div className="modal-box-footer d-flex flex-row">
-                    <Button disabled={this.isValid()} variant="contained" color="primary" onClick={() => {
-                        onRentClose();
-                        onSaveRent(
-                            {});
-                        this.setState({});
-
+                    <Button disabled={!this.isValid()} variant="contained" color="primary" onClick={() => {
+                        this.handleSubmit();
                     }}>Save Rent</Button>
                 </div>
             </Modal>

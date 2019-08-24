@@ -14,6 +14,13 @@ import floorSagas from './Floor';
 import contractTypeSagas from './ContractType';
 import registrationTaxTypeSagas from './RegistrationTaxType';
 import paymentFrequencySagas from './PaymenyFrequency';
+import rentSagas from './Rent';
+import complianceSagas from './Compliance';
+import systemSagas from './System';
+import documentTypeSagas from './DocumentType';
+import documentSagas from './Document';
+import certificateTypeSagas from './CertificateType';
+import certificateSagas from './Certificate'
 
 export default function* rootSaga(getState) {
     yield all([
@@ -31,6 +38,13 @@ export default function* rootSaga(getState) {
         floorSagas(),
         contractTypeSagas(),
         registrationTaxTypeSagas(),
-        paymentFrequencySagas()
+        paymentFrequencySagas(),
+        rentSagas(),
+        complianceSagas(),
+        systemSagas(),
+        documentTypeSagas(),
+        documentSagas(),
+        certificateTypeSagas(),
+        certificateSagas()
     ]);
 }

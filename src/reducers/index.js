@@ -17,6 +17,13 @@ import Floor from './Floor';
 import ContractType from './ContractType';
 import RegistrationTaxType from './RegistrationTaxType';
 import PaymentFrequency from './PaymentFrequency';
+import Rent from "./Rent";
+import Compliance from "./Compliance";
+import System from "./System";
+import DocumentType from "./DocumentType";
+import Document from "./Document";
+import CertificateType from "./CertificateType";
+import Certificate from "./Certificate";
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -36,5 +43,12 @@ export default (history) => combineReducers({
   target: Target,
   contractType: ContractType,
   registrationTaxType: RegistrationTaxType,
-  paymentFrequency: PaymentFrequency
+  paymentFrequency: PaymentFrequency,
+  rent: Rent,
+  compliance: Compliance,
+  system: System,
+  documentType: DocumentType,
+  document: Document,
+  certificateType: CertificateType,
+  certificate: Certificate
 });
