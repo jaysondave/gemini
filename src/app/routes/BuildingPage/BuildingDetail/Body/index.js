@@ -14,7 +14,7 @@ const BodyDetail = ({match}) => (
       <Route exact path={`${match.url}/systems/sub-components`} component={asyncComponent(() => import('./Systems/SubComponent'))}/>
       <Route path={`${match.url}/documents`} component={asyncComponent(() => import('./Documents'))}/>
       <Route path={`${match.url}/cadstral`} component={asyncComponent(() => import('./Cadstral'))}/>
-      <Route path={`${match.url}/certified`} component={asyncComponent(() => import('./Certified'))}/>
+      <Route path={`${match.url}/certificate`} component={asyncComponent(() => import('./Certified'))}/>
       <Route exact path={`${match.url}/insurance`} component={asyncComponent(() => import('./Insurances'))}/>
       <Route exact path={`${match.url}/insurance/claims`} component={asyncComponent(() => import('./Insurances/Claims'))}/>
     </Switch>

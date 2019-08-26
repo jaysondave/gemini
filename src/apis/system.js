@@ -4,7 +4,7 @@ import ConfigurationAPI from './configurationApi';
 export class SystemAPI extends ConfigurationAPI {
     register = (body) => {
         return new Promise((resolve, reject) => {
-            return axios.post(`${API_URL}/systems`, body, {
+            return axios.post(`${API_URL}/body_systems`, body, {
                 headers: {...this.initHeaders(), 'Content-Type': 'multipart/form-data'}
             }).then((response) => {
                 resolve(response);
@@ -15,7 +15,7 @@ export class SystemAPI extends ConfigurationAPI {
     };
     fetchAll = (id) => {
         return new Promise((resolve, reject) => {
-            return axios.get(`${API_URL}/systems?body_id=${id}`,  {
+            return axios.get(`${API_URL}/body_systems?body_id=${id}`,  {
                 headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);
@@ -26,7 +26,7 @@ export class SystemAPI extends ConfigurationAPI {
     };
     updateItem = (id, body) => {
         return new Promise((resolve, reject) => {
-            return axios.put(`${API_URL}/systems/${id}`, ({outdoor: body}), {
+            return axios.put(`${API_URL}/body_systems/${id}`, ({outdoor: body}), {
                 headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);
@@ -38,7 +38,7 @@ export class SystemAPI extends ConfigurationAPI {
 
     deleteItem = (id) => {
         return new Promise((resolve, reject) => {
-            return axios.delete(`${API_URL}/systems/${id}`, {
+            return axios.delete(`${API_URL}/body_systems/${id}`, {
                 headers: this.initHeaders()
             }).then((response) => {
                 resolve(response);

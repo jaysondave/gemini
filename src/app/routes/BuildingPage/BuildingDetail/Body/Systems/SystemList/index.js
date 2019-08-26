@@ -1,22 +1,14 @@
 import React from "react";
 import SystemCell from "./SystemCell";
 
-const SystemList = ({
-                           subBuildingList,
-                           onSubBuildingItemSelect,
-                           onSubBuildingSelect,
-                           onSaveSubBuilding,
-                           onDeleteSubBuilding,
-                         }) => {
+const SystemList = ({data, onEdit, onDelete}) => {
   return (
-    subBuildingList != null?
+      data != null?
       <div className="contact-main-content">
-        {subBuildingList.map((subBuilding, index) =>
-          <SystemCell key={index} subBuilding={subBuilding}
-                           onSubBuildingItemSelect={onSubBuildingItemSelect}
-                           onDeleteSubBuilding={onDeleteSubBuilding}
-                           onSaveSubBuilding={onSaveSubBuilding}
-                           onSubBuildingSelect={onSubBuildingSelect}
+        {data.map((item, index) =>
+          <SystemCell key={index} item={item}
+                      onEdit={onEdit}
+                      onDelete={onDelete}
           />
         )}
 

@@ -1,20 +1,23 @@
 import React, { Component } from "react";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
-import Checkbox from "@material-ui/core/Checkbox";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
-import buildingList from "../../../data/buildingList";
 import AppModuleHeader from "components/AppModuleHeader/index";
 import CustomScrollbars from "util/CustomScrollbars";
 import AddSystem from "../AddSystem";
 import SystemList from "./SystemList";
-import {createNewFloor, fetchFloors, fetchTargets, showLoader, updateFloor} from "../../../../../../actions";
-import FloorsList from "../Floor/FloorsList";
+import {
+  createNewFloor, createNewSystem,
+  fetchFloors,
+  fetchSystems,
+  fetchTargets,
+  showLoader,
+  updateFloor, updateSystem
+} from "../../../../../../actions";
 import ReactPaginate from "react-paginate";
-import AddFloor from "../Floor/AddFloor";
 
 
 class SystemsList extends Component {
@@ -65,12 +68,12 @@ class SystemsList extends Component {
   onSave = (data) => {
     this.setState({addSystem: false});
     this.props.dispatch(showLoader());
-    this.props.dispatch(createNewFloor(data));
+    this.props.dispatch(createNewSystem(data));
   };
   onUpdate = (body) => {
     this.setState({addSystem: false, selectedItem: {}});
     this.props.dispatch(showLoader());
-    this.props.dispatch(updateFloor(body.id, body));
+    this.props.dispatch(updateSystem(body.id, body));
   };
   onDelete = () => {
     this.setState({addSystem: false, selectedItem: {}});
@@ -100,8 +103,7 @@ class SystemsList extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(fetchTargets());
-    this.props.dispatch(fetchFloors(this.getBodyId()));
+    this.props.dispatch(fetchSystems(this.getBodyId()));
   }
   getBodyId = () => {
     const url = this.props.match.url;
@@ -137,7 +139,7 @@ class SystemsList extends Component {
       numPerPage
     } = this.state;
     const {systems} = this.props;
-    const dataList = searchKey === "" ? systems : this.filterData(systems, searchKey);
+    const dataList = systems;
     return (
       <div className="app-wrapper">
         <div className="app-module animated slideInUpTiny animation-duration-3">

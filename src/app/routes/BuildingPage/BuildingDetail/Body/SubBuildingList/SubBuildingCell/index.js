@@ -1,5 +1,4 @@
 import React from "react";
-import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -35,7 +34,7 @@ class SubBuildingCell extends React.Component {
     };
     onEditCertificate = () => {
         this.setState({menuState: false});
-        this.props.history.push(`body/${this.props.item.id}/certified`)
+        this.props.history.push(`body/${this.props.item.id}/certificate`)
     };
     onEditInsurance = () => {
         this.setState({menuState: false});
@@ -74,7 +73,7 @@ class SubBuildingCell extends React.Component {
             "SYSTEMS",
             "DOCUMENTATIONS",
             "CADASTRAL",
-            "CERTIFIED",
+            "CERTIFICATE",
             "INSURANCE"
         ];
         return (
@@ -154,7 +153,7 @@ class SubBuildingCell extends React.Component {
                                     case "FLOORS":
                                         this.onEditFloor();
                                         return;
-                                    case "CERTIFIED":
+                                    case "CERTIFICATE":
                                         this.onEditCertificate();
                                         return;
                                     case "INSURANCE":
