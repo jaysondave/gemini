@@ -1,6 +1,5 @@
 import React from "react";
 import { Modal, ModalHeader } from "reactstrap";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
@@ -9,78 +8,77 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import BootstrapInput from 'components/BootstrapInput';
 
-
-
-
 class AddCadastral extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log({ AddCadastral: props });
-    // const { id, type, province, city, part, areaMq, sectionRegister, name, fg, partFg, sub, partSub, category, kind, className, deduction, consistency, income, dominicalIncome, agriculturalIncome, conformity, registerationDate, dataFrom, address, heading, note } = props.cadastral;
-    this.state = {
-      id: "",
-      type: "building",
-      province: "",
-      city: "",
-      part: "",
-      areaMq: "",
-      sectionRegister: "",
-      denominator: "",
-      fg: "",
-      partFg: "",
-      sub: "",
-      partSub: "",
-      category: "",
-      kind: "",
-      className: "",
-      deduction: "",
-      censusArea: "",
-      microZone: "",
-      consistency: "",
-      income: "",
-      dominicalIncome: "",
-      agriculturalIncome: "",
-      conformity: "",
-      registerationDate: "",
-      dataFrom: "",
-      address: "",
-      heading: "",
-      note: ""
-    };
-  }
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: "",
+      name: "",
+      cadastral_type: "",
+      province: "",
+      city: "",
+      part: "",
+      area_mq: "",
+      selection_register: "",
+      denominator: "",
+      fg: "",
+      partFg: "",
+      sub: "",
+      sub_part: "",
+      category: "",
+      kind: "",
+      cadastral_class: "",
+      deduction: "",
+      census_area: "",
+      micro_zone: "",
+      consistancy: "",
+      income: "",
+      dominicale_income: "",
+      agricultural_income: "",
+      conformity: "",
+      reg_date: "",
+      data_from: "",
+      address: "",
+      heading: "",
+      note: "",
+      attachment: null
+    };
+  }
+
   render() {
-    const { onSaveCadastral, onCadastralClose, open, Cadastral } = this.props;
+    const { onSave, onClose, open, selectedItem } = this.props;
     const {
       id,
-      type,
+      name,
+      cadastral_type,
       province,
       city,
       part,
-      areaMq,
-      sectionRegister,
+      area_mq,
+      selection_register,
       denominator,
       fg,
       partFg,
       sub,
-      partSub,
+      sub_part,
       category,
       kind,
-      className,
-      censusArea,
-      microZone,
+      cadastral_class,
       deduction,
-      consistency,
+      census_area,
+      micro_zone,
+      consistancy,
       income,
-      dominicalIncome,
-      agriculturalIncome,
+      dominicale_income,
+      agricultural_income,
       conformity,
-      registerationDate,
-      dataFrom,
+      reg_date,
+      data_from,
       address,
       heading,
       note
@@ -91,7 +89,7 @@ class AddCadastral extends React.Component {
           {id === "" ? "Insert Cadastral" :
             "Edit Cadastral"}
           <IconButton className="text-white"
-                      onClick={onCadastralClose}>
+                      onClick={() => onClose()}>
             <CloseIcon/>
           </IconButton>
         </ModalHeader>
@@ -103,12 +101,14 @@ class AddCadastral extends React.Component {
                 <div className="col-lg-6 col-sm-6 col-12">
                   <FormControl className="w-100">
                     <Select
-                      value={type}
-                      onChange={this.handleChange("type")}
+                      value={cadastral_type}
+                      onChange={this.handleChange("cadastral_type")}
+                      displayEmpty
                       input={<BootstrapInput/>}
                     >
-                      <MenuItem value={"building"}>Building</MenuItem>
-                      <MenuItem value={"landing"}>Landing</MenuItem>
+                      <MenuItem value={""} disabled>Select Type</MenuItem>
+                      <MenuItem value={"Building"}>Building</MenuItem>
+                      <MenuItem value={"Landing"}>Landing</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
@@ -118,12 +118,16 @@ class AddCadastral extends React.Component {
                   <input
                     className='form-control form-control-lg'
                     placeholder={"Province"}
+                    value={province}
+                    onChange={this.handleChange("province")}
                   />
                 </div>
                 <div className="col-lg-6 col-sm-6 col-12">
                   <input
                     className='form-control form-control-lg'
                     placeholder={"City"}
+                    value={city}
+                    onChange={this.handleChange("city")}
                   />
                 </div>
               </div>
@@ -132,12 +136,16 @@ class AddCadastral extends React.Component {
                   <input
                     className='form-control form-control-lg'
                     placeholder={"Part"}
+                    value={part}
+                    onChange={this.handleChange("part")}
                   />
                 </div>
                 <div className="col-md-6 col-12">
                   <input
                     className='form-control form-control-lg'
                     placeholder={"Area(mq)"}
+                    value={area_mq}
+                    onChange={this.handleChange("area_mq")}
                   />
                 </div>
               </div>
@@ -146,12 +154,16 @@ class AddCadastral extends React.Component {
                   <input
                     className='form-control form-control-lg'
                     placeholder={"Section Register"}
+                    value={selection_register}
+                    onChange={this.handleChange("selection_register")}
                   />
                 </div>
                 <div className="col-md-6 col-12">
                   <input
                     className='form-control form-control-lg'
                     placeholder={"Name"}
+                    value={name}
+                    onChange={this.handleChange("name")}
                   />
                 </div>
               </div>
@@ -160,12 +172,16 @@ class AddCadastral extends React.Component {
                   <input
                     className='form-control form-control-lg'
                     placeholder={"Fg."}
+                    value={fg}
+                    onChange={this.handleChange("fg")}
                   />
                 </div>
                 <div className="col-md-6 col-12">
                   <input
                     className='form-control form-control-lg'
                     placeholder={"Part of Fg"}
+                    value={part}
+                    onChange={this.handleChange("part")}
                   />
                 </div>
               </div>
@@ -174,31 +190,37 @@ class AddCadastral extends React.Component {
                   <input
                     className='form-control form-control-lg'
                     placeholder={"Sub."}
+                    value={sub}
+                    onChange={this.handleChange("sub")}
                   />
                 </div>
                 <div className="col-md-6 col-12">
                   <input
                     className='form-control form-control-lg'
                     placeholder={"Part of Sub"}
+                    value={sub_part}
+                    onChange={this.handleChange("sub_part")}
                   />
                 </div>
               </div>
               <div className="row mb-2">
                 <div className="col-md-6 col-12">
-                  {type === "building" ?
+                  {cadastral_type === "Building" ?
                     <input
                       className='form-control form-control-lg'
                       placeholder={"Category"}
+                      value={category}
+                      onChange={this.handleChange("category")}
                     />
                     :
                     <FormControl className="w-100 mb-2">
                       <Select
                         value={kind}
                         onChange={this.handleChange("kind")}
+                        displayEmpty
                         input={<BootstrapInput/>}
                       >
-                        <MenuItem value={"kind1"}>kind1</MenuItem>
-                        <MenuItem value={"kind2"}>kind2</MenuItem>
+                        <MenuItem value={""} disabled>Select Kind</MenuItem>
                       </Select>
                     </FormControl>}
 
@@ -207,6 +229,8 @@ class AddCadastral extends React.Component {
                   <input
                     className='form-control form-control-lg'
                     placeholder={"Class"}
+                    value={cadastral_class}
+                    onChange={this.handleChange("cadastral_class")}
                   />
                 </div>
               </div>
@@ -214,14 +238,18 @@ class AddCadastral extends React.Component {
                 <div className="col-md-6 col-12">
                   <input
                     className='form-control form-control-lg'
-                    placeholder={type === "building" ? "Census area" : "Deduction"}
+                    placeholder={cadastral_type === "Building" ? "Census area" : "Deduction"}
+                    value={cadastral_type === "Building"? census_area: deduction}
+                    onChange={this.handleChange(cadastral_type === "Building"? "census_area": "deduction")}
                   />
                 </div>
-                {type === "building" ?
+                {cadastral_type === "Building" ?
                   <div className="col-md-6 col-12">
                     <input
                       className='form-control form-control-lg'
                       placeholder={"Micro-zone"}
+                      value={micro_zone}
+                      onChange={this.handleChange("micro_zone")}
                     />
                   </div>
                   : null
@@ -232,13 +260,17 @@ class AddCadastral extends React.Component {
                 <div className="col-md-6 col-12">
                   <input
                     className='form-control form-control-lg'
-                    placeholder={type === "building" ? "Consistency" : "Dominicale Income"}
+                    placeholder={cadastral_type === "Building" ? "Consistency" : "Dominicale Income"}
+                    value={cadastral_type === "Building"?consistancy: dominicale_income}
+                    onChange={this.handleChange(cadastral_type === "Building"? "consistancy": "dominicale_income")}
                   />
                 </div>
                 <div className="col-md-6 col-12">
                   <input
                     className='form-control form-control-lg'
-                    placeholder={type === "building" ? "Income(€)" : "Agricultural Income(€)"}
+                    placeholder={cadastral_type === "Building" ? "Income(€)" : "Agricultural Income(€)"}
+                    value={cadastral_type === "Building"?income: agricultural_income}
+                    onChange={this.handleChange(cadastral_type === "Building"? "income": "agricultural_income")}
                   />
                 </div>
               </div>
@@ -248,10 +280,10 @@ class AddCadastral extends React.Component {
                     <Select
                       value={conformity}
                       onChange={this.handleChange("conformity")}
+                      displayEmpty
                       input={<BootstrapInput/>}
                     >
-                      <MenuItem value={"conformity1"}>conformity1</MenuItem>
-                      <MenuItem value={"conformity2"}>conformity2</MenuItem>
+                      <MenuItem value={""} disabled>Select Compliance</MenuItem>
                     </Select>
                   </FormControl>
                 </div>
@@ -259,6 +291,8 @@ class AddCadastral extends React.Component {
                   <input
                     className='form-control form-control-lg'
                     placeholder={"Registration Date"}
+                    value={reg_date}
+                    onChange={this.handleChange("reg_date")}
                   />
                 </div>
               </div>
@@ -271,13 +305,15 @@ class AddCadastral extends React.Component {
                 className="form-control form-control-lg" rows="6"
                 style={{ width: "100%", height: 70, marginTop: 5, paddingHorizontal: 10, paddingVertical: 5 }}
                 placeholder="Data From"
-                onChange={this.handleChange("dataFrom")}
+                value={data_from}
+                onChange={this.handleChange("data_from")}
               />
 
               <textarea
                 className="form-control form-control-lg" rows="6"
                 style={{ width: "100%", height: 70, marginTop: 5, paddingHorizontal: 10, paddingVertical: 5 }}
                 placeholder="Heading"
+                value={heading}
                 onChange={this.handleChange("heading")}
               />
 
@@ -285,6 +321,7 @@ class AddCadastral extends React.Component {
                 className="form-control form-control-lg" rows="6"
                 style={{ width: "100%", height: 70, marginTop: 5, paddingHorizontal: 10, paddingVertical: 5 }}
                 placeholder="Note"
+                value={note}
                 onChange={this.handleChange("note")}
               />
             </div>
@@ -293,10 +330,6 @@ class AddCadastral extends React.Component {
 
         <div className="modal-box-footer d-flex flex-row">
           <Button disabled={id === ""} variant="contained" color="primary" onClick={() => {
-            onCadastralClose();
-            onSaveCadastral(
-              {});
-            this.setState({});
 
           }}>Save Cadstral</Button>
         </div>
