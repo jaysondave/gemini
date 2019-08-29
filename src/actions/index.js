@@ -22,3 +22,5 @@ export * from './DocumentType';
 export * from './Document';
 export * from './CertificateType'
 export * from './Certificate';
+export * from './Cadastral';
+export * from './CadastralKind';

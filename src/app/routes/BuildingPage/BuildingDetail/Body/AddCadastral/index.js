@@ -7,9 +7,126 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import BootstrapInput from 'components/BootstrapInput';
+import InputMask from "react-input-mask";
+import {connect} from "react-redux";
 
 class AddCadastral extends React.Component {
-
+  handleSubmit = () => {
+    const {
+      name,
+      cadastral_type,
+      province,
+      city,
+      part,
+      area_mq,
+      section_register,
+      fg,
+      part_fg,
+      sub,
+      sub_part,
+      category,
+      kind_id,
+      cadastral_class,
+      deduction,
+      census_area,
+      micro_zone,
+      consistancy,
+      income,
+      dominicale_income,
+      agricultural_income,
+      compliance_id,
+      reg_date,
+      data_from,
+      address,
+      heading,
+      note
+    } = this.state;
+    const { body_id, onSave } = this.props;
+    let body = new FormData();
+    body.append("body[body_id]", body_id);
+    body.append("body[name]", name);
+    body.append("body[cadastral_type]", cadastral_type);
+    body.append("body[province]", province);
+    body.append("body[city]", city);
+    body.append("body[part]", part);
+    body.append("body[area_mq]", area_mq);
+    body.append("body[section_register]", section_register);
+    body.append("body[fg]", fg);
+    body.append("body[part_fg]", part_fg);
+    body.append("body[sub]", sub);
+    body.append("body[sub_part]", sub_part);
+    body.append("body[category]", category);
+    body.append("body[kind_id]", kind_id);
+    body.append("body[cadastral_class]", cadastral_class);
+    body.append("body[deduction]", deduction);
+    body.append("body[census_area]", census_area);
+    body.append("body[micro_zone]", micro_zone);
+    body.append("body[consistancy]", consistancy);
+    body.append("body[income]", income);
+    body.append("body[dominicale_income]", dominicale_income);
+    body.append("body[agricultural_income]", agricultural_income);
+    body.append("body[compliance_id]", compliance_id);
+    body.append("body[reg_date]", reg_date);
+    body.append("body[data_from]", data_from);
+    body.append("body[address]", address);
+    body.append("body[heading]", heading);
+    body.append("body[note]", note);
+    onSave(body);
+  };
+  isValid = () => {
+    const {
+      name,
+      cadastral_type,
+      province,
+      city,
+      part,
+      area_mq,
+      section_register,
+      fg,
+      part_fg,
+      sub,
+      sub_part,
+      category,
+      kind_id,
+      cadastral_class,
+      deduction,
+      census_area,
+      micro_zone,
+      consistancy,
+      income,
+      dominicale_income,
+      agricultural_income,
+      compliance_id,
+      reg_date,
+      data_from,
+      address,
+      heading,
+      note
+    } = this.state;
+    return name !== "" &&
+        cadastral_type !== ""  &&
+        province !== ""  &&
+        city !== ""  &&
+        part !== ""  &&
+        note !== ""  &&
+        area_mq !== ""  &&
+        section_register !== ""  &&
+        fg !== ""  &&
+        part_fg !== ""  &&
+        sub !== ""  &&
+        sub_part !== ""  &&
+        (cadastral_type === "Landing" ? kind_id !== "": category !== "") &&
+        cadastral_class !== ""  &&
+        (cadastral_type === "Building" ? census_area !== "": deduction !== "") &&
+        (cadastral_type === "Building" ? micro_zone !== "": true) &&
+        (cadastral_type === "Building" ? consistancy !== "": dominicale_income !== "") &&
+        (cadastral_type === "Building" ? income !== "": agricultural_income !== "") &&
+        compliance_id !== ""  &&
+        reg_date !== ""  &&
+        data_from !== ""  &&
+        address !== ""  &&
+        heading !== "";
+  };
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
@@ -19,19 +136,18 @@ class AddCadastral extends React.Component {
     this.state = {
       id: "",
       name: "",
-      cadastral_type: "",
+      cadastral_type: "Building",
       province: "",
       city: "",
       part: "",
       area_mq: "",
-      selection_register: "",
-      denominator: "",
+      section_register: "",
       fg: "",
-      partFg: "",
+      part_fg: "",
       sub: "",
       sub_part: "",
       category: "",
-      kind: "",
+      kind_id: 1,
       cadastral_class: "",
       deduction: "",
       census_area: "",
@@ -40,7 +156,7 @@ class AddCadastral extends React.Component {
       income: "",
       dominicale_income: "",
       agricultural_income: "",
-      conformity: "",
+      compliance_id: "",
       reg_date: "",
       data_from: "",
       address: "",
@@ -60,14 +176,13 @@ class AddCadastral extends React.Component {
       city,
       part,
       area_mq,
-      selection_register,
-      denominator,
+      section_register,
       fg,
-      partFg,
+      part_fg,
       sub,
       sub_part,
       category,
-      kind,
+      kind_id,
       cadastral_class,
       deduction,
       census_area,
@@ -76,13 +191,14 @@ class AddCadastral extends React.Component {
       income,
       dominicale_income,
       agricultural_income,
-      conformity,
+      compliance_id,
       reg_date,
       data_from,
       address,
       heading,
       note
     } = this.state;
+    const { compliances, cadastralKinds } = this.props;
     return (
       <Modal className="modal-box" isOpen={open}>
         <ModalHeader className="modal-box-header bg-primary text-white">
@@ -111,6 +227,24 @@ class AddCadastral extends React.Component {
                       <MenuItem value={"Landing"}>Landing</MenuItem>
                     </Select>
                   </FormControl>
+                </div>
+              </div>
+              <div className="row mb-2">
+                <div className="col-md-6 col-12">
+                  <input
+                      className='form-control form-control-lg'
+                      placeholder={"Name"}
+                      value={name}
+                      onChange={this.handleChange("name")}
+                  />
+                </div>
+                <div className="col-md-6 col-12">
+                  <input
+                      className='form-control form-control-lg mb-2'
+                      placeholder={"Address"}
+                      value={address}
+                      onChange={this.handleChange("address")}
+                  />
                 </div>
               </div>
               <div className="row mb-2">
@@ -154,16 +288,8 @@ class AddCadastral extends React.Component {
                   <input
                     className='form-control form-control-lg'
                     placeholder={"Section Register"}
-                    value={selection_register}
-                    onChange={this.handleChange("selection_register")}
-                  />
-                </div>
-                <div className="col-md-6 col-12">
-                  <input
-                    className='form-control form-control-lg'
-                    placeholder={"Name"}
-                    value={name}
-                    onChange={this.handleChange("name")}
+                    value={section_register}
+                    onChange={this.handleChange("section_register")}
                   />
                 </div>
               </div>
@@ -180,8 +306,8 @@ class AddCadastral extends React.Component {
                   <input
                     className='form-control form-control-lg'
                     placeholder={"Part of Fg"}
-                    value={part}
-                    onChange={this.handleChange("part")}
+                    value={part_fg}
+                    onChange={this.handleChange("part_fg")}
                   />
                 </div>
               </div>
@@ -215,12 +341,13 @@ class AddCadastral extends React.Component {
                     :
                     <FormControl className="w-100 mb-2">
                       <Select
-                        value={kind}
-                        onChange={this.handleChange("kind")}
+                        value={kind_id}
+                        onChange={this.handleChange("kind_id")}
                         displayEmpty
                         input={<BootstrapInput/>}
                       >
                         <MenuItem value={""} disabled>Select Kind</MenuItem>
+                        {cadastralKinds.map(c => <MenuItem value={c.id}>{c.name}</MenuItem>)}
                       </Select>
                     </FormControl>}
 
@@ -278,29 +405,31 @@ class AddCadastral extends React.Component {
                 <div className="col-md-6 col-12">
                   <FormControl className="w-100 mb-2">
                     <Select
-                      value={conformity}
-                      onChange={this.handleChange("conformity")}
+                      value={compliance_id}
+                      onChange={this.handleChange("compliance_id")}
                       displayEmpty
                       input={<BootstrapInput/>}
                     >
                       <MenuItem value={""} disabled>Select Compliance</MenuItem>
+                      {compliances.map(c => <MenuItem value={c.id}>{c.name}</MenuItem>)}
                     </Select>
                   </FormControl>
                 </div>
                 <div className="col-md-6 col-12">
-                  <input
-                    className='form-control form-control-lg'
-                    placeholder={"Registration Date"}
-                    value={reg_date}
-                    onChange={this.handleChange("reg_date")}
-                  />
+                  <InputMask
+                      mask="99/99/2999"
+                      maskChar={null}
+                      placeholder={"Registration Date(dd/mm/yyyy)"}
+                      value={reg_date}
+                      onChange={this.handleChange("reg_date")}
+                  >
+                    {(inputProps) => <input
+                        {...inputProps}
+                        className="form-control form-control-lg"
+                    />}
+                  </InputMask>
                 </div>
               </div>
-
-              <input
-                className='form-control form-control-lg mb-2'
-                placeholder={"Address"}
-              />
               <textarea
                 className="form-control form-control-lg" rows="6"
                 style={{ width: "100%", height: 70, marginTop: 5, paddingHorizontal: 10, paddingVertical: 5 }}
@@ -329,13 +458,20 @@ class AddCadastral extends React.Component {
         </div>
 
         <div className="modal-box-footer d-flex flex-row">
-          <Button disabled={id === ""} variant="contained" color="primary" onClick={() => {
-
+          <Button disabled={!this.isValid()} variant="contained" color="primary" onClick={() => {
+            this.handleSubmit()
           }}>Save Cadstral</Button>
         </div>
       </Modal>
     );
   }
 }
-
-export default AddCadastral;
+const mapStateToProps = ({ cadastralKind, compliance }) => {
+  const { cadastralKinds } = cadastralKind;
+  const { compliances } = compliance;
+  return {
+    cadastralKinds,
+    compliances
+  }
+};
+export default connect(mapStateToProps)(AddCadastral);

@@ -20,7 +20,9 @@ import systemSagas from './System';
 import documentTypeSagas from './DocumentType';
 import documentSagas from './Document';
 import certificateTypeSagas from './CertificateType';
-import certificateSagas from './Certificate'
+import certificateSagas from './Certificate';
+import cadastralKindSagas from './CadastralKind';
+import cadastralSagas from './Cadastral';
 
 export default function* rootSaga(getState) {
     yield all([
@@ -45,6 +47,8 @@ export default function* rootSaga(getState) {
         documentTypeSagas(),
         documentSagas(),
         certificateTypeSagas(),
-        certificateSagas()
+        certificateSagas(),
+        cadastralKindSagas(),
+        cadastralSagas()
     ]);
 }

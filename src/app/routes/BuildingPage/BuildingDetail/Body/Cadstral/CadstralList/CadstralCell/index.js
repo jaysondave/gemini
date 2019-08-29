@@ -1,7 +1,5 @@
 import React from "react";
-import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
-import Menu from "@material-ui/core/Menu";
 import {withRouter} from 'react-router-dom'
 
 class CadstralCell extends React.Component {
@@ -27,61 +25,32 @@ class CadstralCell extends React.Component {
 
   render() {
     const {
-      subBuilding,
-      onSubBuildingSelect,
-      onSubBuildingItemSelect,
+      item,
+      onEdit,
+      onDelete,
     } = this.props;
     const { menuState, anchorEl } = this.state;
-    const { id, building_name, user_name, user_address, building_report } = subBuilding;
+    const { id, name, address, city, province } = item;
     return (
 
       <div className="contact-item module-list-item">
-
-        <Checkbox color="primary"
-                  checked={subBuilding.selected}
-                  value="checkedF"
-                  onClick={() => {
-                    onSubBuildingSelect(subBuilding);
-                  }}
-        />
-        <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }}>
-
-          <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }} onClick={() => {
-            onSubBuildingItemSelect(subBuilding);
-          }}>
-
-            <div className="mx-1 mx-md-3"
-                 style={{ fontSize: 16, flex: 1, position: "relative" }}>
-              <div style={{ position: "relative", top: "50%", transform: "translateY(-50%)" }}>{id}</div>
-            </div>
-            <div className="col con-inf-mw-100" style={{ flex: 3 }}>
-              <p className="mb-0">
-                <span className="text-truncate contact-name text-dark">
-                  {building_name}
-                </span>
-              </p>
-
-              <div className="text-muted">
-                <span className="email d-inline-block mr-2">
-                  {user_name},
-                        </span>
-
-                <span className="phone d-inline-block">
-                  {user_address}
+        <div className="d-flex f-1 flex-wrap">
+            <div className="col con-inf-mw-100 f-3">
+              <div className="row mb-0">
+                <span className="text-truncate contact-name text-primary-color text-bold font-size-18">
+                  {name}
                 </span>
               </div>
-            </div>
-            <div className="col con-inf-mw-100" style={{ flex: 1, textAlign: "center" }}>
-              <p className="mb-0">
-                <span className="text-truncate contact-name text-dark">
-                  {"No.Reporter"}
-                </span>
-              </p>
 
-              <div className="text-muted">
-                <span className="email d-inline-block mr-2">
-                  {building_report}
-                </span>
+              <div className="row text-muted">
+                <div className="row col-6 col-md-6 col-xs-12">
+                  <span>
+                    <i className="zmdi zmdi-pin zmdi-hc-fw font-size-18"/>
+                  </span>
+                  <span className="d-inline-block mr-2">
+                      {address + ", " + city + " " + province}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -90,7 +59,6 @@ class CadstralCell extends React.Component {
               <i className="zmdi zmdi-more-vert"/>
             </IconButton>
           </div>
-        </div>
       </div>
     );
   }

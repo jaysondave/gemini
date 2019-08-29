@@ -19,3 +19,5 @@ export * from './documentType';
 export * from './document';
 export * from './certificateType';
 export * from './certificate';
+export * from './cadastralKind';
+export * from './cadastral';
