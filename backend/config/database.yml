@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: postgres
+  host: database-1.cfo5psfwhuv8.us-east-2.rds.amazonaws.com
+  port: 5432
+
+development:
+ <<: *default
+ database: gemini-dev
+
+test:
+ <<: *default
+ database:
+
+production:
+ <<: *default
+ database: gemini
