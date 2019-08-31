@@ -23,6 +23,7 @@ import certificateTypeSagas from './CertificateType';
 import certificateSagas from './Certificate';
 import cadastralKindSagas from './CadastralKind';
 import cadastralSagas from './Cadastral';
+import insuranceSagas from './Insurance';
 
 export default function* rootSaga(getState) {
     yield all([
@@ -49,6 +50,7 @@ export default function* rootSaga(getState) {
         certificateTypeSagas(),
         certificateSagas(),
         cadastralKindSagas(),
-        cadastralSagas()
+        cadastralSagas(),
+        insuranceSagas()
     ]);
 }

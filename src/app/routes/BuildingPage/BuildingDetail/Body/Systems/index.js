@@ -10,12 +10,10 @@ import CustomScrollbars from "util/CustomScrollbars";
 import AddSystem from "../AddSystem";
 import SystemList from "./SystemList";
 import {
-  createNewFloor, createNewSystem,
-  fetchFloors,
+  createNewSystem,
   fetchSystems,
-  fetchTargets,
   showLoader,
-  updateFloor, updateSystem
+  updateSystem
 } from "../../../../../../actions";
 import ReactPaginate from "react-paginate";
 
@@ -43,9 +41,6 @@ class SystemsList extends Component {
       </div>
     </div>;
 
-  };
-  onSystemClose = () => {
-    this.setState({ addSystem: false });
   };
   handleRequestClose = () => {
     this.setState({
@@ -119,7 +114,7 @@ class SystemsList extends Component {
       showMessage: false,
       selectedSectionId: 1,
       drawerState: false,
-      searchUser: "",
+      searchKey: "",
       addSystem: false,
       selectedItem: {},
 

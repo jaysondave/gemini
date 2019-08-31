@@ -26,6 +26,7 @@ import CertificateType from "./CertificateType";
 import Certificate from "./Certificate";
 import Cadastral from "./Cadastral";
 import CadastralKind from "./CadastralKind";
+import Insurance from "./Insurance";
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -55,4 +56,5 @@ export default (history) => combineReducers({
   certificate: Certificate,
   cadastralKind: CadastralKind,
   cadastral: Cadastral,
+  insurance: Insurance
 });

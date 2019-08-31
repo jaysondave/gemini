@@ -24,3 +24,4 @@ export * from './CertificateType'
 export * from './Certificate';
 export * from './Cadastral';
 export * from './CadastralKind';
+export * from './Insurance';

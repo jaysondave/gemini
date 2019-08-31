@@ -78,7 +78,7 @@ class AddDocument extends React.Component {
     };
   }
   render() {
-    const { onSaveDocument, onDocumentClose, open, document } = this.props;
+    const { onSaveDocument, onClose, open, document } = this.props;
     const {
       id,
       document_type_id,
@@ -95,7 +95,7 @@ class AddDocument extends React.Component {
           {id === "" ? "Insert Document" :
             "Edit Document"}
           <IconButton className="text-white"
-                      onClick={onDocumentClose}>
+                      onClick={() => onClose()}>
             <CloseIcon/>
           </IconButton>
         </ModalHeader>

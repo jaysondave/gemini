@@ -42,46 +42,31 @@ class InsuranceCell extends React.Component {
       "DELETE"
     ];
     const {
-      subBuilding,
-      onSubBuildingSelect,
-      onSubBuildingItemSelect,
+      item,
+      onEdit,
+      onDelete,
     } = this.props;
     const { menuState, anchorEl } = this.state;
-    const { id, building_name, user_name, user_address, building_report } = subBuilding;
+    const { id, policy_branch, company, policy_number, agency, contractor, stipulation_date, expiration_date, warning_date } = item;
     return (
 
       <div className="contact-item module-list-item">
 
-        <Checkbox color="primary"
-                  checked={subBuilding.selected}
-                  value="checkedF"
-                  onClick={() => {
-                    onSubBuildingSelect(subBuilding);
-                  }}
-        />
         <div className="d-flex f-1 flex-wrap">
-
-          <div className="d-flex f-1 flex-wrap" onClick={() => {
-            onSubBuildingItemSelect(subBuilding);
-          }}>
-
-            <div className="mx-1 mx-md-3 font-size-16 f-1 position-relative">
-              <div className="position-relative align-center">{id}</div>
-            </div>
             <div className="col con-inf-mw-100 f-3">
               <p className="mb-0">
                 <span className="text-truncate contact-name text-dark">
-                  {'Policy Branch'}
+                  {policy_branch}{" (Policy branch)"}
                 </span>
               </p>
               <p className="mb-0">
                 <span className="text-truncate contact-name text-dark">
-                  {'Insurance Company'}
+                  {company}{" (Policy company)"}
                 </span>
               </p>
               <p className="mb-0">
                 <span className="text-truncate contact-name text-dark">
-                  {'Insurance Agency'}
+                  {agency.first_name + " " + agency.last_name}{" (Insurance agency)"}
                 </span>
               </p>
 
@@ -90,17 +75,17 @@ class InsuranceCell extends React.Component {
             <div className="col con-inf-mw-100 f-3">
               <p className="mb-0">
                 <span className="text-truncate contact-name text-dark">
-                  {'Policy Number'}
+                  {policy_number}{" (Policy number)"}
                 </span>
               </p>
               <p className="mb-0">
                 <span className="text-truncate contact-name text-dark">
-                  {'Stipulation Date'}
+                  {stipulation_date}{" (Stipulation date)"}
                 </span>
               </p>
               <p className="mb-0">
                 <span className="text-truncate contact-name text-dark">
-                  {'Expiration Date'}
+                  {expiration_date}{" (Expiry date)"}
                 </span>
               </p>
 
@@ -115,7 +100,7 @@ class InsuranceCell extends React.Component {
 
               <div className="text-muted">
                 <span className="email d-inline-block mr-2">
-                  {'3'}
+                  {0}
                 </span>
               </div>
             </div>
@@ -157,7 +142,6 @@ class InsuranceCell extends React.Component {
             </Menu>
 
           </div>
-        </div>
       </div>
     );
   }

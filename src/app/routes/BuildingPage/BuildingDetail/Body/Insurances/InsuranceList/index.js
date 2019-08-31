@@ -1,29 +1,21 @@
 import React from "react";
 import InsuranceCell from "./InsuranceCell";
 
-const InsuranceList = ({
-                           subBuildingList,
-                           onSubBuildingItemSelect,
-                           onSubBuildingSelect,
-                           onSaveSubBuilding,
-                           onDeleteSubBuilding,
-                         }) => {
-  return (
-    subBuildingList != null?
-      <div className="contact-main-content">
-        {subBuildingList.map((subBuilding, index) =>
-          <InsuranceCell key={index} subBuilding={subBuilding}
-                           onSubBuildingItemSelect={onSubBuildingItemSelect}
-                           onDeleteSubBuilding={onDeleteSubBuilding}
-                           onSaveSubBuilding={onSaveSubBuilding}
-                           onSubBuildingSelect={onSubBuildingSelect}
-          />
-        )}
+const InsuranceList = ({data, onEdit, onDelete}) => {
+    return (
+        data != null ?
+            <div className="contact-main-content">
+                {data.map((item, index) =>
+                    <InsuranceCell key={index} item={item}
+                                   onEdit={onEdit}
+                                   onDelete={onDelete}
+                    />
+                )}
 
-      </div>
-      :
-      null
-  );
+            </div>
+            :
+            null
+    );
 };
 
 export default InsuranceList;
