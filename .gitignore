@@ -22,36 +22,9 @@ yarn-error.log*
 yarn.lock
 debug.log
 
-backend/config/database.yml
-*.rbc
-*.swp
-capybara-*.html
-.rspec
-backend/log/*
-backend/tmp
-backend/db/*.sqlite3
-backend/public/system
-backend/coverage/
-backend/spec/tmp
+#backend ruby
 backend/.idea
-.DS_Store
-**.orig
-backend/rerun.txt
-backend/pickle-email-*.html
-backend/config/initializers/secret_token.rb
-backend/config/secrets.yml
 backend/config/application.yml
-
-## Environment normalisation:
-backend/.bundle
-backend/vendor/bundle
-
-# these should all be checked in to normalise the environment:
-# Gemfile.lock, .ruby-version, .ruby-gemset
-
-# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
-.rvmrc
-
-# Ignore byebug history
-.byebug_history
-.env
+backend/config/database.yml
+backend/Gemfile.lock
+backend/public/uploads/
