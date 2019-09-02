@@ -10,6 +10,12 @@
 6. `rake db:migrate`
 7. `rails s`
 
+*An error occurred while installing ovirt-engine-sdk (4.3.0)
+sudo apt-get --assume-yes install gcc libcurl4-openssl-dev libxml2-dev ruby ruby-dev
+
+*An error occurred while installing pg (0.18.4), and bundler cannot continue
+sudo apt-get install libpq-dev
+
 ## Optional configuration
 
 - Set your [frontend URL](https://github.com/cyu/rack-cors#origin) in `config/initializers/rack_cors.rb`
