@@ -1,6 +1,6 @@
 nocategory = Category.create!(name: "nocategory", active: false) unless Category.find_by(name: 'nocategory')
 
-User.create!(email: 'admin@gemini-start.com', password: 'admin123', user_type: 'admin', category_id: nocategory.id) unless User.find_by(email: 'admin@gmail.com')
+User.create!(email: 'admin@geminismart.net', password: 'admin123', user_type: 'admin', category_id: nocategory.id) unless User.find_by(email: 'admin@gmail.com')
 
 #Seed Targets
 %w(OFFICES RESIDENTIAL COMMERCIAL SCHOOL ASYLUM WAREHOUSE SURGERIES SHOPS).each do |target|

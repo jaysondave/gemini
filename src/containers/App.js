@@ -5,6 +5,7 @@ import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-intl'
+import dotenv from 'dotenv'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -45,6 +46,7 @@ const RestrictedRoute = ({ component: Component, authUser, ...rest }) =>
 class App extends Component {
 
   componentWillMount() {
+    dotenv.config();
     window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
     if (this.props.initURL === '') {
       this.props.setInitUrl(this.props.history.location.pathname);
