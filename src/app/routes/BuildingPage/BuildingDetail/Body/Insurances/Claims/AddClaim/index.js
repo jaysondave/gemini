@@ -1,24 +1,19 @@
 import React from "react";
 import { Modal, ModalHeader } from "reactstrap";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import FormControl from "@material-ui/core/FormControl";
 import { DropzoneArea } from "material-ui-dropzone";
-import { InputDate } from "../../../../../../../../components/CustomInput/InputDate";
-import DatePicker from "react-datepicker";
+import InputMask from "react-input-mask";
 
 class AddClaim extends React.Component {
   constructor(props) {
     super(props);
-    console.log({ AddRent: props });
-    // const { id, type, province, city, part, areaMq, sectionRegister, name, fg, partFg, sub, partSub, category, kind, className, deduction, consistency, income, dominicalIncome, agriculturalIncome, conformity, registerationDate, dataFrom, address, heading, note } = props.cadastral;
     this.state = {
       id: "",
-      levelFloor: "",
-      intend: "",
-      files: null
+      description: "",
+      claim_date: "",
+      attachment: null
     };
   }
 
@@ -28,30 +23,15 @@ class AddClaim extends React.Component {
   handleChangeFile = (files) => {
     console.log(files);
     this.setState({
-      files: files
+      attachment: files
     });
   };
-  updateDate = name => (date) => {
-    if (date) {
-      this.setState({ [name]: this.formatDate(date.toLocaleDateString()) });
-    }
-  };
-  formatDate = (d) => {
-    let date = new Date(d);
-    let reformattedDate = [
-      date.getFullYear(),
-      ("0" + (date.getMonth() + 1)).slice(-2),
-      ("0" + date.getDate()).slice(-2)
-    ].join('-');
-    return reformattedDate;
-  };
   render() {
-    const { onSaveRent, onRentClose, open, rent } = this.props;
+    const { onClose, open } = this.props;
     const {
       id,
-      levelFloor,
-      intend,
-      files
+      description,
+      claim_date,
     } = this.state;
     return (
       <Modal className="modal-box" isOpen={open}>
@@ -59,7 +39,7 @@ class AddClaim extends React.Component {
           {id === "" ? "New Claim" :
             "Edit Claim"}
           <IconButton className="text-white"
-                      onClick={onRentClose}>
+                      onClick={() => onClose()}>
             <CloseIcon/>
           </IconButton>
         </ModalHeader>
@@ -69,16 +49,14 @@ class AddClaim extends React.Component {
 
             <div className="row col-md-12 col-12 p-0 mb-2">
               <div className="col-md-4 text-right p-relative">
-                <label className="align-center font-size-18">CONTACTOR</label>
+                <label className="align-center font-size-18">CONTRACTOR</label>
               </div>
               <div className="col-md-8 p-0">
-                <FormControl className="w-100 mb-2">
-                  <TextField
-                    value={levelFloor}
-                    onChange={this.handleChange("levelFloor")}
-                    fullWidth
-                    margin="none"/>
-                </FormControl>
+                <input
+                    value={"Contractor 1"}
+                    className='form-control form-control-lg'
+                    readOnly
+                />
               </div>
             </div>
 
@@ -88,13 +66,11 @@ class AddClaim extends React.Component {
                 <label className="align-center font-size-18">INSURANCE AGENCY</label>
               </div>
               <div className="col-md-8 p-0">
-                <FormControl className="w-100 mb-2">
-                  <TextField
-                    value={levelFloor}
-                    onChange={this.handleChange("levelFloor")}
-                    fullWidth
-                    margin="none"/>
-                </FormControl>
+                <input
+                    value={"Agency 1"}
+                    className='form-control form-control-lg'
+                    readOnly
+                />
               </div>
             </div>
 
@@ -103,13 +79,11 @@ class AddClaim extends React.Component {
                 <label className="align-center font-size-18">INSURANCE COMPANY</label>
               </div>
               <div className="col-md-8 p-0">
-                <FormControl className="w-100 mb-2">
-                  <TextField
-                    value={levelFloor}
-                    onChange={this.handleChange("levelFloor")}
-                    fullWidth
-                    margin="none"/>
-                </FormControl>
+                <input
+                    value={"COMPANY 1"}
+                    className='form-control form-control-lg'
+                    readOnly
+                />
               </div>
             </div>
 
@@ -118,13 +92,11 @@ class AddClaim extends React.Component {
                 <label className="align-center font-size-18">POLICY BRANCH</label>
               </div>
               <div className="col-md-8 p-0">
-                <FormControl className="w-100 mb-2">
-                  <TextField
-                    value={levelFloor}
-                    onChange={this.handleChange("levelFloor")}
-                    fullWidth
-                    margin="none"/>
-                </FormControl>
+                <input
+                    value={"BRANCH 1"}
+                    className='form-control form-control-lg'
+                    readOnly
+                />
               </div>
             </div>
 
@@ -133,13 +105,11 @@ class AddClaim extends React.Component {
                 <label className="align-center font-size-18">POLICY NUMBER</label>
               </div>
               <div className="col-md-8 p-0">
-                <FormControl className="w-100 mb-2">
-                  <TextField
-                    value={levelFloor}
-                    onChange={this.handleChange("levelFloor")}
-                    fullWidth
-                    margin="none"/>
-                </FormControl>
+                <input
+                    value={"POLICY NUMBER 1"}
+                    className='form-control form-control-lg'
+                    readOnly
+                />
               </div>
             </div>
 
@@ -149,20 +119,11 @@ class AddClaim extends React.Component {
                 <label className="align-center font-size-18">STIPULATION DATE</label>
               </div>
               <div className="col-md-8 p-0">
-                <div className="d-flex">
-                  <DatePicker
-                    customInput={
-                      <InputDate
-                      />
-                    }
-                    peekNextMonth
-                    showMonthDropdown
-                    showYearDropdown
-                    dropdownMode="select"
-                    selected={new Date()}
-                    onChange={this.updateDate('publishDate')}
-                  />
-                </div>
+                <input
+                    value={"STIPULATION DATE"}
+                    className='form-control form-control-lg'
+                    readOnly
+                />
               </div>
             </div>
 
@@ -171,20 +132,11 @@ class AddClaim extends React.Component {
                 <label className="align-center font-size-18">EXPIRATION DATE</label>
               </div>
               <div className="col-md-8 p-0">
-                <div className="d-flex">
-                  <DatePicker
-                    customInput={
-                      <InputDate
-                      />
-                    }
-                    peekNextMonth
-                    showMonthDropdown
-                    showYearDropdown
-                    dropdownMode="select"
-                    selected={new Date()}
-                    onChange={this.updateDate('publishDate')}
-                  />
-                </div>
+                <input
+                    value={"EXPIRATION DATE"}
+                    className='form-control form-control-lg'
+                    readOnly
+                />
               </div>
             </div>
 
@@ -193,20 +145,18 @@ class AddClaim extends React.Component {
                 <label className="align-center font-size-18">CLAIM DATE</label>
               </div>
               <div className="col-md-8 p-0">
-                <div className="d-flex">
-                  <DatePicker
-                    customInput={
-                      <InputDate
-                      />
-                    }
-                    peekNextMonth
-                    showMonthDropdown
-                    showYearDropdown
-                    dropdownMode="select"
-                    selected={new Date()}
-                    onChange={this.updateDate('publishDate')}
-                  />
-                </div>
+                <InputMask
+                    mask="99/99/2999"
+                    maskChar={null}
+                    placeholder={"dd/mm/yyyy"}
+                    value={claim_date}
+                    onChange={this.handleChange("claim_date")}
+                >
+                  {(inputProps) => <input
+                      {...inputProps}
+                      className="form-control form-control-lg"
+                  />}
+                </InputMask>
               </div>
             </div>
 
@@ -215,37 +165,15 @@ class AddClaim extends React.Component {
                 <label className="align-center font-size-18">DESCRIPTION</label>
               </div>
               <div className="col-md-8 p-0">
-                <FormControl className="w-100 mb-2">
-                  <TextField
-                    value={levelFloor}
-                    onChange={this.handleChange("levelFloor")}
-                    fullWidth
-                    margin="none"/>
-                </FormControl>
+                <textarea
+                    className="form-control form-control-lg" rows="6"
+                    style={{width: "100%", height: 70, marginTop: 5, paddingHorizontal: 10, paddingVertical: 5}}
+                    placeholder="Description"
+                    value={description}
+                    onChange={this.handleChange("description")}
+                />
               </div>
             </div>
-
-            <div className="row col-md-12 col-12 p-0 mb-2">
-              <div className="col-md-4 text-right p-relative">
-                <label className="align-center font-size-18">NOTE</label>
-              </div>
-              <div className="col-md-8 p-0">
-                <FormControl className="w-100 mb-2">
-                  <textarea style={{
-                    width: "100%",
-                    height: 70,
-                    marginTop: 10,
-                    paddingHorizontal: 10,
-                    paddingVertical: 5
-                  }}
-                            value={''}
-                            placeholder="Description"
-                            onChange={this.handleChange("description")}
-                  />
-                </FormControl>
-              </div>
-            </div>
-
             <div className="row col-md-12 col-12 p-0 mb-2">
               <div className="col-md-4 text-right p-relative">
                 <label className="font-size-18">ADD IMAGE</label>
@@ -265,8 +193,7 @@ class AddClaim extends React.Component {
 
         <div className="modal-box-footer d-flex flex-row">
           <Button disabled={id === ""} variant="contained" color="primary" onClick={() => {
-            onRentClose();
-
+            onClose();
           }}>Save CLAIM</Button>
         </div>
       </Modal>

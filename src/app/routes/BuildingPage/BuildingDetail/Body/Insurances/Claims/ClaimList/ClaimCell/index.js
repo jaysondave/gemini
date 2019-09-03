@@ -1,5 +1,4 @@
 import React from "react";
-import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import {withRouter} from 'react-router-dom'
@@ -80,28 +79,16 @@ class ClaimCell extends React.Component {
       "DELETE"
     ];
     const {
-      subBuilding,
-      onSubBuildingSelect,
-      onSubBuildingItemSelect,
+      item,
+      onEdit,
+      onDelete,
     } = this.props;
     const { menuState, anchorEl, addAmount, addDocument, addReminder, addExpert } = this.state;
-    const { id, building_name, user_name, user_address, building_report } = subBuilding;
+    const { id, building_name, user_name, user_address, building_report } = item;
     return (
 
       <div className="contact-item module-list-item">
-
-        <Checkbox color="primary"
-                  checked={subBuilding.selected}
-                  value="checkedF"
-                  onClick={() => {
-                    onSubBuildingSelect(subBuilding);
-                  }}
-        />
         <div className="d-flex f-1 flex-wrap">
-
-          <div className="d-flex f-1 flex-wrap" onClick={() => {
-            onSubBuildingItemSelect(subBuilding);
-          }}>
 
             <div className="mx-1 mx-md-3 font-size-16 f-1 position-relative">
               <div className="position-relative align-center">{id}</div>
@@ -210,7 +197,6 @@ class ClaimCell extends React.Component {
             </Menu>
 
           </div>
-        </div>
         <AddAmount
           open={addAmount}
           onSave={this.onSaveAmount}

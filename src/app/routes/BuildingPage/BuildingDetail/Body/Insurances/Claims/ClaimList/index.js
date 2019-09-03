@@ -1,22 +1,14 @@
 import React from "react";
 import ClaimCell from "./ClaimCell";
 
-const ClaimList = ({
-                           subBuildingList,
-                           onSubBuildingItemSelect,
-                           onSubBuildingSelect,
-                           onSaveSubBuilding,
-                           onDeleteSubBuilding,
-                         }) => {
+const ClaimList = ({ data, onEdit, onDelete }) => {
   return (
-    subBuildingList != null?
+      data != null?
       <div className="contact-main-content">
-        {subBuildingList.map((subBuilding, index) =>
-          <ClaimCell key={index} subBuilding={subBuilding}
-                           onSubBuildingItemSelect={onSubBuildingItemSelect}
-                           onDeleteSubBuilding={onDeleteSubBuilding}
-                           onSaveSubBuilding={onSaveSubBuilding}
-                           onSubBuildingSelect={onSubBuildingSelect}
+        {data.map((item, index) =>
+          <ClaimCell key={index} item={item}
+                     onEdit={onEdit}
+                     onDelete={onDelete}
           />
         )}
 

@@ -22,3 +22,4 @@ export * from './certificate';
 export * from './cadastralKind';
 export * from './cadastral';
 export * from './insurance';
+export * from './claim';

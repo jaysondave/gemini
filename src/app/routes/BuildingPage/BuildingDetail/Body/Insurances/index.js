@@ -1,27 +1,20 @@
 import React, { Component } from "react";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
-import Checkbox from "@material-ui/core/Checkbox";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom"
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
-import buildingList from "../../../data/buildingList";
 import AppModuleHeader from "components/AppModuleHeader/index";
 import CustomScrollbars from "util/CustomScrollbars";
 import InsuranceList from "./InsuranceList";
 import AddInsurance from "./AddInsurance";
 import {
   createNewInsurance,
-  createNewSystem,
   fetchInsurances,
-  fetchSystems,
   showLoader, updateInsurance,
-  updateSystem
 } from "../../../../../../actions";
-import SystemList from "../Systems/SystemList";
 import ReactPaginate from "react-paginate";
-import AddSystem from "../AddSystem";
 
 
 class Insurances extends Component {

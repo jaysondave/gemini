@@ -16,6 +16,10 @@ sudo apt-get --assume-yes install gcc libcurl4-openssl-dev libxml2-dev ruby ruby
 *An error occurred while installing pg (0.18.4), and bundler cannot continue
 sudo apt-get install libpq-dev
 
+**if error -> Validation failed: Attachment Failed to manipulate with MiniMagick, maybe it is not an image? Original Error: You must have ImageMagick or GraphicsMagick installed
+
+$ sudo apt-get install imagemagick
+
 ## Optional configuration
 
 - Set your [frontend URL](https://github.com/cyu/rack-cors#origin) in `config/initializers/rack_cors.rb`
