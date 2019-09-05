@@ -28,3 +28,4 @@ backend/config/application.yml
 backend/config/database.yml
 backend/Gemfile.lock
 backend/public/uploads/
+backend/log

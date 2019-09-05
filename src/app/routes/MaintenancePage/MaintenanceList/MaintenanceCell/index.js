@@ -25,7 +25,7 @@ class MaintenanceCell extends React.Component {
     this.setState({ menuState: false, addBuildingState: true });
   };
   onBodies = () => {
-    this.props.history.push("/app/buildingDashboard/detail");
+    this.props.history.push("/app/buildingDashboard/3");
   };
 
   constructor() {
@@ -59,7 +59,7 @@ class MaintenanceCell extends React.Component {
         />
         <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }}>
 
-          <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }} onClick={() => this.props.history.push("detail")}>
+          <div style={{ display: "flex", flex: 1, flexWrap: "wrap" }} onClick={() => this.props.history.push(`${5}`)}>
 
             <div className="mx-1 mx-md-3"
                  style={{ fontSize: 16, flex: 1, position: "relative" }}>

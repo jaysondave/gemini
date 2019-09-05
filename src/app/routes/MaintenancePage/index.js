@@ -16,7 +16,7 @@ const MaintenanceDashboard = ({match}) => (
       <Route path={`${match.url}/out-standing`} component={asyncComponent(() => import('./routes/OutStanding'))}/>
       <Route path={`${match.url}/rejected`} component={asyncComponent(() => import('./routes/Rejected'))}/>
 
-      <Route path={`${match.url}/detail`} component={asyncComponent(() => import('./MaintenanceDetail'))}/>
+      <Route path={`${match.url}/:id`} component={asyncComponent(() => import('./MaintenanceDetail'))}/>
       <Route path={`${match.url}/maintainer`} component={asyncComponent(() => import('./routes/Maintainer'))}/>
     </Switch>
   </div>
