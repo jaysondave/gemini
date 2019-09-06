@@ -33,6 +33,9 @@ Rails.application.routes.draw do
         resources :cadastral_kinds
         resources :cadastrals
         resources :insurances
+        resources :maintenance_groups
+        resources :maintenance_components
+        resources :maintenance_operations
 
         get :test_mail, to: 'testapis#send_mail'
       end

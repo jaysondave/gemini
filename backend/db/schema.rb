@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190829172147) do
+ActiveRecord::Schema.define(version: 20190906082641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -216,6 +216,28 @@ ActiveRecord::Schema.define(version: 20190829172147) do
     t.index ["payment_frequency_id"], name: "index_insurances_on_payment_frequency_id"
   end
 
+  create_table "maintenance_components", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "maintenance_group_id", null: false
+    t.index ["maintenance_group_id"], name: "index_maintenance_components_on_maintenance_group_id"
+  end
+
+  create_table "maintenance_groups", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "maintenance_operations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "maintenance_component_id", null: false
+    t.index ["maintenance_component_id"], name: "index_maintenance_operations_on_maintenance_component_id"
+  end
+
   create_table "outdoors", force: :cascade do |t|
     t.string "condition"
     t.string "note"
@@ -346,6 +368,8 @@ ActiveRecord::Schema.define(version: 20190829172147) do
   add_foreign_key "floors", "targets"
   add_foreign_key "insurances", "bodies"
   add_foreign_key "insurances", "payment_frequencies"
+  add_foreign_key "maintenance_components", "maintenance_groups"
+  add_foreign_key "maintenance_operations", "maintenance_components"
   add_foreign_key "outdoors", "buildings"
   add_foreign_key "outdoors", "components"
   add_foreign_key "outdoors", "sub_components"
