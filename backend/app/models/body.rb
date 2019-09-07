@@ -8,6 +8,6 @@ class Body < ApplicationRecord
   has_many :certificates
   has_many :cadastrals
   has_many :insurances
-
+  has_many :maintenances, :class_name => "Maintenance", :foreign_key => "body_id"
   scope :filter_by_building_id, -> (building_id) { where(building_id: building_id) }
 end

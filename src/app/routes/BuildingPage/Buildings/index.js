@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import BuildingList from "./BuildingList";
 import AppModuleHeader from "components/AppModuleHeader/index";
+import * as DATA from "data/index";
 import AddBuilding from "../Buildings/AddBuilding";
 import CustomScrollbars from "util/CustomScrollbars";
 import {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190906082641) do
+ActiveRecord::Schema.define(version: 20190907071825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -238,6 +238,32 @@ ActiveRecord::Schema.define(version: 20190906082641) do
     t.index ["maintenance_component_id"], name: "index_maintenance_operations_on_maintenance_component_id"
   end
 
+  create_table "maintenances", force: :cascade do |t|
+    t.string "title"
+    t.integer "reporter_id"
+    t.integer "admin_id"
+    t.bigint "building_id", null: false
+    t.integer "body_id"
+    t.string "priority"
+    t.string "category"
+    t.datetime "due_date"
+    t.text "workers", default: [], array: true
+    t.datetime "reporting_date"
+    t.bigint "maintenance_group_id", null: false
+    t.bigint "maintenance_component_id", null: false
+    t.bigint "maintenance_operation_id", null: false
+    t.integer "status"
+    t.integer "assigned"
+    t.string "description"
+    t.string "attachment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["building_id"], name: "index_maintenances_on_building_id"
+    t.index ["maintenance_component_id"], name: "index_maintenances_on_maintenance_component_id"
+    t.index ["maintenance_group_id"], name: "index_maintenances_on_maintenance_group_id"
+    t.index ["maintenance_operation_id"], name: "index_maintenances_on_maintenance_operation_id"
+  end
+
   create_table "outdoors", force: :cascade do |t|
     t.string "condition"
     t.string "note"
@@ -370,6 +396,10 @@ ActiveRecord::Schema.define(version: 20190906082641) do
   add_foreign_key "insurances", "payment_frequencies"
   add_foreign_key "maintenance_components", "maintenance_groups"
   add_foreign_key "maintenance_operations", "maintenance_components"
+  add_foreign_key "maintenances", "buildings"
+  add_foreign_key "maintenances", "maintenance_components"
+  add_foreign_key "maintenances", "maintenance_groups"
+  add_foreign_key "maintenances", "maintenance_operations"
   add_foreign_key "outdoors", "buildings"
   add_foreign_key "outdoors", "components"
   add_foreign_key "outdoors", "sub_components"

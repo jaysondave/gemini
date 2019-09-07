@@ -36,6 +36,7 @@ Rails.application.routes.draw do
         resources :maintenance_groups
         resources :maintenance_components
         resources :maintenance_operations
+        resources :maintenances
 
         get :test_mail, to: 'testapis#send_mail'
       end

@@ -30,7 +30,7 @@ module Api
       private
 
       def maintenance_component_params
-        params.require(:maintenance_component).permit(:name)
+        params.require(:maintenance_component).permit(:name, :maintenance_group_id)
       end
       def maintenance_component
         @maintenance_component = MaintenanceComponent.find(maintenance_component_id)

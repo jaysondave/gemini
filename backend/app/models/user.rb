@@ -17,6 +17,8 @@ class User < ApplicationRecord
   has_many :primary_insurances, :class_name => "Insurance", :foreign_key => "agency_id"
   has_many :secondary_insurances, :class_name => "Insurance", :foreign_key => "contractor_id"
 
+  has_many :primary_maintenances, :class_name => "Maintenance", :foreign_key => "reporter_id"
+  has_many :secondary_maintenances, :class_name => "Maintenance", :foreign_key => "admin_id"
   scope :by_type, ->(user_type) { where(user_type: user_type) }
 
   private
